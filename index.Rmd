@@ -9,6 +9,26 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## Topic I --- Introduction
+
+* Topics
+    - Overview of statistical learning.
+    - Getting started with R, RStudio, and RMarkdown
+* Reading: Chapter 2 of ISL
+* Programming basics 1: Names, classes, and objects
+* Assignment 1
+    * Discussion questions: ISL 2.4.1, 2.4.3, 2.4.6
+    * Computing assignment: ISL 2.4.8, 2.4.9
+        - As an example: a solution to 2.4.10.
+    * Theory assignment: ISL 2.4.2, 2.4.7.
+
+
+
+
+
+
+
+
 ## R Markdown
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
