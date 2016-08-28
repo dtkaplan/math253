@@ -1,0 +1,27 @@
+---
+title: "Rubric for Final Project Presentation"
+author: "Math 253"
+date: "`r date()`"
+output: html_document
+---
+
+* Substance
+    - Brief introduction to context
+    - Description of the purpose your "client" would have in commissioning your work. (Since there's no client to talk to, you may have to imagine some specific purpose.)
+    - Description of the data. 
+        - Particularly important predictor variables and the response variable. You do not have to give a comprehensive summary.
+        - Missing data and how you dealt with it.
+    - Quantifying error. E.g., are there many groups in a classification problem. Some idea of a loss function.
+
+* Methods applied
+    - how meta-parameters (e.g. cost in SVM) were set by, e.g. cross-validation
+    - indication of the result, e.g. were the parameters very important?
+    - Evaluation of your result to the purpose specified in (1). Explain whether your model results meaningfully address the purpose and justify your view. (E.g. practical significance of acting based on the output of the model.)
+    - Ideas about how a better result might be found, possible alternative approaches, etc.
+    
+* Style
+    - Stays in the time limit (5 min)
+    - Informative graphics or tables about important points
+    - The slides be understood on their own by someone reviewing them
+    - Each member of the group participates in the presentation
+    

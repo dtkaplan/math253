@@ -1,5 +1,6 @@
 ---
 title: "Math 253 Statistical Computing and Machine Learning"
+author: "Syllabus"
 output: 
   html_document: 
     theme: journal
@@ -8,6 +9,18 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+* Instructor: Danny Kaplan, Olin-Rice 231
+* Office Hours: 
+    - Tues and Thurs: 3:00pm-4:30pm and 
+    - Wed: 2:00pm-3:30pm
+    - Anytime by appointment. And if my office door is open, just drop in.
+
+* Text: [An Introduction to Statistical Learning](http://www.springer.com/us/book/9781461471370).  The authors also provide [access via PDF](http://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf).
+* [Course policies](policies)
+
+
+
 
 ## Topic I --- Introduction
 
@@ -40,3 +53,56 @@ knitr::opts_chunk$set(echo = TRUE)
             2. On p. 77 the authors state, "In this case we cannot even fit the multiple regression models using least squares ...." Explain why.
         - ISL 3.7.3 and 3.7.4.
 
+## Topic 3 --- Likelihood and simulation
+
+* Readings
+    - Michael Lavine: What is Bayesian statistics and why everything else is wrong
+* Programming basics 3: Indexing
+* Visualization: Base graphics: lines, polygons, ...
+* Topic assignment: 
+    - Finish the exponential likelihood and taxicab in-class activities. 
+
+## Topic 4 --- Classification
+
+* Readings: In Chapter 4 of ISL §4.1, §4.2, §4.3.1-3, §4.4.1-2, §4.5
+* Programming basics 4: Conditionals
+* Visualization: Grammar of graphics: glyphs and aesthetics
+* Topic 4 Assignment:
+    - Programming Assignment: 4.7.11, 4.7.13
+    - Theory assignment: 4.7.1, 4.7.8, 4.7.9
+ 
+## Topic 5 --- Cross-validation and bootstrapping
+
+* Readings: In Chapter 5 of ISL §5.1, §5.2
+* Programming basics 5: Loops and accumulators
+* Assignment: finish the in-class programming activities for the first five topics.
+
+## Topic 6 --- Selecting model terms
+
+* Readings: in Chapter 6 of ISL §6.1, §6.2
+* Programming basics 6: Functionals --- solving, integration, optimization
+* Assignment: 
+    - Theory 6.8.1, 6.8.2. 
+    - Applied, 6.8.9
+
+## Topic 7 --- Nonlinear regression
+
+* Readings: Chapter 7 of ISL
+* Assignment:
+    - programming: 7.9.11
+    - theory: in §7.9 problems 3, 4, and 5
+ 
+## Topic 8 --- Tree-based methods
+
+* Readings: Chapter 8 of ISL
+* Assignment:
+    - programming: 8.4.12
+    - theory: In §8.4 problems 1, 2, 3, 4, and 5
+
+## Topic 9 --- Support vector machines
+
+* Readings: Chapter 9 of ISL
+
+## Topic 10 --- Unsupervised learning
+
+* Readings: Chapter 10 of ISL

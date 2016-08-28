@@ -1,0 +1,48 @@
+---
+title: "Course Policies for Math 253"
+author: "Daniel Kaplan"
+output: html_document
+---
+
+## Daily plan
+
+The typical class will be a mixture of theory and application. We'll discuss the conceptual material presented in the text, address questions raised by the homework, work through an example, and carry out an in-class computing task. At the end of the class, you will hand in a `.R` file with the statements you wrote to perform the computing task.
+
+Readings are divided into "weeks", which will correspond loosely to a calendar week. You should try to do the readings **before** the first class in which they will be covered. There will, undoubtedly, be things in the readings that you don't understand. A good practice is to read through these nevertheless, making a first pass over the entire reading. Then, bring the not-yet-understood topics to class to discuss. After that, you can make a second pass through the readings and bring still not-yet-understood topics to class. Repeat until exhausted.
+
+The assignments for each topic are due within a week of the last day in class we cover that topic. You will hand these in as `.Rmd` -> `.html` files. A good practice is to try the homework questions right after you have made a first pass over the readings. The questions you don't understand can be used to focus your attention on topics you missed in the first reading and, of course, to bring to class for discussion.
+
+# Grading
+
+Your grade will be based on four components:
+
+1. Daily in-class programming tasks: 25%
+
+Each class day (for the most part) there will be an in-class programming task. You will write up your solution to the task in the form of a `.Rmd` file that compiles successfully. Those parts of your solution which do not (yet) run should be commented out, so that the file as a whole can be run without interruption.
+
+Your answers should be written by you, individually. I encourage you to work together with your classmates to analyze and discuss the task, and to take what you glean from this discussion to your own solution. But you must write the solution on your own in your own R session, without cutting and pasting from anyone else.
+
+You hand in  the programming tasks by doing a `git commit` and then pushing to the repository you share with the instructor.
+
+I'll disregard the lowest scoring several of your answers to account for start-of-semester difficulties, missed classes, forgetting to upload the file, etc.
+
+
+2. Chapter homeworks: 25%
+
+You will hand these in via GitHub `.Rmd` -> `.html` files. There will occasionally be questions which involve a sketch, etc. You don't have to hand in such items.
+
+3. Wrap-up project: 25%
+
+These are small-group projects that tackle a substantial programming or machine-learning problem. You'll start these in the last few weeks of the semester, as will be announced. You and your group will select a specific problem from a list that is provided to you. 
+
+4. Final exam: 25%
+
+The exam will be mainly conceptual and will *not* involve substantial use of the computer in the exam room. Some of the exam may be about your wrap-up project.
+
+The final exam will be held at the time set by the registrar.
+
+# R Style
+
+The "labs" in the book have computer code written in a poor style. There will be much hand wringing and gnashing of teeth from me. 
+
+You are welcome to write in a better style. That's what I'm going to do. But this is not at all required.
