@@ -49,7 +49,7 @@ output:
 ## Topic 3 --- Likelihood and simulation
 
 * Readings
-    - Michael Lavine: What is Bayesian statistics and why everything else is wrong
+    - Michael Lavine: "What is Bayesian statistics and why everything else is wrong" [PDF](Resources/Likelihood-Lavine.pdf)
 * Programming basics 3: Indexing
 * Visualization: Base graphics: lines, polygons, ...
 * Topic assignment: 
