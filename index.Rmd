@@ -6,10 +6,6 @@ output:
     theme: journal
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 * Instructor: Danny Kaplan, Olin-Rice 231
 * Office Hours: 
     - Tues and Thurs: 3:00pm-4:30pm and 
@@ -17,10 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
     - Anytime by appointment. And if my office door is open, just drop in.
 
 * Text: [An Introduction to Statistical Learning](http://www.springer.com/us/book/9781461471370).  The authors also provide [access via PDF](http://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf).
-* [Course policies](policies)
-
-
-
+* [Course policies](policies.html)
 
 ## Topic I --- Introduction
 
@@ -106,3 +99,9 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Topic 10 --- Unsupervised learning
 
 * Readings: Chapter 10 of ISL
+
+## End-of-term Project
+
+* You'll form groups of two to three students and choose a problem from the Kaggle machine-learning competition site. You don't need to think about this until we get toward the end of the semester. At that point, the in-class programming activities will be given over to the project.
+* If you have your own idea for a project, please get my approval before embarking on it.
+* [Rubric for presentation](rubric.html)
