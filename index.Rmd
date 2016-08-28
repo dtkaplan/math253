@@ -16,35 +16,27 @@ knitr::opts_chunk$set(echo = TRUE)
     - Getting started with R, RStudio, and RMarkdown
 * Reading: Chapter 2 of ISL
 * Programming basics 1: Names, classes, and objects
-* Assignment 1
+* Assignment 1 --- file `Topic-1.Rmd`
     * Discussion questions: ISL 2.4.1, 2.4.3, 2.4.6
     * Computing assignment: ISL 2.4.8, 2.4.9
         - As an example: a solution to 2.4.10.
     * Theory assignment: ISL 2.4.2, 2.4.7.
 
+## Topic 2 --- Linear regression
 
+* Readings.
+    - In Chapter 3 of ISL read §3.1 & §3.2
+    - Read §3.6 as you work through the commands (see computing assignment)
+* Programming basics 2: 
+    - Writing functions
+    - Visualization: Base graphics, statistical plots
+* Assignment 2 --- file `Topic-2.Rmd`
+    - Computing
+        - work through §3.6. (Style catastrophe: Although the book uses attach(), it is bad practice to do so. Ask about alternatives!)
+        - Problem 13 in ISL 3.7.13.
+    - Theory 
+        - Reading questions.
+            1. On p. 66 the authors state, "This is clearly not true in Fig. 3.1" Explain why.
+            2. On p. 77 the authors state, "In this case we cannot even fit the multiple regression models using least squares ...." Explain why.
+        - ISL 3.7.3 and 3.7.4.
 
-
-
-
-
-
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
