@@ -1,0 +1,46 @@
+---
+title: "Why I don't use Moodle"
+author: "Daniel Kaplan"
+date: "August 28, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Moodle is a "learning management system" designed to facilitate communications between instructors and students.
+
+* Instructors can post syllabi, reading lists, and resources such as homework assignments, PDF files, etc.
+* Students can hand in their work in the form of files.
+* There are discussion forums for students and instructors.
+* Some simple interactive features, such as quizzes, can be graded automatically if done through Moodle.
+
+Moodle was first released in August 2002. Very soon after that, Moodle was introduced to Macalester by Barron Koralesky, now the [Chief Information Officer at Williams College](http://oit.williams.edu/about/staff/). He set it up on an old Mac server in his office. Profs. Libby Shoop and Karl Wirth were the first users. I joined in the next semester and have used Moodle for more than a decade.
+
+Moodle was a big step forward for Macalester. It provided what was for the time a plausible interface for constructing an online syllabus and still-somewhat-buggy services for students to hand in papers. It is now the second most-used LMS. It's used in some impressively big applications, such the Open University of the UK with 200,000 students.
+
+Were this still the environment of 2002, with the web programming resources of 2002, I would likely still be using Moodle. But both the demands placed on class support software and the resources available have changed considerably in 14 years. (Who would have guessed!) This includes custom software designed for massively open online courses (MOOCs), and "generic" software such as Wordpress. 
+
+Editing or creating a resource in Moodle is agonizingly slow compared to modern systems. The only copy of the course resources is on the Moodle server. This means that you cannot use software on your own computer for editing and revising documents. Access to Moodle is generally limited to the students enrolled in the course and *never* available for people outside the institution. This makes it difficult to have collaborations across institutions, or even to share your work with friends or potential employers. 
+
+Setting up a hand-in site on Moodle is subject to many potential errors. Did you describe the site in a way that students can understand? Is it in a position where students will find it? Did you set the deadlines appropriately? Did you configure the permissions correctly: how many files can be uploaded? Can there be a side channel for notes (e.g. "I'm still waiting for the data on ... before finalizing the report.")? From the instructor's point of view, reading through submissions is slow. Providing feedback is limited. The instructor cannot modify the file on Moodle so that you can see comments or revise your work.
+
+In this course, we'll use GitHub and RStudio for our class support interface. GitHub is a system for "version control," maintaining a detailed history of the evolution of the files in a project.
+
+RStudio provides an "integrated development system" for software in R and related languagues (e.g. C++). RStudio has also popularized modern tools for constructing documents, including interactive documents, and providing a straightforward means to write one document and render it in various formats, e.g. HTML, PDF, Word.
+
+Combining GitHub and RStudio enables us to work as collaborators. In a collaboration, every participant has a voice. GitHub and RStudio organize those voices to facilitate working toward a final product.
+
+Even today, many people work together on a document by using software such as Word to create a file, email that file to collaborators, have the collaborators work on it and share their work by emailing their own files. The result is a proliferation of files with no intrinsic support for maintaining an "official" version, or for releasing a file and continuing to allow updates. 
+
+The model in git is different. First, instead of an individual file, git facilitates working with (potentially large) sets of files. This is important in software, which often consists of many related files. Modern documents are much like software, and can be broken down into components: text, figures, output from software, etc. Doing this facilitates collaboration since it compartmentalizes the different components while providing for a formal, explicit structure for connecting the components. 
+
+Second, a single file in git is not copied and edited in a prolific form that leads to ambiguity about which is the up-to-date file. Instead, there is just one up-to-date file. Any of the collaborators can synchronize to that file at any time. Changes that collaborators make are recorded in their own (temporary) copy of the file. At any point, a collaborator can synchronize his or her changes with the up-to-date file. A complete history is kept, so it's possible to see who changed what and to go back to any previous version of the file.
+
+Moodle supports the "multiple copies of files" paradigm. You do your work, then upload a copy of your file to the hand-in site posted for a Moodle course.  At that point, the file you handed in is completely disconnected from the original file that you wrote. If you update that file, the copy on Moodle does not change. To get it to change, you would have to hand in another copy.
+
+If you are working as part of a team, it's not feasible to hand in a document to replace one that another student handed in. It's also not feasible to maintain links among multiple files: each file stands on its own. Also, the whole process of handing in a file is error-prone and tedious: login to Moodle, select the correct hand-in site (which often goes wrong), upload the file. This whole process needs to be repeated for each and every revision of the file.
+
+In contrast, with git and GitHub, you simply synchronize your current copy of the file with the repository. 
+
