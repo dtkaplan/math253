@@ -1,0 +1,5 @@
+# Classification notes will appear here.
+
+# New ideas
+
+Compare CART, etc. to [Fast and Frugal Trees](http://nathanieldphillips.com/2016/08/making-fast-good-decisions-with-the-fftrees-r-package/)

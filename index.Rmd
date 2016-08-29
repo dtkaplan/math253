@@ -28,6 +28,7 @@ output:
     * Computing assignment: ISL 2.4.8, 2.4.9
         - As an example: a solution to 2.4.10.
     * Theory assignment: ISL 2.4.2, 2.4.7.
+* Notes
 
 ## Topic 2 --- Linear regression
 
@@ -46,6 +47,7 @@ output:
             1. On p. 66 the authors state, "This is clearly not true in Fig. 3.1" Explain why.
             2. On p. 77 the authors state, "In this case we cannot even fit the multiple regression models using least squares ...." Explain why.
         - ISL 3.7.3 and 3.7.4.
+* Notes
 
 ## Topic 3 --- Likelihood and simulation
 
@@ -55,6 +57,8 @@ output:
 * Visualization: Base graphics: lines, polygons, ...
 * Topic assignment: 
     - Finish the exponential likelihood and taxicab in-class activities. 
+* Notes
+
 
 ## Topic 4 --- Classification
 
@@ -64,7 +68,8 @@ output:
 * Topic 4 Assignment:
     - Programming Assignment: 4.7.11, 4.7.13
     - Theory assignment: 4.7.1, 4.7.8, 4.7.9
- 
+* [Notes](Notes/classification.html)
+
 ## Topic 5 --- Cross-validation and bootstrapping
 
 * Readings: In Chapter 5 of ISL §5.1, §5.2
@@ -100,6 +105,8 @@ output:
 ## Topic 10 --- Unsupervised learning
 
 * Readings: Chapter 10 of ISL
+
+
 
 ## End-of-term Project
 
