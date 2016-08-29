@@ -17,7 +17,7 @@ output:
 * Text: [An Introduction to Statistical Learning](http://www.springer.com/us/book/9781461471370).  The authors also provide [access via PDF](http://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf).
 * [Course policies](policies.html)
 * [Using GitHub from RStudio](github.html)
-* [Why I don't use Moodle](Resources/why-not-moodle.html)
+* [Why I don't use Moodle](why-not-moodle.html)
 
 ## Topic I --- Introduction
 
