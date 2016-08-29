@@ -8,7 +8,7 @@ output:
 # Statistical Computing and Machine Learning
 ## Fall 2016
 
-* Instructor: Danny Kaplan, Olin-Rice 231
+* Instructor: Danny Kaplan, Olin-Rice 231, `kaplan@macalester.edu`
 * Office Hours: 
     - Tues and Thurs: 3:00pm-4:30pm and 
     - Wed: 2:00pm-3:30pm
