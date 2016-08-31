@@ -8,11 +8,13 @@ output:
 # Statistical Computing and Machine Learning
 ## Fall 2016
 
-* Instructor: Danny Kaplan, Olin-Rice 231, `kaplan@macalester.edu`
+* Instructor: **Danny Kaplan**, Olin-Rice 231, `kaplan@macalester.edu`
 * Office Hours: 
     - Tues and Thurs: 3:00pm-4:30pm and 
     - Wed: 2:00pm-3:30pm
     - Anytime by appointment. And if my office door is open, just drop in.
+* Preceptor: **Leqi Zhao** `lzhao@macalester.edu`
+    - Office hours: Monday 7-9pm, MSCS Reading Room
 
 * Text: [An Introduction to Statistical Learning](http://www.springer.com/us/book/9781461471370).  The authors also provide [access via PDF](http://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf).
 * [Course policies](policies.html)
