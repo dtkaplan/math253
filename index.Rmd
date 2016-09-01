@@ -16,6 +16,8 @@ output:
 * Preceptor: **Leqi Zhao** `lzhao@macalester.edu`
     - Office hours: Monday 7-9pm, MSCS Reading Room
 
+* Make an account on <GitHub.com> and enter your account ID and the corresponding email address on [this form](https://docs.google.com/forms/d/e/1FAIpQLSemXlrenuLKVY0GNf-gBGDh6QTkaw3hS7fEZojBxBY3K_e2uA/viewform#responses).
+
 * Text: [An Introduction to Statistical Learning](http://www.springer.com/us/book/9781461471370).  The authors also provide [access via PDF](http://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf).
 * [Course policies](policies.html)
 * [Using GitHub from RStudio](github.html)
