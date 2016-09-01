@@ -1,0 +1,131 @@
+---
+title: "In-Class Computing Task 1"
+author: 'Math 253: Statistical Computing & Machine Learning'
+params:
+  show_answers: no
+output:
+  tufte::tufte_html: default
+  tufte::tufte_book:
+    latex_engine: xelatex
+  tufte::tufte_handout:
+    latex_engine: xelatex
+---
+
+```{r include=FALSE}
+library("scoreActivity")
+library(mosaicData)
+library(mosaic)
+knitr::opts_chunk$set(tidy=FALSE, echo=params$show_answers)
+```
+
+This is the first in-class computing task for the course.  These instructions apply to this and future computing tasks.
+
+1. You'll construct your answers in an `.Rmd` document that lives in your individual `math253-<your name>` repository. The document for today is called `01-Programming.Rmd`. Upcoming days' work will involve files named in the same fashion.
+#. When you are finished with your work, you will compile the `.Rmd` file to HTML. The compilation **must** run to completion when you "source" it. That is, you should be able to see the resulting HTML file.
+
+    If there are chunks in your document that are incomplete, comment them out to produce a file that does compile while preserving your incomplete work.
+#. Many of the tasks will involve assigning a value to a given name, such as `task3`.  Make sure to use this name exactly, including capitalization.  If you don't, the scoring system will miss your answer.
+#. To help you keep track of your answers, use subsection headings to divide your `.Rmd` file, like this:
+
+    `## Task 3 `
+#. At the end of the class, stage the documents you've changed (including the HTML document), commit, and push to GitHub
+
+Before we start, you will need to install on your RStudio system a package that provides tests for your document, so that you can see what commands are not yet right. Here's the command to install the package, which you need do only once.
+
+```{r eval = FALSE}
+devtools::install_github("dtkaplan/scoreActivity")
+```
+
+# Today's tasks
+
+These are meant to help you learn some basics in R.  Don't expect the answers to be immediately evident to you.
+
+\enlargethispage{1in}
+
+## Task 1
+
+There is a package called `mosaicData`.  Write the command that will load this package into R.  Note that `load()` is (surprisingly) not the correct function to do this.
+
+```{r echo=params$show_answers}
+library(mosaicData)
+```
+
+You may find that `mosaicData` is not yet installed on your R system.  If not, use the *Packages* tab in RStudio to install it.  This is done outside of your script.  Once installed, a package can be used in any script you like without re-installation.
+
+## Task 2
+
+Create an object named `task2` that contains a character string like
+"`r paste("Today is", date())`".  Your command should be such as to create a string with the correct date on any day in the future that the document is compiled.
+
+```{r echo=params$show_answers}
+task2 <- paste("Today is", date())
+```
+
+You will find two functions to be useful:
+
+* `paste()`, which concatenates strings.
+* A function that looks at the system clock to figure out what day it is.  I'm not going to tell you which function it is.  You figure it out yourself.  Here are some possibilities: `now()`, `today()`, `day_time()`, `day()`, `time()`, `date_time()`, `date()`, `at_present()`, `clock()`, `calendar()`.
+
+## Task 3
+
+In the `mosaicData` package, there is a data frame named `Galton`.  Create these objects:
+
+* `task3a` containing the names of the variables in `Galton`
+* `task3b` containing the number of cases in `Galton`
+* `task3c` containing the mean of `height` in `Galton`
+
+```{r echo=params$show_answers}
+task3a <- names(Galton)
+task3b <- nrow(Galton)
+task3c <- mean(Galton$height)
+```
+
+
+
+## Task 4
+
+Create an object `task4` containing the following object:
+
+$$ \left( 
+\begin{array}{ccc}
+1 & 2 & 3\\
+4 & 5 & 6\\
+\end{array}
+\right) $$
+
+Hint: the object is a matrix.
+
+```{r echo=params$show_answers}
+task4 <- matrix(1:6, ncol=3, byrow=TRUE)
+```
+
+## Task 5
+
+```{r echo=FALSE, fig.margin=TRUE, fig.width=6, fig.height=6.5, fig.cap="1000 random points uniformly distributed in the unit square in the first quadrant.  The unit circle is shown for comparison."}
+x <- runif(1000)
+y <- runif(1000)
+plot(y ~ x, pch=20, col = rgb(0,0,0,.5), xlim=c(-1,1), ylim=c(-1,1))
+angles <- seq(0, 2*pi, length=500)
+lines(cos(angles), sin(angles))
+```
+
+Create these objects:
+
+* `task5x` a vector with 1000 random values between 0 and 1. (Hint: `runif()`)
+* `task5y` another such vector.
+* `task5pi` the value of $\pi$ estimated from a "Monte Carlo" simulation.  That is, for each of `task5x` and `task5y`, square the vector.  Then add them together and take the square root.  This will give the length from the origin to each of 1000 random points in the unit square in the first quadrant.  Finally, compute what fraction of these lengths are $\leq 1$.  That fraction is an estimate of $\pi / 4$.
+
+```{r echo=params$show_answers}
+task5x <- runif(1000)
+task5y <- runif(1000)
+task5pi <- 4 * mean(sqrt(task5x ^ 2 + task5y ^ 2) <= 1)
+```
+
+```{r echo=FALSE, eval=params$show_answers, results="asis"}
+cat("# Test statments")
+```
+
+```{r echo=params$show_answers, eval=params$show_answers}
+source("Day-01-Test-Statements.R", local=TRUE)
+```
+
