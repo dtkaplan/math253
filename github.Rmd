@@ -1,7 +1,59 @@
 ---
-title: "Using GitHub from Rstudio"
-output: html_document
+title: "Using GitHub from RStudio"
+output:
+  html_document: default
+  pdf_document: default
 ---
+
+## Setting up your Math 253 repository
+
+First, we have to set up communications between your RStudio system and GitHub. You need only do this once on each RStudio system. But if you want to work on, say, a new computer or new RStudio server, you'll need to do it again.
+
+1. Make sure you have a GitHub account. You'll need two pieces of information about your account:
+    a. Your GitHub ID. For the instructions, I'll call in `brosenberg`, but remember to use your own ID
+    b. The email address you gave when you set up your account. I'll use `brosenberg@macalester.edu` for the example.
+2. Start up RStudio and do the following:
+    a. In the console, give these commands:
+    ```{r eval = FALSE}
+system('git config --global user.name "Brian MacAlistair"')
+system('git config --global user.email "brosenberg@macalester.edu"')
+system('git config --global --list')
+```
+    b. Select the menu item Tools/Global Options/Git-SVN. You will see a button to "Create RSA key ...". If the box above that button is empty, press the button. Otherwise continue on ....
+    c. Click "View public key" and copy the resulting displayed text to your clipboard.
+3. Go to your GitHub account. It will have an address like `github.com/brosenberg`. 
+    a. Press the "Edit Profile" button, then select "SHS and GPG keys."
+    b. Press the "New SSH key" button.
+    c. Two text boxes will appear. In the smaller one, insert some description of your RStudio system, e.g. `rstudio.macalester.edu` or `my own laptop`. In the larger one, paste the text you copied to your keyboard in step 2c.
+4. Almost done ... A GitHub repository has been set up for you. It will has a URL in this form: <github.com/dtkaplan/math253-brosenberg>. If that doesn't work, ask for help. There might have been some mistake or delay in setting up your repository, and only `dtkaplan` can fix things.
+    a. Direct your browser to the address of your repository.
+    b. On the right side of the page, there is a green button: "Clone or download". Press it. A small dialog panel will appear. It should say, "Clone with SSH". (If not, press the small "Use SSH" link to the right.) 
+    c. Click on the small clipboard icon. This will copy an address to your clipboard. The address starts with `git@github.com`.
+5. Go back to your RStudio system. Select File/New Project/Version Control/GIT. A dialog box will appear. 
+    a. Paste the address from 4c into the topmost text-entry widget in the dialog box. 
+    b. Press "Create project." Some stuff will happen. Ultimately, you should see RStudio restart and the name of your repository (e.g. `math253-brosenberg`) will be on the upper right corner of the RStudio window. (If you are using the server version of RStudio, you might have to refresh your browser to see the change.)
+
+## Using your repository
+
+You will be modifying files that are already in your repository, for instance `01-Programming.Rmd`.
+
+1. Make sure that the project displayed in your RStudio is the right one, e.g. `math253-brosenberg`
+2. Open, edit, debug, and revise the files you are working on in the normal way. You should knit the file to HTML frequently. This helps you spot problems early. 
+3. You'll mainly be working with `.Rmd` files. When you're satisfied with things, knit the file to produce HTML one final time.
+4. Ready to "hand in" your work? Go to the "Git" tab in RStudio. You should see at least two files listed: the file you edited and the corresponding HTML file. 
+    a. "Stage" the files by checking the little boxes.
+    b. "Commit" the files by pressing the "commit" button. You will be asked to write a message. Choose something short and informative, e.g. "Day 1 project submission." A dialog box will appear with some text indicating what was in the commit.
+    c. Press the "Pull" arrow.
+    d. Press the "Push" arrow.
+    
+Assuming that no errors appear, you are all done!
+
+Well ... actually you're never "all done." You will often want to revise your work. Follow the same steps as above.
+
+It is **not cheating** to revise your work, even after you hand it in. I encourage you to do this, be it the next day or several weeks after you handed it in. Git keeps a detailed history of all your commits, so I can always find any version of the file that I need.
+
+
+## Why are we doing this?
 
 We speak of "handing in" assignments, projects, and other work for a course. But just as we no longer "dial" a telephone, there is no longer a hand involved in handing in. With course support systems like Moodle, you "hand in" by uploading to a server a copy of the file containing your work. You have a working copy of your work and, when you're finished with your work, you upload a final copy.
 
