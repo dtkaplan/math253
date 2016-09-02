@@ -5,9 +5,10 @@ bookdown::gitbook:
       before: |
         <li><a href="./">Math 253 Notes</a></li>
       after: |
-        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+        <li><a href="https://github.com/dtkaplan/math253" target="blank">Published with bookdown</a></li>
+      collapse: section
     edit:
-      link: https://github.com/rstudio/bookdown-demo/edit/master/%s
+      link: https://github.com/dtkaplan/math253/edit/master/%s
 bookdown::pdf_book:
   includes:
     in_header: preamble.tex
