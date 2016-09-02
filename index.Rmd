@@ -15,13 +15,17 @@ output:
     - Anytime by appointment. And if my office door is open, just drop in.
 * Preceptor: **Leqi Zhao** `lzhao@macalester.edu`
     - Office hours: Monday 7-9pm, MSCS Reading Room
-
-* Make an account on <GitHub.com> and enter your account ID and the corresponding email address on [this form](https://docs.google.com/forms/d/e/1FAIpQLSemXlrenuLKVY0GNf-gBGDh6QTkaw3hS7fEZojBxBY3K_e2uA/viewform#responses).
-
 * Text: [An Introduction to Statistical Learning](http://www.springer.com/us/book/9781461471370).  The authors also provide [access via PDF](http://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf).
+* **Class notes**. [In-class notes for the entire semester](Class_notes/_book/introduction.html). (An evolving document.)
+
+### Starting the semester
+
 * [Course policies](policies.html)
 * [Installing and using GitHub from RStudio](github.html)
 * [Why I don't use Moodle](why-not-moodle.html)
+* Make an account on <GitHub.com> and enter your account ID and the corresponding email address on [this form](https://docs.google.com/forms/d/e/1FAIpQLSemXlrenuLKVY0GNf-gBGDh6QTkaw3hS7fEZojBxBY3K_e2uA/viewform#responses).
+
+
 
 ## Topic I --- Introduction
 
@@ -35,7 +39,6 @@ output:
     * Computing assignment: ISL 2.4.8, 2.4.9
         - As an example: a solution to 2.4.10.
     * Theory assignment: ISL 2.4.2, 2.4.7.
-* Notes
 * Programming activities: [Sept 1](ProgrammingActivities/Day-01-Programming-Task.html), [Sept 6](ProgrammingActivities/Day-02-Programming-Task.html), [Sept 8](ProgrammingActivities/Day-03-Programming-Task.html),[Sept 15](ProgrammingActivities/Day-04-Programming-Task.html)
 
 ## Topic 2 --- Linear regression
@@ -55,7 +58,7 @@ output:
             1. On p. 66 the authors state, "This is clearly not true in Fig. 3.1" Explain why.
             2. On p. 77 the authors state, "In this case we cannot even fit the multiple regression models using least squares ...." Explain why.
         - ISL 3.7.3 and 3.7.4.
-* Notes
+
 
 ## Topic 3 --- Likelihood and simulation
 
@@ -65,8 +68,6 @@ output:
 * Visualization: Base graphics: lines, polygons, ...
 * Topic assignment: 
     - Finish the exponential likelihood and taxicab in-class activities. 
-* Notes
-
 
 ## Topic 4 --- Classification
 
