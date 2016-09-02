@@ -1,0 +1,7 @@
+# Introduction {#intro}
+
+* Subjects
+    * Overview of statistical learning.
+    * Getting started with R, RStudio, and RMarkdown
+* Reading: Chapter 2 of ISL
+* Programming basics 1: Names, classes, and objects
