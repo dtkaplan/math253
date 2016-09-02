@@ -39,7 +39,7 @@ output:
     * Computing assignment: ISL 2.4.8, 2.4.9
         - As an example: a solution to 2.4.10.
     * Theory assignment: ISL 2.4.2, 2.4.7.
-* Programming activities: [Sept 1](ProgrammingActivities/Day-01-Programming-Task.html), [Sept 6](ProgrammingActivities/Day-02-Programming-Task.html), [Sept 8](ProgrammingActivities/Day-03-Programming-Task.html),[Sept 15](ProgrammingActivities/Day-04-Programming-Task.html)
+* Programming activities: [Sept 1](ProgrammingActivities/Day-01-Programming-Task.html), [Sept 6](ProgrammingActivities/Day-02-Programming-Task.html), [Sept 8](ProgrammingActivities/Day-03-Programming-Task.html)
 
 ## Topic 2 --- Linear regression
 
