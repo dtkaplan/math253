@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Notes for Math 253: Statistical Computing and Machine Learning</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Notes and other materials for Math 253 at Macalester College.">
+  <meta name="generator" content="bookdown 0.1.6 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Notes for Math 253: Statistical Computing and Machine Learning" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Notes and other materials for Math 253 at Macalester College." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Notes for Math 253: Statistical Computing and Machine Learning" />
+  
+  <meta name="twitter:description" content="Notes and other materials for Math 253 at Macalester College." />
+  
+
+<meta name="author" content="Daniel Kaplan">
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="preface.html">
+<link rel="next" href="linear-regression.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Math 253 Notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#math-253-and-the-macalester-statistics-curriculum"><i class="fa fa-check"></i>Math 253 and the Macalester statistics curriculum</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#these-notes-are-written-in-bookdown"><i class="fa fa-check"></i>These notes are written in Bookdown</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#statistical-and-machine-learning"><i class="fa fa-check"></i><b>1.1</b> Statistical and Machine Learning</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="introduction.html"><a href="introduction.html#statistics-concepts"><i class="fa fa-check"></i><b>1.1.1</b> Statistics concepts</a></li>
+<li class="chapter" data-level="1.1.2" data-path="introduction.html"><a href="introduction.html#computing-concepts"><i class="fa fa-check"></i><b>1.1.2</b> Computing concepts</a></li>
+<li class="chapter" data-level="1.1.3" data-path="introduction.html"><a href="introduction.html#cross-fertilization"><i class="fa fa-check"></i><b>1.1.3</b> Cross fertilization</a></li>
+<li class="chapter" data-level="1.1.4" data-path="introduction.html"><a href="introduction.html#example-1-machine-translation-of-natural-languages"><i class="fa fa-check"></i><b>1.1.4</b> Example 1: Machine translation of natural languages</a></li>
+<li class="chapter" data-level="1.1.5" data-path="introduction.html"><a href="introduction.html#example-2-from-library-catalogs-to-latent-semantic-indexing"><i class="fa fa-check"></i><b>1.1.5</b> Example 2: From library catalogs to latent semantic indexing</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#theoretical-concepts-isl-2.1"><i class="fa fa-check"></i><b>1.2</b> Theoretical concepts ISL §2.1</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="introduction.html"><a href="introduction.html#prediction-versus-inference"><i class="fa fa-check"></i><b>1.2.1</b> Prediction versus inference</a></li>
+<li class="chapter" data-level="1.2.2" data-path="introduction.html"><a href="introduction.html#accuracy-versus-interpretability"><i class="fa fa-check"></i><b>1.2.2</b> Accuracy versus interpretability</a></li>
+<li class="chapter" data-level="1.2.3" data-path="introduction.html"><a href="introduction.html#reducible-versus-irreducible-error"><i class="fa fa-check"></i><b>1.2.3</b> Reducible versus irreducible error</a></li>
+<li class="chapter" data-level="1.2.4" data-path="introduction.html"><a href="introduction.html#regression-versus-classification"><i class="fa fa-check"></i><b>1.2.4</b> Regression versus classification</a></li>
+<li class="chapter" data-level="1.2.5" data-path="introduction.html"><a href="introduction.html#supervised-versus-unsupervised"><i class="fa fa-check"></i><b>1.2.5</b> Supervised versus unsupervised</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#in-class-programming-activity"><i class="fa fa-check"></i><b>1.3</b> In-class programming activity</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#review-from-day-1"><i class="fa fa-check"></i><b>1.4</b> Review from Day 1</a></li>
+<li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#day-2-theory-accuracy-precision-and-bias"><i class="fa fa-check"></i><b>1.5</b> Day 2 theory: accuracy, precision, and bias</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="introduction.html"><a href="introduction.html#figure-2.10"><i class="fa fa-check"></i><b>1.5.1</b> Figure 2.10</a></li>
+<li class="chapter" data-level="1.5.2" data-path="introduction.html"><a href="introduction.html#another-example-a-smoother-simulated-fx."><i class="fa fa-check"></i><b>1.5.2</b> Another example: A smoother simulated <span class="math inline">\(f(x)\)</span>.</a></li>
+<li class="chapter" data-level="1.5.3" data-path="introduction.html"><a href="introduction.html#whats-the-best-of-these-models"><i class="fa fa-check"></i><b>1.5.3</b> What’s the “best” of these models?</a></li>
+<li class="chapter" data-level="1.5.4" data-path="introduction.html"><a href="introduction.html#why-is-testing-mse-u-shaped"><i class="fa fa-check"></i><b>1.5.4</b> Why is testing MSE U-shaped?</a></li>
+<li class="chapter" data-level="1.5.5" data-path="introduction.html"><a href="introduction.html#measuring-the-variance-of-independent-sources-of-variation"><i class="fa fa-check"></i><b>1.5.5</b> Measuring the variance of independent sources of variation</a></li>
+<li class="chapter" data-level="1.5.6" data-path="introduction.html"><a href="introduction.html#equation-2.7"><i class="fa fa-check"></i><b>1.5.6</b> Equation 2.7</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="introduction.html"><a href="introduction.html#programming-basics-i-names-classes-and-objects"><i class="fa fa-check"></i><b>1.6</b> Programming Basics I: Names, classes, and objects</a><ul>
+<li class="chapter" data-level="1.6.1" data-path="introduction.html"><a href="introduction.html#names"><i class="fa fa-check"></i><b>1.6.1</b> Names</a></li>
+<li class="chapter" data-level="1.6.2" data-path="introduction.html"><a href="introduction.html#objects"><i class="fa fa-check"></i><b>1.6.2</b> Objects</a></li>
+<li class="chapter" data-level="1.6.3" data-path="introduction.html"><a href="introduction.html#classes"><i class="fa fa-check"></i><b>1.6.3</b> Classes</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="introduction.html"><a href="introduction.html#day-2-in-class-programming-activity"><i class="fa fa-check"></i><b>1.7</b> Day 2 in-class programming activity</a></li>
+<li class="chapter" data-level="1.8" data-path="introduction.html"><a href="introduction.html#review-of-day-2"><i class="fa fa-check"></i><b>1.8</b> Review of Day 2</a></li>
+<li class="chapter" data-level="1.9" data-path="introduction.html"><a href="introduction.html#a-classifier-example"><i class="fa fa-check"></i><b>1.9</b> A Classifier example</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>2</b> Linear Regression</a><ul>
+<li class="chapter" data-level="2.1" data-path="linear-regression.html"><a href="linear-regression.html#day-4-overview"><i class="fa fa-check"></i><b>2.1</b> Day 4 Overview</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="linear-regression.html"><a href="linear-regression.html#isl-books-statement-on-why-to-study-linear-regression"><i class="fa fa-check"></i><b>2.1.1</b> ISL book’s statement on why to study linear regression</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="linear-regression.html"><a href="linear-regression.html#small-data"><i class="fa fa-check"></i><b>2.2</b> Small data</a></li>
+<li class="chapter" data-level="2.3" data-path="linear-regression.html"><a href="linear-regression.html#selecting-model-terms"><i class="fa fa-check"></i><b>2.3</b> Selecting model terms</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="linear-regression.html"><a href="linear-regression.html#theory-of-whole-model-anova."><i class="fa fa-check"></i><b>2.3.1</b> Theory of whole-model ANOVA.</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="linear-regression.html"><a href="linear-regression.html#programming-basics-graphics"><i class="fa fa-check"></i><b>2.4</b> Programming basics: Graphics</a></li>
+<li class="chapter" data-level="2.5" data-path="linear-regression.html"><a href="linear-regression.html#in-class-programming-activity-1"><i class="fa fa-check"></i><b>2.5</b> In-class programming activity</a></li>
+<li class="chapter" data-level="2.6" data-path="linear-regression.html"><a href="linear-regression.html#review-of-day-4"><i class="fa fa-check"></i><b>2.6</b> Review of Day 4</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="linear-regression.html"><a href="linear-regression.html#graphics-basics"><i class="fa fa-check"></i><b>2.6.1</b> Graphics basics</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="linear-regression.html"><a href="linear-regression.html#regression-and-interpretability"><i class="fa fa-check"></i><b>2.7</b> Regression and Interpretability</a></li>
+<li class="chapter" data-level="2.8" data-path="linear-regression.html"><a href="linear-regression.html#measuring-accuracy-of-the-model"><i class="fa fa-check"></i><b>2.8</b> Measuring Accuracy of the Model</a></li>
+<li class="chapter" data-level="2.9" data-path="linear-regression.html"><a href="linear-regression.html#bias-of-the-model"><i class="fa fa-check"></i><b>2.9</b> Bias of the model</a></li>
+<li class="chapter" data-level="2.10" data-path="linear-regression.html"><a href="linear-regression.html#forward-backward-and-mixed-selection"><i class="fa fa-check"></i><b>2.10</b> Forward, backward and mixed selection</a></li>
+<li class="chapter" data-level="2.11" data-path="linear-regression.html"><a href="linear-regression.html#in-class-programming-activity-2"><i class="fa fa-check"></i><b>2.11</b> In-class programming activity</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="instructions-for-the-publishing-system-bookdown.html"><a href="instructions-for-the-publishing-system-bookdown.html"><i class="fa fa-check"></i>Instructions for the publishing system: Bookdown</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/dtkaplan/math253" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notes for Math 253: Statistical Computing and Machine Learning</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="introduction" class="section level1">
+<h1><span class="header-section-number">Topic 1</span> Introduction</h1>
+<ul>
+<li>Subjects
+<ul>
+<li>Overview of statistical learning.</li>
+<li>Getting started with R, RStudio, and RMarkdown</li>
+</ul></li>
+<li>Reading: Chapter 2 of ISL</li>
+<li>Programming basics 1: Names, classes, and objects</li>
+</ul>
+<div id="statistical-and-machine-learning" class="section level2">
+<h2><span class="header-section-number">1.1</span> Statistical and Machine Learning</h2>
+<p>The two terms, “statistical learning” and “machine learning,” reflect mainly the artificialities of academic disciplines.</p>
+<ul>
+<li>Statisticians focus on the statistical aspects of the problems</li>
+<li>Computer scientists are interested in “machines”, including hardware and software.</li>
+</ul>
+<p>“Data Science” is a new term that reflects the reality that both statistical and machine learning are about data. Techniques and concepts from both statistics and computer science are essential.</p>
+<div id="statistics-concepts" class="section level3">
+<h3><span class="header-section-number">1.1.1</span> Statistics concepts</h3>
+<ul>
+<li>Sampling variability</li>
+<li>Bias and variance</li>
+<li>Characterization of precision</li>
+<li>Function estimation frameworks, e.g. generalized linear models</li>
+<li>Assumed probability models</li>
+<li>Prior and posterior probabilities (Bayesian framework)</li>
+</ul>
+</div>
+<div id="computing-concepts" class="section level3">
+<h3><span class="header-section-number">1.1.2</span> Computing concepts</h3>
+<ul>
+<li>Algorithms</li>
+<li>Iteration</li>
+<li>Simulation</li>
+<li>Function estimation frameworks, e.g. classification trees, support vector machines, artificial intelligence techniques</li>
+<li>Kalman filters</li>
+</ul>
+</div>
+<div id="cross-fertilization" class="section level3">
+<h3><span class="header-section-number">1.1.3</span> Cross fertilization</h3>
+<ul>
+<li>Assumed probability models supplanted by simulation
+<ul>
+<li>Randomization and iteration</li>
+<li>Cross validation</li>
+<li>Bootstrapping</li>
+</ul></li>
+<li>Model interpretibility Rather than an emphasis on the output of a function, interest in what the function has to say about how the world works.</li>
+</ul>
+</div>
+<div id="example-1-machine-translation-of-natural-languages" class="section level3">
+<h3><span class="header-section-number">1.1.4</span> Example 1: Machine translation of natural languages</h3>
+<p>Computer scientists took this on.</p>
+<ul>
+<li>Identification of grammatical structures and tagging text.</li>
+<li>Dictionaries of single-word equivalents, common phrases.</li>
+</ul>
+<p><a href="https://en.wikipedia.org/wiki/Literal_translation">Story from early days of machine translation</a>:</p>
+<ul>
+<li>Start with English: “The spirit is willing, but the flesh is weak.” <!-- (Russian equivalent: дух бодр, плоть же немощна) --></li>
+<li>Translate into Russian <!-- somehow getting водка хорошая, но мясо протухло.--></li>
+<li>Translate back into English. Result: “The vodka is good, but the meat is rotten.”</li>
+</ul>
+<p>Statistical approach:</p>
+<ul>
+<li>Take a large sample of short phrases in language A and their human translation into language B: the dictionary</li>
+<li>Find simple measures of similarity between phrases in language A (e.g. de-stemmed words in common)</li>
+<li>Take new phrase in language A, look up it’s closest match in the dictionary phrases in language A. Translation is the corresponding dictionary entry in language B</li>
+</ul>
+<p>Where did the sample of phrases come from?</p>
+<ul>
+<li>European Union documents routinely translated into all the member languages. Humans mark correspondence.</li>
+<li>“Mechanical Turk” dispersal of small work tasks.</li>
+</ul>
+<p>Result: Google translate.</p>
+</div>
+<div id="example-2-from-library-catalogs-to-latent-semantic-indexing" class="section level3">
+<h3><span class="header-section-number">1.1.5</span> Example 2: From library catalogs to latent semantic indexing</h3>
+<p>Early days: computer systems with key words and search systems (as in library catalogs)</p>
+<p>Now: dimension reduction (e.g. singular value decomposition), angle between specific documents and what might be called “eigen-documents”</p>
+<p>Result: Google search</p>
+</div>
+</div>
+<div id="theoretical-concepts-isl-2.1" class="section level2">
+<h2><span class="header-section-number">1.2</span> Theoretical concepts ISL §2.1</h2>
+<div id="prediction-versus-inference" class="section level3">
+<h3><span class="header-section-number">1.2.1</span> Prediction versus inference</h3>
+<ul>
+<li>Black-box predictions. If the box works, why worry about what’s inside?
+<ul>
+<li>Example: Malignancy of cancer from appearance of cells. Works for guiding treatment. Does it matter why malignant cells have the appearance they do?</li>
+<li>Story: Mid-1980s. Heart rate variability spectral analysis and holter monitors. (Holters were cassette tape recorders set to record ECG very, very slowly. Spectral analysis breaks down the overal signal into periodic components.) Very large spike at 0.03 Hz seen in people who will soon die.<br />
+</li>
+</ul></li>
+<li>Causal influences. We want to use observations to inform our understanding of what influences what.
+<ul>
+<li>Story continued: The very large spike was the “wow and flutter” in the cassette tape mechanism. This had an exact periodicity: a spike in the spectrum. If the person was sick, their heart rate was steady: they had no capacity to vary it as other conditions in the body (arterial compliance, venus tone) called for. Understanding what happens in cardiac illness is, in part, about understanding how the various control systems interact.</li>
+</ul></li>
+</ul>
+</div>
+<div id="accuracy-versus-interpretability" class="section level3">
+<h3><span class="header-section-number">1.2.2</span> Accuracy versus interpretability</h3>
+<p>Sometimes “flexibility” is used instead of “accuracy”.</p>
+<p>Not flexible:</p>
+<div class="figure"><span id="fig:ISL-2-1"></span>
+<img src="Images/Chapter-2/2.1.png" alt="Individual fits miss how the explanatory variables interact. ISL Figure 2.1" width="400" />
+<p class="caption">
+Figure 1.1: Individual fits miss how the explanatory variables interact. ISL Figure 2.1
+</p>
+</div>
+<p>Flexible:</p>
+<div class="figure"><span id="fig:ISL-2-2"></span>
+<img src="Images/Chapter-2/2.2.png" alt="Such detailed patterns are more closely associated with physical science data than with social/economic data. ISL Figure 2.2" width="400" />
+<p class="caption">
+Figure 1.2: Such detailed patterns are more closely associated with physical science data than with social/economic data. ISL Figure 2.2
+</p>
+</div>
+<hr />
+<p>And in multiple variables:</p>
+<p><strong>Not flexible</strong>:</p>
+<div class="figure"><span id="fig:ISL-2-4"></span>
+<img src="Images/Chapter-2/2.4.png" alt="ISL Figure 2.4" width="330" />
+<p class="caption">
+Figure 1.3: ISL Figure 2.4
+</p>
+</div>
+<p><strong>Flexible</strong>:</p>
+<div class="figure"><span id="fig:ISL-2-6"></span>
+<img src="Images/Chapter-2/2.6.png" alt="ISL Figure 2.6" width="330" />
+<p class="caption">
+Figure 1.4: ISL Figure 2.6
+</p>
+</div>
+<p>A quick characterization of several model architectures (which they call “statistical learning methods”)</p>
+<div class="figure"><span id="fig:ISL-2-7"></span>
+<img src="Images/Chapter-2/2.7.png" alt="ISL Figure 2.7" width="400" />
+<p class="caption">
+Figure 1.5: ISL Figure 2.7
+</p>
+</div>
+</div>
+<div id="reducible-versus-irreducible-error" class="section level3">
+<h3><span class="header-section-number">1.2.3</span> Reducible versus irreducible error</h3>
+<p>What does this mean? (from p. 19)</p>
+<p><span class="math display">\[\begin{array}{rcl}
+E(Y - \hat{Y})^2 &amp; = &amp; E[f(X) + \epsilon - \hat{f}(X)]^2\\
+                 &amp; = &amp; \underbrace{[f(X) - \hat{f}(X)]^2}_{Reducible} + \underbrace{Var(\epsilon)}_{Irreducible}\\
+                 \end{array}\]</span></p>
+<p>Notation:</p>
+<ul>
+<li><span class="math inline">\(X\)</span> — the inputs that determine the output <span class="math inline">\(Y\)</span>.</li>
+<li><span class="math inline">\(Y\)</span> — the output, that is, the quantity we want to predict</li>
+<li><span class="math inline">\(\hat{Y}\)</span> — our prediction
+<ul>
+<li>hat means estimated, no hat means “real” (whatever that might mean)</li>
+</ul></li>
+<li><span class="math inline">\(E(Y - \hat{Y})^2\)</span> — the mean of the square difference between our prediction and the “real” value. <span class="math inline">\(E\)</span> means “expectation value.”</li>
+<li><span class="math inline">\(f(X)\)</span> — what <span class="math inline">\(Y\)</span> would be, ideally, for a given <span class="math inline">\(X\)</span></li>
+<li><span class="math inline">\(\hat{f}(X)\)</span> — our estimate of <span class="math inline">\(f(X)\)</span></li>
+<li><span class="math inline">\(\epsilon\)</span> — but <span class="math inline">\(Y\)</span> is subject to other, “random” influences. <span class="math inline">\(\epsilon\)</span> represents these. <span class="math inline">\(\epsilon\)</span> is a misleading notation because it may not be at all small in practice. But <span class="math inline">\(\epsilon\)</span> is alway centered on zero (by definition).</li>
+<li><span class="math inline">\(|f(X) - \hat{f}(X)|\)</span> — the magnitude of the difference between the “real” <span class="math inline">\(f()\)</span> and our estimate. This can be made small by
+<ol style="list-style-type: decimal">
+<li>collecting more data</li>
+<li>using a more flexible model</li>
+<li>expanding the set of inputs considered</li>
+</ol></li>
+<li><span class="math inline">\(Var(\epsilon)\)</span> — the “variance” of <span class="math inline">\(\epsilon\)</span>. This is the mean square of <span class="math inline">\(\epsilon\)</span>, that is, <span class="math inline">\(E(\epsilon^2)\)</span>.</li>
+</ul>
+</div>
+<div id="regression-versus-classification" class="section level3">
+<h3><span class="header-section-number">1.2.4</span> Regression versus classification</h3>
+<p>Regression: quantitative response (value, probability, count, …)</p>
+<p>Classification: categorical response with more than two categories. (When there are just two categories, regression (e.g. logistic regression) does the job.)</p>
+</div>
+<div id="supervised-versus-unsupervised" class="section level3">
+<h3><span class="header-section-number">1.2.5</span> Supervised versus unsupervised</h3>
+<ul>
+<li>Demographics groups in marketing.</li>
+<li>Poverty vs middle-class</li>
+<li>Political beliefs … left vs right?</li>
+</ul>
+<div class="figure"><span id="fig:ISL-2-8"></span>
+<img src="Images/Chapter-2/2.8.png" alt="ISL Figure 2.8" width="250" />
+<p class="caption">
+Figure 1.6: ISL Figure 2.8
+</p>
+</div>
+</div>
+</div>
+<div id="in-class-programming-activity" class="section level2">
+<h2><span class="header-section-number">1.3</span> In-class programming activity</h2>
+<p><a href="../Daily-Programming/2015-09-03.pdf">Day 1 activity</a></p>
+</div>
+<div id="review-from-day-1" class="section level2">
+<h2><span class="header-section-number">1.4</span> Review from Day 1</h2>
+<ul>
+<li><p>Supervised vs unsupervised We will be doing only supervised learning until late in the course</p></li>
+<li><p>Supervised learning:</p>
+<ul>
+<li>We have a set of cases, <span class="math inline">\(i = 1, 2, 3, \ldots, n\)</span>, called the <strong>training data</strong>.</li>
+<li>For each case, we have an input <span class="math inline">\({\mathbf X_i}\)</span> consisting potentially of several variables measured on that case.
+<ul>
+<li>The subscript <span class="math inline">\(i\)</span> in <span class="math inline">\({\mathbf X_i}\)</span> means that we have one <span class="math inline">\({\mathbf X}\)</span> for each case. The boldface <span class="math inline">\({\bf X}\)</span> means that the input can be multi-dimensional, that is, consisting of multiple variables.<br />
+</li>
+</ul></li>
+<li>For each case, we have an output <span class="math inline">\(Y_i\)</span>.</li>
+<li>We want to learn the overall pattern of the relationship between the inputs <span class="math inline">\({\mathbf X}\)</span> and the outputs <span class="math inline">\(Y\)</span>, not just for our <span class="math inline">\(n\)</span> training cases, but for potential cases that we have not encountered yet. These as yet unencountered cases are thought of as the <strong>testing data</strong>.</li>
+<li>We are going to represent the pattern with a <strong>function</strong> <span class="math inline">\(\hat{f} : {\bf X} \rightarrow Y\)</span>.<br />
+</li>
+<li>Sometimes I’ll use the word <strong>model</strong> instead of function. A model is a representation for a purpose. A function is a kind of representation. So some models involve functions. That’s the kind we’ll focus on in this course. I say “model” out of habit, but it’s a good habit that reminds us that the <strong>purpose</strong> of the function is important and we should know what that purpose is when we undertake learning.</li>
+</ul></li>
+<li><p>Regression vs classification<br />
+Different kinds of functions. A classifier has output as a categorical level. A regression has output as a number.</p></li>
+<li>Prediction vs inference
+<ul>
+<li>Two different kinds of purpose. There may well be different kinds of functions best suited to each purpose.</li>
+</ul></li>
+<li><p>Accuracy vs interpretability<br />
+We always want models to be accurate. Whether we need to be able to interpret the model depends on our overall purpose.</p></li>
+<li><p>Reducible error vs irreducible error<br />
+It’s good to know how accurate our models can get. That gives a goal for trying out different types of models to know when we don’t need to keep searching.</p></li>
+</ul>
+</div>
+<div id="day-2-theory-accuracy-precision-and-bias" class="section level2">
+<h2><span class="header-section-number">1.5</span> Day 2 theory: accuracy, precision, and bias</h2>
+<div id="figure-2.10" class="section level3">
+<h3><span class="header-section-number">1.5.1</span> Figure 2.10</h3>
+<p>In constructing a theory, it’s good to have a system you can play with where you know exactly what is going on: e.g. a simulation.</p>
+<p>The dark blue line in the left panel is a function the authors created for use in a simulation:</p>
+<div class="figure"><span id="fig:ISL-2-9"></span>
+<img src="Images/Chapter-2/2.9.png" alt="ISL Figure 2.9" width="400" />
+<p class="caption">
+Figure 1.7: ISL Figure 2.9
+</p>
+</div>
+<p>The dots are data they generated from evaluating the function at a few dozen values of <span class="math inline">\(x\)</span> and adding noise to each result.</p>
+<p>The difference between the dots’ vertical position and the function value is the <em>residual</em>, which they are calling the <em>error</em>. The mean square error MSE is</p>
+<p><span class="math display">\[\mbox{MSE} = \frac{1}{n} \sum_{i=1}^n (y_i - f(x_i))^2\]</span></p>
+<ul>
+<li>Take this notation apart. What’s <span class="math inline">\(n\)</span>? What’s <span class="math inline">\(i\)</span>?</li>
+<li>Suppose that <span class="math inline">\(f(x)\)</span> were constant. In that situation, what kind of statistical quantity does this resemble?</li>
+<li>In actual practice, we don’t know <span class="math inline">\(f(x)\)</span>. (Indeed, it’s a matter of philosophy whether this is an <span class="math inline">\(f(x)\)</span> — it’s a kind of Platonic form.) Here we know <span class="math inline">\(f(x)\)</span> because we are playing a game: running a simulation.</li>
+</ul>
+<p>Looking again at the left panel in Figure 2.9, you can see three different functions that they have fitted to the data. It’s not important right now, but you might as well know what these model architectures are:</p>
+<ol style="list-style-type: decimal">
+<li>Linear regression line (orange)</li>
+<li>Smoothing splines (green and light blue). A smoothing spline is a functional form with a parameter: the <em>smoothness</em>. The green function is less smooth than the light blue function.</li>
+<li>That smoothness measure can also be applied to the linear regression form</li>
+</ol>
+<p>Each of these three functions were fitted to the data. Another word for fitted is <em>trained</em>. As such, we use the term <em>training error</em> for the difference between the data points and the fitted functions. Also, because the functions are not the Platonic <span class="math inline">\(f(x)\)</span>, they are written <span class="math inline">\(\hat{f}(x)\)</span>.</p>
+<p>For each of the functions, the training MSE is</p>
+<p><span class="math display">\[\mbox{Training MSE} = \frac{1}{n} \sum_{i=1}^n (y_i - \hat{f}(x_i))^2\]</span></p>
+<p>Right panel of the graph is something completely different: both the axes are different than in the left panel.</p>
+<ul>
+<li>x-axis: the smoothness of the functions. This is labelled <em>flexibility</em>.</li>
+<li>The three x positions correspond to the smoothness of the three models. This is measured as the effective <em>number of parameters</em> of the function.<br />
+Why does the straight-line function have a smoothness of 2?</li>
+<li>y-axis: the MSE
+<ul>
+<li>The dots connected by the gray curve show the <em>training</em> MSE of the three models.</li>
+<li>The dots connected by the orange curve show the <em>testing</em> MSE of the three models.</li>
+<li>The continuous curves were constructed by calculating the MSE for many more values of smoothness than shown in the left panel.</li>
+</ul></li>
+<li>How did they measure the <em>training</em> MSE?</li>
+</ul>
+</div>
+<div id="another-example-a-smoother-simulated-fx." class="section level3">
+<h3><span class="header-section-number">1.5.2</span> Another example: A smoother simulated <span class="math inline">\(f(x)\)</span>.</h3>
+<div class="figure"><span id="fig:ISL-2-10"></span>
+<img src="Images/Chapter-2/2.10.png" alt="ISL Figure 2.10" width="400" />
+<p class="caption">
+Figure 1.8: ISL Figure 2.10
+</p>
+</div>
+<ul>
+<li>What’s different between the right panel of 2.9 and that of 2.10?</li>
+</ul>
+</div>
+<div id="whats-the-best-of-these-models" class="section level3">
+<h3><span class="header-section-number">1.5.3</span> What’s the “best” of these models?</h3>
+<p>When examining training MSE, the more flexible model has the smaller MSE. This answer is pre-ordained, regardless of the actual shape of the Platonic <span class="math inline">\(f(x)\)</span>.</p>
+<p>In traditional regression, we use ANOVA or *adjusted$ <span class="math inline">\(R^2\)</span> to help avoid this inevitability that more complicated models will be closer to the training data.</p>
+<p>Another approach to this is to use <em>testing</em> MSE rather than training MSE. So pick the model with flexibility at the bottom of the U-shaped testing MSE curve.</p>
+</div>
+<div id="why-is-testing-mse-u-shaped" class="section level3">
+<h3><span class="header-section-number">1.5.4</span> Why is testing MSE U-shaped?</h3>
+<ul>
+<li>Bias: how far <span class="math inline">\(\hat{f}(x)\)</span> is from <span class="math inline">\(f(x)\)</span></li>
+<li>Variance: how much <span class="math inline">\(\hat{f}\)</span> would vary among different randomly selected possible training samples.</li>
+</ul>
+<p>In traditional regression, we get at the variance by using confidence intervals on parameters. The broader the confidence interval, the higher the variation from random sample to random sample. These confidence intervals come from normal theory or from bootstrapping. Bootstrapping is a simulation of the variation in model fit due to training data.</p>
+<p>Bias decreases with higher flexibility.</p>
+<p>Variance tends to increase with higher flexibility.</p>
+<p>Irreducible error is constant.</p>
+<div class="figure"><span id="fig:ISL-2-12"></span>
+<img src="Images/Chapter-2/2.12.png" alt="ISL Figure 2.12" width="400" />
+<p class="caption">
+Figure 1.9: ISL Figure 2.12
+</p>
+</div>
+</div>
+<div id="measuring-the-variance-of-independent-sources-of-variation" class="section level3">
+<h3><span class="header-section-number">1.5.5</span> Measuring the variance of independent sources of variation</h3>
+<p>Simulation:</p>
+<p>Add three different sources of variation. The width of the individual sources is measured by the standard deviation <code>sd=</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(mosaic)
+n &lt;-<span class="st"> </span><span class="dv">1000</span>
+<span class="kw">sd</span>( <span class="kw">rnorm</span>(<span class="dv">1000</span>, <span class="dt">sd=</span><span class="dv">3</span>) +<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>, <span class="dt">sd=</span><span class="dv">1</span>) +<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>, <span class="dt">sd=</span><span class="dv">2</span>) )</code></pre></div>
+<pre><code>## [1] 3.666602</code></pre>
+<ul>
+<li>Divide into small groups and
+<ul>
+<li>construct a theory about how the variation in the individual components relates to the variation in the whole.</li>
+<li>test whether your theory works for other random distributions, e.g. <code>rexp()</code></li>
+</ul></li>
+</ul>
+</div>
+<div id="equation-2.7" class="section level3">
+<h3><span class="header-section-number">1.5.6</span> Equation 2.7</h3>
+<p><span class="math display">\[E( y - \hat{f}(x) )^2 = \mbox{Var}(\hat{f}(x)) + [\mbox{Bias}(\hat{f}(x))]^2 + \mbox{Var}(\epsilon)\]</span></p>
+<p>Breaks down the total “error” into three independent sources of variation:</p>
+<ol style="list-style-type: decimal">
+<li>How <span class="math inline">\(y_i\)</span> differs from <span class="math inline">\(f(x_i)\)</span>. This is the irreducible noise: <span class="math inline">\(\epsilon\)</span></li>
+<li>How <span class="math inline">\(\hat{f}(x_i)\)</span> (if fitted to the testing data) differs from <span class="math inline">\(f(x_i)\)</span>. This is the <em>bias</em>.</li>
+<li>How the particular <span class="math inline">\(\hat{f}(x_i)\)</span> fitted to the training data differs from the <span class="math inline">\(\hat{f}(x_i)\)</span> that would be the best fit to the testing data.</li>
+</ol>
+<p><span class="math display">\[\underbrace{E( y - \hat{f}(x) )^2}_{\mbox{Total error}} = \underbrace{\mbox{Var}(\hat{f}(x))}_{\mbox{source 3.}} + \underbrace{[\mbox{Bias}(\hat{f}(x))]^2}_{\mbox{source 2.}} + \underbrace{\mbox{Var}(\epsilon)}_{\mbox{source 1.}}\]</span></p>
+</div>
+</div>
+<div id="programming-basics-i-names-classes-and-objects" class="section level2">
+<h2><span class="header-section-number">1.6</span> Programming Basics I: Names, classes, and objects</h2>
+<div id="names" class="section level3">
+<h3><span class="header-section-number">1.6.1</span> Names</h3>
+<p>Composed of letters, numbers, <code>_</code> and <code>.</code>.<br />
+- Don’t use <code>.</code> — it’s a bad habit. But plenty of people do. - Can’t lead with a number. - Capitalization counts. - Unquoted (… almost always)</p>
+</div>
+<div id="objects" class="section level3">
+<h3><span class="header-section-number">1.6.2</span> Objects</h3>
+<p>Information (bits) in a particular format.<br />
+- Different formats for different purposes. - The format is the <code>class()</code> or <code>mode()</code>. <code>mode</code> is more basic than <code>class</code>.</p>
+<p><strong>Assignment</strong>: Give a name to an object</p>
+</div>
+<div id="classes" class="section level3">
+<h3><span class="header-section-number">1.6.3</span> Classes</h3>
+<p>Different classes represent different kinds of things. They typically have different operations that are relevant.</p>
+<ul>
+<li>1-dimensional homogeneous collections of numbers or of character strings. These collections are called <em>vectors</em>
+<ul>
+<li>1-dimensional means you need only one index to refer to a specific element</li>
+<li><code>length()</code>, which can be zero.</li>
+<li>Operations, e.g. <code>sum()</code>, <code>mean()</code>, <code>max()</code> …</li>
+</ul></li>
+<li>2-dimensional homogeneous collections of numbers or of character strings. These collections are called <em>matrices</em>
+<ul>
+<li>2-dimensional means you need two indices to refer to a specific element.</li>
+<li><code>dim()</code></li>
+<li>Operations, e.g., <code>t()</code>, <code>colSums()</code>, <code>rowSums()</code>, <code>%*%</code>, …</li>
+</ul></li>
+<li><p>1-dimensional heterogeneous collections: <em>lists</em></p></li>
+<li><p>Data frames</p></li>
+<li><p>Functions</p></li>
+</ul>
+</div>
+</div>
+<div id="day-2-in-class-programming-activity" class="section level2">
+<h2><span class="header-section-number">1.7</span> Day 2 in-class programming activity</h2>
+<p><a href="../Daily-Programming/2015-09-08.pdf">Day 2 activity</a></p>
+</div>
+<div id="review-of-day-2" class="section level2">
+<h2><span class="header-section-number">1.8</span> Review of Day 2</h2>
+<ul>
+<li><span class="math inline">\(f({\mathbf X})\)</span> versus <span class="math inline">\(\hat{f}({\mbox{X}})\)</span>: Platonic idea versus what we get out of the training data. Quip: “The hat means there’s a person underneath the model.”</li>
+<li>Mean Square Error — like the standard deviation of residuals</li>
+<li>Training vs testing data</li>
+<li>Smoothness, a.k.a. flexibility, model degrees of freedom
+<ul>
+<li>More flexibility <span class="math inline">\(\rightarrow\)</span> better training MSE</li>
+</ul></li>
+<li>Components of MSE
+<ol style="list-style-type: decimal">
+<li>Irreducible random noise: <span class="math inline">\(\epsilon\)</span></li>
+<li>Bias: <span class="math inline">\(f({\mathbf X}) - \hat{f}({\mathbf X})\)</span>
+<ul>
+<li>Caused by too much smoothness</li>
+<li>Caused by omitting a relevant variable</li>
+<li>Caused by including an irrelevant variable</li>
+</ul></li>
+<li><span class="math inline">\(Var(\hat{f}({\mathbf X}))\)</span> — how much <span class="math inline">\(\hat{f}\)</span> varies from one possible training set to another.
+<ul>
+<li>Increased by too many degrees of freedom: <em>overfitting</em></li>
+<li>Increased by collinearity and multi-collinearity.</li>
+<li>Increased by large <span class="math inline">\(\epsilon\)</span></li>
+<li>Decreased by large <span class="math inline">\(n\)</span></li>
+</ul></li>
+</ol></li>
+</ul>
+</div>
+<div id="a-classifier-example" class="section level2">
+<h2><span class="header-section-number">1.9</span> A Classifier example</h2>
+<p>A classification setting: Blood cell counts.</p>
+<p>Build a machine which takes a small blood sample and examines and classifies individual white blood cells.</p>
+<div class="figure"><span id="fig:blood-cells"></span>
+<img src="Images/blood-cells.png" alt="Blood cell classification" width="462" />
+<p class="caption">
+Figure 1.10: Blood cell classification
+</p>
+</div>
+<p>The classification is to be based on two measured inputs, shown on the x- and y-axes.</p>
+<p>Training data has been developed where the cell was classified “by hand.” In medicine, this is sometimes called the <em>gold standard</em>. The gold standard is sometimes not very accurate. Here, each cell is one dot. The color is the type of the cell: granulocytes, lymphocytes, monocytes, …</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="preface.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="linear-regression.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/dtkaplan/math253/edit/master/110-Introduction.Rmd",
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
