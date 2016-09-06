@@ -15,31 +15,7 @@ The two terms, "statistical learning" and "machine learning," reflect mainly the
 
 "Data Science" is a new term that reflects the reality that both statistical and machine learning are about data.  Techniques and concepts from both statistics and computer science are essential.
 
-### Statistics concepts
 
-* Sampling variability
-* Bias and variance
-* Characterization of precision
-* Function estimation frameworks, e.g. generalized linear models
-* Assumed probability models
-* Prior and posterior probabilities (Bayesian framework)
-
-### Computing concepts
-
-* Algorithms 
-* Iteration
-* Simulation
-* Function estimation frameworks, e.g. classification trees, support vector machines, artificial intelligence techniques
-* Kalman filters
-
-### Cross fertilization
-
-* Assumed probability models supplanted by simulation
-    * Randomization and iteration
-    * Cross validation
-    * Bootstrapping
-* Model interpretibility
-    Rather than an emphasis on the output of a function, interest in what the function has to say about how the world works.
     
 ### Example 1: Machine translation of natural languages
 
@@ -75,8 +51,46 @@ Now: dimension reduction (e.g. singular value decomposition), angle between spec
 
 Result: Google search
 
+### Computing technique
+
+Each student in the class as a personal repository on GitHub. The instructor is also a contributor to this repository and can see anything in it. Complete instructions for doing this are in the appendix.
+
+1. Set up some communications and security systems (e.g. an RSA key)
+2. Clone your repository from GitHub. It is at an address like `github.com/dtkaplan/math253-bobama`.
+
+[Day 1 Programming Activity](../../ProgrammingActivities/Day-01-Programming-Task.html)
+
+
 
 ## Theoretical concepts ISL §2.1
+
+"Data science" lies at the intersection of statistics and computer science.
+
+### Statistics concepts
+
+* Sampling variability
+* Bias and variance
+* Characterization of precision
+* Function estimation frameworks, e.g. generalized linear models
+* Assumed probability models
+* Prior and posterior probabilities (Bayesian framework)
+
+### Computing concepts
+
+* Algorithms 
+* Iteration
+* Simulation
+* Function estimation frameworks, e.g. classification trees, support vector machines, artificial intelligence techniques
+* Kalman filters
+
+### Cross fertilization
+
+* Assumed probability models supplanted by simulation
+    * Randomization and iteration
+    * Cross validation
+    * Bootstrapping
+* Model interpretibility
+    Rather than an emphasis on the output of a function, interest in what the function has to say about how the world works.
 
 ### Prediction versus inference
 
