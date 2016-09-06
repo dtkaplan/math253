@@ -17,6 +17,7 @@ output:
     - Office hours: Monday 7-9pm, MSCS Reading Room
 * Text: [An Introduction to Statistical Learning](http://www.springer.com/us/book/9781461471370).  The authors also provide [access via PDF](http://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf).
 * **Class notes**. [In-class notes for the entire semester](Class_notes/_book/introduction.html). (An evolving document.)
+* [Online discussion site](https://github.com/dtkaplan/math253-discussion/issues).
 
 ### Starting the semester
 
