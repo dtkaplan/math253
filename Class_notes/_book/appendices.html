@@ -37,8 +37,8 @@ MathJax.Hub.Config({
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="appendices.html">
-<link rel="next" href="instructions-for-the-publishing-system-bookdown.html">
+<link rel="prev" href="linear-regression.html">
+<link rel="next" href="connecting-rstudio-to-your-github-repository.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -201,131 +201,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="connecting-rstudio-to-your-github-repository" class="section level1 unnumbered">
-<h1>Connecting RStudio to your GitHub repository</h1>
-<div id="setting-up-your-math-253-repository" class="section level2">
-<h2><span class="header-section-number">2.12</span> Setting up your Math 253 repository</h2>
-<p>First, we have to set up communications between your RStudio system and GitHub. You need only do this once on each RStudio system. But if you want to work on, say, a new computer or new RStudio server, you’ll need to do it again.</p>
-<ol style="list-style-type: decimal">
-<li>Make sure you have a GitHub account. You’ll need two pieces of information about your account:
-<ol style="list-style-type: lower-alpha">
-<li>Your GitHub ID. For the instructions, I’ll call in <code>brosenberg</code>, but remember to use your own ID</li>
-<li>The email address you gave when you set up your account. I’ll use <code>brosenberg@macalester.edu</code> for the example.</li>
-</ol></li>
-<li>Start up RStudio and do the following:
-<ol style="list-style-type: lower-alpha">
-<li>In the console, give these commands:</li>
-</ol>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system</span>(<span class="st">&#39;git config --global user.name &quot;Brian MacAlistair&quot;&#39;</span>)
-<span class="kw">system</span>(<span class="st">&#39;git config --global user.email &quot;brosenberg@macalester.edu&quot;&#39;</span>)
-<span class="kw">system</span>(<span class="st">&#39;git config --global --list&#39;</span>)</code></pre></div>
-<ol start="2" style="list-style-type: lower-alpha">
-<li>Select the menu item Tools/Global Options/Git-SVN. You will see a button to “Create RSA key …”. If the box above that button is empty, press the button. Otherwise continue on ….</li>
-<li>Click “View public key” and copy the resulting displayed text to your clipboard.</li>
-</ol></li>
-<li>Go to your GitHub account. It will have an address like <code>github.com/brosenberg</code>.
-<ol style="list-style-type: lower-alpha">
-<li>Press the “Edit Profile” button, then select “SHS and GPG keys.”</li>
-<li>Press the “New SSH key” button.</li>
-<li>Two text boxes will appear. In the smaller one, insert some description of your RStudio system, e.g. <code>rstudio.macalester.edu</code> or <code>my own laptop</code>. In the larger one, paste the text you copied to your keyboard in step 2c.</li>
-</ol></li>
-<li>Almost done … A GitHub repository has been set up for you. It will has a URL in this form: &lt;github.com/dtkaplan/math253-brosenberg&gt;. If that doesn’t work, ask for help. There might have been some mistake or delay in setting up your repository, and only <code>dtkaplan</code> can fix things.
-<ol style="list-style-type: lower-alpha">
-<li>Direct your browser to the address of your repository.</li>
-<li>On the right side of the page, there is a green button: “Clone or download”. Press it. A small dialog panel will appear. It should say, “Clone with SSH”. (If not, press the small “Use SSH” link to the right.)</li>
-<li>Click on the small clipboard icon. This will copy an address to your clipboard. The address starts with <code>git@github.com</code>.</li>
-</ol></li>
-<li>Go back to your RStudio system. Select File/New Project/Version Control/GIT. A dialog box will appear.
-<ol style="list-style-type: lower-alpha">
-<li>Paste the address from 4c into the topmost text-entry widget in the dialog box.</li>
-<li>Press “Create project.” Some stuff will happen. Ultimately, you should see RStudio restart and the name of your repository (e.g. <code>math253-brosenberg</code>) will be on the upper right corner of the RStudio window. (If you are using the server version of RStudio, you might have to refresh your browser to see the change.)</li>
-</ol></li>
-</ol>
-</div>
-<div id="using-your-repository" class="section level2">
-<h2><span class="header-section-number">2.13</span> Using your repository</h2>
-<p>You will be modifying files that are already in your repository, for instance <code>01-Programming.Rmd</code>.</p>
-<ol style="list-style-type: decimal">
-<li>Make sure that the project displayed in your RStudio is the right one, e.g. <code>math253-brosenberg</code></li>
-<li>Open, edit, debug, and revise the files you are working on in the normal way. You should knit the file to HTML frequently. This helps you spot problems early.</li>
-<li>You’ll mainly be working with <code>.Rmd</code> files. When you’re satisfied with things, knit the file to produce HTML one final time.</li>
-<li>Ready to “hand in” your work? Go to the “Git” tab in RStudio. You should see at least two files listed: the file you edited and the corresponding HTML file.
-<ol style="list-style-type: lower-alpha">
-<li>“Stage” the files by checking the little boxes.</li>
-<li>“Commit” the files by pressing the “commit” button. You will be asked to write a message. Choose something short and informative, e.g. “Day 1 project submission.” A dialog box will appear with some text indicating what was in the commit.</li>
-<li>Press the “Pull” arrow.</li>
-<li>Press the “Push” arrow.</li>
-</ol></li>
-</ol>
-<p>Assuming that no errors appear, you are all done!</p>
-<p>Well … actually you’re never “all done.” You will often want to revise your work. Follow the same steps as above.</p>
-<p>It is <strong>not cheating</strong> to revise your work, even after you hand it in. I encourage you to do this, be it the next day or several weeks after you handed it in. Git keeps a detailed history of all your commits, so I can always find any version of the file that I need.</p>
-</div>
-<div id="why-are-we-doing-this" class="section level2">
-<h2><span class="header-section-number">2.14</span> Why are we doing this?</h2>
-<p>We speak of “handing in” assignments, projects, and other work for a course. But just as we no longer “dial” a telephone, there is no longer a hand involved in handing in. With course support systems like Moodle, you “hand in” by uploading to a server a copy of the file containing your work. You have a working copy of your work and, when you’re finished with your work, you upload a final copy.</p>
-<p>Making a copy has implications that can get in the way of carrying out your work. The problem is that there is usually nothing in the copy that indicates unambiguously where it comes from. If you want to revise the document, should you be revising the working document or the final copy?</p>
-<p>The word “final” suggests the traditional approach to this question. Once the work is done and the document is finalized, you no longer make any changes.</p>
-<p>It turns out that “final” does not accord well with the way that people work in collaboration. For all the time that people work with a document, there is a continuing process of revision and refinement. You may think something is final, but in a collaboration that’s not entirely your call; you may find out that it isn’t yet finished. Insofar as your document contains web links to other documents, the situation becomes even more complex, since those other documents may change.</p>
-<p>An extreme instance of this lack of finality appears in software development. Software is complex and bugs are apt to be discovered even after the “final” release. Any piece software written by you or your team relies on and communicates with other software. Changes in that other software can imply a need to revise your own software. We’ve become familiar with the idea of versions of software: R 3.3.2, Word 2016, etc.</p>
-<p>There are advantages in thinking about documents in the same way we think about software.<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> Or, put another way, there are advantages to thinking about working with documents using the same tools that computer programmers use to manage their own complex collaborations with other programmers and with other software.</p>
-<p>That’s what we’re going to do. There are two reasons: (1) it provides a superior way of managing communications and (2) it is the way things are heading in general, so the skills and concepts you develop will help you in your future work and career.</p>
-<p>To outline the components of the process …</p>
-<ol style="list-style-type: decimal">
-<li>You are going to be writting documents using the .Rmd (R/Markdown) format. You’ll use this even if there happens not to be any R content in the document.</li>
-<li>Each document that you create as part of your work for this course will be located in an RStudio “project.” A project is a means of grouping together related files.</li>
-<li>The project and the files within it will be located on your own computer. This might be your own laptop or a server.</li>
-<li>Your project will be cloned to storage on other computers. In particular, there will be a clone on the instructor’s computer and another clone on a server in the cloud.</li>
-<li>The cloud server is maintained by GitHub.com. This is not the only such server, but it is the one we are going to use.</li>
-<li>Both GitHub.com and your computer (and any other computers the project is cloned on) communicate with a system called “git.” The git system provides facilities for keeping a thorough record of the changes you make in files contained in your project. You control how fine-grained you want this record to be. The means for doing this is to take a snapshot of the current state of your project. Such a snapshot is called a “commit.” You have control of which of the documents will have changes recorded in the history; directing git to include the changes to a particular file (or even its creation) is called “staging” the file.</li>
-<li>At times of your own choice, you can synchronize/update the clone of the web server to the most recent commit of your project. This is called “pushing” the commit.</li>
-<li>Also at times of your choosing, you can synchronize/update your own clone of the project to the one on the GitHub server. This is called “pulling” a commit.</li>
-<li>Pulling and pushing are the means by which you collaborate with others on the project. Just as you will push your changes to the server, others will be pushing their own changes. You pull to synchronize your clone of the project with the changes that have been pushed by others. In a typical work session,
-<ol style="list-style-type: lower-alpha">
-<li>you will <strong>commit</strong> the current state of your project,</li>
-<li>then <strong>pull</strong> from the server,</li>
-<li>make the revisions you want in your clone.</li>
-<li>commit as often as you like within a session. Committing provides you with a marker. If something went wrong and you want to undo your revisions, it’s very easy to do so to the point where you last made a commit. Some people commit every paragraph. You decide. It takes very little time and costs nothing. If your file is intended to be translated to HTML, make sure to do this and to stage and commit the resulting version of the HTML file.</li>
-<li>When you are done with that session’s revisions, you — wait for it! — once again <strong>pull</strong> from the server. This lets you capture any changes that others made while you were revising your own clone of the project. It’s important because, sometimes, your changes will conflict with those made by others and pulling gives git a chance to bring any such conflicts to your attention. (Git will not let you push until all such conflicts have been resolved.)</li>
-<li>Finally, you <strong>push</strong> to the server, so that the clone on the server is synchronized to the changes you have made.</li>
-<li>At the instant after your push, you are now ready to continue at step (c). If you recommence work after enough time has elapsed that someone else might have pushed their own clone to the server, you should instead continue at step (a). You don’t need to be anxious about this; git will identify any conflicts that might have arisen due to another collaborator’s commits after step (f).</li>
-</ol></li>
-</ol>
-<p>It’s up to you to decide how often you should push. Pushing serves two purposes:</p>
-<ul>
-<li>It “backs up” your work to the cloud, so you won’t lose anything done up to the point of the push.</li>
-<li>It allows your collaborators to work with your revisions.</li>
-</ul>
-<p>You will “hand in” your work by</p>
-<ol style="list-style-type: lower-alpha">
-<li>Staging any files involved in the work.</li>
-<li>Committing the staged files. You might want to identify the commit with a message like “Handing in Assignment 2.”</li>
-<li>Pushing to the server.</li>
-</ol>
-<p>You’re work will be marked as “handed in” the moment you commit. But the instructor will only be able to see the files you’ve handed in <em>after</em> you push to the cloud server. If you decide to revise your work, simply revise, stage, commit and push again. The instructor will see the new version and will also have access to the earlier versions along with the time stamp made when they were committed. When in doubt about a deadline, push your work. You can always revise and push again if you discover that you have additional time until the deadline. What’s more, you can revise and push again <em>after</em> the deadline. Your instructor will be able to sort out which is the version to use for grading purposes. It is <em>not cheating</em> to revise after the deadline, because the instructor always knows which versions were submitted before the deadline. Indeed, I encourage you to revise your work even after it’s been submitted. That way you will have a copy that reflects your current understanding.</p>
-<p>By the way, the web site for this course is managed in exactly the same way. The only difference is that whatever clone the server has is made available to web browsers.</p>
-<p>Vocabulary: You should be able to give an accurate definition of each of these words, and say how they are connected to one another:</p>
-<ul>
-<li>git, GitHub, clone, stage, commit, push, pull, conflict</li>
-</ul>
-<hr />
-<p>DT Kaplan, Tue Sep 6 09:20:28 2016</p>
+<div id="appendices" class="section level1 unnumbered">
+<h1>Appendices</h1>
 
-</div>
-</div>
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>Documents on a computer are always software: instructions to some display system about what image to paint on the computer screen or paper. To paraphrase the artist <a href="https://en.wikipedia.org/wiki/Ren%C3%A9_Magritte">Magritte</a>, “Ceçi n’est pas un document.” What you write is the software to create a document, just as Magritte’s famous painting of a pipe is a painting, not a pipe.<a href="connecting-rstudio-to-your-github-repository.html#fnref1">↩</a></p></li>
-</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="appendices.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="instructions-for-the-publishing-system-bookdown.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="linear-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="connecting-rstudio-to-your-github-repository.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
@@ -352,7 +238,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/dtkaplan/math253/edit/master/910-github.Rmd",
+"link": "https://github.com/dtkaplan/math253/edit/master/902-Appendices.Rmd",
 "text": null
 },
 "download": null,

@@ -6,6 +6,10 @@
 * Reading: Chapter 2 of ISL
 * Programming basics 1: Names, classes, and objects
 
+```{r include = FALSE}
+library(mosaic)
+```
+
 ## Statistical and Machine Learning
 
 The two terms, "statistical learning" and "machine learning," reflect mainly the artificialities of academic disciplines.
@@ -61,6 +65,13 @@ Each student in the class as a personal repository on GitHub. The instructor is 
 [Day 1 Programming Activity](../../ProgrammingActivities/Day-01-Programming-Task.html)
 
 
+## Review of Day 1
+
+We discussed what "machine learning" means and saw some examples of situations where machine-learning techniques have been used successfully to solve problems that had at best clumbsy solutions before. (Natural language translation, catalogs of large collections of documents.)
+
+We worked through the process of connecting RStudio to GitHub, so that you can use your personal repository for organizing, backing up, and handing in your work.
+
+The Day-1 programming activity introduced some basic components of R: assignments, strings, vectors, etc.
 
 ## Theoretical concepts ISL §2.1
 
@@ -91,19 +102,79 @@ Each student in the class as a personal repository on GitHub. The instructor is 
     * Bootstrapping
 * Model interpretibility
     Rather than an emphasis on the output of a function, interest in what the function has to say about how the world works.
+    
+## Many techniques 
 
-### Prediction versus inference
+"Learning" is an attractive word and suggests that "machine learning" is an equivalent for what humans do. Perhaps it is to some extent ...
 
-* Black-box predictions.  If the box works, why worry about what's inside?
-    - Example: Malignancy of cancer from appearance of cells.  Works for guiding treatment. Does it matter why malignant cells have the appearance they do?
-    - Story: Mid-1980s. Heart rate variability spectral analysis and holter monitors. (Holters were cassette tape recorders set to record ECG very, very slowly. Spectral analysis breaks down the overal signal into periodic components.) Very large spike at 0.03 Hz seen in people who will soon die.  
-* Causal influences.  We want to use observations to inform our understanding of what influences what.
-    - Story continued: The very large spike was the "wow and flutter" in the cassette tape mechanism. This had an exact periodicity: a spike in the spectrum. If the person was sick, their heart rate was steady: they had no capacity to vary it as other conditions in the body (arterial compliance, venus tone) called for.  Understanding what happens in cardiac illness is, in part, about understanding how the various control systems interact.
+But "modeling" is a more precise term. We will be building models of various aspects of the world based on data.
 
-### Accuracy versus interpretability
+* Model: A representation for a purpose. Blueprints, dolls, model airplanes.
+* Mathematical model: A model built of mathematical stuff
+    - polynomials: Math 155
+    - functions more generally: e.g. splines, smoothers, ...
+    - trees
+    - geometry of distance: e.g. which exemplar are the inputs closest to?
+    - projection onto subspaces
+* Statistical model: A mathematical model founded on data. 
 
-Sometimes "flexibility" is used instead of "accuracy".
+### Unsupervised learning
 
+Wait until the end of the semester.
+
+We will be doing only supervised learning until late in the course.
+    
+### Supervised learning: 
+    
+* We have a set of cases, $i = 1, 2, 3, \ldots, n$, called the **training data**. 
+* For each case, we have an input ${\mathbf X_i}$ consisting potentially of several variables measured on that case.
+    - The subscript $i$ in ${\mathbf X_i}$ means that we have one ${\mathbf X}$ for each case.  The boldface ${\bf X}$ means that the input can be multi-dimensional, that is, consisting of multiple variables.  
+* For each case, we have an output $Y_i$.
+* We want to learn the overall pattern of the relationship between the inputs ${\mathbf X}$ and the outputs $Y$, not just for our $n$ training cases, but for potential cases that we have not encountered yet. These as yet unencountered cases are thought of as the **testing data**. 
+* We are going to represent the pattern with a **function** $\hat{f} : {\bf X} \rightarrow Y$.  
+* Sometimes I'll use the word **model** instead of function.  A model is a representation for a purpose.  A function is a kind of representation.  So some models involve functions.  That's the kind we'll focus on in this course.  I say "model" out of habit, but it's a good habit that reminds us that the **purpose** of the function is important and we should know what that purpose is when we undertake learning.
+    
+
+
+    
+## Basic dicotomies in machine learning
+
+There are fundamental trade-offs that describe the structure of learning from data. There are also trade-offs that arise between different methods of learning. Finally, there are dicotomies that stem from the different purposes for learning.
+
+These dicotomies provide a kind of road map to tell you where are are and identify where you might want to go.
+
+And, as always, it's important to know why you are doing what you're doing: your purpose.
+
+### Purposes for learning:
+
+* Make predictions. Given new inputs, e.g. data about an event, predict what the result of the event will be. e.g. weather forecasting, credit card fraud, success in college, .... In statistics, this is sometimes thought of as "analyzing data from an observational study."
+* Anticipate the effects of an intervention that we impose, e.g., giving a patient a drug, changing funding for schools, ... Traditionally in statistics, this has been tied exclusively to data from experiments. There is now greater acceptance that experiments are not always possible, and it's important to be able to make reasonable inferences about causation from observational studies.
+* Find structure in a mass of data.
+
+
+### Dicotomies
+
+* make predictions vs capture causal mechanism (in this course: common sense. There are also formal techniques to guide causal reasoning.)
+* flexibility vs variance (need some tools for this)
+* black box vs interpretable models (comparing model architectures)
+* reducible vs irreducible error ("bias" vs "residuals")
+* regression vs classification (easy!)
+* supervised vs unsupervised learning (easy!)
+
+### Prediction versus mechanism
+
+
+Example: Malignancy of cancer from appearance of cells.  Works for guiding treatment. Does it matter why malignant cells have the appearance they do?
+
+Story: Mid-1980s. Heart rate variability spectral analysis and holter monitors. (Holters were cassette tape recorders set to record ECG very, very slowly. Spectral analysis breaks down the overal signal into periodic components.) Very large spike at 0.03 Hz seen in people who will soon die.  
+
+Could use for prediction, but researchers were also interested in the underlying physiological mechanism.  Causal influences.  We want to use observations to inform our understanding of what influences what.
+
+Story continued: The very large spike was the "wow and flutter" in the cassette tape mechanism. This had an exact periodicity: a spike in the spectrum. If the person was sick, their heart rate was steady: they had no capacity to vary it as other conditions in the body (arterial compliance, venus tone) called for.  Understanding what happens in cardiac illness is, in part, about understanding how the various control systems interact.
+
+### Flexibility versus variance
+
+In traditional statistics, this is often tied up with the concept of "degrees of freedom."
 
 Not flexible:
 
@@ -133,13 +204,24 @@ knitr::include_graphics("Images/Chapter-2/2.4.png")
 knitr::include_graphics("Images/Chapter-2/2.6.png")
 ```
 
+
+### Black box vs interpretable models
+
+Many learning techniques produce models that are not easily interpreted in terms of the working of the system. Examples: neural networks, random forests, etc. The role of input variables is implicit. Characterizing it requires experimenting on the model. 
+In other learning techniques, the role of the various inputs and their interactions is explicit (e.g. model coefficients).
+
+The reason to use a black-box model is that it can be flexible. So this tradeoff might be called "flexibility vs interpretability."
+
 A quick characterization of several model architectures (which they call "statistical learning methods")
 
 ```{r ISL-2-7, echo = FALSE, fig.cap = "ISL Figure 2.7"}
 knitr::include_graphics("Images/Chapter-2/2.7.png")
 ```
 
+
 ### Reducible versus irreducible error
+
+How good can we make a model? How do we describe how good it is?
 
 What does this mean?  (from p. 19)
 
@@ -181,43 +263,6 @@ knitr::include_graphics("Images/Chapter-2/2.8.png")
 ```
 
 
-## In-class programming activity 
-
-[Day 1 activity](../Daily-Programming/2015-09-03.pdf)
-
-```{r include=FALSE}
-require(mosaic)
-```
-
-## Review from Day 1
-
-* Supervised vs unsupervised
-    We will be doing only supervised learning until late in the course
-    
-* Supervised learning: 
-    
-    * We have a set of cases, $i = 1, 2, 3, \ldots, n$, called the **training data**. 
-    * For each case, we have an input ${\mathbf X_i}$ consisting potentially of several variables measured on that case.
-        - The subscript $i$ in ${\mathbf X_i}$ means that we have one ${\mathbf X}$ for each case.  The boldface ${\bf X}$ means that the input can be multi-dimensional, that is, consisting of multiple variables.  
-    * For each case, we have an output $Y_i$.
-    * We want to learn the overall pattern of the relationship between the inputs ${\mathbf X}$ and the outputs $Y$, not just for our $n$ training cases, but for potential cases that we have not encountered yet. These as yet unencountered cases are thought of as the **testing data**. 
-    * We are going to represent the pattern with a **function** $\hat{f} : {\bf X} \rightarrow Y$.  
-    * Sometimes I'll use the word **model** instead of function.  A model is a representation for a purpose.  A function is a kind of representation.  So some models involve functions.  That's the kind we'll focus on in this course.  I say "model" out of habit, but it's a good habit that reminds us that the **purpose** of the function is important and we should know what that purpose is when we undertake learning.
-    
-* Regression vs classification    
-    Different kinds of functions. A classifier has output as a categorical level.  A regression has output as a number.
-
-* Prediction vs inference    
-    * Two different kinds of purpose.  There may well be different kinds of functions best suited to each purpose.
-    
-* Accuracy vs interpretability    
-    We always want models to be accurate.  Whether we need to be able to interpret the model depends on our overall purpose.
-    
-* Reducible error vs irreducible error    
-    It's good to know how accurate our models can get.  That gives a goal for trying out different types of models to know when we don't need to keep searching.
-
-
-
     
 
 ## Day 2 theory: accuracy, precision, and bias
@@ -232,7 +277,7 @@ The dark blue line in the left panel is a function the authors created for use i
 knitr::include_graphics("Images/Chapter-2/2.9.png")
 ```
 
-The dots are data they generated from evaluating the function at a few dozen values of $x$ and adding noise to each result.
+The dots are data the textbook authors generated from evaluating the function at a few dozen values of $x$ and adding noise to each result.
 
 The difference between the dots' vertical position and the function value is the *residual*, which they are calling the *error*.  The mean square error MSE is
 
@@ -301,11 +346,11 @@ knitr::include_graphics("Images/Chapter-2/2.12.png")
 
 ### Measuring the variance of independent sources of variation 
 
-Simulation:
+Simulation: Make and edit a file `Day-02.Rmd`.
 
+#### Explore
 Add three different sources of variation.  The width of the individual sources is measured by the standard deviation `sd=`.
 ```{r}
-require(mosaic)
 n <- 1000
 sd( rnorm(1000, sd=3) + rnorm(1000, sd=1) + rnorm(1000, sd=2) )
 ```
@@ -314,6 +359,17 @@ sd( rnorm(1000, sd=3) + rnorm(1000, sd=1) + rnorm(1000, sd=2) )
     - construct a theory about how the variation in the individual components relates to the variation in the whole.
     - test whether your theory works for other random distributions, e.g. `rexp()`
 
+#### Result (Don't read until you've drawn your own conclusions!)
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+The variance of the sum of independent random variables is the sum of the variances of the individual random variables.
 
 ### Equation 2.7 
 
@@ -392,6 +448,20 @@ Different classes represent different kinds of things.  They typically have diff
         * Increased by collinearity and multi-collinearity.
         * Increased by large $\epsilon$
         * Decreased by large $n$
+        
+* Regression vs classification    
+    Different kinds of functions. A classifier has output as a categorical level.  A regression has output as a number.
+
+* Prediction vs inference    
+    * Two different kinds of purpose.  There may well be different kinds of functions best suited to each purpose.
+    
+* Accuracy vs interpretability    
+    We always want models to be accurate.  Whether we need to be able to interpret the model depends on our overall purpose.
+    
+* Reducible error vs irreducible error    
+    It's good to know how accurate our models can get.  That gives a goal for trying out different types of models to know when we don't need to keep searching.
+
+
 
 ## A Classifier example 
 
