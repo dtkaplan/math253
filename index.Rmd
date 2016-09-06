@@ -26,6 +26,14 @@ output:
 * [Why I don't use Moodle](why-not-moodle.html)
 * Make an account on <GitHub.com> and enter your account ID and the corresponding email address on [this form](https://docs.google.com/forms/d/e/1FAIpQLSemXlrenuLKVY0GNf-gBGDh6QTkaw3hS7fEZojBxBY3K_e2uA/viewform#responses).
 
+### Due dates
+
+You should "push" your daily programming activity to your repository *before* leaving class. But feel free to revise your work and push again at any time.
+
+Each topic assignment is due one week *after* we finish covering that topic in class.
+
+- Topic I: Sept 15
+- Topic II: To be determined
 
 
 ## Topic I --- Introduction
