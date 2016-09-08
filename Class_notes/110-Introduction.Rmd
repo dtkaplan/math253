@@ -262,10 +262,43 @@ Classification: categorical response with more than two categories. (When there 
 knitr::include_graphics("Images/Chapter-2/2.8.png")
 ```
 
+## Review of Day 2
 
+### Trade-offs/Dicotomies
+
+* Regression vs classification    
+    Different kinds of functions. A classifier has output as a categorical level.  A regression has output as a number.
     
+* Supervised vs unsupervised learning
+    - In supervised learning, with have an output (response variable) $Y$ which we want to generate from input $\mathbf{X}$. We train a function $\hat{f}: \mathbf{X} \rightarrow Y$  
+    - In unsupervised learning, there is no identified response variable. Instead of modeling the response as a function of $\mathbf{X}$, we look for patterns within $\mathbf{X}$.
 
-## Day 2 theory: accuracy, precision, and bias
+* Prediction vs causal mechanism    
+    * Two different kinds of purpose.  There may well be different kinds of functions best suited to each purpose.
+    
+* Accuracy (flexibility) vs interpretability    
+    We always want models to be accurate.  Whether we need to be able to interpret the model depends on our overall purpose.
+    
+* Reducible error vs irreducible error    
+    It's good to know how accurate our models can get.  That gives a goal for trying out different types of models to know when we don't need to keep searching.
+
+## A Classifier example 
+
+A classification setting: Blood cell counts.
+
+Build a machine which takes a small blood sample and examines and classifies individual white blood cells.
+
+```{r blood-cells, echo = FALSE, fig.cap = "Blood cell classification"}
+knitr::include_graphics("Images/blood-cells.png")
+```
+
+The classification is to be based on two measured inputs, shown on the x- and y-axes.
+
+Training data has been developed where the cell was classified "by hand." In medicine, this is sometimes called the *gold standard*.  The gold standard is sometimes not very accurate.  Here, each cell is one dot.  The color is the type of the cell: granulocytes, lymphocytes, monocytes, ...
+
+
+
+## Day 3 theory: accuracy, precision, and bias
 
 ### Figure 2.10 
 
@@ -323,7 +356,11 @@ knitr::include_graphics("Images/Chapter-2/2.10.png")
 
 When examining training MSE, the more flexible model has the smaller MSE. This answer is pre-ordained, regardless of the actual shape of the Platonic $f(x)$.
 
-In traditional regression, we use ANOVA or *adjusted$ $R^2$ to help avoid this inevitability that more complicated models will be closer to the training data.
+In traditional regression, we use ANOVA or *adjusted$ $R^2$ to help avoid this inevitability that more complicated models will be closer to the training data. Both of those traditional methods *inflate* the estimate of the MSE by taking into account the "degrees of freedom," df, in the model and how that compares to the number of cases $n$ in the training dataset. The inflation looks like 
+
+$$ \frac{n}{n - \mbox{df}} $$
+
+So when $\mbox{df} \rightarrow n$, we inflate the MSE quite a lot.
 
 Another approach to this is to use *testing* MSE rather than training MSE. So pick the model with flexibility at the bottom of the U-shaped testing MSE curve.
 
@@ -346,7 +383,7 @@ knitr::include_graphics("Images/Chapter-2/2.12.png")
 
 ### Measuring the variance of independent sources of variation 
 
-Simulation: Make and edit a file `Day-02.Rmd`.
+Simulation: Make and edit a file `Day-03.Rmd`.
 
 #### Explore
 Add three different sources of variation.  The width of the individual sources is measured by the standard deviation `sd=`.
@@ -407,30 +444,45 @@ Information (bits) in a particular format.
 
 Different classes represent different kinds of things.  They typically have different operations that are relevant.
 
-* 1-dimensional homogeneous collections of numbers or of character strings.  These collections are called *vectors*    
+* 1-dimensional homogeneous collections of numbers, booleans/logicals or of character strings.  These collections are called *vectors*    
     - 1-dimensional means you need only one index to refer to a specific element
     - `length()`, which can be zero. 
-    - Operations, e.g. `sum()`, `mean()`, `max()` ...
+    - Operations, e.g. `sum()`, `mean()`, `max()`, `table()`, `cumsum()`, arithmetic and mathematical functions (e.g. `sqrt()`), ...
+    - Index vectors with `[ ]`. The index can be a single or multiple numbers in the range 1 to `length(v)`. It can also be a logical vector of length `length(v)`.
+    - If you want, you can convert the boolean style to a number style with `which()`.
+    
     
 * 2-dimensional homogeneous collections of numbers or of character strings. These collections are called *matrices*
     - 2-dimensional means you need two indices to refer to a specific element.
     - `dim()`
     - Operations, e.g., `t()`, `colSums()`, `rowSums()`, `%*%`, ...
+    - Index matrices with `[ , ]`. You need to give two 
 
 * 1-dimensional heterogeneous collections: *lists*   
+    - create with `list()`
+    - index with `[[ ]]` or `[ ]`. The first is for an individual item which you want in the form of that item itself. The second is to create a subset of the list which will be a list itself.
+    - you can name items in lists and refer to them by name. `[["name"]]` To set names of list items, use named arguments to `list()` or use the `names()` function on the left-hand side of the `<-` operation. (The left-hand side of `<-` is called an "assignable." These can be names, but they can be other things as well such as indexed arrays, `names()`, etc.)
 
 * Data frames
 
+A list of vectors
+- factors vs character strings
+
+
+
 * Functions
 
+Take inputs and produce an output (and maybe a side-effect).
+- Make them with `function(){ }`, a special form. (It's not actually a function!)
+- Try this
+```{r error = TRUE}
+class(sin)
+class(3)
+class("a string")
+class(function)
+```
 
-
-## Day 2 in-class programming activity 
-
-[Day 2 activity](../Daily-Programming/2015-09-08.pdf)
-
-
-## Review of Day 2
+## Review of Day 3
 
 * $f({\mathbf X})$ versus $\hat{f}({\mbox{X}})$: Platonic idea versus what we get out of the training data. Quip: "The hat means there's a person underneath the model."
 * Mean Square Error --- like the standard deviation of residuals
@@ -449,32 +501,4 @@ Different classes represent different kinds of things.  They typically have diff
         * Increased by large $\epsilon$
         * Decreased by large $n$
         
-* Regression vs classification    
-    Different kinds of functions. A classifier has output as a categorical level.  A regression has output as a number.
-
-* Prediction vs inference    
-    * Two different kinds of purpose.  There may well be different kinds of functions best suited to each purpose.
-    
-* Accuracy vs interpretability    
-    We always want models to be accurate.  Whether we need to be able to interpret the model depends on our overall purpose.
-    
-* Reducible error vs irreducible error    
-    It's good to know how accurate our models can get.  That gives a goal for trying out different types of models to know when we don't need to keep searching.
-
-
-
-## A Classifier example 
-
-A classification setting: Blood cell counts.
-
-Build a machine which takes a small blood sample and examines and classifies individual white blood cells.
-
-```{r blood-cells, echo = FALSE, fig.cap = "Blood cell classification"}
-knitr::include_graphics("Images/blood-cells.png")
-```
-
-The classification is to be based on two measured inputs, shown on the x- and y-axes.
-
-Training data has been developed where the cell was classified "by hand." In medicine, this is sometimes called the *gold standard*.  The gold standard is sometimes not very accurate.  Here, each cell is one dot.  The color is the type of the cell: granulocytes, lymphocytes, monocytes, ...
-
 
