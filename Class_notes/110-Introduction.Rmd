@@ -188,7 +188,6 @@ Flexible:
 knitr::include_graphics("Images/Chapter-2/2.2.png")
 ```
 
---------------------
 
 And in multiple variables:
 
@@ -267,7 +266,8 @@ knitr::include_graphics("Images/Chapter-2/2.8.png")
 ### Trade-offs/Dicotomies
 
 * Regression vs classification    
-    Different kinds of functions. A classifier has output as a categorical level.  A regression has output as a number.
+    - Different kinds of functions. A classifier has output as a categorical level.  A regression has output as a number.
+    - Many classifiers are arranged to produce as output a set of numbers: the probability of each of the possible levels of the categorical output. When there are just two such levels, only one probability is needed. (The other is simply $(1-p)$.) So for two-level classifiers, there's not necessarily a distinction between regression and classification. Thus, "logistic regression."
     
 * Supervised vs unsupervised learning
     - In supervised learning, with have an output (response variable) $Y$ which we want to generate from input $\mathbf{X}$. We train a function $\hat{f}: \mathbf{X} \rightarrow Y$  
@@ -446,9 +446,19 @@ Different classes represent different kinds of things.  They typically have diff
 
 * 1-dimensional homogeneous collections of numbers, booleans/logicals or of character strings.  These collections are called *vectors*    
     - 1-dimensional means you need only one index to refer to a specific element
+```{r}
+my_vector <- c("apple", "berry", "cherry")
+log10(my_vector)
+```
     - `length()`, which can be zero. 
     - Operations, e.g. `sum()`, `mean()`, `max()`, `table()`, `cumsum()`, arithmetic and mathematical functions (e.g. `sqrt()`), ...
     - Index vectors with `[ ]`. The index can be a single or multiple numbers in the range 1 to `length(v)`. It can also be a logical vector of length `length(v)`.
+```{r}
+funny <- ceiling(3*runif(10))
+my_vector[funny]
+length(my_vector)
+dim(my_vector)
+```
     - If you want, you can convert the boolean style to a number style with `which()`.
     
     
@@ -460,6 +470,11 @@ Different classes represent different kinds of things.  They typically have diff
 
 * 1-dimensional heterogeneous collections: *lists*   
     - create with `list()`
+```{r}
+my_list <- list(magic = 1:10, greeting = "hello", is_wednesday = FALSE)
+my_list[c("greeting", "magic", "magic")]
+my_list$magic
+```
     - index with `[[ ]]` or `[ ]`. The first is for an individual item which you want in the form of that item itself. The second is to create a subset of the list which will be a list itself.
     - you can name items in lists and refer to them by name. `[["name"]]` To set names of list items, use named arguments to `list()` or use the `names()` function on the left-hand side of the `<-` operation. (The left-hand side of `<-` is called an "assignable." These can be names, but they can be other things as well such as indexed arrays, `names()`, etc.)
 
