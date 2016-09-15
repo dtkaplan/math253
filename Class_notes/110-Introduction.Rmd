@@ -261,6 +261,10 @@ Classification: categorical response with more than two categories. (When there 
 knitr::include_graphics("Images/Chapter-2/2.8.png")
 ```
 
+## Programming Activity 1
+
+[Using R/Markdown](../ProgrammingActivities/Day-01-Programming.html)
+
 ## Review of Day 2
 
 ### Trade-offs/Dicotomies
@@ -296,7 +300,9 @@ The classification is to be based on two measured inputs, shown on the x- and y-
 
 Training data has been developed where the cell was classified "by hand." In medicine, this is sometimes called the *gold standard*.  The gold standard is sometimes not very accurate.  Here, each cell is one dot.  The color is the type of the cell: granulocytes, lymphocytes, monocytes, ...
 
+## Programming Activity 2
 
+[Some basics with data](../ProgrammingActivities/Day-02-Programming.html)
 
 ## Day 3 theory: accuracy, precision, and bias
 
@@ -422,7 +428,7 @@ $$\underbrace{E( y - \hat{f}(x) )^2}_{\mbox{Total error}} = \underbrace{\mbox{Va
 
 
 
-## Programming Basics I: Names, classes, and objects
+## Programming Basics I: Names, classes, and objects {progbasics1}
 
 ### Names 
 
@@ -440,52 +446,86 @@ Information (bits) in a particular format.
 
 **Assignment**: Give a name to an object
 
-### Classes 
+### Vectors 
 
-Different classes represent different kinds of things.  They typically have different operations that are relevant.
+1-dimensional homogeneous collections of numbers, character strings, booleans/logicals, etc.
 
-* 1-dimensional homogeneous collections of numbers, booleans/logicals or of character strings.  These collections are called *vectors*    
-    - 1-dimensional means you need only one index to refer to a specific element
+#### Must Know!
+
+There are some basic types of vectors. The most common are:
+
+1. **numeric**, e.g. `3`, `3.14159`, `6.023e26`,`6.626196e-34`
+2. **character**, e.g. `"hello"`, `"When in the course of human events ..."
+3. **logical** (or "booleans"). The only allowable values: `TRUE` and `FALSE`
+
+Much of the software you'll use in this course will work with an alternative to character strings called "factors." 
+
+4. **factor**, an encoded representation of levels of a categorical variable.
+
+Some operations you will use when dealing with categorical variables are `as.character()` and (for older software) `as.factor()`.
+
+Vectors are "1-dimensional" collections. That is, you need only one index to refer to a specific element.
 ```{r}
 my_vector <- c("apple", "berry", "cherry")
-log10(my_vector)
+my_vector[2]
+my_vector[c(3, 1, 2, 2)]
+my_vector[4] <- "durian"
 ```
-    - `length()`, which can be zero. 
-    - Operations, e.g. `sum()`, `mean()`, `max()`, `table()`, `cumsum()`, arithmetic and mathematical functions (e.g. `sqrt()`), ...
-    - Index vectors with `[ ]`. The index can be a single or multiple numbers in the range 1 to `length(v)`. It can also be a logical vector of length `length(v)`.
+
+Boolean indexing
 ```{r}
-funny <- ceiling(3*runif(10))
+my_vector[my_vector > "b"]
+```
+
+If you want, you can convert the boolean style to a number style with `which()`.
+    
+
+
+Other important functions:
+
+- `length()`, to say how many elements there are in the vector. The length can be zero. 
+- Arithmetic operations, e.g. `sum()`, `mean()`, `max()`, `cumsum()`, and other functions (e.g. `sqrt()`, `log()`, `sin()`), ...
+- Logical operations, that is, operations that transform vectors into a logical vector. Examples:
+    - Comparison: `>`, `==`, `>=`, `!=`, `<`, `<=`
+    - Boolean operations: `!`, `|`, `&`. (Note, these are single characters.) 
+- Categorical operations, e.g. `table()`
+```{r}
+funny <- ceiling(length(my_vector)*runif(10))
 my_vector[funny]
 length(my_vector)
 dim(my_vector)
 ```
-    - If you want, you can convert the boolean style to a number style with `which()`.
-    
-    
+
+### Matrices    
+
 * 2-dimensional homogeneous collections of numbers or of character strings. These collections are called *matrices*
     - 2-dimensional means you need two indices to refer to a specific element.
     - `dim()`
     - Operations, e.g., `t()`, `colSums()`, `rowSums()`, `%*%`, ...
     - Index matrices with `[ , ]`. You need to give two 
 
-* 1-dimensional heterogeneous collections: *lists*   
-    - create with `list()`
+### Lists
+
+1-dimensional heterogeneous collections   
+
+- create with `list()`
 ```{r}
 my_list <- list(magic = 1:10, greeting = "hello", is_wednesday = FALSE)
 my_list[c("greeting", "magic", "magic")]
 my_list$magic
 ```
-    - index with `[[ ]]` or `[ ]`. The first is for an individual item which you want in the form of that item itself. The second is to create a subset of the list which will be a list itself.
-    - you can name items in lists and refer to them by name. `[["name"]]` To set names of list items, use named arguments to `list()` or use the `names()` function on the left-hand side of the `<-` operation. (The left-hand side of `<-` is called an "assignable." These can be names, but they can be other things as well such as indexed arrays, `names()`, etc.)
+- index with `[[ ]]` or `[ ]`. The first is for an individual item which you want in the form of that item itself. The second is to create a subset of the list which will be a list itself.
+- you can name items in lists and refer to them by name. `[["name"]]` To set names of list items, use named arguments to `list()` or use the `names()` function on the left-hand side of the `<-` operation. (The left-hand side of `<-` is called an "assignable." These can be names, but they can be other things as well such as indexed arrays, `names()`, etc.)
 
 * Data frames
 
-A list of vectors
-- factors vs character strings
+A list of vectors.
+
+- Each component in a given vector must be the same kind of thing as the other components. (Special cases: `NA` for missing data. Two more special things for numerical data.`NaN`, & `Inf`) 
+- Important functions: `nrow()`, `names()`, `$`.
 
 
-
-* Functions
+### Functions
 
 Take inputs and produce an output (and maybe a side-effect).
 - Make them with `function(){ }`, a special form. (It's not actually a function!)
@@ -496,6 +536,10 @@ class(3)
 class("a string")
 class(function)
 ```
+
+## Programming Activity 3
+
+[Indexing on data: training and testing data sets](../ProgrammingActivities/Day-03-Programming.html)
 
 ## Review of Day 3
 
@@ -515,5 +559,9 @@ class(function)
         * Increased by collinearity and multi-collinearity.
         * Increased by large $\epsilon$
         * Decreased by large $n$
+ 
+## Start Thursday 15 Sept. 
         
+[Programming Basics I](#progbasics1)
 
+[Indexing on data: training and testing data sets](../ProgrammingActivities/Day-03-Programming.html)

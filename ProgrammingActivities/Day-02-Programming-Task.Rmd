@@ -66,11 +66,11 @@ You will need to replace the short string `"Auto.data"` in the book's commands w
 
 ## Task 3
 
-Create an object `task3` that holds a summary of the `horsepower` variable, as with the summary near the bottom of p. 51.  **Do not use** `attach()`.^[Using `attach()` is bad style. It's best to write statements that refer to the data table(s) explicitly. A save alternative to `attach()` is `with()`, as in 
+Create an object `task3` that holds a summary of the `horsepower` variable, as with the summary near the bottom of p. 51.  **Do not use** `attach()`.^[Using `attach()` is bad style. It's best to write statements that refer to the data table(s) explicitly.] A safe alternative to `attach()` is `with()`, as in 
 ```{r}
 task3 <- with(Auto, summary(horsepower))
 ```
-] You may, however, use either `$` or `with()` as you prefer. 
+You may, however, use either `$` or `with()` as you prefer. 
 ```{r}
 task3 <- summary(Auto$horsepower)
 ```

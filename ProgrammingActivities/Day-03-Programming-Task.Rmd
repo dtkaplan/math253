@@ -1,14 +1,15 @@
 ---
-title: "In-Class Computing Day 3"
-author: 'Math 253: Statistical Computing & Machine Learning'
+title: "In-Class Computing Project 3"
+author: "Working with indices: Training vs testing data"
+date: 'Math 253: Statistical Computing & Machine Learning'
 params:
   show_answers: no
 output:
+  tufte::tufte_html: default
   tufte::tufte_handout:
     latex_engine: xelatex
   tufte::tufte_book:
     latex_engine: xelatex
-  tufte::tufte_html: default
 ---
 
 ```{r include=FALSE}

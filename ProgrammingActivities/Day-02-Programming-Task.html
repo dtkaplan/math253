@@ -71,9 +71,9 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 </div>
 <div id="task-3" class="section level2">
 <h2>Task 3</h2>
-<p>Create an object <code>task3</code> that holds a summary of the <code>horsepower</code> variable, as with the summary near the bottom of p. 51. <strong>Do not use</strong> <code>attach()</code>.^[Using <code>attach()</code> is bad style. It’s best to write statements that refer to the data table(s) explicitly. A save alternative to <code>attach()</code> is <code>with()</code>, as in</p>
+<p>Create an object <code>task3</code> that holds a summary of the <code>horsepower</code> variable, as with the summary near the bottom of p. 51. <strong>Do not use</strong> <code>attach()</code>.<label for="tufte-sn-2" class="margin-toggle sidenote-number">2</label><input type="checkbox" id="tufte-sn-2" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">2</span> Using <code>attach()</code> is bad style. It’s best to write statements that refer to the data table(s) explicitly.</span> A safe alternative to <code>attach()</code> is <code>with()</code>, as in</p>
 <pre class="r"><code>task3 &lt;- with(Auto, summary(horsepower))</code></pre>
-<p>] You may, however, use either <code>$</code> or <code>with()</code> as you prefer.</p>
+<p>You may, however, use either <code>$</code> or <code>with()</code> as you prefer.</p>
 <pre class="r"><code>task3 &lt;- summary(Auto$horsepower)</code></pre>
 </div>
 <div id="task-4" class="section level2">
@@ -91,7 +91,7 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <div id="task-6" class="section level2">
 <h2>Task 6</h2>
 <p>These programming tasks come with a set of test statements that check which elements of the activity have been done correctly. The <code>02-Programming.Rmd</code> file (and all the other daily files) already contain a section at the end of the document that runs the checks and displays the results.</p>
-<p>The tests rely on a package called <code>scoreActivity</code>. You may need to install this package. This is a one-time operation. Since it was written just for this class, the package is not distributed via the official CRAN system. Run this statement from the console:<label for="tufte-sn-2" class="margin-toggle sidenote-number">2</label><input type="checkbox" id="tufte-sn-2" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">2</span> In the HTML version of this document, you can scroll the following statement to the right to see the whole thing.</span></p>
+<p>The tests rely on a package called <code>scoreActivity</code>. You may need to install this package. This is a one-time operation. Since it was written just for this class, the package is not distributed via the official CRAN system. Run this statement from the console:<label for="tufte-sn-3" class="margin-toggle sidenote-number">3</label><input type="checkbox" id="tufte-sn-3" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">3</span> In the HTML version of this document, you can scroll the following statement to the right to see the whole thing.</span></p>
 <pre class="r"><code>devtools::install_github(&quot;dtkaplan/Math-253/DailyProgrammingTasks/scoreActivity&quot;)</code></pre>
 <p>If it turns out that you don’t have the <code>devtools</code> package, install it in the usual way using the “Packages” tab in RStudio.</p>
 </div>

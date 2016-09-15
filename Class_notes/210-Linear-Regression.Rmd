@@ -5,7 +5,7 @@
 require(mosaic)
 ```
 
-## Day 4 Overview
+## Day 4 Preview
 
 * The linear model (e.g. what `lm()` does)
 * A variety of questions relevant to different purposes, e.g.
@@ -13,22 +13,26 @@ require(mosaic)
     - what's the strength of an effect?
     - is there synergy between different factors?
 
+
 ### ISL book's statement on why to study linear regression
 
 > "Though it may seem somewhat dull compared to some of the more modern statistical learning approaches described ... later ..., linear regression is still a useful and widely used statistical learning method.  Moreover, it serves as a good jumping-off point for newer approaches....  Consequently, the importance of having a good understanding of linear regression before studying more complex learning methods cannot be overstated."
 
 Concepts from linear regression:
 
-* Choice of explanatory variables and model term (such as interaction).
-* "Degrees of freedom"
-* Ease of interpretability of coefficients and their standard errors.
+* Compact representation of model form: polynomial coefficients.
+* Much of inference (confidence intervals, hypothesis tests) can be expressed in terms of a polynomial coefficient.
+* "Size" of model quantifiable as an integer: number of coefficients: degrees of freedom.
+* Highly efficient estimation (when doing least squares)
+
 
 ## Small data
 
 The regression techniques were developed in an era of small data, such as that that might be written in a lab notebook or field journal.  As a result:
 
 1. Emphasis on very simple descriptions, such as means, differences between means, simple regression.
-2. Theoretical concern with details of distributions, such as the t-distribution.
+2. Theoretical concern with details of distributions, such as the t-distribution. 
+    - the difference between z- and t-distributions are of no consequence for moderate DF and higher.
 3. No division into training and testing data.  Data are too valuable to test! (Ironic, given the importance of replicability in the theory of the scientific method.)
 
 As a consequence of (3), there's a great deal of concern about *assumptions*, e.g. 
@@ -43,6 +47,8 @@ As a consequence of (3), there's a great deal of concern about *assumptions*, e.
 The regression techniques 
 
 - Heirarchical principal
+    - main effects, then
+    - interaction.
 - Increase in $R^2$
 
 
@@ -66,6 +72,64 @@ The $R^2$ versus $p$ picture.
 - Whole model ANOVA.
 - ANOVA on model parts
 
+## Programming basics: Linear Models
+
+Syntactic element: **formulas**. Formulas provide a way of using variables "symbolically." This is useful, for instance, in depicting the desired relationship among variables. Two forms:
+
+- `y ~ x` two-sided
+- `~ x` one-sided
+- NOT ALLOWED, `y ~`
+
+Important functions: 
+
+- `lm()`, `predict()` , `anova()`, `summary()`.
+- For later: `solve()`, `model.matrix()`.
+- From 155: `coef()`, `fitted()`, `resid()`
+
+Training with `lm()`: Specify formula `Y ~ X1 + X2` ...
+
+```{r}
+data(College, package = "ISLR")
+mod <- lm(Outstate ~ Enroll + Accept + perc.alumni, data = College ) 
+coef(mod)
+```
+
+What kind of thing is `mod`?
+
+Model output with `predict()`
+```{r}
+predict(mod, 
+        newdata = data.frame(Enroll = 100, Accept = 1000, perc.alumni = 25))
+```
+
+What kind of thing is the output of `predict()`?
+
+```{r}
+predict(mod, interval = "confidence",
+        newdata = data.frame(Enroll = 100, Accept = 1000, perc.alumni = 25))
+predict(mod, interval = "prediction",
+        newdata = data.frame(Enroll = 100, Accept = 1000, perc.alumni = 25))
+```
+
+Why is the "confidence interval" so much narrower than the "prediction interval?"
+
+**Inference** with `anova()` and `summary()`. This is all "in-sample" inference, not cross-validated.
+
+```{r}
+M <- model.matrix(~ Enroll + Accept + perc.alumni, data = College)
+qr.solve(M, College$Outstate)
+```
+
+For the people who have had linear algebra, why doesn't this work?
+```{r error = TRUE}
+solve(M, College$Outstate)
+```
+
+
+[Indexing on data: training and testing data sets](../ProgrammingActivities/Day-03-Programming.html)
+
+
+## Start Day 5, Sept 20, 2016
 
 ## Programming basics: Graphics
 
@@ -83,9 +147,7 @@ Basic functions:
 
 ## In-class programming activity 
 
-[Day 4 activity](../Daily-Programming/Day-4-Programming-Task.pdf)
-
-Drawing a histogram.
+[Programming Activity 4](../Daily-Programming/Day-4-Programming-Task.pdf): Drawing a histogram.
 
 
 ## Review of Day 4
