@@ -116,7 +116,7 @@ Why is the "confidence interval" so much narrower than the "prediction interval?
 **Inference** with `anova()` and `summary()`. This is all "in-sample" inference, not cross-validated.
 
 ```{r}
-M <- model.matrix(~ Enroll + Accept + perc.alumni, data = College)
+M <- model.matrix(~ Enroll + Accept * perc.alumni, data = College)
 qr.solve(M, College$Outstate)
 ```
 

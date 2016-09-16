@@ -8,6 +8,13 @@ output:
 # Statistical Computing and Machine Learning
 ## Fall 2016
 
+
+*********
+
+**Breaking NEWS!** The registrar has scheduled our final exam for **Wednesday 14 December** from 1:30pm to 3:30. Plan your travel accordingly.
+
+*********
+
 * Instructor: **Danny Kaplan**, Olin-Rice 231, `kaplan@macalester.edu`
 * Office Hours: 
     - Tues and Thurs: 3:00pm-4:30pm and 
