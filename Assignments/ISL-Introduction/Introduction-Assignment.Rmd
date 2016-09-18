@@ -1,0 +1,92 @@
+---
+title: "MATH 253 Introduction Exercises"
+author: "Danny Kaplan"
+date: "Statistical Computing and Machine Learning"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+set.seed(103)
+library(ISLR)
+```
+
+
+## ISL 2.4.2
+
+Is it a classification or regression problem?
+
+a. The response variable, CEO salary, is a quantitative variable, so this is a regression problem.
+b. The response variable has levels *success* or *failure*, so this is a classification problem.
+c. The response variable, percent change in the US dollar, is quantitative, so this is a regression problem.
+
+
+## ISL 2.4.7
+
+a. Compute the Euclidean distance between each observation and the test point, $X_1 = X_2 = X_3 = 0$.
+    - Obs. 1: $\sqrt{(0-0)^2 + (3-0)^2 + (0-0)^2} = 3$
+    - Obs. 2: $\sqrt{(2-0)^2 + (0-0)^2 + (0-0)^2} = 2$
+    - Obs. 3: $\sqrt{(0-0)^2 + (1-0)^2 + (3-0)^2} = \sqrt{10}$
+    - Obs. 4: $\sqrt{(0-0)^2 + (1-0)^2 + (2-0)^2} = \sqrt{5}$
+    - Obs. 5: $\sqrt{(-1-0)^2 + (0-0)^2 + (1-0)^2} = \sqrt{2}$
+    - Obs. 6: $\sqrt{(1-0)^2 + (1-0)^2 + (1-0)^2} = \sqrt{3}$
+b. What is our prediction with $K = 1$?
+    Observation 5 is closest to the test point, so the output will be the value associated with observation 5: Green
+c. What is our prediction with $K = 3$?
+    Observations 5, 6, and 2 are the closest. Observation 5 votes "Green," observations 2 and 6 both vote "Red." Red is the winner!
+d. If the Bayes decision boundary in this problem is highly nonlinear, then would we expect the best value for $K$ to be large or small?
+    Models with large $K$ tend to change value slowly.  Boundaries that are highly nonlinear require model values that can change rapidly.  This argues for small $K$.
+
+## ISL 2.4.8
+
+Using the `College` data set from the `ISLR` package ... rather than reading it in with `read.csv()`.
+
+```{r}
+library(ISLR)
+data(College)
+```
+
+Not so much point in giving a solution here.  In the problem they walk through the commands needed.
+
+
+## ISL 2.4.9
+
+```{r}
+library(ISLR)
+data(Auto)
+```
+
+Making sure the NAs are removed:
+```{r}
+Auto <- Auto[ - complete.cases(Auto), ]
+```
+
+a. Which predictors are quantitative and which are qualitative?
+    You could use `summary(Auto)` to look at each variable, or use the `class()` function to calculate the answer.  `lapply()` applies the function specified by `FUN` to each variable in a data frame.
+    ```{r}
+lapply(Auto, FUN = class)
+```
+b. What is the range of each quantitative predictor?
+    ```{r}
+with(Auto, range(mpg))
+with(Auto, range(cylinders))
+with(Auto, range(acceleration))
+ # and so on.
+```
+c. What is the mean and standard deviation of each quantitative predictor?
+    ```{r}
+with(Auto, c(mean(mpg), sd(mpg)))
+with(Auto, c(mean(cylinders), sd(cylinders)))
+with(Auto, c(mean(acceleration), sd(acceleration)))
+ # and so on.
+```
+d. Remove the 10th through 85th observations
+```{r}
+For_part_d <- Auto[ - (10:85), ]
+# then statements as in c.
+```
+e. Investigate the predictors graphically
+```{r}
+pairs(Auto)
+```
+f. Might any of the other predictors be useful to predict `mpg`?
+    The first row (or column, if you like) shows the correlations with `mpg`.  Most of the variables show a correlation with `mpg`, e.g. cylinders, displacement, horsepower, wieght, acceleration, and year.

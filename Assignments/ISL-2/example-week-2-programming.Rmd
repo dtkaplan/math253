@@ -1,0 +1,181 @@
+---
+title: 'Week 2 Programming Assignment: Example'
+author: "Danny Kaplan"
+date: "Statistical Computing & Machine Learning"
+output: html_document
+---
+
+<!-- Template boilerplate -->
+```{r include=FALSE}
+library(mosaic, quietly = TRUE)
+library(dplyr, quietly = TRUE)
+options(width=100) # wide printing
+```
+
+Preliminary notes for this example answer:
+
+* You should use a first-order heading `#⊔` for each exercise and a second-order heading `##⊔` for each exercise section. (The `⊔` refers to an empty space.)
+* The section titles should be short but descriptive.  If there is a label for the exercise section, e.g. (a), use it before your descriptive title.
+* All your commands should be in "chunks".
+* All output should be displayed automatically through compiling Rmd -> HTML
+* When output from a chunk is not needed, use `results = 'hide'`
+* When loading a library, use `library( [package name], quietly = TRUE)`
+* Don't need a library unless you will need to use its features extensively.  See item (a) for an example.
+* Set interactive commands like `?Boston` in a chunk with `eval = FALSE`
+* You should use `mosaic` commands rather than the "raw" commands used in ISL.  There's already a `library(mosaic)` in the template.
+* When deciding on the length and detail of your answers, ignore the **Advanced Commentary** sections.  
+
+
+
+# Exercise 10 in ISL § 2.4
+
+## (a) Load in the `Boston` data set
+
+```{r}
+data(Boston, package = "MASS")
+```
+
+```{r eval = FALSE}
+help(Boston, package = "MASS")
+```
+
+According to the documentation, there are 506 rows and 14 columns. The columns are various variables such as the average number of rooms per dwelling.  The rows are ... well they don't explicitly say in the documentation.  This is a major flaw in documentation.  The rows (cases) seem to be towns near Boston, MA.  For whatever reason, the towns are not identified by name.  
+
+## (b) Pairwise scatterplots
+
+In *ISL* (p. 50), they suggest using `pairs()`.
+```{r}
+pairs( ~ crim + indus + nox + tax + medv, data = Boston)
+```
+
+You could use `~ .` as a shorthand for "all the variables."  But there are too many here to make a sensible plot.
+
+### Advanced Commentary
+
+Each pair of variables is simply a scatter plot, as you can make with `xyplot()`.
+
+```{r}
+xyplot(crim ~ medv, data=Boston)
+xyplot(nox ~ indus, data=Boston)
+```
+
+Low median value of owner-occupied homes (`medv`) is associated with higher crime rates.  Mid-level `medv` shows practically zero crime rate, while some high-level `medv` have non-zero rates.
+
+Nitrogen oxides (`nox`) are associated with a higher proportion of non-retail business acres per town (`indus`).
+
+## (c) Per capital crime rate
+
+A simple way to look for associations between the predictor variables (a.k.a. *explanatory variables*) is the correlation coefficient:
+
+```{r}
+cor(crim ~ medv, data = Boston)
+cor(crim ~ tax, data=Boston)
+cor(crim ~ age, data=Boston)
+# and so on
+```
+Higher crime rates are associated with lower median home value, higher taxes, and older housing stock.
+
+### Advanced commentary
+
+This "advanced commentary" is just to drop hints about what we will be doing later in the course.  You are **not** expected to understand the details here.  Think of the advanced commentary like a movie trailer.
+
+#### More concise calculation
+
+The correlations can be calculated for all the variables at once.  Functions like `lapply()`, which iterate over all the items in a collection, are useful for this purpose.  Here's a pretty complicated statement that requires considerable explanation.  For now, just think about what makes sense to you and what doesn't
+
+```{r}
+Boston %>%
+  lapply(FUN=function(x) cor(Boston$crim, x)) %>%
+  unlist()
+```
+
+#### Covariance matrix
+
+There are many explanatory variables correlated with crime rate.  But these explanatory variables are often correlated with each other.  For interest, `nox` and `indus` are correlated, so if `nox` were (implausibly) the cause of crime, `indus` would have to be correlated as well.
+
+To deal with this situation, it's common to calculate the pairwise correlations between all the quantitative variables.  This is called a covariance matrix:
+
+```{r}
+cor(Boston) %>%
+  round(digits=2)
+```
+
+There are a variety of techniques for dealing with this mass of mutual associations.
+
+## (d) Suburb-by-suburb analysis
+
+This is a question about distributions.
+
+```{r}
+densityplot( ~ crim, data = Boston)
+densityplot( ~ tax, data = Boston)
+densityplot( ~ ptratio, data = Boston)
+# and so on.
+```
+
+There are towns with exceptionally high tax rates and crime rates.  And there are a few towns with low pupil-teacher ratios.
+
+## (e) Charles river
+
+
+Count how many towns abut the Charles River.
+```{r}
+sum(~chas, data=Boston)
+```
+
+### Advanced Commentary
+
+The above code is written using the `mosaic` package operators, which provide an easy way to summarise variables in a data set.  In "base R", this could be done in any of several ways:
+```{r}
+sum(Boston$chas)
+with(Boston, sum(chas))
+```
+
+Using `dplyr` data verbs, you could write:
+```{r}
+Boston %>%
+  summarise(bound_the_charles = sum(chas))
+```
+
+## (f) Median pupil-teacher ratio
+
+```{r}
+median( ~ ptratio, data = Boston)
+```
+
+### Advanced commentary
+
+Or you could use the equivalent of any of the alternative forms given in (e).
+
+## (g) Owner-occupied homes
+
+Since the data set doesn't identify the individual towns, the best we can do is to find the row number for the town with the lowest `medv`.  
+
+```{r}
+low_medv <- subset(Boston, medv == min(medv))
+low_medv
+```
+
+The style used in *ISL* (p. 50) might involve drawing a histogram and adding a vertical line to mark the location of the cases with lowest `medv`
+```{r fig.keep = "hold"}
+hist(Boston$crim)
+abline(v = low_medv$crim)
+```
+
+## (h) Large dwellings
+
+How many towns average more than seven rooms per dwelling? Eight rooms? Many different ways to compute this.
+
+```{r}
+with(Boston, table(rm > 7))
+with(Boston, sum(rm > 7))
+with(Boston, table(rm > 8))
+```
+
+Let's look at the towns with more than 8 rooms per dwelling. Again, there are many ways to do this.
+
+```{r}
+xyplot(crim ~ medv, data=Boston, groups=Boston$rm > 8)
+```
+
+Mostly high value homes in low crime areas, but there is one exception.

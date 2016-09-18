@@ -1,0 +1,127 @@
+---
+title: "MATH 253 Week 6 Exercises"
+author: "Danny Kaplan"
+date: "November 30, 2015"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+set.seed(103)
+library(ISLR)
+library(glmnet)
+```
+
+
+## Exercise ISLR 6.8.1
+
+> We perform best subset, forward stepwise, and backward stepwise selection on a single data set.  For each approach, we optain $p+1$ models, containing $0, 1, 2, \ldots, p$ predictors.
+
+a. Which of the three models with $k$ predictors has the smallest *training* RSS?
+    Best subset will never be worse than the other two, because best subset considers all of the models considered by the stepwise selection methods.
+b. Which of the three models with $k$ predictors has the smallest *test* RSS?
+    The answer could be considered to be the same as (a) on average.  But for any particular testing set, either of the three might be best.
+c. True or False:
+    i. True.  At $k+1$, forward selection has added a new predictor to those at $k$.
+    #. True.  At $k$, backward selection has deleted a predictor from those at $k+1$.
+    #. False. The models at any $k$ for forward and backward selection do not necessarily have overlap.
+    #. False.  Same reason as in (3).
+    #. False.  Predictors used at $k$ may be completely different from predictors used at $k+1$.
+
+## Exercise ISLR 6.8.2
+
+a. iii.
+b. iii.
+c. ii.
+
+
+
+## Exercise ISLR 6.8.9
+
+Predict the number of applications received using the other variables in the `College` data set.
+
+```{r}
+model_formula <- Apps ~ .
+library(ISLR)
+data(College)
+names(College)
+# log taken here!
+College$Apps <- log10(College$Apps)
+```
+
+#### (a) Split the data into a training and a test data set.
+```{r}
+training_cases <- sample(1:nrow(College), size = nrow(College)/2)
+Training <- College[training_cases, ]
+Testing <- College[ - training_cases, ]
+```
+
+#### (b) Fit a linear model on the training set and evaluate the prediction error on the test set
+
+```{r}
+mod_b <- lm(model_formula, data=Training)
+preds <- predict(mod_b, newdata = Testing)
+mean((Testing$Apps - preds)^2)
+```
+
+#### (c) Fit a ridge regression model
+
+$\lambda$ is to be chosen by cross-validation.
+
+```{r}
+library(glmnet)
+
+Training_MM <- model.matrix(model_formula, data = Training)
+mod_c <- cv.glmnet(Training_MM , Training$Apps, alpha = 0)
+mod_c$lambda.min
+Testing_MM <- model.matrix(model_formula, data = Testing)
+preds <- predict(mod_c, newx = Testing_MM, s = mod_c$lambda.min)
+mean((Testing$Apps - preds)^2)
+```
+
+#### (d) Fit a lasso regression model
+
+Similar to (c), but with `alpha = 1`
+
+```{r}
+library(glmnet)
+Training_MM <- model.matrix(model_formula, data = Training)
+mod_d <- cv.glmnet(Training_MM , Training$Apps, alpha = 1)
+mod_d$lambda.min
+Testing_MM <- model.matrix(model_formula, data = Testing)
+preds <- predict(mod_d, newx = Testing_MM, s = mod_d$lambda.min)
+mean((Testing$Apps - preds)^2)
+```
+
+#### (e) Fit a PCR regression model
+
+```{r}
+library(pls)
+mod_e <- pcr(model_formula, data = Training, validation = "CV")
+validationplot(mod_e, val.type = "MSEP")
+```
+
+We're going to choose 4 components:
+```{r}
+preds <- predict(mod_e,  newdata = Testing, ncomp = 4)
+mean((Testing$Apps - preds)^2)
+```
+
+#### (f) Fit a PLSR regression model
+
+```{r}
+library(pls)
+mod_f <- plsr(model_formula, data = Training, validation = "CV")
+validationplot(mod_f, val.type = "MSEP")
+```
+
+We're going to choose 4 components:
+```{r}
+preds <- predict(mod_f,  newdata = Testing, ncomp = 4)
+mean((Testing$Apps - preds)^2)
+```
+
+#### (g) Comments
+
+The mean square prediction error is about 140,000 for linear regression and for some of the of the other methods; the RMS prediction error is about 375 applications. The result varies considerably depending on what is selected for the `Training` set.
+
+But there is a big outlier in `College$Apps`.  It might be best to take the logarithm of the number of applications. When this is done (note the `log10(Apps)` right after the `names(College)` statement at the top of this report), the mean square prediction error (in log units) is about 0.05, or a root mean square error of $0.23$.  This corresponds to an 95% confidence interval of 36% to 280%.  

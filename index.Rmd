@@ -54,7 +54,7 @@ Each topic assignment is due one week *after* we finish covering that topic in c
 * Assignment 1 --- file `Topic-1.Rmd`
     * Discussion questions: ISL 2.4.1, 2.4.3, 2.4.6
     * Computing assignment: ISL 2.4.8, 2.4.9
-        - As an example: a solution to 2.4.10.
+        - As an example: [a solution to 2.4.10](Assignments/ISL-2/example-week-2-programming.html).
     * Theory assignment: ISL 2.4.2, 2.4.7.
 * Programming activities: [Sept 1](ProgrammingActivities/Day-01-Programming-Task.html), [Sept 6](ProgrammingActivities/Day-02-Programming-Task.html), [Sept 8](ProgrammingActivities/Day-03-Programming-Task.html)
 

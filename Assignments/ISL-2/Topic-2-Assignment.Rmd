@@ -1,0 +1,59 @@
+---
+title: "MATH 253 Topic 2 Exercises"
+author: "Danny Kaplan"
+date: "Statistical Computing and Machine Learning"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+set.seed(103)
+library(ISLR)
+```
+
+## Exercise ISLR 3.7.3
+
+Predictor | Coefficient
+----------|-------------
+Intercept | 50
+GPA       | 20
+IQ        | 0.07
+Sex (1=F) | 35
+GPA x IQ  | 0.01
+GPA x Sex | -10
+
+
+i. For a fixed value of IQ and GPA, males earn more on average than females.    
+    Wrong. The only terms that are at issue are `Sex` and `GPA x Sex`.  The partial difference of the response with respect to `Sex` is $35 - 10$ `GPA`. This will be positive for `GPA` less than 3.5, negative for `GPA` greater than 3.5. So it's wrong to say that in general males earn more than females; it depends on GPA. 
+#. For a fixed value of IQ and GPA, females earn more on average than males.    
+    Same answer as i.
+#. For a fixed value of IQ and GPA, males earn more than females provided that the GPA is high enough.    
+    Right, if `GPA` is greater than 3.5. 
+#. For a fixed value of IQ and GPA, females earn more than males provided that the GPA is high enough.    
+    Same answer as iii.
+
+b. Predict the salary of a female with IQ of 110 and GPA of 4.0. 
+    $50 + 20*4.0 + 0.07*110 + 35*1 + 0.01*4.0*110 - 10*4.0*1 = 137.1$
+
+c. Coefficients have units.  Different coefficients can't be meaningfully compared unless there is a context.  For example, it's obviously wrong to say that 10 seconds is less than 100 mm.  But if there is a context, for instance a velocity of 1 meter per second, then 10 seconds is bigger than 100 mm.    
+   For the interaction `GPA` x `IQ`, the coefficient is 0.01 per (GPA unit x IQ unit). For a typical IQ of 100 points, a 1 grade difference in GPA results in a 1 unit difference in the output.  This is not necessarily so small.
+
+## Exercise ISLR 3.7.4
+
+a. For the training data, expect the cubic regression to have a smaller residual sum of squares than the linear regression.  At worst, the cubic regression will have the *same* RSS as the linear regression.
+b. For the test data, the cubic regression will have both higher bias and higher variance than the linear regression (because the "true" relationship is assumed to be linear).
+c. There is not enough information to tell.  Knowing that the relationship is nonlinear means that the more flexible model --- the cubic --- will have lesser bias than the linear model.  However, the cubic may also have higher variance.  The overall error is a combination of bias and variance.
+d. Same as c.
+
+## Figure 3.1 and p. 66
+
+> For these formulas to be strictly valid, we need to assume that the errors $\epsilon_i$ for each observation are uncorrelated with common variance $\sigma^2$.  This is clearly not true in Figure 3.1 ....
+
+![Figure 3.1 from ISLR](../../ISL-Book-Figures/Chapter3/3.1.png)
+
+Note that the residuals are comparatively small for low values of `TV` and larger for high values of `TV`.  One way to think of this is that the residuals do not have a common variance but rather a variance that is correlated with `TV`.
+
+## Page 77
+
+> ... sometimes we have a very large number of variables.  If $p > n$ then there are more coefficients $\beta_j$ to estimate than observations from which to estimate them.  In this case we cannot even fit the multiple linear regression model using least squares ....
+
+In general, when there are as many coefficients than cases, there will be an exact solution with zero residuals.  When there are more coefficients than cases, there will be an infinity of different solutions with zero residuals.  I would not go so far as to say this means "we cannot even fit the ... model," but it means that there is no *unique* best fit.
