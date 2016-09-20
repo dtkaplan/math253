@@ -1,14 +1,15 @@
 ---
-title: "In-Class Computing Day 4"
+title: "In-Class Computing Project 4"
 author: 'Math 253: Statistical Computing & Machine Learning'
-params:
-  show_answers: no
+date: "Graphics basics"
 output:
   tufte::tufte_html: default
   tufte::tufte_handout:
     latex_engine: xelatex
   tufte::tufte_book:
     latex_engine: xelatex
+params:
+  show_answers: no
 ---
 
 ```{r include=FALSE}

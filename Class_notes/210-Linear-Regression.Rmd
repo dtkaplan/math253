@@ -42,35 +42,7 @@ As a consequence of (3), there's a great deal of concern about *assumptions*, e.
     - uncorrelated between cases
     - each is a draw from the same distribution.
 
-## Selecting model terms
 
-The regression techniques 
-
-- Heirarchical principal
-    - main effects, then
-    - interaction.
-- Increase in $R^2$
-
-
-### Theory of whole-model ANOVA.
-
-Standard measure: $\frac{\mbox{Explained amount}}{\mbox{Unexplained amount}}$
-
-Examples:
-
-- Standard error of mean:  $\frac{\hat{\mu}}{\sigma / n}$ -- note the $n$.
-- t statistic on difference between two means: $\frac{\hat{\mu}_1 - \hat{\mu}_2}{\sigma / (n-1)}$
-- F statistic: $\frac{SS / df1}{SSR / df2}$
-    - df1 is the number of degrees of freedom involved by the model or model term under consideration.
-    - df2 is $n - (p - 1)$ where $p$ is the total degrees of freedom in the model.  (I called this $m$ in the Math 155 book.)  The intercept is what the $-1$ is about: the intercept *can never* account for case-to-case variation.
-
-Trade-off between eating variance and consuming degrees of freedom.
-
-The $R^2$ versus $p$ picture.
-
-- Adjusted $R^2$
-- Whole model ANOVA.
-- ANOVA on model parts
 
 ## Programming basics: Linear Models
 
@@ -129,7 +101,45 @@ solve(M, College$Outstate)
 [Indexing on data: training and testing data sets](../ProgrammingActivities/Day-03-Programming.html)
 
 
-## Start Day 5, Sept 20, 2016
+## Review of Day 4, Sept 15, 2016
+
+* Discussed the linear regression architecture and how it relates to machine learning.
+    - linear regression is designed to work even in "small data" situations where
+        a. cross-validation is not appropriate
+        b. the number of model degrees of freedom may be almost as large as $n$
+    - provides a ready definition of the "size" of a model: the number of coefficients.
+* Introduced the main software used in linear regression, `lm()` and `predict()`
+* Programming basics: indexing of vectors, matrices and data frames.
+
+## Selecting model terms
+
+The regression techniques 
+
+- Heirarchical principal
+    - main effects, then
+    - interaction.
+- Increase in $R^2$
+
+
+### Theory of whole-model ANOVA.
+
+Standard measure: $\frac{\mbox{Explained amount}}{\mbox{Unexplained amount}}$
+
+Examples:
+
+- Standard error of mean:  $\frac{\hat{\mu}}{\sigma / n}$ -- note the $n$.
+- t statistic on difference between two means: $\frac{\hat{\mu}_1 - \hat{\mu}_2}{\sigma / (n-1)}$
+- F statistic: $\frac{SS / df1}{SSR / df2}$
+    - df1 is the number of degrees of freedom involved by the model or model term under consideration.
+    - df2 is $n - (p - 1)$ where $p$ is the total degrees of freedom in the model.  (I called this $m$ in the Math 155 book.)  The intercept is what the $-1$ is about: the intercept *can never* account for case-to-case variation.
+
+Trade-off between eating variance and consuming degrees of freedom.
+
+The $R^2$ versus $p$ picture.
+
+- Adjusted $R^2$
+- Whole model ANOVA.
+- ANOVA on model parts
 
 ## Programming basics: Graphics
 
