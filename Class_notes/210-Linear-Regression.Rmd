@@ -1,8 +1,16 @@
+---
+title: "Linear Regression"
+output: html_notebook
+---
+
+
 # Linear Regression {#linear-regression}
+
 
 
 ```{r include=FALSE}
 require(mosaic)
+require(dplyr)
 ```
 
 ## Day 4 Preview
@@ -111,14 +119,78 @@ solve(M, College$Outstate)
 * Introduced the main software used in linear regression, `lm()` and `predict()`
 * Programming basics: indexing of vectors, matrices and data frames.
 
+## Regression and Interpretability
+
+Regression models are generally constructed for the sake of interpretability:
+
+* Global linearity
+* Coefficients are indication of effect size. The coefficients have physical units.
+* Term by term indication of statistical significance
+
+An example on `College` data from `ISLR` package 
+
+```{r}
+data(College, package="ISLR")
+College$Yield <- with(College, Enroll/Accept)
+mod1 <- lm(Yield ~ Outstate + Grad.Rate + Top25perc, data = College)
+mosaic::rsquared(mod1)
+mod2 <- lm(Yield ~ . - Grad.Rate, data = College)
+mosaic::rsquared(mod2)
+```
+* What variables matter?
+* How good are the predictions?
+* How strong are the effects?
+
+## Toward an automated regression process
+
+In machine learning, we ask the computer to identify patterns in the data. 
+
+* In "traditional" regression (which is still very important), we specify the explanatory terms and the computer finds the "best" model with those terms: least squares. 
+* In machine learning, we want the computer to figure out which terms, of all the possibilities, will lead to the "best" model.
+
+
 ## Selecting model terms
 
 The regression techniques 
 
-- Heirarchical principal
-    - main effects, then
-    - interaction.
-- Increase in $R^2$
+- Traditional regression: 
+    - Our knowledge of the system being studied.
+    - Heirarchical principal
+        * main effects, then
+        * interaction.
+- Machine learning
+    - Look at all combinations of variables? 
+    - Activity 1: 
+        * Write a statement that will pull 2 random variables from a data frame *and* the explanatory variable.
+        * Use `Yield ~ .` as the formula.
+```{r}
+explanatory_vars <- names(College)[-19]
+
+my_vars <- sample(explanatory_vars, size = 12)
+new_data <- College[ , c(my_vars, "Yield")]
+mod <- lm(Yield ~ ., data = new_data)
+mosaic::rsquared(mod)
+mod
+2^18
+```
+        
+    - Activity 2: 
+        * How many combinations are there of $k$ explanatory variables? Calculate this for $k = 5, 10, 15, 20$. How many are there in the `College`?
+        * What about with interactions?
+    - How long does it take to fit a model?
+```{r}
+system.time( do(1000) * lm(Yield ~ ., data=College))
+256*7/3600
+```
+
+```{r}
+names(College)
+```
+    
+With $k$ explanatory variables, $2^k$ possibilities, not even including interactions. Including first-order interactions, it's
+    $2^k + 2^{k(k-1)/2}$. Calculate this for $k=3.
+    - Increase in $R^2$? Problem: $R^2$ will always go up as we add a new term.
+    - Some other measure that takes into account how much $R^2$ should go up.
 
 
 ### Theory of whole-model ANOVA.
@@ -143,6 +215,10 @@ The $R^2$ versus $p$ picture.
 
 ## Programming basics: Graphics
 
+```{r}
+plot(1, type = "n", xlim = c(100,200), ylim = c(300,500))
+```
+
 Basic functions:
 
 1. Create a frame: `plot()`.  Blank frame: `plot( , type="n")`
@@ -160,7 +236,6 @@ Basic functions:
 [Programming Activity 4](../Daily-Programming/Day-4-Programming-Task.pdf): Drawing a histogram.
 
 
-## Review of Day 4
 
 ### Graphics basics
 
@@ -175,19 +250,13 @@ Basic functions:
 3. Write a function to draw a circle.
     - What do you want the interface to look like? What arguments are essential? What options are nice to have?
     
-## Regression and Interpretability
 
-Regression models are generally constructed for the sake of interpretability:
-
-* Global linearity
-* Coefficients are indication of effect size. The coefficients have physical units.
-* Term by term indication of statistical significance
 
 ## Measuring Accuracy of the Model
 
-* $R^2$ - Var(fitted)/Var(response)
+* $R^2$ = Var(fitted)/Var(response)
 * Adjusted $R^2$ - takes into account estimate of average increase in $R^2$ per junk degree of freedom
-* Residual Standard Error - Sqrt of Average square error per residual degree of freedom. The sqrt of the mean square for residuals in ANOVA
+* Residual Standard Error - Sqrt of average square error per residual degree of freedom. The sqrt of the mean square for residuals in ANOVA.
 
 ## Bias of the model
 
@@ -198,17 +267,6 @@ Regression models are generally constructed for the sake of interpretability:
 - Whole model ANOVA.
 - ANOVA on model parts
 - Adjusted $R^2$
-
-Run an example on `College` data from `ISLR` package 
-
-```{r}
-data(College, package="ISLR")
-College$Yield <- with(College, Enroll/Accept)
-mod1 <- lm(Yield ~ Outstate + Grad.Rate + Top25perc, data=College)
-```
-* What variables matter?
-* How good are the predictions?
-* How strong are the effects?
 
 
 
