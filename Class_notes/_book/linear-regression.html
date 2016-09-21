@@ -169,17 +169,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.1.1" data-path="linear-regression.html"><a href="linear-regression.html#isl-books-statement-on-why-to-study-linear-regression"><i class="fa fa-check"></i><b>2.1.1</b> ISL book’s statement on why to study linear regression</a></li>
 </ul></li>
 <li class="chapter" data-level="2.2" data-path="linear-regression.html"><a href="linear-regression.html#small-data"><i class="fa fa-check"></i><b>2.2</b> Small data</a></li>
-<li class="chapter" data-level="2.3" data-path="linear-regression.html"><a href="linear-regression.html#selecting-model-terms"><i class="fa fa-check"></i><b>2.3</b> Selecting model terms</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="linear-regression.html"><a href="linear-regression.html#theory-of-whole-model-anova."><i class="fa fa-check"></i><b>2.3.1</b> Theory of whole-model ANOVA.</a></li>
+<li class="chapter" data-level="2.3" data-path="linear-regression.html"><a href="linear-regression.html#programming-basics-linear-models"><i class="fa fa-check"></i><b>2.3</b> Programming basics: Linear Models</a></li>
+<li class="chapter" data-level="2.4" data-path="linear-regression.html"><a href="linear-regression.html#review-of-day-4-sept-15-2016"><i class="fa fa-check"></i><b>2.4</b> Review of Day 4, Sept 15, 2016</a></li>
+<li class="chapter" data-level="2.5" data-path="linear-regression.html"><a href="linear-regression.html#regression-and-interpretability"><i class="fa fa-check"></i><b>2.5</b> Regression and Interpretability</a></li>
+<li class="chapter" data-level="2.6" data-path="linear-regression.html"><a href="linear-regression.html#toward-an-automated-regression-process"><i class="fa fa-check"></i><b>2.6</b> Toward an automated regression process</a></li>
+<li class="chapter" data-level="2.7" data-path="linear-regression.html"><a href="linear-regression.html#selecting-model-terms"><i class="fa fa-check"></i><b>2.7</b> Selecting model terms</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="linear-regression.html"><a href="linear-regression.html#theory-of-whole-model-anova."><i class="fa fa-check"></i><b>2.7.1</b> Theory of whole-model ANOVA.</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="linear-regression.html"><a href="linear-regression.html#programming-basics-linear-models"><i class="fa fa-check"></i><b>2.4</b> Programming basics: Linear Models</a></li>
-<li class="chapter" data-level="2.5" data-path="linear-regression.html"><a href="linear-regression.html#start-day-5-sept-20-2016"><i class="fa fa-check"></i><b>2.5</b> Start Day 5, Sept 20, 2016</a></li>
-<li class="chapter" data-level="2.6" data-path="linear-regression.html"><a href="linear-regression.html#programming-basics-graphics"><i class="fa fa-check"></i><b>2.6</b> Programming basics: Graphics</a></li>
-<li class="chapter" data-level="2.7" data-path="linear-regression.html"><a href="linear-regression.html#in-class-programming-activity"><i class="fa fa-check"></i><b>2.7</b> In-class programming activity</a></li>
-<li class="chapter" data-level="2.8" data-path="linear-regression.html"><a href="linear-regression.html#review-of-day-4"><i class="fa fa-check"></i><b>2.8</b> Review of Day 4</a><ul>
-<li class="chapter" data-level="2.8.1" data-path="linear-regression.html"><a href="linear-regression.html#graphics-basics"><i class="fa fa-check"></i><b>2.8.1</b> Graphics basics</a></li>
+<li class="chapter" data-level="2.8" data-path="linear-regression.html"><a href="linear-regression.html#programming-basics-graphics"><i class="fa fa-check"></i><b>2.8</b> Programming basics: Graphics</a></li>
+<li class="chapter" data-level="2.9" data-path="linear-regression.html"><a href="linear-regression.html#in-class-programming-activity"><i class="fa fa-check"></i><b>2.9</b> In-class programming activity</a><ul>
+<li class="chapter" data-level="2.9.1" data-path="linear-regression.html"><a href="linear-regression.html#graphics-basics"><i class="fa fa-check"></i><b>2.9.1</b> Graphics basics</a></li>
 </ul></li>
-<li class="chapter" data-level="2.9" data-path="linear-regression.html"><a href="linear-regression.html#regression-and-interpretability"><i class="fa fa-check"></i><b>2.9</b> Regression and Interpretability</a></li>
 <li class="chapter" data-level="2.10" data-path="linear-regression.html"><a href="linear-regression.html#measuring-accuracy-of-the-model"><i class="fa fa-check"></i><b>2.10</b> Measuring Accuracy of the Model</a></li>
 <li class="chapter" data-level="2.11" data-path="linear-regression.html"><a href="linear-regression.html#bias-of-the-model"><i class="fa fa-check"></i><b>2.11</b> Bias of the model</a></li>
 <li class="chapter" data-level="2.12" data-path="linear-regression.html"><a href="linear-regression.html#forward-backward-and-mixed-selection"><i class="fa fa-check"></i><b>2.12</b> Forward, backward and mixed selection</a></li>
@@ -260,41 +260,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 </ul>
 </div>
-<div id="selecting-model-terms" class="section level2">
-<h2><span class="header-section-number">2.3</span> Selecting model terms</h2>
-<p>The regression techniques</p>
-<ul>
-<li>Heirarchical principal
-<ul>
-<li>main effects, then</li>
-<li>interaction.</li>
-</ul></li>
-<li>Increase in <span class="math inline">\(R^2\)</span></li>
-</ul>
-<div id="theory-of-whole-model-anova." class="section level3">
-<h3><span class="header-section-number">2.3.1</span> Theory of whole-model ANOVA.</h3>
-<p>Standard measure: <span class="math inline">\(\frac{\mbox{Explained amount}}{\mbox{Unexplained amount}}\)</span></p>
-<p>Examples:</p>
-<ul>
-<li>Standard error of mean: <span class="math inline">\(\frac{\hat{\mu}}{\sigma / n}\)</span> – note the <span class="math inline">\(n\)</span>.</li>
-<li>t statistic on difference between two means: <span class="math inline">\(\frac{\hat{\mu}_1 - \hat{\mu}_2}{\sigma / (n-1)}\)</span></li>
-<li>F statistic: <span class="math inline">\(\frac{SS / df1}{SSR / df2}\)</span>
-<ul>
-<li>df1 is the number of degrees of freedom involved by the model or model term under consideration.</li>
-<li>df2 is <span class="math inline">\(n - (p - 1)\)</span> where <span class="math inline">\(p\)</span> is the total degrees of freedom in the model. (I called this <span class="math inline">\(m\)</span> in the Math 155 book.) The intercept is what the <span class="math inline">\(-1\)</span> is about: the intercept <em>can never</em> account for case-to-case variation.</li>
-</ul></li>
-</ul>
-<p>Trade-off between eating variance and consuming degrees of freedom.</p>
-<p>The <span class="math inline">\(R^2\)</span> versus <span class="math inline">\(p\)</span> picture.</p>
-<ul>
-<li>Adjusted <span class="math inline">\(R^2\)</span></li>
-<li>Whole model ANOVA.</li>
-<li>ANOVA on model parts</li>
-</ul>
-</div>
-</div>
 <div id="programming-basics-linear-models" class="section level2">
-<h2><span class="header-section-number">2.4</span> Programming basics: Linear Models</h2>
+<h2><span class="header-section-number">2.3</span> Programming basics: Linear Models</h2>
 <p>Syntactic element: <strong>formulas</strong>. Formulas provide a way of using variables “symbolically.” This is useful, for instance, in depicting the desired relationship among variables. Two forms:</p>
 <ul>
 <li><code>y ~ x</code> two-sided</li>
@@ -330,20 +297,149 @@ mod &lt;-<span class="st"> </span><span class="kw">lm</span>(Outstate ~<span cla
 ## 1 11687.8 5548.956 17826.64</code></pre>
 <p>Why is the “confidence interval” so much narrower than the “prediction interval?”</p>
 <p><strong>Inference</strong> with <code>anova()</code> and <code>summary()</code>. This is all “in-sample” inference, not cross-validated.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(~<span class="st"> </span>Enroll +<span class="st"> </span>Accept +<span class="st"> </span>perc.alumni, <span class="dt">data =</span> College)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(~<span class="st"> </span>Enroll +<span class="st"> </span>Accept *<span class="st"> </span>perc.alumni, <span class="dt">data =</span> College)
 <span class="kw">qr.solve</span>(M, College$Outstate)</code></pre></div>
-<pre><code>## (Intercept)      Enroll      Accept perc.alumni 
-## 6387.368606   -2.888077    1.101019  179.528731</code></pre>
+<pre><code>##        (Intercept)             Enroll             Accept 
+##      7024.34843865        -3.00377409         0.78401053 
+##        perc.alumni Accept:perc.alumni 
+##       147.31268325         0.02011475</code></pre>
 <p>For the people who have had linear algebra, why doesn’t this work?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">solve</span>(M, College$Outstate)</code></pre></div>
-<pre><code>## Error in solve.default(M, College$Outstate): &#39;a&#39; (777 x 4) must be square</code></pre>
+<pre><code>## Error in solve.default(M, College$Outstate): &#39;a&#39; (777 x 5) must be square</code></pre>
 <p><a href="../ProgrammingActivities/Day-03-Programming.html">Indexing on data: training and testing data sets</a></p>
 </div>
-<div id="start-day-5-sept-20-2016" class="section level2">
-<h2><span class="header-section-number">2.5</span> Start Day 5, Sept 20, 2016</h2>
+<div id="review-of-day-4-sept-15-2016" class="section level2">
+<h2><span class="header-section-number">2.4</span> Review of Day 4, Sept 15, 2016</h2>
+<ul>
+<li>Discussed the linear regression architecture and how it relates to machine learning.
+<ul>
+<li>linear regression is designed to work even in “small data” situations where
+<ol style="list-style-type: lower-alpha">
+<li>cross-validation is not appropriate</li>
+<li>the number of model degrees of freedom may be almost as large as <span class="math inline">\(n\)</span></li>
+</ol></li>
+<li>provides a ready definition of the “size” of a model: the number of coefficients.</li>
+</ul></li>
+<li>Introduced the main software used in linear regression, <code>lm()</code> and <code>predict()</code></li>
+<li>Programming basics: indexing of vectors, matrices and data frames.</li>
+</ul>
+</div>
+<div id="regression-and-interpretability" class="section level2">
+<h2><span class="header-section-number">2.5</span> Regression and Interpretability</h2>
+<p>Regression models are generally constructed for the sake of interpretability:</p>
+<ul>
+<li>Global linearity</li>
+<li>Coefficients are indication of effect size. The coefficients have physical units.</li>
+<li>Term by term indication of statistical significance</li>
+</ul>
+<p>An example on <code>College</code> data from <code>ISLR</code> package</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(College, <span class="dt">package=</span><span class="st">&quot;ISLR&quot;</span>)
+College$Yield &lt;-<span class="st"> </span><span class="kw">with</span>(College, Enroll/Accept)
+mod1 &lt;-<span class="st"> </span><span class="kw">lm</span>(Yield ~<span class="st"> </span>Outstate +<span class="st"> </span>Grad.Rate +<span class="st"> </span>Top25perc, <span class="dt">data =</span> College)
+mosaic::<span class="kw">rsquared</span>(mod1)</code></pre></div>
+<pre><code>## [1] 0.2170221</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod2 &lt;-<span class="st"> </span><span class="kw">lm</span>(Yield ~<span class="st"> </span>. -<span class="st"> </span>Grad.Rate, <span class="dt">data =</span> College)
+mosaic::<span class="kw">rsquared</span>(mod2)</code></pre></div>
+<pre><code>## [1] 0.5004599</code></pre>
+<ul>
+<li>What variables matter?</li>
+<li>How good are the predictions?</li>
+<li>How strong are the effects?</li>
+</ul>
+</div>
+<div id="toward-an-automated-regression-process" class="section level2">
+<h2><span class="header-section-number">2.6</span> Toward an automated regression process</h2>
+<p>In machine learning, we ask the computer to identify patterns in the data.</p>
+<ul>
+<li>In “traditional” regression (which is still very important), we specify the explanatory terms and the computer finds the “best” model with those terms: least squares.</li>
+<li>In machine learning, we want the computer to figure out which terms, of all the possibilities, will lead to the “best” model.</li>
+</ul>
+</div>
+<div id="selecting-model-terms" class="section level2">
+<h2><span class="header-section-number">2.7</span> Selecting model terms</h2>
+<p>The regression techniques</p>
+<ul>
+<li>Traditional regression:
+<ul>
+<li>Our knowledge of the system being studied.</li>
+<li>Heirarchical principal
+<ul>
+<li>main effects, then</li>
+<li>interaction.</li>
+</ul></li>
+</ul></li>
+<li>Machine learning
+<ul>
+<li>Look at all combinations of variables?</li>
+<li>Activity 1:
+<ul>
+<li>Write a statement that will pull 2 random variables from a data frame <em>and</em> the explanatory variable.</li>
+<li>Use <code>Yield ~ .</code> as the formula.</li>
+</ul></li>
+</ul></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">explanatory_vars &lt;-<span class="st"> </span><span class="kw">names</span>(College)[-<span class="dv">19</span>]
+
+my_vars &lt;-<span class="st"> </span><span class="kw">sample</span>(explanatory_vars, <span class="dt">size =</span> <span class="dv">12</span>)
+new_data &lt;-<span class="st"> </span>College[ , <span class="kw">c</span>(my_vars, <span class="st">&quot;Yield&quot;</span>)]
+mod &lt;-<span class="st"> </span><span class="kw">lm</span>(Yield ~<span class="st"> </span>., <span class="dt">data =</span> new_data)
+mosaic::<span class="kw">rsquared</span>(mod)</code></pre></div>
+<pre><code>## [1] 0.4032243</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Yield ~ ., data = new_data)
+## 
+## Coefficients:
+## (Intercept)    Top10perc  F.Undergrad     Outstate     Personal  
+##   6.438e-01    2.578e-03    1.903e-05   -8.676e-06    3.417e-06  
+##   S.F.Ratio  P.Undergrad  perc.alumni    Top25perc   Room.Board  
+##   9.026e-04    3.400e-06    1.187e-04   -1.055e-03   -1.990e-05  
+##   Grad.Rate       Accept          PhD  
+##  -7.240e-05   -4.149e-05   -9.836e-04</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span>^<span class="dv">18</span></code></pre></div>
+<pre><code>## [1] 262144</code></pre>
+<pre><code>- Activity 2: 
+    * How many combinations are there of $k$ explanatory variables? Calculate this for $k = 5, 10, 15, 20$. How many are there in the `College`?
+    * What about with interactions?
+- How long does it take to fit a model?</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>( <span class="kw">do</span>(<span class="dv">1000</span>) *<span class="st"> </span><span class="kw">lm</span>(Yield ~<span class="st"> </span>., <span class="dt">data=</span>College))</code></pre></div>
+<pre><code>##    user  system elapsed 
+##   6.574   0.073   6.866</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">256</span>*<span class="dv">7</span>/<span class="dv">3600</span></code></pre></div>
+<pre><code>## [1] 0.4977778</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(College)</code></pre></div>
+<pre><code>##  [1] &quot;Private&quot;     &quot;Apps&quot;        &quot;Accept&quot;      &quot;Enroll&quot;      &quot;Top10perc&quot;  
+##  [6] &quot;Top25perc&quot;   &quot;F.Undergrad&quot; &quot;P.Undergrad&quot; &quot;Outstate&quot;    &quot;Room.Board&quot; 
+## [11] &quot;Books&quot;       &quot;Personal&quot;    &quot;PhD&quot;         &quot;Terminal&quot;    &quot;S.F.Ratio&quot;  
+## [16] &quot;perc.alumni&quot; &quot;Expend&quot;      &quot;Grad.Rate&quot;   &quot;Yield&quot;</code></pre>
+<p>With <span class="math inline">\(k\)</span> explanatory variables, <span class="math inline">\(2^k\)</span> possibilities, not even including interactions. Including first-order interactions, it’s <span class="math inline">\(2^k + 2^{k(k-1)/2}\)</span>. Calculate this for $k=3. - Increase in <span class="math inline">\(R^2\)</span>? Problem: <span class="math inline">\(R^2\)</span> will always go up as we add a new term. - Some other measure that takes into account how much <span class="math inline">\(R^2\)</span> should go up.</p>
+<div id="theory-of-whole-model-anova." class="section level3">
+<h3><span class="header-section-number">2.7.1</span> Theory of whole-model ANOVA.</h3>
+<p>Standard measure: <span class="math inline">\(\frac{\mbox{Explained amount}}{\mbox{Unexplained amount}}\)</span></p>
+<p>Examples:</p>
+<ul>
+<li>Standard error of mean: <span class="math inline">\(\frac{\hat{\mu}}{\sigma / n}\)</span> – note the <span class="math inline">\(n\)</span>.</li>
+<li>t statistic on difference between two means: <span class="math inline">\(\frac{\hat{\mu}_1 - \hat{\mu}_2}{\sigma / (n-1)}\)</span></li>
+<li>F statistic: <span class="math inline">\(\frac{SS / df1}{SSR / df2}\)</span>
+<ul>
+<li>df1 is the number of degrees of freedom involved by the model or model term under consideration.</li>
+<li>df2 is <span class="math inline">\(n - (p - 1)\)</span> where <span class="math inline">\(p\)</span> is the total degrees of freedom in the model. (I called this <span class="math inline">\(m\)</span> in the Math 155 book.) The intercept is what the <span class="math inline">\(-1\)</span> is about: the intercept <em>can never</em> account for case-to-case variation.</li>
+</ul></li>
+</ul>
+<p>Trade-off between eating variance and consuming degrees of freedom.</p>
+<p>The <span class="math inline">\(R^2\)</span> versus <span class="math inline">\(p\)</span> picture.</p>
+<ul>
+<li>Adjusted <span class="math inline">\(R^2\)</span></li>
+<li>Whole model ANOVA.</li>
+<li>ANOVA on model parts</li>
+</ul>
+</div>
 </div>
 <div id="programming-basics-graphics" class="section level2">
-<h2><span class="header-section-number">2.6</span> Programming basics: Graphics</h2>
+<h2><span class="header-section-number">2.8</span> Programming basics: Graphics</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="dv">1</span>, <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">100</span>,<span class="dv">200</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">300</span>,<span class="dv">500</span>))</code></pre></div>
+<p><img src="Class_Notes__Statistical_Computing___Machine_Learning_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>Basic functions:</p>
 <ol style="list-style-type: decimal">
 <li>Create a frame: <code>plot()</code>. Blank frame: <code>plot( , type=&quot;n&quot;)</code>
@@ -360,13 +456,10 @@ mod &lt;-<span class="st"> </span><span class="kw">lm</span>(Outstate ~<span cla
 </ol>
 </div>
 <div id="in-class-programming-activity" class="section level2">
-<h2><span class="header-section-number">2.7</span> In-class programming activity</h2>
+<h2><span class="header-section-number">2.9</span> In-class programming activity</h2>
 <p><a href="../Daily-Programming/Day-4-Programming-Task.pdf">Programming Activity 4</a>: Drawing a histogram.</p>
-</div>
-<div id="review-of-day-4" class="section level2">
-<h2><span class="header-section-number">2.8</span> Review of Day 4</h2>
 <div id="graphics-basics" class="section level3">
-<h3><span class="header-section-number">2.8.1</span> Graphics basics</h3>
+<h3><span class="header-section-number">2.9.1</span> Graphics basics</h3>
 <ol style="list-style-type: decimal">
 <li>API for graphics: <code>plot()</code>, <code>points()</code>, <code>lines()</code>, <code>polygon()</code>, <code>text()</code>, …</li>
 <li>Create a plotting frame: <code>plot()</code>
@@ -383,21 +476,12 @@ mod &lt;-<span class="st"> </span><span class="kw">lm</span>(Outstate ~<span cla
 </ol>
 </div>
 </div>
-<div id="regression-and-interpretability" class="section level2">
-<h2><span class="header-section-number">2.9</span> Regression and Interpretability</h2>
-<p>Regression models are generally constructed for the sake of interpretability:</p>
-<ul>
-<li>Global linearity</li>
-<li>Coefficients are indication of effect size. The coefficients have physical units.</li>
-<li>Term by term indication of statistical significance</li>
-</ul>
-</div>
 <div id="measuring-accuracy-of-the-model" class="section level2">
 <h2><span class="header-section-number">2.10</span> Measuring Accuracy of the Model</h2>
 <ul>
-<li><span class="math inline">\(R^2\)</span> - Var(fitted)/Var(response)</li>
+<li><span class="math inline">\(R^2\)</span> = Var(fitted)/Var(response)</li>
 <li>Adjusted <span class="math inline">\(R^2\)</span> - takes into account estimate of average increase in <span class="math inline">\(R^2\)</span> per junk degree of freedom</li>
-<li>Residual Standard Error - Sqrt of Average square error per residual degree of freedom. The sqrt of the mean square for residuals in ANOVA</li>
+<li>Residual Standard Error - Sqrt of average square error per residual degree of freedom. The sqrt of the mean square for residuals in ANOVA.</li>
 </ul>
 </div>
 <div id="bias-of-the-model" class="section level2">
@@ -408,15 +492,6 @@ mod &lt;-<span class="st"> </span><span class="kw">lm</span>(Outstate ~<span cla
 <li>Whole model ANOVA.</li>
 <li>ANOVA on model parts</li>
 <li><p>Adjusted <span class="math inline">\(R^2\)</span></p></li>
-</ul>
-<p>Run an example on <code>College</code> data from <code>ISLR</code> package</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(College, <span class="dt">package=</span><span class="st">&quot;ISLR&quot;</span>)
-College$Yield &lt;-<span class="st"> </span><span class="kw">with</span>(College, Enroll/Accept)
-mod1 &lt;-<span class="st"> </span><span class="kw">lm</span>(Yield ~<span class="st"> </span>Outstate +<span class="st"> </span>Grad.Rate +<span class="st"> </span>Top25perc, <span class="dt">data=</span>College)</code></pre></div>
-<ul>
-<li>What variables matter?</li>
-<li>How good are the predictions?</li>
-<li>How strong are the effects?</li>
 </ul>
 </div>
 <div id="forward-backward-and-mixed-selection" class="section level2">
