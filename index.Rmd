@@ -75,7 +75,7 @@ Each topic assignment is due one week *after* we finish covering that topic in c
             1. On p. 66 the authors state, "This is clearly not true in Fig. 3.1" Explain why.
             2. On p. 77 the authors state, "In this case we cannot even fit the multiple regression models using least squares ...." Explain why.
         - ISL 3.7.3 and 3.7.4.
-* Programming activities: [Sept 20](ProgrammingActivities/Day-03-Programming-Task.html), [Sept 22](ProgrammingActivities/Day-04-Programming-Task.html)
+* Programming activities: [Sept 20](ProgrammingActivities/Day-03-Programming-Task.html), [Sept 22](ProgrammingActivities/Day-04-Programming-Task.html), [Sept 27](ProgrammingActivities/Day-05-Programming-Task.html)
 
 
 ## Topic 3 --- Likelihood and simulation
