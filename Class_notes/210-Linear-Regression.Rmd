@@ -371,9 +371,14 @@ Algorithmic approaches:
 
 ## Basics of linear algebra
 
+The idea here is not to teach you linear algebra, but to expose you to some of the terminology and operations of linear algebra, so that when you see it again later in the course you'll have a good start.
+
 * A vector --- a column of numbers. The *dimension* is the count of numbers in the vector.
 * A *space*: the set of all possible vectors of a given dimension.
-* A *matrix* --- a colection of vectors (all the same dimension).
+* *Scalar multiplication*
+* *Vector addition*: walk the first vector, then the second. 
+* *Linear combination*: do scalar multiplication on each vector, then add.
+* A *matrix* --- a collection of vectors (all the same dimension).
 * *Dot product*: a basic calculations on vectors:
     - the length (via Pythagorus)
     - the angle between two vectors
@@ -381,13 +386,49 @@ Algorithmic approaches:
 * Matrix operation: *Linear combination*.
     - Take a linear combination of the vectors in a matrix. Analogous to taking a trip. Result: a vector representing the end-point of the trip.
 * The *subspace* spanned by the matrix: the set of all possible points you can get to with a linear combination.
-* Matrix operation: *Orthogonalization* --- Find perpendicular vectors that span the same subspace as a matrix.
+* Matrix operation: *Orthogonalization* --- Find perpendicular vectors that span the same subspace as a matrix. Example, draw the picture for two vectors $\vec{a}$ and $\vec{b}$.
 * Matrix operation: *Projection*
-    - Given a matrix M and a vector V, find the closest point in the subspace of M to the vector V.
+    - Given a matrix M and a vector V, find the closest point in the subspace of M to the vector V. How? Orthogonalize matrix M, then for each vector in orthogonalized M, subtract out the part of $V$ aligned with that vector.
 * Matrix operation: *inversion* --- the inverse operation to linear combination.
     - given an end-point in the space spanned by M, figure out a linear combination that will get you there.
-    
-    
+* Vector to vector operation: Outer product. col vector $\times$ row vector.
+    - Can generalize to operations other than $\times$.
+
+For linear algebra folks: Projection is the Q part of QR decomposition. R is the solve part.
+    - In economics, they write things in an older style:
+        Solve $M b = y$ for $b$. But $M$ may not be square, so no regular inverse.
+        - Pre-multiply by $M^T$ to get $M^T M b = M^T y$
+        - Invert to get $b = (M^T M)^{-1} M^T y$. The matrix $(M^T M)^{-1} M^T$ is called the pseudo inverse.
+        
+Exercises: writing linear algebra functions
+
+1. Addition comes for free. Confirm this.
+#. Scalar multiplication comes for free. Confirm this.
+#. Write a function for the dot product.
+#. Write a function for the vector length.
+#. Write a function for the cosine of the angle between two vectors.
+#. Write a function to project vector $\vec{a}$ onto $\vec{b}$. Subtracting the result from $\vec{a}$ will give the component of $\vec{a}$ orthogonal to $\vec{b}$. So we can decompose $\vec{a}$ into two components relative to $\vec{b}$. Show that the supposedly ortogonal component is really orthogonal to $b$ --- that is, the dot product is 0.
+#. Generalization: Write a function to orthogonalize a matrix M.
+#. Generalization: Write a function to calculate the projection of V onto M.
+
+```{r}
+vdot <- function(a, b) {
+  sum(a * b)
+}
+vlen <- function(a) sqrt(vdot(a, a))
+vcos <- function(a, b) { 
+  vdot(a, b) / (vlen(a) * vlen(b))
+}
+vangle <- function(a, b, degrees = FALSE) {
+  res <- vcos(a, b)
+  if (degrees) res <- res * 180 / pi
+  
+  res
+}
+vproj <- function(a, onto = b) {
+  vlen(a) * vcos(a, onto) * onto
+}
+```
 
 ## The geometry of fitting
 
