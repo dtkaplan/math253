@@ -1,0 +1,22 @@
+---
+title: "Junky paths to R^2 = 1"
+output: html_notebook
+---
+
+```{r}
+require(mosaic)
+head(CPS85)
+insightful_mod <- lm(wage ~ poly(educ,3) * union * poly(exper,3) * sex * sector, data = CPS85)
+length(coef(insightful_mod))
+rsquared(insightful_mod)
+opponents_mod <- lm(wage ~ rand(128), data = CPS85)
+length(coef(opponents_mod))
+rsquared(opponents_mod)
+names(CPS85)
+```
+
+
+
+
+
+

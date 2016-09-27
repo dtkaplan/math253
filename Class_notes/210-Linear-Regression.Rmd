@@ -399,8 +399,48 @@ For linear algebra folks: Projection is the Q part of QR decomposition. R is the
         Solve $M b = y$ for $b$. But $M$ may not be square, so no regular inverse.
         - Pre-multiply by $M^T$ to get $M^T M b = M^T y$
         - Invert to get $b = (M^T M)^{-1} M^T y$. The matrix $(M^T M)^{-1} M^T$ is called the pseudo inverse.
-        
-Exercises: writing linear algebra functions
+     
+## Programming Basics: Functions
+
+1. Syntax of functions:
+```r
+name <- function(arg1, arg2, ...) {
+  body of function. Can use arg1, arg2, etc. 
+}
+```
+
+* typically you will return a value. The value calculated by the last command line in the body is what's returned. Or you can use `return()` at any point in the function.
+* Often functions are designed to produce "side effects", e.g. graphics.  
+* Scope: what happens in functions stays in functions.
+
+1. Create a plotting frame: `plot()`
+    - Write a function that makes this more convenient to use. What features would you like. 
+    ```{r}
+    blank_frame <- function(xlim, ylim) {
+      
+    }
+    ```
+2. Write a function to draw a circle.
+    - What do you want the interface to look like? What arguments are essential? What options are nice to have?
+    
+
+
+## In-class programming activity
+
+Histogram and density functions 
+
+[Day 6 activity](../Daily-Programming/Day-06-Programming-Task.pdf)
+
+ 
+     
+## Review of Day 7
+
+- We finished reviewing adjusted R^2 and ANOVA.
+- Started talking about linear algebra.
+
+We only got through the first few elements in our review of linear algebra.  Let's go through them again
+
+## Arithmetic of linear algebra functions
 
 1. Addition comes for free. Confirm this.
 #. Scalar multiplication comes for free. Confirm this.
@@ -454,36 +494,18 @@ $$ \mbox{standard error of B coef.} =
 * B --- this model vector 
 * residuals --- the residual vector
 
+## Using predict() to calculate precision
 
+- confidence intervals
+- prediction intervals
 
-## Programming Basics: Functions
+## Conclusion
 
-1. Syntax of functions:
-```r
-name <- function(arg1, arg2, ...) {
-  body of function. Can use arg1, arg2, etc. 
-}
-```
+This wraps up our look at linear regression. Main points:
 
-* typically you will return a value. The value calculated by the last command line in the body is what's returned. Or you can use `return()` at any point in the function.
-* Often functions are designed to produce "side effects", e.g. graphics.  
-* Scope: what happens in functions stays in functions.
+* model output is a linear combination of the inputs.
+* `lm()` finds the "best" linear combination.
+* rich theory relating to precision of coefficients and the residuals.
+* traditional ways of applying that theory: F tests and t tests.
 
-1. Create a plotting frame: `plot()`
-    - Write a function that makes this more convenient to use. What features would you like. 
-    ```{r}
-    blank_frame <- function(xlim, ylim) {
-      
-    }
-    ```
-2. Write a function to draw a circle.
-    - What do you want the interface to look like? What arguments are essential? What options are nice to have?
-    
-
-
-## In-class programming activity
-
-Histogram and density functions 
-
-[Day 6 activity](../Daily-Programming/Day-06-Programming-Task.pdf)
 
