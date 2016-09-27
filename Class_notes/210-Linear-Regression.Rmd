@@ -280,6 +280,35 @@ delta <- sqrt(rowSums((rpts - tmp)^2))
 * In 100-dimensional space?
 
 
+
+
+
+
+## In-class programming activity 
+
+[Day 5 activity](../Daily-Programming/Day-05-Programming-Task.pdf)
+
+Drawing a histogram.
+
+## Day 6 Summary
+
+* $R^2$ 
+    - var(fitted) / var(response)
+    - partitioning of variance: 
+        - var(fitted) + var(resid) = var(response)
+        - same with sum of squares: SS(fitted) + SS(resid) = SS(response)
+* Adjusted $R^2$
+    - $R^2$ vs $p$ picture
+    - Derive a formula from the picture: we've got $p+1$ df to get from $R^2 = 0$ to our observed $R^2$, so $n - (p+1)$ df left for the residuals. Rate of increase due to junk is $(1 - R^2) / (n - p - 1)$. Projecting back $p$ terms gives an adjustment of $(1 - R^2) / \frac{p}{n - p - 1}$. Subtract this from $R^2$.
+    - Wikipedia gives two formulas:
+        - $Adj R^2 = {1-(1-R^{2}){n-1 \over n-p-1}}$ -- this projects back $n-1$ terms from 1.
+        - $Adj R^2 = {R^{2}-(1-R^{2}){p \over n-p-1}}$ --- projects back $p$ terms from $R^2$.
+        
+- Adjusted $R^2$
+- Whole model ANOVA.
+- ANOVA on model parts
+
+
 ## Measuring Accuracy of the Model
 
 * $R^2$ = Var(fitted)/Var(response)
@@ -287,6 +316,8 @@ delta <- sqrt(rowSums((rpts - tmp)^2))
 * Residual Standard Error - Sqrt of average square error per residual degree of freedom. The sqrt of the mean square for residuals in ANOVA.
 
 ## Bias of the model
+
+You need to know the "truth" to calculate the bias. We don't.
 
 ```{r echo = FALSE}
 knitr::include_graphics("Images/Chapter-2/2.1.png")
@@ -297,7 +328,8 @@ knitr::include_graphics("Images/Chapter-2/2.1.png")
 
 ### Theory of whole-model ANOVA.
 
-Standard measure: $\frac{\mbox{Explained amount}}{\mbox{Unexplained amount}}$
+Standard measure: 
+$\frac{\mbox{Explained amount}}{\mbox{Unexplained amount}}$
 
 Examples:
 
@@ -309,11 +341,7 @@ Examples:
 
 Trade-off between eating variance and consuming degrees of freedom.
 
-The $R^2$ versus $p$ picture.
 
-- Adjusted $R^2$
-- Whole model ANOVA.
-- ANOVA on model parts
 
 
 ## Forward, backward and mixed selection
@@ -341,6 +369,52 @@ Algorithmic approaches:
     - what's the sensitivity of the process to the choice of training data?
 - "Greedy" approaches
 
+## Basics of linear algebra
+
+* A vector --- a column of numbers. The *dimension* is the count of numbers in the vector.
+* A *space*: the set of all possible vectors of a given dimension.
+* A *matrix* --- a colection of vectors (all the same dimension).
+* *Dot product*: a basic calculations on vectors:
+    - the length (via Pythagorus)
+    - the angle between two vectors
+    - orthogonality: when two vectors are perpendicular, their dot product is zero.
+* Matrix operation: *Linear combination*.
+    - Take a linear combination of the vectors in a matrix. Analogous to taking a trip. Result: a vector representing the end-point of the trip.
+* The *subspace* spanned by the matrix: the set of all possible points you can get to with a linear combination.
+* Matrix operation: *Orthogonalization* --- Find perpendicular vectors that span the same subspace as a matrix.
+* Matrix operation: *Projection*
+    - Given a matrix M and a vector V, find the closest point in the subspace of M to the vector V.
+* Matrix operation: *inversion* --- the inverse operation to linear combination.
+    - given an end-point in the space spanned by M, figure out a linear combination that will get you there.
+    
+    
+
+## The geometry of fitting
+
+* Data tables: cases and variables. 
+* Case space (the rows of the matrix) and variable space (the columns).
+* A quantitative variable is a vector.
+* A categorical variable can be encoded as a set of "dummy" vectors.
+* Response variable and explanatory variable
+* The linear projection problem: find the point spanned by the explanatory variables that's closest to the response.  That linear combination is the best-fitting model.
+    * One explanatory and the response
+    * Two explanatory on board and the response on the board (perfect, but meaningless fit)
+    * Two explanatory in three-space and the response (residual likely)
+
+
+## Precision of the coefficients
+
+$$ \mbox{standard error of B coef.} = 
+| \mbox{residuals} | \frac{1}{| \mbox{B} |}\ 
+\frac{1}{\sin( \theta )}\ \frac{1}{\sqrt{n}}\ \sqrt{\frac{n}{n-m}}$$
+
+* $m$ --- degrees of freedom in model
+* $\theta$ --- angle between this model vector and the space spanned by the others
+* B --- this model vector 
+* residuals --- the residual vector
+
+
+
 ## Programming Basics: Functions
 
 1. Syntax of functions:
@@ -366,10 +440,9 @@ name <- function(arg1, arg2, ...) {
     
 
 
-## In-class programming activity 
+## In-class programming activity
 
-[Day 5 activity](../Daily-Programming/Day-05-Programming-Task.pdf)
+Histogram and density functions 
 
-Drawing a histogram.
-
+[Day 6 activity](../Daily-Programming/Day-06-Programming-Task.pdf)
 
