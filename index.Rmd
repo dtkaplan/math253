@@ -41,7 +41,7 @@ You should "push" your daily programming activity to your repository *before* le
 Each topic assignment is due one week *after* we finish covering that topic in class.
 
 - Topic I: Sept 20. Note: Ignore the comment in `Topic-1.Rmd` about there not being any exercises. There are exercises, as you can see below.
-- Topic II: To be determined
+- Topic II: Oct 6, 2016
 
 
 ## Topic I --- Introduction

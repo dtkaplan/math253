@@ -9,8 +9,9 @@ output: html_notebook
 
 
 ```{r include=FALSE}
-require(mosaic)
-require(dplyr)
+library(mosaic)
+library(dplyr)
+library(ggplot2)
 ```
 
 ## Day 4 Preview
@@ -428,6 +429,19 @@ name <- function(arg1, arg2, ...) {
 ## In-class programming activity
 
 Histogram and density functions 
+
+
+```{r}
+set.seed(101)
+n = 20
+X <- data.frame(vals = runif(n), 
+                group = as.character((1:n) %% 2))
+ggplot(head(X, 15), aes(x = vals)) + 
+  geom_density(bw = .1, position = "stack", aes(color = group, fill = group)) + 
+  geom_rug(aes(color = group)) + 
+#  facet_grid( . ~ group) +
+  xlim(-0.5, 1.5)
+```
 
 [Day 6 activity](../Daily-Programming/Day-06-Programming-Task.pdf)
 

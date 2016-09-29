@@ -4,3 +4,63 @@ output: html_notebook
 ---
 
 # Likelihood and Bayes
+
+We accept that our models won't produce an $\hat{f}(x)$ that always matches $y$. There is the *irreducible error* $\epsilon$, in addition to variance and bias.
+
+* Variance: a measure of how far off our $\hat{f}()$ is from that we would have been able to construct with an infinite amount of data: $\hat{f}_\infty()$.
+* Bias: a measure of how far off $\hat{f}_\infty()$ is from $f()$.
+
+We're using *mean square error* or *sum of square errors* as a measure of how far $\hat{f}(x_i)$ is from the actual result $y_i$.
+
+Now we're going to look at the difference in terms of probabilities: what would be the probability of any particular $\hat{y}_i$ given our $\hat{f}(x_i)$.
+
+Let's quantify probability.
+
+## What's a probability?
+
+* densities
+* cumulative --- this is really what probability refers to.
+* discrete events
+* joint events
+* conditional events
+
+
+
+
+## Conditional probability
+
+The probability of an event in a *given* state of the world. That state of the world might have been set up by another event having occurred.
+
+## Inverting conditional probabilities
+
+What we want is $p(\mbox{state of world} | \mbox{observations})$.  I'll write this $p(\theta | {\cal O})$
+
+Tree with cancer (benign or malignant) and cell shape (round, elongated, ruffled)
+
+SPACE FOR THE TREE
+
+SEE PAPER NOTES.  (remember to transcribe them here)
+
+, e.g. observe ruffled, what is the chance that the tumor is malignant.
+
+Of the 10000 people in the study,     
+* 7000 had benign tumors of which 10% or 700 had ruffled cells
+* 3000 had malignant tumors of whom 60% or 1800 had ruffled cells
+
+So, of the 2500 people with ruffled cells, 1800 had malignant tumors. $p( \theta | {\cal O} )$
+
+## Exponential probability density
+
+What's the time between random events, e.g. 500-year storms or earthquakes in a region that has a big one roughly every 100 years?
+
+From [*The Really Big One](http://www.newyorker.com/magazine/2015/07/20/the-really-big-one), an article in the New Yorker about discoveries in the last few decades that established a high risk in the Pacific Northwest for an earthquake of magnitude 9.
+
+> We now know that the Pacific Northwest has experienced forty-one subduction-zone earthquakes in the past ten thousand years. If you divide ten thousand by forty-one, you get two hundred and forty-three, which is Cascadia’s recurrence interval: the average amount of time that elapses between earthquakes. That timespan is dangerous both because it is too long—long enough for us to unwittingly build an entire civilization on top of our continent’s worst fault line—and because it is not long enough. Counting from the earthquake of 1700, we are now three hundred and fifteen years into a two-hundred-and-forty-three-year cycle.
+
+> It is possible to quibble with that number. Recurrence intervals are averages, and averages are tricky: ten is the average of nine and eleven, but also of eighteen and two. It is not possible, however, to dispute the scale of the problem. 
+
+The last paragraph ...
+
+> All day long, just out of sight, the ocean rises up and collapses, spilling foamy overlapping ovals onto the shore. Eighty miles farther out, ten thousand feet below the surface of the sea, the hand of a geological clock is somewhere in its slow sweep. All across the region, seismologists are looking at their watches, wondering how long we have, and what we will do, before geological time catches up to our own. 
+
+Have students propose distributions and justify them.
