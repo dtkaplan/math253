@@ -1,0 +1,6 @@
+---
+title: "Likelihood and Bayes"
+output: html_notebook
+---
+
+# Likelihood and Bayes
