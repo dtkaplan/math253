@@ -1,9 +1,131 @@
 ---
-title: "Likelihood and Bayes"
+title: "Foundations: Linear Algebra, Likelihood, and Bayes"
 output: html_notebook
 ---
 
-# Likelihood and Bayes
+# Foundations
+
+The topics in this section --- linear algebra, Bayes' rule, and likelihood --- underlie many of the machine-learning techniques we will be studying later in the course. Bayes' rule is a way to *flip* conditional probabilities. Among other things it allows you to interpret data in the light of previous knowledge and belief (which to be fancy, we can call "theory"). Likelihood is a unifying principle for using data to estimate model parameters and is fundamental in statistical theory. It's also an essential part of Bayes' rule. And linear algebra is used throughout statistics and machine learning. Among other things, it's at work behind the motivation and calculations of regression.
+
+## Linear Algebra
+
+The idea here is not to teach you linear algebra, but to expose you to some of the terminology and operations of linear algebra, so that when you see it again later in the course you'll have a good start.
+
+* A vector --- a column of numbers. The *dimension* is the count of numbers in the vector.
+* A *space*: the set of all possible vectors of a given dimension.
+* *Scalar multiplication*
+* *Vector addition*: walk the first vector, then the second. 
+* *Linear combination*: do scalar multiplication on each vector, then add.
+* A *matrix* --- a collection of vectors (all the same dimension).
+* *Dot product*: a basic calculations on vectors:
+    - the length (via Pythagorus)
+    - the angle between two vectors
+    - orthogonality: when two vectors are perpendicular, their dot product is zero.
+* Matrix operation: *Linear combination*.
+    - Take a linear combination of the vectors in a matrix. Analogous to taking a trip. Result: a vector representing the end-point of the trip.
+* The *subspace* spanned by the matrix: the set of all possible points you can get to with a linear combination.
+* Matrix operation: *Orthogonalization* --- Find perpendicular vectors that span the same subspace as a matrix. Example, draw the picture for two vectors $\vec{a}$ and $\vec{b}$.
+* Matrix operation: *Projection*
+    - Given a matrix M and a vector V, find the closest point in the subspace of M to the vector V. How? Orthogonalize matrix M, then for each vector in orthogonalized M, subtract out the part of $V$ aligned with that vector.
+* Matrix operation: *inversion* --- the inverse operation to linear combination.
+    - given an end-point in the space spanned by M, figure out a linear combination that will get you there.
+* Vector to vector operation: Outer product. col vector $\times$ row vector.
+    - Can generalize to operations other than $\times$.
+
+For linear algebra folks: Projection is the Q part of QR decomposition. R is the solve part.
+    - In economics, they write things in an older style:
+        Solve $M b = y$ for $b$. But $M$ may not be square, so no regular inverse.
+        - Pre-multiply by $M^T$ to get $M^T M b = M^T y$
+        - Invert to get $b = (M^T M)^{-1} M^T y$. The matrix $(M^T M)^{-1} M^T$ is called the pseudo inverse.
+
+## Arithmetic of linear algebra operations
+
+1. Addition comes for free. Confirm this.
+#. Scalar multiplication comes for free. Confirm this.
+#. Write a function for the dot product.
+```{r}
+vdot <- function(v, w) {
+  sum(v * w)
+}   
+```
+#. Write a function for the vector length.
+```{r}
+vlength <- function(v) {
+  sqrt(vdot(v, v))
+}
+```
+#. Write a function for the cosine of the angle between two vectors.
+```{r}
+vangle <- function(v, w, degrees = FALSE) {
+   theta <- acos(vdot(v, w) / (vlength(v) * vlength(w)))
+  
+   if (degrees) theta * (180 / pi )
+   else theta
+}
+```
+
+#. Write a function to project vector $\vec{a}$ onto $\vec{b}$. Subtracting the result from $\vec{a}$ will give the component of $\vec{a}$ orthogonal to $\vec{b}$. So we can decompose $\vec{a}$ into two components relative to $\vec{b}$. Show that the supposedly ortogonal component is really orthogonal to $b$ --- that is, the dot product is 0.
+```{r}
+vproject <- function(v, onto) { # the red thing
+  onto * vlength(v) * cos(vangle(v, onto)) / vlength(onto)
+}
+vresid <- function(v, onto) {
+  v - vproject(v, onto)
+}
+
+```
+#. Generalization: Write a function to orthogonalize a matrix M.
+#. Generalization: Write a function to calculate the projection of V onto M.
+
+
+
+
+
+
+```{r}
+vdot <- function(a, b) {
+  sum(a * b)
+}
+vlen <- function(a) sqrt(vdot(a, a))
+vcos <- function(a, b) { 
+  vdot(a, b) / (vlen(a) * vlen(b))
+}
+vangle <- function(a, b, degrees = FALSE) {
+  res <- vcos(a, b)
+  if (degrees) res <- res * 180 / pi
+  
+  res
+}
+vproj <- function(a, onto = b) {
+  vlen(a) * vcos(a, onto) * onto
+}
+```
+
+## The geometry of fitting
+
+* Data tables: cases and variables. 
+* Case space (the rows of the matrix) and variable space (the columns).
+* A quantitative variable is a vector.
+* A categorical variable can be encoded as a set of "dummy" vectors.
+* Response variable and explanatory variable
+* The linear projection problem: find the point spanned by the explanatory variables that's closest to the response.  That linear combination is the best-fitting model.
+    * One explanatory and the response
+    * Two explanatory on board and the response on the board (perfect, but meaningless fit)
+    * Two explanatory in three-space and the response (residual likely)
+
+
+## Precision of the coefficients
+
+$$ \mbox{standard error of B coef.} = 
+| \mbox{residuals} | \frac{1}{| \mbox{B} |}\ 
+\frac{1}{\sin( \theta )}\ \frac{1}{\sqrt{n}}\ \sqrt{\frac{n}{n-m}}$$
+
+* $m$ --- degrees of freedom in model
+* $\theta$ --- angle between this model vector and the space spanned by the others
+* B --- this model vector 
+* residuals --- the residual vector
+
+## Likelihood and Bayes
 
 We accept that our models won't produce an $\hat{f}(x)$ that always matches $y$. There is the *irreducible error* $\epsilon$, in addition to variance and bias.
 
@@ -16,15 +138,31 @@ Now we're going to look at the difference in terms of probabilities: what would 
 
 Let's quantify probability.
 
-## What's a probability?
+## Summary of Day 8
+
+We finished up our brief introduction to linear algebra and started discussing probability. I suggested the rather broad definition of a probability as a number between zero and one.
+
+## Day 9 Announcements
+
+Make sure you've accepted the invitation to the discussion group.
+
+Reading for Thursday: "What is Bayesian statistics and why everything else is wrong"
+
+### What's a probability?
+
+* Chances of something happening
+* Frequentist: Number of "favorable events" / number of events
+* Bayesian. Number between 0 and 1.
+
+$ p(rain | Sept 29, Libra, Thursday )$
 
 * densities
 * cumulative --- this is really what probability refers to.
 * discrete events
 * joint events
 * conditional events
-
-
+* relating joint and conditional: p(A & X) = p(A | X) p(X) = p(X | A) p(A)
+* Bayes rule p(A | X) = p(X | A) p(A) / p(X)
 
 
 ## Conditional probability
@@ -53,6 +191,20 @@ So, of the 2500 people with ruffled cells, 1800 had malignant tumors. $p( \theta
 
 What's the time between random events, e.g. 500-year storms or earthquakes in a region that has a big one roughly every 100 years?
 
+
+[Earthquake warning in Southern California, late Sept. 2016](http://www.latimes.com/local/lanow/la-me-ln-earthquake-san-andreas-20161003-snap-story.html)
+
+> But over the last week, anxieties were particularly heightened, and the natural denial that is part of living in earthquake country was harder to pull off. 
+
+> A swarm of seismic activity at the Salton Sea that began a week ago prompted scientists to say there was an elevated risk for a big San Andreas fault earthquake. By Monday [Oct 3, 2016], that risk had lessened. 
+
+> But the impact of that warning was still being felt. For some, it meant checking quake safety lists. Others looked at preparing for the Big One, such as bolting bookshelves to walls, installing safety latches on kitchen cabinets and strapping down televisions.
+
+Why has the risk gotten smaller? How much smaller?
+
+### Meanwhile, further north ...
+
+
 From [*The Really Big One](http://www.newyorker.com/magazine/2015/07/20/the-really-big-one), an article in the New Yorker about discoveries in the last few decades that established a high risk in the Pacific Northwest for an earthquake of magnitude 9.
 
 > We now know that the Pacific Northwest has experienced forty-one subduction-zone earthquakes in the past ten thousand years. If you divide ten thousand by forty-one, you get two hundred and forty-three, which is Cascadia’s recurrence interval: the average amount of time that elapses between earthquakes. That timespan is dangerous both because it is too long—long enough for us to unwittingly build an entire civilization on top of our continent’s worst fault line—and because it is not long enough. Counting from the earthquake of 1700, we are now three hundred and fifteen years into a two-hundred-and-forty-three-year cycle.
@@ -64,3 +216,102 @@ The last paragraph ...
 > All day long, just out of sight, the ocean rises up and collapses, spilling foamy overlapping ovals onto the shore. Eighty miles farther out, ten thousand feet below the surface of the sea, the hand of a geological clock is somewhere in its slow sweep. All across the region, seismologists are looking at their watches, wondering how long we have, and what we will do, before geological time catches up to our own. 
 
 Have students propose distributions and justify them.
+
+## California earthquake warning, reprise
+
+The Salton Sea earthquake happens. Our prior on large $\lambda$ immediately surges, so there is a significant probability of a quake in the next hours. But as more time goes by, that probability goes down.
+
+* We're interested in $\lambda$ in the exponential distribution 
+$\lambda \exp(-lambda t)$ . This has a cumulative $1 - \exp(-\lambda t)$.
+* Observation: Earthquake hasn't occurred after D days. Likelihood is 1 minus the cumulative, or $\exp(-\lambda D)$.
+* Prior: a mix of the conventional (very small lambda) and some small probability of very high lambda.
+
+Plot out the posterior for different values of D:
+
+* D = 0.1 two hours after the quake.
+* D = 1 a day after the quake
+* D = 3 three days after the quake
+
+The area to the right of 5 days (in expected time to the next quake) is the conventional model.
+
+
+Plot this out as a function of $1/\lambda$, so we need to adjust the density by $| df/d\lambda | = | d \frac{1}{\lambda} / d\lambda| = \lambda^2$
+```{r}
+D <- 3
+lambda <- 100/(1:5000) 
+# prior: proportional to lambda: 
+#  small lambda unlikely, so short time to next earthquake
+prior <- function(lambda) (ifelse(lambda < .2, 25, 1/lambda))
+plot(lambda, ( prior(lambda)), type = "l", xlim = c(0,5))
+plot(1/lambda, exp( - lambda * D) * prior(lambda) * (lambda^2), 
+     type = "l", xlab = "Expected time to the big one, days.",
+     xlim = c(0, 10))
+lines(1/lambda, lambda*.005/prior(lambda), col = "red")
+```
+
+For small D, the "urgency" part of the prior overwhelms the likelihood. As D gets bigger, we revert to the standard model.
+
+## The Price is Right!
+
+*The Price is Right* is a game show in which contestants compete to guess the price of a prize.  The winner is the person whose guess is closest to the actual price considering just those contestants who guesses a price less than or equal to the actual price.
+
+Strategy:
+
+1. First person to guess: an honest guess, hedged on the low side.
+2. Second person: bias guess to be far from the first person's guess.
+3. Third person: 
+4. Fourth person: Zero, or just above one of the other guesses.
+
+Play this game. Call down 4 contestants.  What's the price of this yacht?
+
+![](Images/yacht-04.jpg)
+
+Now, suppose rather than being a strategic game biased toward the last guesser, we wanted to evaluate political prognosticators.  The winner should be the person who makes the best prediction rather than the best guess.
+
+Game: Predict the number of electoral college votes for Donald Trump.
+
+Game: Predict the results of the Ukrainian Parliament's [vote of no confidence](http://www.bbc.com/news/world-europe-35591605) in Prime Minister Arseniy Yatsenyuk. How many votes for no confidence were there. \marginnote{(Actual result for you to compare your prediction to: one-hundred ninety-four out of three-hundred thirty-nine.)}
+
+1. Play this game asking people to draw the probability distribution of their prediction.  Who won. How to evaluate the predictions?
+
+2. Suppose you know something about the contestants.    
+    * David Moore from International Studies
+    * Gary Krueger from Economics
+    * Sybill Trelawney from Divination Science
+    * Jesse Ventura from Political Science
+
+
+## From likelihood to Bayes
+
+Multiply likelihood by prior probability. Normalize so that total probability is 1.
+
+## Choosing models using maximum likelihood
+
+* We model the error as random, with a probability distribution we choose. Often this distribution has parameters.
+* To find the error, we need to make an assumption of what the parameters of the deterministic model are. 
+    - Make that assumption.
+    - Make a similar assumption for the parameters of the probability distribution.
+    - Find the errors.
+    - Calculate the probability of those errors given the probability distribution that we choose. That's the likelihood for the assumed parameters.
+* Repeat in order to modify the assumptions to increase the likelihood. 
+
+Straight line model:
+
+Gaussian errors:
+
+$$f(x \; | \; \mu, \sigma) = \frac{1}{\sigma\sqrt{2\pi} } \; e^{ -\frac{(x-\mu)^2}{2\sigma^2} }$$
+
+What happens when you take the log ... why it's sum of squares.
+
+Question: What about minimizing the absolute value of the residuals, rather than the square? 
+- Corresponds to a two-sided exponential distribution like $\frac{\lambda}{2} \exp(-\lambda |x|)$
+
+## Day 9 Preview
+
+Read "What is Bayesian Statistics and why everything else is wrong."
+
+Emphasize the choice of what detail of the sampling model to use.  Just this school in isolation?  This school as the max of 1000 schools?
+
+
+
+
