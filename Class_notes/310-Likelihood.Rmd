@@ -272,14 +272,24 @@ Game: Predict the number of electoral college votes for Donald Trump.
 
 Game: Predict the results of the Ukrainian Parliament's [vote of no confidence](http://www.bbc.com/news/world-europe-35591605) in Prime Minister Arseniy Yatsenyuk. How many votes for no confidence were there. \marginnote{(Actual result for you to compare your prediction to: one-hundred ninety-four out of three-hundred thirty-nine.)}
 
-1. Play this game asking people to draw the probability distribution of their prediction.  Who won. How to evaluate the predictions?
+Play this game asking people to draw the probability distribution of their prediction.
 
-2. Suppose you know something about the contestants.    
+- Suppose you know something about the contestants.    
     * David Moore from International Studies
     * Gary Krueger from Economics
     * Sybill Trelawney from Divination Science
     * Jesse Ventura from Political Science
+- You've been asked to assign a probability to each contestant. You'll use this probability to weight each of their future predictions.
 
+Have the contestants keep their identity secret at first.
+
+Draw a density on the board. Give them a vertical scale for density, insisting that each of their densities has area one.
+
+1. *The Likelihood Game*:   Who won? How to evaluate the predictions?
+
+2. *The Bayesian Game*: 
+    - The contestants reveal their identity
+    - What's your posterior probability on each of them.
 
 ## From likelihood to Bayes
 
