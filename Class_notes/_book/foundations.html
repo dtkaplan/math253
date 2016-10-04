@@ -38,8 +38,8 @@ MathJax.Hub.Config({
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="connecting-rstudio-to-your-github-repository.html">
-
+<link rel="prev" href="linear-regression.html">
+<link rel="next" href="appendices.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -244,211 +244,325 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="instructions-for-the-publishing-system-bookdown" class="section level1 unnumbered">
-<h1>Instructions for the publishing system: Bookdown</h1>
-<p>You can label chapter and section titles using <code>{#label}</code> after them, e.g., we can reference Chapter <a href="#intro"><strong>??</strong></a>. If you do not manually label them, there will be automatic labels anyway, e.g., Chapter <a href="#methods"><strong>??</strong></a>.</p>
-<p>Figures and tables with captions will be placed in <code>figure</code> and <code>table</code> environments, respectively.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, .<span class="dv">1</span>, .<span class="dv">1</span>))
-<span class="kw">plot</span>(pressure, <span class="dt">type =</span> <span class="st">&#39;b&#39;</span>, <span class="dt">pch =</span> <span class="dv">19</span>)</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:nice-fig"></span>
-<img src="Class_Notes__Statistical_Computing___Machine_Learning_files/figure-html/nice-fig-1.png" alt="Here is a nice figure!" width="80%" />
-<p class="caption">
-Figure 3.1: Here is a nice figure!
-</p>
+<div id="foundations" class="section level1">
+<h1><span class="header-section-number">Topic 3</span> Foundations</h1>
+<p>The topics in this section — linear algebra, Bayes’ rule, and likelihood — underlie many of the machine-learning techniques we will be studying later in the course. Bayes’ rule is a way to <em>flip</em> conditional probabilities. Among other things it allows you to interpret data in the light of previous knowledge and belief (which to be fancy, we can call “theory”). Likelihood is a unifying principle for using data to estimate model parameters and is fundamental in statistical theory. It’s also an essential part of Bayes’ rule. And linear algebra is used throughout statistics and machine learning. Among other things, it’s at work behind the motivation and calculations of regression.</p>
+<div id="linear-algebra" class="section level2">
+<h2><span class="header-section-number">3.1</span> Linear Algebra</h2>
+<p>The idea here is not to teach you linear algebra, but to expose you to some of the terminology and operations of linear algebra, so that when you see it again later in the course you’ll have a good start.</p>
+<ul>
+<li>A vector — a column of numbers. The <em>dimension</em> is the count of numbers in the vector.</li>
+<li>A <em>space</em>: the set of all possible vectors of a given dimension.</li>
+<li><em>Scalar multiplication</em></li>
+<li><em>Vector addition</em>: walk the first vector, then the second.</li>
+<li><em>Linear combination</em>: do scalar multiplication on each vector, then add.</li>
+<li>A <em>matrix</em> — a collection of vectors (all the same dimension).</li>
+<li><em>Dot product</em>: a basic calculations on vectors:
+<ul>
+<li>the length (via Pythagorus)</li>
+<li>the angle between two vectors</li>
+<li>orthogonality: when two vectors are perpendicular, their dot product is zero.</li>
+</ul></li>
+<li>Matrix operation: <em>Linear combination</em>.
+<ul>
+<li>Take a linear combination of the vectors in a matrix. Analogous to taking a trip. Result: a vector representing the end-point of the trip.</li>
+</ul></li>
+<li>The <em>subspace</em> spanned by the matrix: the set of all possible points you can get to with a linear combination.</li>
+<li>Matrix operation: <em>Orthogonalization</em> — Find perpendicular vectors that span the same subspace as a matrix. Example, draw the picture for two vectors <span class="math inline">\(\vec{a}\)</span> and <span class="math inline">\(\vec{b}\)</span>.</li>
+<li>Matrix operation: <em>Projection</em>
+<ul>
+<li>Given a matrix M and a vector V, find the closest point in the subspace of M to the vector V. How? Orthogonalize matrix M, then for each vector in orthogonalized M, subtract out the part of <span class="math inline">\(V\)</span> aligned with that vector.</li>
+</ul></li>
+<li>Matrix operation: <em>inversion</em> — the inverse operation to linear combination.
+<ul>
+<li>given an end-point in the space spanned by M, figure out a linear combination that will get you there.</li>
+</ul></li>
+<li>Vector to vector operation: Outer product. col vector <span class="math inline">\(\times\)</span> row vector.
+<ul>
+<li>Can generalize to operations other than <span class="math inline">\(\times\)</span>.</li>
+</ul></li>
+</ul>
+<p>For linear algebra folks: Projection is the Q part of QR decomposition. R is the solve part. - In economics, they write things in an older style: Solve <span class="math inline">\(M b = y\)</span> for <span class="math inline">\(b\)</span>. But <span class="math inline">\(M\)</span> may not be square, so no regular inverse. - Pre-multiply by <span class="math inline">\(M^T\)</span> to get <span class="math inline">\(M^T M b = M^T y\)</span> - Invert to get <span class="math inline">\(b = (M^T M)^{-1} M^T y\)</span>. The matrix <span class="math inline">\((M^T M)^{-1} M^T\)</span> is called the pseudo inverse.</p>
 </div>
-<p>Reference a figure by its code chunk label with the <code>fig:</code> prefix, e.g., see Figure <a href="instructions-for-the-publishing-system-bookdown.html#fig:nice-fig">3.1</a>. Similarly, you can reference tables generated from <code>knitr::kable()</code>, e.g., see Table <a href="instructions-for-the-publishing-system-bookdown.html#tab:nice-tab">3.1</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr::<span class="kw">kable</span>(
-  <span class="kw">head</span>(iris, <span class="dv">20</span>), <span class="dt">caption =</span> <span class="st">&#39;Here is a nice table!&#39;</span>,
-  <span class="dt">booktabs =</span> <span class="ot">TRUE</span>
-)</code></pre></div>
-<table>
-<caption><span id="tab:nice-tab">Table 3.1: </span>Here is a nice table!</caption>
-<thead>
-<tr class="header">
-<th align="right">Sepal.Length</th>
-<th align="right">Sepal.Width</th>
-<th align="right">Petal.Length</th>
-<th align="right">Petal.Width</th>
-<th align="left">Species</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="right">5.1</td>
-<td align="right">3.5</td>
-<td align="right">1.4</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.9</td>
-<td align="right">3.0</td>
-<td align="right">1.4</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">4.7</td>
-<td align="right">3.2</td>
-<td align="right">1.3</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.6</td>
-<td align="right">3.1</td>
-<td align="right">1.5</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.0</td>
-<td align="right">3.6</td>
-<td align="right">1.4</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.4</td>
-<td align="right">3.9</td>
-<td align="right">1.7</td>
-<td align="right">0.4</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">4.6</td>
-<td align="right">3.4</td>
-<td align="right">1.4</td>
-<td align="right">0.3</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.0</td>
-<td align="right">3.4</td>
-<td align="right">1.5</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">4.4</td>
-<td align="right">2.9</td>
-<td align="right">1.4</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.9</td>
-<td align="right">3.1</td>
-<td align="right">1.5</td>
-<td align="right">0.1</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.4</td>
-<td align="right">3.7</td>
-<td align="right">1.5</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.8</td>
-<td align="right">3.4</td>
-<td align="right">1.6</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">4.8</td>
-<td align="right">3.0</td>
-<td align="right">1.4</td>
-<td align="right">0.1</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.3</td>
-<td align="right">3.0</td>
-<td align="right">1.1</td>
-<td align="right">0.1</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.8</td>
-<td align="right">4.0</td>
-<td align="right">1.2</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.7</td>
-<td align="right">4.4</td>
-<td align="right">1.5</td>
-<td align="right">0.4</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.4</td>
-<td align="right">3.9</td>
-<td align="right">1.3</td>
-<td align="right">0.4</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.1</td>
-<td align="right">3.5</td>
-<td align="right">1.4</td>
-<td align="right">0.3</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.7</td>
-<td align="right">3.8</td>
-<td align="right">1.7</td>
-<td align="right">0.3</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.1</td>
-<td align="right">3.8</td>
-<td align="right">1.5</td>
-<td align="right">0.3</td>
-<td align="left">setosa</td>
-</tr>
-</tbody>
-</table>
-<p>You can write citations, too. For example, we are using the <strong>bookdown</strong> package <span class="citation">(Xie <a href="#ref-R-bookdown">2016</a>)</span> in this sample book, which was built on top of R Markdown and <strong>knitr</strong> <span class="citation">(Xie <a href="#ref-xie2015">2015</a>)</span>.</p>
-
-<div id="refs" class="references">
-<div>
-<p>Xie, Yihui. 2015. <em>Dynamic Documents with R and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/" class="uri">http://yihui.name/knitr/</a>.</p>
+<div id="arithmetic-of-linear-algebra-operations" class="section level2">
+<h2><span class="header-section-number">3.2</span> Arithmetic of linear algebra operations</h2>
+<ol style="list-style-type: decimal">
+<li>Addition comes for free. Confirm this.</li>
+<li>Scalar multiplication comes for free. Confirm this.</li>
+<li>Write a function for the dot product.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vdot &lt;-<span class="st"> </span>function(v, w) {
+  <span class="kw">sum</span>(v *<span class="st"> </span>w)
+}   </code></pre></div>
+<ol>
+<li>Write a function for the vector length.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vlength &lt;-<span class="st"> </span>function(v) {
+  <span class="kw">sqrt</span>(<span class="kw">vdot</span>(v, v))
+}</code></pre></div>
+<ol>
+<li>Write a function for the cosine of the angle between two vectors.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vangle &lt;-<span class="st"> </span>function(v, w, <span class="dt">degrees =</span> <span class="ot">FALSE</span>) {
+   theta &lt;-<span class="st"> </span><span class="kw">acos</span>(<span class="kw">vdot</span>(v, w) /<span class="st"> </span>(<span class="kw">vlength</span>(v) *<span class="st"> </span><span class="kw">vlength</span>(w)))
+  
+   if (degrees) theta *<span class="st"> </span>(<span class="dv">180</span> /<span class="st"> </span>pi )
+   else theta
+}</code></pre></div>
+<ol>
+<li>Write a function to project vector <span class="math inline">\(\vec{a}\)</span> onto <span class="math inline">\(\vec{b}\)</span>. Subtracting the result from <span class="math inline">\(\vec{a}\)</span> will give the component of <span class="math inline">\(\vec{a}\)</span> orthogonal to <span class="math inline">\(\vec{b}\)</span>. So we can decompose <span class="math inline">\(\vec{a}\)</span> into two components relative to <span class="math inline">\(\vec{b}\)</span>. Show that the supposedly ortogonal component is really orthogonal to <span class="math inline">\(b\)</span> — that is, the dot product is 0.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vproject &lt;-<span class="st"> </span>function(v, onto) { <span class="co"># the red thing</span>
+  onto *<span class="st"> </span><span class="kw">vlength</span>(v) *<span class="st"> </span><span class="kw">cos</span>(<span class="kw">vangle</span>(v, onto)) /<span class="st"> </span><span class="kw">vlength</span>(onto)
+}
+vresid &lt;-<span class="st"> </span>function(v, onto) {
+  v -<span class="st"> </span><span class="kw">vproject</span>(v, onto)
+}</code></pre></div>
+<ol>
+<li>Generalization: Write a function to orthogonalize a matrix M.</li>
+<li>Generalization: Write a function to calculate the projection of V onto M.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vdot &lt;-<span class="st"> </span>function(a, b) {
+  <span class="kw">sum</span>(a *<span class="st"> </span>b)
+}
+vlen &lt;-<span class="st"> </span>function(a) <span class="kw">sqrt</span>(<span class="kw">vdot</span>(a, a))
+vcos &lt;-<span class="st"> </span>function(a, b) { 
+  <span class="kw">vdot</span>(a, b) /<span class="st"> </span>(<span class="kw">vlen</span>(a) *<span class="st"> </span><span class="kw">vlen</span>(b))
+}
+vangle &lt;-<span class="st"> </span>function(a, b, <span class="dt">degrees =</span> <span class="ot">FALSE</span>) {
+  res &lt;-<span class="st"> </span><span class="kw">vcos</span>(a, b)
+  if (degrees) res &lt;-<span class="st"> </span>res *<span class="st"> </span><span class="dv">180</span> /<span class="st"> </span>pi
+  
+  res
+}
+vproj &lt;-<span class="st"> </span>function(a, <span class="dt">onto =</span> b) {
+  <span class="kw">vlen</span>(a) *<span class="st"> </span><span class="kw">vcos</span>(a, onto) *<span class="st"> </span>onto
+}</code></pre></div>
 </div>
-<div>
-<p>———. 2016. <em>Bookdown: Authoring Books with R Markdown</em>. <a href="https://github.com/rstudio/bookdown" class="uri">https://github.com/rstudio/bookdown</a>.</p>
+<div id="the-geometry-of-fitting" class="section level2">
+<h2><span class="header-section-number">3.3</span> The geometry of fitting</h2>
+<ul>
+<li>Data tables: cases and variables.</li>
+<li>Case space (the rows of the matrix) and variable space (the columns).</li>
+<li>A quantitative variable is a vector.</li>
+<li>A categorical variable can be encoded as a set of “dummy” vectors.</li>
+<li>Response variable and explanatory variable</li>
+<li>The linear projection problem: find the point spanned by the explanatory variables that’s closest to the response. That linear combination is the best-fitting model.
+<ul>
+<li>One explanatory and the response</li>
+<li>Two explanatory on board and the response on the board (perfect, but meaningless fit)</li>
+<li>Two explanatory in three-space and the response (residual likely)</li>
+</ul></li>
+</ul>
+</div>
+<div id="precision-of-the-coefficients" class="section level2">
+<h2><span class="header-section-number">3.4</span> Precision of the coefficients</h2>
+<p><span class="math display">\[ \mbox{standard error of B coef.} = 
+| \mbox{residuals} | \frac{1}{| \mbox{B} |}\ 
+\frac{1}{\sin( \theta )}\ \frac{1}{\sqrt{n}}\ \sqrt{\frac{n}{n-m}}\]</span></p>
+<ul>
+<li><span class="math inline">\(m\)</span> — degrees of freedom in model</li>
+<li><span class="math inline">\(\theta\)</span> — angle between this model vector and the space spanned by the others</li>
+<li>B — this model vector</li>
+<li>residuals — the residual vector</li>
+</ul>
+</div>
+<div id="likelihood-and-bayes" class="section level2">
+<h2><span class="header-section-number">3.5</span> Likelihood and Bayes</h2>
+<p>We accept that our models won’t produce an <span class="math inline">\(\hat{f}(x)\)</span> that always matches <span class="math inline">\(y\)</span>. There is the <em>irreducible error</em> <span class="math inline">\(\epsilon\)</span>, in addition to variance and bias.</p>
+<ul>
+<li>Variance: a measure of how far off our <span class="math inline">\(\hat{f}()\)</span> is from that we would have been able to construct with an infinite amount of data: <span class="math inline">\(\hat{f}_\infty()\)</span>.</li>
+<li>Bias: a measure of how far off <span class="math inline">\(\hat{f}_\infty()\)</span> is from <span class="math inline">\(f()\)</span>.</li>
+</ul>
+<p>We’re using <em>mean square error</em> or <em>sum of square errors</em> as a measure of how far <span class="math inline">\(\hat{f}(x_i)\)</span> is from the actual result <span class="math inline">\(y_i\)</span>.</p>
+<p>Now we’re going to look at the difference in terms of probabilities: what would be the probability of any particular <span class="math inline">\(\hat{y}_i\)</span> given our <span class="math inline">\(\hat{f}(x_i)\)</span>.</p>
+<p>Let’s quantify probability.</p>
+</div>
+<div id="summary-of-day-8" class="section level2">
+<h2><span class="header-section-number">3.6</span> Summary of Day 8</h2>
+<p>We finished up our brief introduction to linear algebra and started discussing probability. I suggested the rather broad definition of a probability as a number between zero and one.</p>
+</div>
+<div id="day-9-announcements" class="section level2">
+<h2><span class="header-section-number">3.7</span> Day 9 Announcements</h2>
+<p>Make sure you’ve accepted the invitation to the discussion group.</p>
+<p>Reading for Thursday: “What is Bayesian statistics and why everything else is wrong”</p>
+<div id="whats-a-probability" class="section level3">
+<h3><span class="header-section-number">3.7.1</span> What’s a probability?</h3>
+<ul>
+<li>Chances of something happening</li>
+<li>Frequentist: Number of “favorable events” / number of events</li>
+<li>Bayesian. Number between 0 and 1.</li>
+</ul>
+<p>$ p(rain | Sept 29, Libra, Thursday )$</p>
+<ul>
+<li>densities</li>
+<li>cumulative — this is really what probability refers to.</li>
+<li>discrete events</li>
+<li>joint events</li>
+<li>conditional events</li>
+<li>relating joint and conditional: p(A &amp; X) = p(A | X) p(X) = p(X | A) p(A)</li>
+<li>Bayes rule p(A | X) = p(X | A) p(A) / p(X)</li>
+</ul>
 </div>
 </div>
+<div id="conditional-probability" class="section level2">
+<h2><span class="header-section-number">3.8</span> Conditional probability</h2>
+<p>The probability of an event in a <em>given</em> state of the world. That state of the world might have been set up by another event having occurred.</p>
 </div>
-
-
-
-
-
-
-
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-R-bookdown">
-<p>Xie, Yihui. 2016. <em>Bookdown: Authoring Books with R Markdown</em>. <a href="https://github.com/rstudio/bookdown" class="uri">https://github.com/rstudio/bookdown</a>.</p>
+<div id="inverting-conditional-probabilities" class="section level2">
+<h2><span class="header-section-number">3.9</span> Inverting conditional probabilities</h2>
+<p>What we want is <span class="math inline">\(p(\mbox{state of world} | \mbox{observations})\)</span>. I’ll write this <span class="math inline">\(p(\theta | {\cal O})\)</span></p>
+<p>Tree with cancer (benign or malignant) and cell shape (round, elongated, ruffled)</p>
+<p>SPACE FOR THE TREE</p>
+<p>SEE PAPER NOTES. (remember to transcribe them here)</p>
+<p>, e.g. observe ruffled, what is the chance that the tumor is malignant.</p>
+<p>Of the 10000 people in the study,<br />
+* 7000 had benign tumors of which 10% or 700 had ruffled cells * 3000 had malignant tumors of whom 60% or 1800 had ruffled cells</p>
+<p>So, of the 2500 people with ruffled cells, 1800 had malignant tumors. <span class="math inline">\(p( \theta | {\cal O} )\)</span></p>
 </div>
-<div id="ref-xie2015">
-<p>Xie, Yihui. 2015. <em>Dynamic Documents with R and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/" class="uri">http://yihui.name/knitr/</a>.</p>
+<div id="exponential-probability-density" class="section level2">
+<h2><span class="header-section-number">3.10</span> Exponential probability density</h2>
+<p>What’s the time between random events, e.g. 500-year storms or earthquakes in a region that has a big one roughly every 100 years?</p>
+<p><a href="http://www.latimes.com/local/lanow/la-me-ln-earthquake-san-andreas-20161003-snap-story.html">Earthquake warning in Southern California, late Sept. 2016</a></p>
+<blockquote>
+<p>But over the last week, anxieties were particularly heightened, and the natural denial that is part of living in earthquake country was harder to pull off.</p>
+</blockquote>
+<blockquote>
+<p>A swarm of seismic activity at the Salton Sea that began a week ago prompted scientists to say there was an elevated risk for a big San Andreas fault earthquake. By Monday [Oct 3, 2016], that risk had lessened.</p>
+</blockquote>
+<blockquote>
+<p>But the impact of that warning was still being felt. For some, it meant checking quake safety lists. Others looked at preparing for the Big One, such as bolting bookshelves to walls, installing safety latches on kitchen cabinets and strapping down televisions.</p>
+</blockquote>
+<p>Why has the risk gotten smaller? How much smaller?</p>
+<div id="meanwhile-further-north" class="section level3">
+<h3><span class="header-section-number">3.10.1</span> Meanwhile, further north …</h3>
+<p>From <a href="http://www.newyorker.com/magazine/2015/07/20/the-really-big-one">*The Really Big One</a>, an article in the New Yorker about discoveries in the last few decades that established a high risk in the Pacific Northwest for an earthquake of magnitude 9.</p>
+<blockquote>
+<p>We now know that the Pacific Northwest has experienced forty-one subduction-zone earthquakes in the past ten thousand years. If you divide ten thousand by forty-one, you get two hundred and forty-three, which is Cascadia’s recurrence interval: the average amount of time that elapses between earthquakes. That timespan is dangerous both because it is too long—long enough for us to unwittingly build an entire civilization on top of our continent’s worst fault line—and because it is not long enough. Counting from the earthquake of 1700, we are now three hundred and fifteen years into a two-hundred-and-forty-three-year cycle.</p>
+</blockquote>
+<blockquote>
+<p>It is possible to quibble with that number. Recurrence intervals are averages, and averages are tricky: ten is the average of nine and eleven, but also of eighteen and two. It is not possible, however, to dispute the scale of the problem.</p>
+</blockquote>
+<p>The last paragraph …</p>
+<blockquote>
+<p>All day long, just out of sight, the ocean rises up and collapses, spilling foamy overlapping ovals onto the shore. Eighty miles farther out, ten thousand feet below the surface of the sea, the hand of a geological clock is somewhere in its slow sweep. All across the region, seismologists are looking at their watches, wondering how long we have, and what we will do, before geological time catches up to our own.</p>
+</blockquote>
+<p>Have students propose distributions and justify them.</p>
 </div>
+</div>
+<div id="california-earthquake-warning-reprise" class="section level2">
+<h2><span class="header-section-number">3.11</span> California earthquake warning, reprise</h2>
+<p>The Salton Sea earthquake happens. Our prior on large <span class="math inline">\(\lambda\)</span> immediately surges, so there is a significant probability of a quake in the next hours. But as more time goes by, that probability goes down.</p>
+<ul>
+<li>We’re interested in <span class="math inline">\(\lambda\)</span> in the exponential distribution <span class="math inline">\(\lambda \exp(-lambda t)\)</span> . This has a cumulative <span class="math inline">\(1 - \exp(-\lambda t)\)</span>.</li>
+<li>Observation: Earthquake hasn’t occurred after D days. Likelihood is 1 minus the cumulative, or <span class="math inline">\(\exp(-\lambda D)\)</span>.</li>
+<li>Prior: a mix of the conventional (very small lambda) and some small probability of very high lambda.</li>
+</ul>
+<p>Plot out the posterior for different values of D:</p>
+<ul>
+<li>D = 0.1 two hours after the quake.</li>
+<li>D = 1 a day after the quake</li>
+<li>D = 3 three days after the quake</li>
+</ul>
+<p>The area to the right of 5 days (in expected time to the next quake) is the conventional model.</p>
+<p>Plot this out as a function of <span class="math inline">\(1/\lambda\)</span>, so we need to adjust the density by <span class="math inline">\(| df/d\lambda | = | d \frac{1}{\lambda} / d\lambda| = \lambda^2\)</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">D &lt;-<span class="st"> </span><span class="dv">3</span>
+lambda &lt;-<span class="st"> </span><span class="dv">100</span>/(<span class="dv">1</span>:<span class="dv">5000</span>) 
+<span class="co"># prior: proportional to lambda: </span>
+<span class="co">#  small lambda unlikely, so short time to next earthquake</span>
+prior &lt;-<span class="st"> </span>function(lambda) (<span class="kw">ifelse</span>(lambda &lt;<span class="st"> </span>.<span class="dv">2</span>, <span class="dv">25</span>, <span class="dv">1</span>/lambda))
+<span class="kw">plot</span>(lambda, ( <span class="kw">prior</span>(lambda)), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">5</span>))</code></pre></div>
+<p><img src="Class_Notes__Statistical_Computing___Machine_Learning_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="dv">1</span>/lambda, <span class="kw">exp</span>( -<span class="st"> </span>lambda *<span class="st"> </span>D) *<span class="st"> </span><span class="kw">prior</span>(lambda) *<span class="st"> </span>(lambda^<span class="dv">2</span>), 
+     <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Expected time to the big one, days.&quot;</span>,
+     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">10</span>))
+<span class="kw">lines</span>(<span class="dv">1</span>/lambda, lambda*.<span class="dv">005</span>/<span class="kw">prior</span>(lambda), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</code></pre></div>
+<p><img src="Class_Notes__Statistical_Computing___Machine_Learning_files/figure-html/unnamed-chunk-30-2.png" width="672" /></p>
+<p>For small D, the “urgency” part of the prior overwhelms the likelihood. As D gets bigger, we revert to the standard model.</p>
+</div>
+<div id="the-price-is-right" class="section level2">
+<h2><span class="header-section-number">3.12</span> The Price is Right!</h2>
+<p><em>The Price is Right</em> is a game show in which contestants compete to guess the price of a prize. The winner is the person whose guess is closest to the actual price considering just those contestants who guesses a price less than or equal to the actual price.</p>
+<p>Strategy:</p>
+<ol style="list-style-type: decimal">
+<li>First person to guess: an honest guess, hedged on the low side.</li>
+<li>Second person: bias guess to be far from the first person’s guess.</li>
+<li>Third person:</li>
+<li>Fourth person: Zero, or just above one of the other guesses.</li>
+</ol>
+<p>Play this game. Call down 4 contestants. What’s the price of this yacht?</p>
+<div class="figure">
+<img src="Images/yacht-04.jpg" />
+
+</div>
+<p>Now, suppose rather than being a strategic game biased toward the last guesser, we wanted to evaluate political prognosticators. The winner should be the person who makes the best prediction rather than the best guess.</p>
+<p>Game: Predict the number of electoral college votes for Donald Trump.</p>
+<p>Game: Predict the results of the Ukrainian Parliament’s <a href="http://www.bbc.com/news/world-europe-35591605">vote of no confidence</a> in Prime Minister Arseniy Yatsenyuk. How many votes for no confidence were there.<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
+<p>Play this game asking people to draw the probability distribution of their prediction.</p>
+<ul>
+<li>Suppose you know something about the contestants.
+<ul>
+<li>David Moore from International Studies</li>
+<li>Gary Krueger from Economics</li>
+<li>Sybill Trelawney from Divination Science</li>
+<li>Jesse Ventura from Political Science</li>
+</ul></li>
+<li>You’ve been asked to assign a probability to each contestant. You’ll use this probability to weight each of their future predictions.</li>
+</ul>
+<p>Have the contestants keep their identity secret at first.</p>
+<p>Draw a density on the board. Give them a vertical scale for density, insisting that each of their densities has area one.</p>
+<ol style="list-style-type: decimal">
+<li><p><em>The Likelihood Game</em>: Who won? How to evaluate the predictions?</p></li>
+<li><em>The Bayesian Game</em>:
+<ul>
+<li>The contestants reveal their identity</li>
+<li>What’s your posterior probability on each of them.</li>
+</ul></li>
+</ol>
+</div>
+<div id="from-likelihood-to-bayes" class="section level2">
+<h2><span class="header-section-number">3.13</span> From likelihood to Bayes</h2>
+<p>Multiply likelihood by prior probability. Normalize so that total probability is 1.</p>
+</div>
+<div id="choosing-models-using-maximum-likelihood" class="section level2">
+<h2><span class="header-section-number">3.14</span> Choosing models using maximum likelihood</h2>
+<ul>
+<li>We model the error as random, with a probability distribution we choose. Often this distribution has parameters.</li>
+<li>To find the error, we need to make an assumption of what the parameters of the deterministic model are.
+<ul>
+<li>Make that assumption.</li>
+<li>Make a similar assumption for the parameters of the probability distribution.</li>
+<li>Find the errors.</li>
+<li>Calculate the probability of those errors given the probability distribution that we choose. That’s the likelihood for the assumed parameters.</li>
+</ul></li>
+<li>Repeat in order to modify the assumptions to increase the likelihood.</li>
+</ul>
+<p>Straight line model:</p>
+<p>Gaussian errors:</p>
+<p><span class="math display">\[f(x \; | \; \mu, \sigma) = \frac{1}{\sigma\sqrt{2\pi} } \; e^{ -\frac{(x-\mu)^2}{2\sigma^2} }\]</span></p>
+<p>What happens when you take the log … why it’s sum of squares.</p>
+<p>Question: What about minimizing the absolute value of the residuals, rather than the square? - Corresponds to a two-sided exponential distribution like <span class="math inline">\(\frac{\lambda}{2} \exp(-\lambda |x|)\)</span></p>
+</div>
+<div id="day-9-preview" class="section level2">
+<h2><span class="header-section-number">3.15</span> Day 9 Preview</h2>
+<p>Read “What is Bayesian Statistics and why everything else is wrong.”</p>
+<p>Emphasize the choice of what detail of the sampling model to use. Just this school in isolation? This school as the max of 1000 schools?</p>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Actual result for you to compare your prediction to: one-hundred ninety-four out of three-hundred thirty-nine.<a href="foundations.html#fnref1">↩</a></p></li>
+</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="connecting-rstudio-to-your-github-repository.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="linear-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="appendices.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
@@ -475,7 +589,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/dtkaplan/math253/edit/master/950-Bookdown-Instructions.Rmd",
+"link": "https://github.com/dtkaplan/math253/edit/master/310-Likelihood.Rmd",
 "text": null
 },
 "download": null,

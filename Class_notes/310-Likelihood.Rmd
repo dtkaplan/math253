@@ -270,7 +270,7 @@ Now, suppose rather than being a strategic game biased toward the last guesser, 
 
 Game: Predict the number of electoral college votes for Donald Trump.
 
-Game: Predict the results of the Ukrainian Parliament's [vote of no confidence](http://www.bbc.com/news/world-europe-35591605) in Prime Minister Arseniy Yatsenyuk. How many votes for no confidence were there. \marginnote{(Actual result for you to compare your prediction to: one-hundred ninety-four out of three-hundred thirty-nine.)}
+Game: Predict the results of the Ukrainian Parliament's [vote of no confidence](http://www.bbc.com/news/world-europe-35591605) in Prime Minister Arseniy Yatsenyuk. How many votes for no confidence were there.^[Actual result for you to compare your prediction to: one-hundred ninety-four out of three-hundred thirty-nine.]
 
 Play this game asking people to draw the probability distribution of their prediction.
 
