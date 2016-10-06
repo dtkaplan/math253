@@ -187,6 +187,67 @@ Of the 10000 people in the study,
 
 So, of the 2500 people with ruffled cells, 1800 had malignant tumors. $p( \theta | {\cal O} )$
 
+## Summary of Day 9
+
+Announcement: Read ["What is Bayesian Statistics and why everything else is wrong."](../Resources/Likelihood-Lavine.pdf)
+
+We derived Bayes' rule (simple!) from fundamental principles of probability. There are three components of the formula that have individual names:
+
+* The *prior*. What you know before you examine the data.
+* The *likelihood*. A conditional probability. Given a theory (that is, a way that you think the world works), what is the probability of the data you have observed.
+    - Typically a likelihood is built around a model that has both a deterministic and a random component.  For instance, the output $y_i$ depends on an input $x_i$ according to $y_i = a + b x + \epsilon$.
+    - We specify the properties (e.g., the variance) of the random component as part of the theory. For instance, we might specify that $\epsilon$ is drawn from a normal distribution with mean zero and variance $c^2$.
+    - The likelihood can be calculated by multiplying together the probabilities of each of values the data indicates. Continuing with the example in the previous points, $\epsilon_i = y_i - (a + b x_i)$. The calculation would be likelihood $= \prod_i$`dnorm(`$\epsilon_i$`, mean = 0, sd = c)`.
+    - In order to have acceptable performance in computer arithmetic, we generally calculate the *log likelihood*. This allows us to turn the product in the above point into a sum. 
+* The *posterior*. Our updated beliefs given the data.
+
+Controversy! Many people believe that performing calculations using a prior is unscientific. This is because the prior reflects the views of the researcher, rather than a solid fact of reality. Nonetheless, everyone agrees that the likelihood is meaningful. Many of the estimation problems of statistics amount to finding parameters that maximize the likelihood. (People who think that using a prior is a reasonable way of doing business, like the author, point out that the model itself is a subjective choice.)
+
+The in-class programming task involved calculating a likelihood with a model that involved the exponential probability distribution. In that task, we were not doing the full Bayesian calculation. Instead, we took as our point estimate of the parameter the *argmax*, that is, the parameter value that produces the highest likelihood. 
+
+## Likelihood example
+
+Consider a mechanism like that behind Figure 3.1 in ISLR.
+
+![Figure 3.1 from ISRL](Images/Chapter-3/3.1.png)
+
+There seems to be a straight-line relationship between Sales and TV. You can also see that the variance of the residuals is bigger for larger values of TV. The usual least-squares estimator is based on maximizing the likelihood of a model like $\mbox{Sales} = a + b \mbox{TV} + \epsilon$, where $\epsilon$ is "iid normal". But we know the $\epsilon$ estimated from the data won't be iid. Our model is therefore wrong. That's not necessarily a problem, since all models are wrong (they are models after all!) but some models are useful. So the iid model might be useful.
+
+Let's make some similar data on which we can demonstrate a likelihood calculation.
+
+```{r}
+TV <- runif(500)
+Sales <- 3.5 + 12 * TV + (3* TV + 0.75) * rnorm(length(TV))
+plot(TV, Sales, ylim = c(0, 25))
+```
+
+Here's a simple calculation with a "wrong" model:
+```{r}
+lm(Sales ~ TV)
+```
+
+If we like, however, we can do the calculation with a "better" model, say, taking the following as the model behind our likelihood.
+
+```{r}
+Sales_likelihood <- function(params) {
+  a <- params[1]
+  b <- params[2]
+  c <- params[3]
+  d <- params[4]
+
+  # Negate so the the minimization routine will produce the maximum likelihood
+  -sum(log(dnorm(Sales - (a + b * TV), mean = 0, sd = c + d * TV )))
+}
+```
+
+```{r}
+Sales_likelihood(c(5, 10, 1, 1))
+```
+```{r}
+nlm(Sales_likelihood, c(5, 10, 1, 1))
+```
+
+
 ## Exponential probability density
 
 What's the time between random events, e.g. 500-year storms or earthquakes in a region that has a big one roughly every 100 years?
@@ -316,9 +377,16 @@ What happens when you take the log ... why it's sum of squares.
 Question: What about minimizing the absolute value of the residuals, rather than the square? 
 - Corresponds to a two-sided exponential distribution like $\frac{\lambda}{2} \exp(-\lambda |x|)$
 
-## Day 9 Preview
+## Day 10 Preview
 
-Read "What is Bayesian Statistics and why everything else is wrong."
+Read ["What is Bayesian Statistics and why everything else is wrong."](../Resources/Likelihood-Lavine.pdf)
+
+
+Go through sections 1, 2, and 4 in class: about the likelihood calculation, the p-value calculation, and the philosophical criticism of p-values.
+
+
+
+
 
 Emphasize the choice of what detail of the sampling model to use.  Just this school in isolation?  This school as the max of 1000 schools?
 

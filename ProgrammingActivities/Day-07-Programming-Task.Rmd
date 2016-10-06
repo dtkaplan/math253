@@ -23,7 +23,9 @@ In this activity, you will perform some likelihood calculations on data simulate
 
 The exponential distribution has one parameter, `rate`.
 
-1. Create an object `vals` containing 10 random values selected from an exponential distribution with rate $1/100$.  You can use `rexp()` for this.  Check your values to make sure they are plausible.  If an event happens at a rate of $1/100$, for instance the so-called 100-year storm, you expect the interval between events to be something like 100.
+1. Recall that our objective here is to make an estimate of this parameter from data. It's convenient to do this with a simulation. This way, you'll know what the estimated rate *should be* and you'll be able to see how well the estimator you build is performing.  
+    
+    Create an object `vals` containing 10 random values selected from an exponential distribution with rate $1/100$. You can use `rexp()` for this.  Check your values to make sure they are plausible.  If an event happens at a rate of $1/100$, for instance the so-called 100-year storm, you expect the interval between events to be something like 100. But because the events are random, the intervals will not usually be exactly 100 years.
 
 ```{r echo=params$show_answers}
 vals <- rexp(10, rate = 1 / 100)
@@ -49,7 +51,6 @@ LL_exp <- function(rate) {
 rates <- seq(1/200, 1/50, length=200)
 ```
 
-\newpage
 
 5. You are going to compute the log-likelihood of `vals` for each component of `rates`.^[Those of you who have experience writing computer programs will think of using a loop. R has functions that perform the task of looping and accumulating answers for you.] The following command will do the job:
 ```r
