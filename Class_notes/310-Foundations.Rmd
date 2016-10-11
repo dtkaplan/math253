@@ -393,7 +393,7 @@ Likelihood.
 Example: Mean and standard deviation 
 
 ```{r}
-data_vals <- runif(100, min = 20, max = 50)
+data_vals <- runif(10000, min = 20, max = 50)
 # data_vals <- rexp(10000, rate = 1) 
 mean(data_vals)
 median(data_vals)
@@ -426,7 +426,40 @@ Link to ["What is Bayesian Statistics and why everything else is wrong."](../Res
 
 Go through sections 1, 2, and 4 in class: about the likelihood calculation, the p-value calculation, and the philosophical criticism of p-values.
 
-Emphasize the choice of what detail of the sampling model to use.  Just this school in isolation?  This school as the max of 1000 schools?
+Find the likelihood of observing $k$ cases out of $E$ employees with a rate of $\theta$.
+
+```{r}
+E <- 145
+k <- 8
+theta <- .01
+L <- function(theta) dbinom(k, size = E, prob = theta)
+```
+Making the plot of likelihood versus $\theta$
+```{r}
+x <- seq(0,.10, length = 100)
+y <- L(x)
+plot(x, y, type = "l", xlab = "theta", ylab = "likelihood")
+```
+
+Emphasize the choice of what detail of the sampling model to use.  Just this school in isolation?
+
+Suppose we consider that there are 1000 schools near high-tension lines. Our school is presumably one of the highest rates, since other schools who had bigger numbers would come forward. Let's imagine that our school is in the top 10%. This is like calculating that of 10 schools, the 8 cancer cases we observed are the most of any of those 10. What does this give for the likelihood of theta?
+
+```{r}
+nschools <- 2
+Lschools <- function(theta) {
+  prob_of_k <- dbinom(k, size = E, prob = theta)
+  less_than_k <- pbinom(k - 0.5, size = E, prob = theta)^(nschools - 1)
+  prob_of_k * less_than_k
+}
+```
+
+```{r}
+x <- seq(0,.05, length = 100)
+y <- Lschools(x)
+plot(x, y, type = "l", xlab = "theta", ylab = "likelihood")
+```
+
 
 
 ## Programming Basics: Conditionals

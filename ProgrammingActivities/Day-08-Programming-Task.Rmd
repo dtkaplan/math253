@@ -93,7 +93,7 @@ According to regulations, the `fare_amount` depends on the `trip_distance` in a 
 \enlargethispage{1in}
 
 The waiting-time part of the fare is  
-`waiting_fare <= fare_amount - (base_fare + per_mile*trip_distance)`.     
+`waiting_fare <- fare_amount - (base_fare + per_mile*trip_distance)`.     
 Each individual trip's waiting time is modeled as random. You can choose whatever probability distribution you like, but it should be such that the probability density for negative values is zero (or, if you like, very small).  For instance, an exponential distribution might be appropriate.^[When using an exponential distribution, keep in mind that there is a hard cut-off at an input of zero: the probability of any negative value is exactly zero, meaning "impossible." (Zero likelihood corresponds to `-Inf` log-likelihood. Yet when searching for the maximum likelihood, you may encounter parameter values where `-Inf` is the result.  Sophisticated methods of dealing with such boundaries are beyond the scope of this course, but you can always get around the problem by adding a small positive value to the likelihood before taking the log.)]  
 
 * Write a function `taxi_likelihood()` that takes as an argument a vector like `c(base_fare = 2.00, per_mile = 4.00, params = 1/3)`.  
