@@ -5,7 +5,11 @@ date: "Counting with Conditionals"
 params:
   show_answers: FALSE
 output: 
-  rmarkdown::tufte_handout
+  tufte::tufte_html: default
+  tufte::tufte_handout:
+    latex_engine: xelatex
+  tufte::tufte_book:
+    latex_engine: xelatex
 ---
 
 ```{r include=FALSE}
