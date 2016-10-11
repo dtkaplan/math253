@@ -9,11 +9,7 @@ output:
 ## Fall 2016
 
 
-*********
 
-**Breaking NEWS!** The registrar has scheduled our final exam for **Wednesday 14 December** from 1:30pm to 3:30. Plan your travel accordingly.
-
-*********
 
 * Instructor: **Danny Kaplan**, Olin-Rice 231, `kaplan@macalester.edu`
 * Office Hours: 
@@ -26,6 +22,7 @@ output:
 * **Class notes**. [In-class notes for the entire semester](Class_notes/_book/introduction.html). (An evolving document.)
 * [Online discussion site](https://github.com/dtkaplan/math253-discussion/issues).
 * An [introduction to R/RStudio/Markdown](http://ismayc.github.io/rbasics-book)
+* The registrar has scheduled our **final exam** for Wednesday 14 December from 1:30pm to 3:30.
 
 ### Starting the semester
 
@@ -91,7 +88,6 @@ Each topic assignment is due one week *after* we finish covering that topic in c
 ## Topic 4 --- Classification
 
 * Readings: In Chapter 4 of ISL §4.1, §4.2, §4.3.1-3, §4.4.1-2, §4.5
-* Programming basics 4: Conditionals
 * Visualization: Grammar of graphics: glyphs and aesthetics
 * Topic 4 Assignment:
     - Programming Assignment: 4.7.11, 4.7.13
