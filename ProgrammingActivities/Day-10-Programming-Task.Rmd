@@ -1,0 +1,174 @@
+---
+title: "In-Class Programming Task 10"
+author: 'Math 253: Statistical Computing & Machine Learning'
+date: "Implementing logistic regression"
+output:
+  tufte::tufte_handout:
+    latex_engine: xelatex
+  tufte::tufte_book:
+    latex_engine: xelatex
+  tufte::tufte_html: default
+params:
+  show_answers: no
+---
+
+```{r include=FALSE}
+options(width=80)
+library(mosaicData)
+library(ggplot2)
+library(scoreActivity)
+library(ISLR)
+knitr::opts_chunk$set(tidy=FALSE, echo=params$show_answers)
+options(width=100)
+```
+
+In this activity, you will work with the logistic function and likelihood. For the sake of definiteness, you'll use the `Default` data from the `ISLR` package, but the programming involved will show techniques for writing functions that work with any data table.
+
+```{r}
+library(ISLR)
+data(Default)
+```
+
+# The logistic function
+
+The logistic function is defined as ${\cal L}(x) = \frac{e^x}{1 + e^x}$.    
+Note that the function ${\cal L}(x)$ takes a scalar, $x$ as an input.
+
+* Write a function `logistic()` that returns the value of the logistic function for any numerical input $x$.
+
+```{r echo = params$show_answers}
+logistic <- function(x) exp(x) / (1 + exp(x))
+```
+
+
+
+# Linear combinations
+
+In logistic regression, a linear combination of variables is taken and passed through the logistic function to produce a probability. 
+
+* Write a function `linear_combine()` that takes two arguments:    
+    - `data=` specifying a data table
+    - `coefs=` specifying a set of coefficients to use in the linear combination.
+
+The `coefs` argument will have a very specific form: a numerical vector with named components.  For example, `linear_combine()` will be invoked with a command like this:
+```{r eval=FALSE, echo=TRUE}
+linear_combine(data = Default, 
+               coefs = c(intercept = 3, balance = 0.00001, income = -0.0002))
+```
+
+The `linear_combine()` function will multiply each of the named variables in `data` by the corresponding coefficient, then add in the value of the intercept.  The returned value will be the vector that is the specified linear combination.
+
+\enlargethispage{1in}
+At the heart of your `linear_combine()` will be a loop like this:
+```{r eval=FALSE, echo=TRUE}
+result <- 0
+for (nm in names(coefs)) {
+  if (nm == "intercept") {
+    result <- result + coefs[[nm]]
+  } else {
+    result <- result + coefs[[nm]] * data[[nm]]
+  }
+}
+```
+    
+Arrange your function to call `stop()` if the variable names in the `coef` vector don't exist in `data`.
+
+```{r echo=params$show_answers}
+linear_combine <- function(data = NULL, coefs = NULL) {
+  if (is.null(data)) 
+    stop("Must provide data table in data= argument")
+  if (is.null(coefs)) 
+    stop("Must provide coefficients in coef= argument")
+  result <- 0
+  for (nm in names(coefs)) {
+    if (nm == "intercept") {
+      result <- result + coefs[[nm]] + rep(0, nrow(data))
+    } else {
+      if ( ! nm %in% names(data)) 
+        stop("Variable '", nm, "' in coefficients but not in data.")
+      result <- result + coefs[[nm]] * data[[nm]]
+    }
+  }
+  result
+}
+```
+
+# Probabilities
+
+\enlargethispage{1in}
+
+Applying the logistic function to the output of `linear_combine()` produces a number between zero and one.  You can interpret this probability as the conditional probability of the outcome given the values of the data. 
+
+* Write a function `LL_logistic()` that computes the log-likelihood of the observed result given a model (in the form of `coefs`).  It will have these arguments:
+    * `data=` a data table
+    * `coefs=` the vector of coefficients
+    * `outcome=` a `TRUE` or `FALSE` vector giving the outcome
+    
+Your function should 
+
+1. use `linear_combine()` on `data` and `coefs` to produce a number for each case in `data`.
+2. put the result of (1) through `logistic()`.  The output will be a probability for each case in `data`, which I'll write here as $p_i$.
+3. set the likelihood for each case in `data` to be $p_i$ if the result is `TRUE`, otherwise set the likelihood to be $1 - p_i$.
+4. combine the likelihoods of the individual cases into an overall log likelihood.
+
+```{r echo=params$show_answers}
+LL_logistic <- function(data = NULL, coefs = NULL, outcome) {
+  probs <- logistic( linear_combine(data=data, coefs=coefs))
+  likelihoods <- ifelse(outcome, probs, 1-probs)
+  
+  sum(log(likelihoods))
+}
+```
+
+Here's a quick test for your function:
+
+```{r echo=TRUE}
+LL_logistic(data=Default, 
+            coefs = c(intercept = 1, income = -0.0001), 
+            outcome = Default$default == "Yes")
+```
+
+# Optimize
+
+Use `optim()` to find the maximum likelihood coefficients (using just the intercept and `income`) to predict `default`. 
+
+```{r echo=params$show_answers, eval=params$show_answers}
+fun_to_minimize <- function(coefs) {
+  - LL_logistic(data=Default, coefs=coefs, outcome=Default$default=="Yes")
+}
+best_coefs <- optim(c(intercept = 1, income = -0.0001), fun_to_minimize) 
+```
+
+Put your results in an object called `best_coefs`.
+
+Compare your result to the output of 
+```{r eval=FALSE, echo=TRUE}
+glm(default == "Yes" ~ income, data=Default, family="binomial")
+```
+
+```{r echo=FALSE, eval=params$show_answers, results="asis"}
+cat("# Test statments")
+```
+
+```{r echo=params$show_answers, eval=params$show_answers}
+source("Day-10-Test-Statements.R", local = TRUE)
+```
+
+
+\newpage
+
+# Above and beyond
+
+It seems odd to have to specify both `data=Default` and `outcome=Default$default == "yes"` in the above command.  R provides a way to avoid this, so that the `outcome` argument can be simply `default == "Yes"`.  To do this, write your `LL_logistic()` this way
+
+```{r eval=FALSE, echo=TRUE}
+LL_Logistic <- function(data = NULL, coefs = NULL, outcome) {
+  outcome_statement <- substitute(outcome)
+  outcome <- eval(outcome_statement, envir = data)
+  # Now, "outcome" will be the value of the statement when 
+  # applied to the values in data
+  
+  # ... Continue with your calculations
+}
+```
+

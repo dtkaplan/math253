@@ -1,9 +1,9 @@
 ---
-title: "Foundations: Linear Algebra, Likelihood, and Bayes"
+title: "Foundations: linear algebra, likelihood, and Bayes' rule"
 output: html_notebook
 ---
 
-# Foundations
+# Foundations: linear algebra, likelihood and Bayes' rule
 
 The topics in this section --- linear algebra, Bayes' rule, and likelihood --- underlie many of the machine-learning techniques we will be studying later in the course. Bayes' rule is a way to *flip* conditional probabilities. Among other things it allows you to interpret data in the light of previous knowledge and belief (which to be fancy, we can call "theory"). Likelihood is a unifying principle for using data to estimate model parameters and is fundamental in statistical theory. It's also an essential part of Bayes' rule. And linear algebra is used throughout statistics and machine learning. Among other things, it's at work behind the motivation and calculations of regression.
 
@@ -468,6 +468,13 @@ plot(x, y, type = "l", xlab = "theta", ylab = "likelihood")
     Carries out the test for each element in the vector.
 * a special form: `if (condition) {statements} else {statements}`
 
+```{r}
+x <- rnorm(10)
+table(x < 0)
+ifelse(x >= 0, sqrt(x), "bogus")
+```
+
+
 Both of these can be nested.
 
 
@@ -476,6 +483,10 @@ Both of these can be nested.
 ```{r}
 library(ISLR)
 data(Default) # loan balances and defaults.
+head(Default)
+you_pay <- with(Default,
+  ifelse(balance / 10  <  income, 0.10 * balance, 0.05 * income))
+sum(you_pay)
 ```
 
 Determine annual payment amount for student loans.  E.g.
@@ -490,7 +501,53 @@ Determine annual payment amount for student loans.  E.g.
 1. Calculate the median of a set of values.
     * if an odd number in the set, then the middle value
     * if an even number in the set, the mean of the two values in the middle.
+    
+```{r}
+my_median <- function(x) {
+  if (length(x) %% 2 == 1) {
+    # odd length
+    sort(x)[ceiling(length(x)/2)]
+  } else {
+    # even length
+    inds <- length(x)/2 + c(0, 1)
+    mean(sort(x)[inds])
+
+  }
+}
+my_median(1:11)
+median(1:11)
+```
+
+
 2. `pmax()` is a function that takes the case-by-case maximum of each of two input vectors. We're going to add some error checking. 
+
+```{r}
+my_pmax <- function(v1, v2) ifelse(v1 > v2, v1, v2)
+my_pmax3 <- function(v1, v2, v3){
+  ifelse(v1 >= v2,
+         my_pmax(v1, v3),
+         my_pmax(v2, v3)
+  )
+  }
+my_pmax4 <- function(v1, v2, v3, v4) {
+  ifelse(v1 >= v2, 
+         my_pmax3(v1, v3, v4),
+         my_pmax3(v2, v3, v4))
+}
+my_pmax_any <- function(...) {
+  vectors <- list(...)
+  if (length(vectors) == 2) my_pmax(...)
+  if (length(vectors) == 3) my_pmax3(...)
+  if (length(vectors) == 4) my_pmax4(...)
+}
+
+
+my_pmax(rnorm(10), rnorm(10))
+```
+
+
+
+
 * Unless the vectors are either numeric or character, and of the same type, throw an error. 
 * Add an argument `handle_na` which, if `TRUE` replaces `NA` with `-Inf` for the purposes of the comparison.
 * Add an argument `na_rid=` 
