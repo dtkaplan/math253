@@ -48,10 +48,9 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <p>In this activity, you will work with the logistic function and likelihood. For the sake of definiteness, you’ll use the <code>Default</code> data from the <code>ISLR</code> package, but the programming involved will show techniques for writing functions that work with any data table.</p>
 <div id="the-logistic-function" class="section level1">
 <h1>The logistic function</h1>
-<p>The logistic function is defined as <span class="math inline">\({\cal L}(x) = \frac{e^x}{1 + e^x}\)</span>.<br />
-Note that the function <span class="math inline">\({\cal L}(x)\)</span> takes a scalar, <span class="math inline">\(x\)</span> as an input.</p>
+<p>The logistic function is defined as <span class="math inline">\({\cal L}(x) = \frac{e^x}{1 + e^x}\)</span>. Note that the function <span class="math inline">\({\cal L}(x)\)</span> takes a scalar <span class="math inline">\(x\)</span> as an input.</p>
 <ul>
-<li>Write a function <code>logistic()</code> that returns the value of the logistic function for any numerical input <span class="math inline">\(x\)</span>.</li>
+<li>Write a function <code>logistic()</code> that returns the value of the logistic function for any numerical vector <code>x</code>. Remember that functions like <code>exp()</code> and <code>+</code> are vectorized in R, so writing <code>logistic()</code> for a scalar <span class="math inline">\(x\)</span> will automatically work on a vector <code>x</code>.</li>
 </ul>
 </div>
 <div id="linear-combinations" class="section level1">
@@ -84,11 +83,11 @@ for (nm in names(coefs)) {
 <p></p>
 <p>Applying the logistic function to the output of <code>linear_combine()</code> produces a number between zero and one. You can interpret this probability as the conditional probability of the outcome given the values of the data.</p>
 <ul>
-<li>Write a function <code>LL_logistic()</code> that computes the log-likelihood of the observed result given a model (in the form of <code>coefs</code>). It will have these arguments:
+<li>Write a function <code>LL_logistic()</code> that computes the log-likelihood of the observed result given a model in the form of <code>coefs</code>. It will have these arguments:
 <ul>
-<li><code>data=</code> a data table</li>
-<li><code>coefs=</code> the vector of coefficients</li>
-<li><code>outcome=</code> a <code>TRUE</code> or <code>FALSE</code> vector giving the outcome</li>
+<li><code>data=</code> a data table for training</li>
+<li><code>coefs=</code> a proposed vector of coefficients</li>
+<li><code>outcome=</code> a <code>TRUE</code> or <code>FALSE</code> vector giving the observed outcome in the training data.</li>
 </ul></li>
 </ul>
 <p>Your function should</p>

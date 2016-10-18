@@ -3,11 +3,11 @@ title: "In-Class Programming Task 10"
 author: 'Math 253: Statistical Computing & Machine Learning'
 date: "Implementing logistic regression"
 output:
+  tufte::tufte_html: default
   tufte::tufte_handout:
     latex_engine: xelatex
   tufte::tufte_book:
     latex_engine: xelatex
-  tufte::tufte_html: default
 params:
   show_answers: no
 ---
