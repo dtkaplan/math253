@@ -90,7 +90,7 @@ Each adds to the log odds in the normal, linear regression way.  Negative means 
 names(Default)
 ggplot(Default, 
        aes(x = income, y = balance, alpha = default, color = default)) + 
-  geom_point() + facet_wrap( ~ student)
+  geom_point() #+ facet_wrap( ~ student)
 ```
 
 ```{r}
