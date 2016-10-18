@@ -1,0 +1,175 @@
+---
+title: "LDA and QDA"
+output: html_notebook
+---
+
+```{r include = FALSE}
+require(mosaic)
+require(ISLR)
+require(MASS)
+```
+
+
+
+
+# Linear and Quadratic Discriminant Analysis
+
+
+## Example: Default on student loans
+
+```{r}
+model_of_default2 <-
+  lda(default ~ balance + income, data = Default)
+model_of_default2
+
+predict(model_of_default2, newdata = list(balance = 3000, income = 40000))
+```
+
+```{r}
+sector_mod <- lda(sector ~ wage + educ, data = CPS85)
+sector_mod
+predict(sector_mod, newdata = list(wage = 10, educ = 16))
+all_combos <- expand(wage = 0:10, educ = 5:16)
+res <- predict(sector_mod)$class
+CPS85$predicted <- res
+ggplot(CPS85, aes(x = wage, y = educ, color = predicted)) + geom_point()
+```
+
+## A Bayes' Rule approach
+
+Suppose we have $K$ classes, $A_1, A_2, \ldots, A_K$.  We also have a set of inputs $x_1, x_2, \ldots, x_p \equiv {\mathbf x}$. 
+
+We observe ${\mathbf x}$ and we want to know $p(A_j | {\mathbf x})$. This is a *posterior* probability.
+
+Per usual, the quantities we can get from our training data are in the form of a *likelihood*: $p({\mathbf x} | A_j)$. 
+
+Given a *prior* $p(A_j)$ for all K classes, we can flip the likelihood into a posterior.
+
+In order to define our likelihood $p({\mathbf x} | A_j)$, we need both the training data and a model form for the probability $p()$.
+
+A standard (but not necessarily good) model of a distribution is a multivariate Gaussian.
+LDA and QDA are based on a multi-variable Gaussian.
+
+
+## Univariate Gaussian
+
+$$p(x) = \underbrace{\frac{1}{\sqrt{2 \pi \sigma^2}}}_{Normalization} \underbrace{\exp(- \frac{(x-m)^2}{2 \sigma^2})}_{Shape}$$
+
+Imagine that we have another variable $z = x/3$. Geometrically, $z$ is a stretched out version of $x$, stretched by a factor of 3 around the mean.  The distribution is
+
+$$p(z) = \underbrace{\frac{1}{\sqrt{2 \pi (3\sigma)^2}}}_{Normalization}\ \underbrace{\exp(- \frac{(x-m)^2}{2 (3\sigma)^2})}_{Shape}$$
+
+Note how the normalization changes.  $p(z)$ is broader than $p(x)$, so it must also be shorter.
+
+The R function `dnorm()` calculates $p(x)$ for a univariate Gaussian.
+
+## Uncorrelated bivariate gaussian
+
+For independent RVs x and y, p(xy) = p(x)p(y).  Show that the normalization is
+$\frac{1}{2 \pi \sigma_x \sigma_y}$.
+
+The sigmas multiply in the normalization, like the area of something being stretched out in two orthogonal directions.
+
+
+
+## Bivariate normal distribution with correlations
+
+
+$$f(x,y) =
+      \frac{1}{2 \pi  \sigma_X \sigma_Y \sqrt{1-\rho^2}}
+      \exp\left(
+        -\frac{1}{2(1-\rho^2)}\left[
+          \frac{(x-\mu_X)^2}{\sigma_X^2} +
+          \frac{(y-\mu_Y)^2}{\sigma_Y^2} -
+          \frac{2\rho(x-\mu_X)(y-\mu_Y)}{\sigma_X \sigma_Y}
+        \right]
+      \right)$$
+
+If $\rho > 0$ and $x$ and $y$ are both above their respective means, the correlation term makes the result *less* surprising: a larger probability.
+
+Another way of writing this same formula is using a covariate matrix ${\boldsymbol\Sigma}$.
+
+
+
+Or, in matrix form
+
+
+$$(2\pi)^{-\frac{k}{2}}|\boldsymbol\Sigma|^{-\frac{1}{2}}\, \exp\left( -\frac{1}{2}(\mathbf{x}-\boldsymbol\mu)'\boldsymbol\Sigma^{-1}(\mathbf{x}-\boldsymbol\mu) \right)$$
+
+where $$\boldsymbol \Sigma \equiv \left(\begin{array}{cc}\sigma_x^2 & \rho \sigma_x \sigma_y\\\rho\sigma_x\sigma_y& \sigma_y^2\end{array} \right)$$
+
+Therefore
+$$\boldsymbol \Sigma^{-1} \equiv  \frac{1}{\sigma_x^2 \sigma_y^2 (1 - \rho^2)} \left(\begin{array}{cc}\sigma_y^2 & - \rho \sigma_x \sigma_y\\ - \rho\sigma_x\sigma_y& \sigma_x^2\end{array} \right)$$
+
+
+## Shape of multivariate gaussian
+
+As an amplitude plot
+![amplitude plot](https://upload.wikimedia.org/wikipedia/commons/5/57/Multivariate_Gaussian.png)
+
+Showing marginals and 3-$\sigma$ contour 
+![marginals](https://upload.wikimedia.org/wikipedia/commons/8/8e/MultivariateNormal.png)
+
+
+
+## Generating bivariate normal from independent
+
+We want to find a matrix, M, by which to multiply iid Z to get correlated X with specified $\sigma_x, \sigma_y, \rho$.  The covariance matrix will be
+
+
+```{r}
+# parameters
+sigma_x <- 3
+sigma_y <- 1
+rho <- 0.5
+Sigma <- matrix(c(sigma_x^2, rho * sigma_x * sigma_y, rho * sigma_x * sigma_y, sigma_y^2), nrow = 2)
+n <- 5000 # number of simulated cases
+# iid base
+Z <- cbind(rnorm(n), rnorm(n))
+M <- matrix(c(sigma_x, 0, rho * sigma_y, sqrt(1-rho^2)* sigma_y), nrow = 2)
+X <- Z %*% M
+cov(X)
+```
+
+M transforms from iid to correlated. 
+
+In formula, we transform from correlated X to iid, so use M$^{-1}$.
+
+## Determinant gives area of a parallelogram
+
+Look at the stretching that goes on
+
+![Proof without words](http://i.stack.imgur.com/gCaz3.png)
+
+
+## Independent variables $x_i$
+
+* Describing dependence
+
+```{r}
+x1 = runif(1000)
+x2 = rnorm(1000, mean=3*x1+2, sd=x1)
+plot(x1, x2)
+```
+
+* Linear correlations and the Gaussian
+
+Remember the univariate Gaussian with parameters $\mu$ and $\sigma^2$:    
+$$\frac{1}{\sqrt{2 \pi \sigma^2}} \exp \left(-\frac{(x - \mu)^2}{2 \sigma^2}\right)$$
+
+Situation: Build a classifier.  We measure some features and want to say which group a case refers to.
+
+Specific example: Based on the `ISLR::Default` data, find the probability of a person defaulting on a loan given their `income` and `balance`. 
+
+```{r fig.width=8, fig.height=8, out.width = "6in"}
+names(Default)
+ggplot(Default, 
+       aes(x = income, y = balance, alpha = default, color = default)) + 
+  geom_point()
+```
+
+We were looking at the likelihood: prob(observation | class)
+
+Note: Likelihood itself won't do a very good job, since defaults are relatively uncommon. That is, p(default) $\ll$ p(not).
+
+
