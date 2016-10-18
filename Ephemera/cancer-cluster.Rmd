@@ -1,0 +1,36 @@
+---
+title: "Cancer at the Slater School"
+output: html_notebook
+---
+
+Find the likelihood of observing $k$ cases out of $E$ employees with a rate of $\theta$.
+
+```{r}
+E <- 145
+k <- 8
+theta <- .01
+L <- function(theta) dbinom(k, size = E, prob = theta)
+```
+Making the plot of likelihood versus $\theta$
+```{r}
+x <- seq(0,.10, length = 100)
+y <- L(x)
+plot(x, y, type = "l", xlab = "theta", ylab = "likelihood")
+```
+
+Suppose we consider that there are 1000 schools near high-tension lines. Our school is presumably one of the highest rates, since other schools who had bigger numbers would come forward. Let's imagine that our school is in the top 10%. This is like calculating that of 10 schools, the 8 cancer cases we observed are the most of any of those 10. What does this give for the likelihood of theta?
+
+```{r}
+nschools <- 10
+Lschools <- function(theta) {
+  prob_of_k <- dbinom(k, size = E, prob = theta)
+  less_than_k <- pbinom(k - 0.5, size = E, prob = theta)^(nschools - 1)
+  prob_of_k * less_than_k
+}
+```
+
+```{r}
+x <- seq(0,.05, length = 100)
+y <- Lschools(x)
+plot(x, y, type = "l", xlab = "theta", ylab = "likelihood")
+```

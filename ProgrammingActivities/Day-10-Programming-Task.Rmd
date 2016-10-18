@@ -31,10 +31,9 @@ data(Default)
 
 # The logistic function
 
-The logistic function is defined as ${\cal L}(x) = \frac{e^x}{1 + e^x}$.    
-Note that the function ${\cal L}(x)$ takes a scalar, $x$ as an input.
+The logistic function is defined as ${\cal L}(x) = \frac{e^x}{1 + e^x}$. Note that the function ${\cal L}(x)$ takes a scalar $x$ as an input.
 
-* Write a function `logistic()` that returns the value of the logistic function for any numerical input $x$.
+* Write a function `logistic()` that returns the value of the logistic function for any numerical vector `x`. Remember that functions like `exp()` and `+` are vectorized in R, so writing `logistic()` for a scalar $x$ will automatically work on a vector `x`.
 
 ```{r echo = params$show_answers}
 logistic <- function(x) exp(x) / (1 + exp(x))
@@ -99,10 +98,10 @@ linear_combine <- function(data = NULL, coefs = NULL) {
 
 Applying the logistic function to the output of `linear_combine()` produces a number between zero and one.  You can interpret this probability as the conditional probability of the outcome given the values of the data. 
 
-* Write a function `LL_logistic()` that computes the log-likelihood of the observed result given a model (in the form of `coefs`).  It will have these arguments:
-    * `data=` a data table
-    * `coefs=` the vector of coefficients
-    * `outcome=` a `TRUE` or `FALSE` vector giving the outcome
+* Write a function `LL_logistic()` that computes the log-likelihood of the observed result given a model in the form of `coefs`.  It will have these arguments:
+    * `data=` a data table for training
+    * `coefs=` a proposed vector of coefficients
+    * `outcome=` a `TRUE` or `FALSE` vector giving the observed outcome in the training data.
     
 Your function should 
 

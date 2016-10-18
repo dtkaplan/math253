@@ -3,6 +3,10 @@ title: "Classifiers"
 output: html_notebook
 ---
 
+```{r include = FALSE}
+library(mosaic)
+```
+
 ## Classification overview
 
 * Response variable: categorical.  Typically just a few levels: 2 or 3.
@@ -44,7 +48,7 @@ res / (1-res)
 ```
 
 ```{r}
-mod2 <- lm(alive ~ age, data=Whickham)
+mod2 <- glm(alive ~ age, data=Whickham, family = "binomial")
 f <- makeFun(mod2)
 plotFun(f(age) ~ age, age.lim = c(20,100))
 plotPoints(jitter(alive) ~ age, data=Whickham, add=TRUE,
