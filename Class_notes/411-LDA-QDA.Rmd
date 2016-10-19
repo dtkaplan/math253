@@ -29,10 +29,10 @@ predict(model_of_default2, newdata = list(balance = 3000, income = 40000))
 sector_mod <- lda(sector ~ wage + educ, data = CPS85)
 sector_mod
 predict(sector_mod, newdata = list(wage = 10, educ = 16))
-all_combos <- expand(wage = 0:10, educ = 5:16)
-res <- predict(sector_mod)$class
-CPS85$predicted <- res
-ggplot(CPS85, aes(x = wage, y = educ, color = predicted)) + geom_point()
+all_combos <- expand.grid(wage = seq(0,20,length=50), educ = seq(5,16, length = 50))
+res <- predict(sector_mod, newdata = all_combos)$class
+all_combos$predicted <- res
+ggplot(all_combos, aes(x = wage, y = educ, color = predicted)) + geom_point()
 ```
 
 ## A Bayes' Rule approach

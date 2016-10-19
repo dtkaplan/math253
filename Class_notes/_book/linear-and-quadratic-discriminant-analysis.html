@@ -38,8 +38,8 @@ MathJax.Hub.Config({
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="connecting-rstudio-to-your-github-repository.html">
-
+<link rel="prev" href="classifiers.html">
+<link rel="next" href="logistic-regression.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -278,202 +278,189 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="instructions-for-the-publishing-system-bookdown" class="section level1 unnumbered">
-<h1>Instructions for the publishing system: Bookdown</h1>
-<p>You can label chapter and section titles using <code>{#label}</code> after them, e.g., we can reference Chapter <a href="#intro"><strong>??</strong></a>. If you do not manually label them, there will be automatic labels anyway, e.g., Chapter <a href="#methods"><strong>??</strong></a>.</p>
-<p>Figures and tables with captions will be placed in <code>figure</code> and <code>table</code> environments, respectively.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, .<span class="dv">1</span>, .<span class="dv">1</span>))
-<span class="kw">plot</span>(pressure, <span class="dt">type =</span> <span class="st">&#39;b&#39;</span>, <span class="dt">pch =</span> <span class="dv">19</span>)</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:nice-fig"></span>
-<img src="Class_Notes__Statistical_Computing___Machine_Learning_files/figure-html/nice-fig-1.png" alt="Here is a nice figure!" width="80%" />
-<p class="caption">
-Figure 6.1: Here is a nice figure!
-</p>
+<div id="linear-and-quadratic-discriminant-analysis" class="section level1">
+<h1><span class="header-section-number">Topic 5</span> Linear and Quadratic Discriminant Analysis</h1>
+<div id="example-default-on-student-loans" class="section level2">
+<h2><span class="header-section-number">5.1</span> Example: Default on student loans</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model_of_default2 &lt;-
+<span class="st">  </span><span class="kw">lda</span>(default ~<span class="st"> </span>balance +<span class="st"> </span>income, <span class="dt">data =</span> Default)
+model_of_default2</code></pre></div>
+<pre><code>## Call:
+## lda(default ~ balance + income, data = Default)
+## 
+## Prior probabilities of groups:
+##     No    Yes 
+## 0.9667 0.0333 
+## 
+## Group means:
+##       balance   income
+## No   803.9438 33566.17
+## Yes 1747.8217 32089.15
+## 
+## Coefficients of linear discriminants:
+##                  LD1
+## balance 2.230835e-03
+## income  7.793355e-06</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">predict</span>(model_of_default2, <span class="dt">newdata =</span> <span class="kw">list</span>(<span class="dt">balance =</span> <span class="dv">3000</span>, <span class="dt">income =</span> <span class="dv">40000</span>))</code></pre></div>
+<pre><code>## $class
+## [1] Yes
+## Levels: No Yes
+## 
+## $posterior
+##            No       Yes
+## 1 0.008136798 0.9918632
+## 
+## $x
+##        LD1
+## 1 4.879445</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sector_mod &lt;-<span class="st"> </span><span class="kw">lda</span>(sector ~<span class="st"> </span>wage +<span class="st"> </span>educ, <span class="dt">data =</span> CPS85)
+sector_mod</code></pre></div>
+<pre><code>## Call:
+## lda(sector ~ wage + educ, data = CPS85)
+## 
+## Prior probabilities of groups:
+##   clerical      const      manag      manuf      other       prof 
+## 0.18164794 0.03745318 0.10299625 0.12734082 0.12734082 0.19662921 
+##      sales    service 
+## 0.07116105 0.15543071 
+## 
+## Group means:
+##               wage     educ
+## clerical  7.422577 12.93814
+## const     9.502000 11.15000
+## manag    12.704000 14.58182
+## manuf     8.036029 11.19118
+## other     8.500588 11.82353
+## prof     11.947429 15.63810
+## sales     7.592632 13.21053
+## service   6.537470 11.60241
+## 
+## Coefficients of linear discriminants:
+##             LD1        LD2
+## wage 0.06196785 -0.2108914
+## educ 0.43349567  0.2480535
+## 
+## Proportion of trace:
+##    LD1    LD2 
+## 0.9043 0.0957</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">predict</span>(sector_mod, <span class="dt">newdata =</span> <span class="kw">list</span>(<span class="dt">wage =</span> <span class="dv">10</span>, <span class="dt">educ =</span> <span class="dv">16</span>))</code></pre></div>
+<pre><code>## $class
+## [1] prof
+## Levels: clerical const manag manuf other prof sales service
+## 
+## $posterior
+##    clerical       const     manag      manuf      other      prof
+## 1 0.1619905 0.005807399 0.1680084 0.02274195 0.04429026 0.4781032
+##        sales    service
+## 1 0.07668742 0.04237084
+## 
+## $x
+##        LD1       LD2
+## 1 1.352846 0.5336987</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_combos &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">wage =</span> <span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">20</span>,<span class="dt">length=</span><span class="dv">50</span>), <span class="dt">educ =</span> <span class="kw">seq</span>(<span class="dv">5</span>,<span class="dv">16</span>, <span class="dt">length =</span> <span class="dv">50</span>))
+res &lt;-<span class="st"> </span><span class="kw">predict</span>(sector_mod, <span class="dt">newdata =</span> all_combos)$class
+all_combos$predicted &lt;-<span class="st"> </span>res
+<span class="kw">ggplot</span>(all_combos, <span class="kw">aes</span>(<span class="dt">x =</span> wage, <span class="dt">y =</span> educ, <span class="dt">color =</span> predicted)) +<span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
+<p><img src="Class_Notes__Statistical_Computing___Machine_Learning_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
 </div>
-<p>Reference a figure by its code chunk label with the <code>fig:</code> prefix, e.g., see Figure <a href="instructions-for-the-publishing-system-bookdown.html#fig:nice-fig">6.1</a>. Similarly, you can reference tables generated from <code>knitr::kable()</code>, e.g., see Table <a href="instructions-for-the-publishing-system-bookdown.html#tab:nice-tab">6.1</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr::<span class="kw">kable</span>(
-  <span class="kw">head</span>(iris, <span class="dv">20</span>), <span class="dt">caption =</span> <span class="st">&#39;Here is a nice table!&#39;</span>,
-  <span class="dt">booktabs =</span> <span class="ot">TRUE</span>
-)</code></pre></div>
-<table>
-<caption><span id="tab:nice-tab">Table 6.1: </span>Here is a nice table!</caption>
-<thead>
-<tr class="header">
-<th align="right">Sepal.Length</th>
-<th align="right">Sepal.Width</th>
-<th align="right">Petal.Length</th>
-<th align="right">Petal.Width</th>
-<th align="left">Species</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="right">5.1</td>
-<td align="right">3.5</td>
-<td align="right">1.4</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.9</td>
-<td align="right">3.0</td>
-<td align="right">1.4</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">4.7</td>
-<td align="right">3.2</td>
-<td align="right">1.3</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.6</td>
-<td align="right">3.1</td>
-<td align="right">1.5</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.0</td>
-<td align="right">3.6</td>
-<td align="right">1.4</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.4</td>
-<td align="right">3.9</td>
-<td align="right">1.7</td>
-<td align="right">0.4</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">4.6</td>
-<td align="right">3.4</td>
-<td align="right">1.4</td>
-<td align="right">0.3</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.0</td>
-<td align="right">3.4</td>
-<td align="right">1.5</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">4.4</td>
-<td align="right">2.9</td>
-<td align="right">1.4</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.9</td>
-<td align="right">3.1</td>
-<td align="right">1.5</td>
-<td align="right">0.1</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.4</td>
-<td align="right">3.7</td>
-<td align="right">1.5</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.8</td>
-<td align="right">3.4</td>
-<td align="right">1.6</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">4.8</td>
-<td align="right">3.0</td>
-<td align="right">1.4</td>
-<td align="right">0.1</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.3</td>
-<td align="right">3.0</td>
-<td align="right">1.1</td>
-<td align="right">0.1</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.8</td>
-<td align="right">4.0</td>
-<td align="right">1.2</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.7</td>
-<td align="right">4.4</td>
-<td align="right">1.5</td>
-<td align="right">0.4</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.4</td>
-<td align="right">3.9</td>
-<td align="right">1.3</td>
-<td align="right">0.4</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.1</td>
-<td align="right">3.5</td>
-<td align="right">1.4</td>
-<td align="right">0.3</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.7</td>
-<td align="right">3.8</td>
-<td align="right">1.7</td>
-<td align="right">0.3</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.1</td>
-<td align="right">3.8</td>
-<td align="right">1.5</td>
-<td align="right">0.3</td>
-<td align="left">setosa</td>
-</tr>
-</tbody>
-</table>
-<p>You can write citations, too. For example, we are using the <strong>bookdown</strong> package <span class="citation">(Xie <a href="#ref-R-bookdown">2016</a>)</span> in this sample book, which was built on top of R Markdown and <strong>knitr</strong> <span class="citation">(Xie <a href="#ref-xie2015">2015</a>)</span>.</p>
-
-<div id="refs" class="references">
-<div>
-<p>Xie, Yihui. 2015. <em>Dynamic Documents with R and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/" class="uri">http://yihui.name/knitr/</a>.</p>
+<div id="a-bayes-rule-approach" class="section level2">
+<h2><span class="header-section-number">5.2</span> A Bayes’ Rule approach</h2>
+<p>Suppose we have <span class="math inline">\(K\)</span> classes, <span class="math inline">\(A_1, A_2, \ldots, A_K\)</span>. We also have a set of inputs <span class="math inline">\(x_1, x_2, \ldots, x_p \equiv {\mathbf x}\)</span>.</p>
+<p>We observe <span class="math inline">\({\mathbf x}\)</span> and we want to know <span class="math inline">\(p(A_j | {\mathbf x})\)</span>. This is a <em>posterior</em> probability.</p>
+<p>Per usual, the quantities we can get from our training data are in the form of a <em>likelihood</em>: <span class="math inline">\(p({\mathbf x} | A_j)\)</span>.</p>
+<p>Given a <em>prior</em> <span class="math inline">\(p(A_j)\)</span> for all K classes, we can flip the likelihood into a posterior.</p>
+<p>In order to define our likelihood <span class="math inline">\(p({\mathbf x} | A_j)\)</span>, we need both the training data and a model form for the probability <span class="math inline">\(p()\)</span>.</p>
+<p>A standard (but not necessarily good) model of a distribution is a multivariate Gaussian. LDA and QDA are based on a multi-variable Gaussian.</p>
 </div>
-<div>
-<p>———. 2016. <em>Bookdown: Authoring Books with R Markdown</em>. <a href="https://github.com/rstudio/bookdown" class="uri">https://github.com/rstudio/bookdown</a>.</p>
+<div id="univariate-gaussian" class="section level2">
+<h2><span class="header-section-number">5.3</span> Univariate Gaussian</h2>
+<p><span class="math display">\[p(x) = \underbrace{\frac{1}{\sqrt{2 \pi \sigma^2}}}_{Normalization} \underbrace{\exp(- \frac{(x-m)^2}{2 \sigma^2})}_{Shape}\]</span></p>
+<p>Imagine that we have another variable <span class="math inline">\(z = x/3\)</span>. Geometrically, <span class="math inline">\(z\)</span> is a stretched out version of <span class="math inline">\(x\)</span>, stretched by a factor of 3 around the mean. The distribution is</p>
+<p><span class="math display">\[p(z) = \underbrace{\frac{1}{\sqrt{2 \pi (3\sigma)^2}}}_{Normalization}\ \underbrace{\exp(- \frac{(x-m)^2}{2 (3\sigma)^2})}_{Shape}\]</span></p>
+<p>Note how the normalization changes. <span class="math inline">\(p(z)\)</span> is broader than <span class="math inline">\(p(x)\)</span>, so it must also be shorter.</p>
+<p>The R function <code>dnorm()</code> calculates <span class="math inline">\(p(x)\)</span> for a univariate Gaussian.</p>
+</div>
+<div id="uncorrelated-bivariate-gaussian" class="section level2">
+<h2><span class="header-section-number">5.4</span> Uncorrelated bivariate gaussian</h2>
+<p>For independent RVs x and y, p(xy) = p(x)p(y). Show that the normalization is <span class="math inline">\(\frac{1}{2 \pi \sigma_x \sigma_y}\)</span>.</p>
+<p>The sigmas multiply in the normalization, like the area of something being stretched out in two orthogonal directions.</p>
+</div>
+<div id="bivariate-normal-distribution-with-correlations" class="section level2">
+<h2><span class="header-section-number">5.5</span> Bivariate normal distribution with correlations</h2>
+<p><span class="math display">\[f(x,y) =
+      \frac{1}{2 \pi  \sigma_X \sigma_Y \sqrt{1-\rho^2}}
+      \exp\left(
+        -\frac{1}{2(1-\rho^2)}\left[
+          \frac{(x-\mu_X)^2}{\sigma_X^2} +
+          \frac{(y-\mu_Y)^2}{\sigma_Y^2} -
+          \frac{2\rho(x-\mu_X)(y-\mu_Y)}{\sigma_X \sigma_Y}
+        \right]
+      \right)\]</span></p>
+<p>If <span class="math inline">\(\rho &gt; 0\)</span> and <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are both above their respective means, the correlation term makes the result <em>less</em> surprising: a larger probability.</p>
+<p>Another way of writing this same formula is using a covariate matrix <span class="math inline">\({\boldsymbol\Sigma}\)</span>.</p>
+<p>Or, in matrix form</p>
+<p><span class="math display">\[(2\pi)^{-\frac{k}{2}}|\boldsymbol\Sigma|^{-\frac{1}{2}}\, \exp\left( -\frac{1}{2}(\mathbf{x}-\boldsymbol\mu)&#39;\boldsymbol\Sigma^{-1}(\mathbf{x}-\boldsymbol\mu) \right)\]</span></p>
+<p>where <span class="math display">\[\boldsymbol \Sigma \equiv \left(\begin{array}{cc}\sigma_x^2 &amp; \rho \sigma_x \sigma_y\\\rho\sigma_x\sigma_y&amp; \sigma_y^2\end{array} \right)\]</span></p>
+<p>Therefore <span class="math display">\[\boldsymbol \Sigma^{-1} \equiv  \frac{1}{\sigma_x^2 \sigma_y^2 (1 - \rho^2)} \left(\begin{array}{cc}\sigma_y^2 &amp; - \rho \sigma_x \sigma_y\\ - \rho\sigma_x\sigma_y&amp; \sigma_x^2\end{array} \right)\]</span></p>
+</div>
+<div id="shape-of-multivariate-gaussian" class="section level2">
+<h2><span class="header-section-number">5.6</span> Shape of multivariate gaussian</h2>
+<p>As an amplitude plot <img src="https://upload.wikimedia.org/wikipedia/commons/5/57/Multivariate_Gaussian.png" alt="amplitude plot" /></p>
+<p>Showing marginals and 3-<span class="math inline">\(\sigma\)</span> contour <img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/MultivariateNormal.png" alt="marginals" /></p>
+</div>
+<div id="generating-bivariate-normal-from-independent" class="section level2">
+<h2><span class="header-section-number">5.7</span> Generating bivariate normal from independent</h2>
+<p>We want to find a matrix, M, by which to multiply iid Z to get correlated X with specified <span class="math inline">\(\sigma_x, \sigma_y, \rho\)</span>. The covariance matrix will be</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># parameters</span>
+sigma_x &lt;-<span class="st"> </span><span class="dv">3</span>
+sigma_y &lt;-<span class="st"> </span><span class="dv">1</span>
+rho &lt;-<span class="st"> </span><span class="fl">0.5</span>
+Sigma &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(sigma_x^<span class="dv">2</span>, rho *<span class="st"> </span>sigma_x *<span class="st"> </span>sigma_y, rho *<span class="st"> </span>sigma_x *<span class="st"> </span>sigma_y, sigma_y^<span class="dv">2</span>), <span class="dt">nrow =</span> <span class="dv">2</span>)
+n &lt;-<span class="st"> </span><span class="dv">5000</span> <span class="co"># number of simulated cases</span>
+<span class="co"># iid base</span>
+Z &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw">rnorm</span>(n), <span class="kw">rnorm</span>(n))
+M &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(sigma_x, <span class="dv">0</span>, rho *<span class="st"> </span>sigma_y, <span class="kw">sqrt</span>(<span class="dv">1</span>-rho^<span class="dv">2</span>)*<span class="st"> </span>sigma_y), <span class="dt">nrow =</span> <span class="dv">2</span>)
+X &lt;-<span class="st"> </span>Z %*%<span class="st"> </span>M
+<span class="kw">cov</span>(X)</code></pre></div>
+<pre><code>##          [,1]      [,2]
+## [1,] 8.685671 1.4568780
+## [2,] 1.456878 0.9748281</code></pre>
+<p>M transforms from iid to correlated.</p>
+<p>In formula, we transform from correlated X to iid, so use M<span class="math inline">\(^{-1}\)</span>.</p>
+</div>
+<div id="determinant-gives-area-of-a-parallelogram" class="section level2">
+<h2><span class="header-section-number">5.8</span> Determinant gives area of a parallelogram</h2>
+<p>Look at the stretching that goes on</p>
+<div class="figure">
+<img src="http://i.stack.imgur.com/gCaz3.png" alt="Proof without words" />
+<p class="caption">Proof without words</p>
 </div>
 </div>
-</div>
+<div id="independent-variables-x_i" class="section level2">
+<h2><span class="header-section-number">5.9</span> Independent variables <span class="math inline">\(x_i\)</span></h2>
+<ul>
+<li>Describing dependence</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x1 =<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1000</span>)
+x2 =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>, <span class="dt">mean=</span><span class="dv">3</span>*x1<span class="dv">+2</span>, <span class="dt">sd=</span>x1)
+<span class="kw">plot</span>(x1, x2)</code></pre></div>
+<p><img src="Class_Notes__Statistical_Computing___Machine_Learning_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
+<ul>
+<li>Linear correlations and the Gaussian</li>
+</ul>
+<p>Remember the univariate Gaussian with parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span>:<br />
+<span class="math display">\[\frac{1}{\sqrt{2 \pi \sigma^2}} \exp \left(-\frac{(x - \mu)^2}{2 \sigma^2}\right)\]</span></p>
+<p>Situation: Build a classifier. We measure some features and want to say which group a case refers to.</p>
+<p>Specific example: Based on the <code>ISLR::Default</code> data, find the probability of a person defaulting on a loan given their <code>income</code> and <code>balance</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(Default)</code></pre></div>
+<pre><code>## [1] &quot;default&quot; &quot;student&quot; &quot;balance&quot; &quot;income&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(Default, 
+       <span class="kw">aes</span>(<span class="dt">x =</span> income, <span class="dt">y =</span> balance, <span class="dt">alpha =</span> default, <span class="dt">color =</span> default)) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
+<p><img src="Class_Notes__Statistical_Computing___Machine_Learning_files/figure-html/unnamed-chunk-61-1.png" width="6in" /></p>
+<p>We were looking at the likelihood: prob(observation | class)</p>
+<p>Note: Likelihood itself won’t do a very good job, since defaults are relatively uncommon. That is, p(default) <span class="math inline">\(\ll\)</span> p(not).</p>
 
-
-
-
-
-
-
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-R-bookdown">
-<p>Xie, Yihui. 2016. <em>Bookdown: Authoring Books with R Markdown</em>. <a href="https://github.com/rstudio/bookdown" class="uri">https://github.com/rstudio/bookdown</a>.</p>
-</div>
-<div id="ref-xie2015">
-<p>Xie, Yihui. 2015. <em>Dynamic Documents with R and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/" class="uri">http://yihui.name/knitr/</a>.</p>
 </div>
 </div>
             </section>
@@ -481,8 +468,8 @@ Figure 6.1: Here is a nice figure!
           </div>
         </div>
       </div>
-<a href="connecting-rstudio-to-your-github-repository.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="classifiers.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="logistic-regression.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
@@ -509,7 +496,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/dtkaplan/math253/edit/master/950-Bookdown-Instructions.Rmd",
+"link": "https://github.com/dtkaplan/math253/edit/master/411-LDA-QDA.Rmd",
 "text": null
 },
 "download": null,
