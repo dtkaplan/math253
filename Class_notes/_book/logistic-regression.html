@@ -240,8 +240,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.5" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#bivariate-normal-distribution-with-correlations"><i class="fa fa-check"></i><b>5.5</b> Bivariate normal distribution with correlations</a></li>
 <li class="chapter" data-level="5.6" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#shape-of-multivariate-gaussian"><i class="fa fa-check"></i><b>5.6</b> Shape of multivariate gaussian</a></li>
 <li class="chapter" data-level="5.7" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#generating-bivariate-normal-from-independent"><i class="fa fa-check"></i><b>5.7</b> Generating bivariate normal from independent</a></li>
-<li class="chapter" data-level="5.8" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#determinant-gives-area-of-a-parallelogram"><i class="fa fa-check"></i><b>5.8</b> Determinant gives area of a parallelogram</a></li>
-<li class="chapter" data-level="5.9" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#independent-variables-x_i"><i class="fa fa-check"></i><b>5.9</b> Independent variables <span class="math inline">\(x_i\)</span></a></li>
+<li class="chapter" data-level="5.8" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#independent-variables-x_i"><i class="fa fa-check"></i><b>5.8</b> Independent variables <span class="math inline">\(x_i\)</span></a></li>
+<li class="chapter" data-level="5.9" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#for-oct-27"><i class="fa fa-check"></i><b>5.9</b> For Oct 27</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>6</b> Logistic Regression</a><ul>
 <li class="chapter" data-level="6.1" data-path="logistic-regression.html"><a href="logistic-regression.html#probability-and-odds"><i class="fa fa-check"></i><b>6.1</b> Probability and odds</a></li>
@@ -296,10 +296,10 @@ res</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod2 &lt;-<span class="st"> </span><span class="kw">glm</span>(alive ~<span class="st"> </span>age, <span class="dt">data=</span>Whickham, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)
 f &lt;-<span class="st"> </span><span class="kw">makeFun</span>(mod2)
 <span class="kw">plotFun</span>(<span class="kw">f</span>(age) ~<span class="st"> </span>age, <span class="dt">age.lim =</span> <span class="kw">c</span>(<span class="dv">20</span>,<span class="dv">100</span>))</code></pre></div>
-<p><img src="Class_Notes__Statistical_Computing___Machine_Learning_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
+<p><img src="Class_Notes__Statistical_Computing___Machine_Learning_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plotPoints</span>(<span class="kw">jitter</span>(alive) ~<span class="st"> </span>age, <span class="dt">data=</span>Whickham, <span class="dt">add=</span><span class="ot">TRUE</span>,
            <span class="dt">pch=</span><span class="dv">20</span>, <span class="dt">alpha=</span>.<span class="dv">3</span>)</code></pre></div>
-<p><img src="Class_Notes__Statistical_Computing___Machine_Learning_files/figure-html/unnamed-chunk-65-2.png" width="672" /></p>
+<p><img src="Class_Notes__Statistical_Computing___Machine_Learning_files/figure-html/unnamed-chunk-72-2.png" width="672" /></p>
 <p>If we’re going to use likelihood to fit, the estimated probability can’t be <span class="math inline">\(\leq 0\)</span>.</p>
 </div>
 <div id="log-odds" class="section level2">
@@ -341,13 +341,13 @@ the net income will be zero for the bookie.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(Default, 
        <span class="kw">aes</span>(<span class="dt">x =</span> income, <span class="dt">y =</span> balance, <span class="dt">alpha =</span> default, <span class="dt">color =</span> default)) +<span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="co">#+ facet_wrap( ~ student)</span></code></pre></div>
-<p><img src="Class_Notes__Statistical_Computing___Machine_Learning_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
+<p><img src="Class_Notes__Statistical_Computing___Machine_Learning_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model_of_default &lt;-
 <span class="st">  </span><span class="kw">glm</span>(default ==<span class="st"> &quot;Yes&quot;</span> ~<span class="st"> </span>balance +<span class="st"> </span>income, <span class="dt">data =</span> Default, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)
 f &lt;-<span class="st"> </span><span class="kw">makeFun</span>(model_of_default)
 <span class="kw">plotFun</span>(<span class="kw">f</span>(<span class="dt">income=</span>income, <span class="dt">balance=</span>balance) ~<span class="st"> </span>income +<span class="st"> </span>balance,
         income.lim &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">70000</span>), <span class="dt">balance.lim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">3000</span>))</code></pre></div>
-<p><img src="Class_Notes__Statistical_Computing___Machine_Learning_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
+<p><img src="Class_Notes__Statistical_Computing___Machine_Learning_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(model_of_default)</code></pre></div>
 <pre><code>## 
 ## Call:

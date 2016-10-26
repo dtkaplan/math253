@@ -240,8 +240,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.5" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#bivariate-normal-distribution-with-correlations"><i class="fa fa-check"></i><b>5.5</b> Bivariate normal distribution with correlations</a></li>
 <li class="chapter" data-level="5.6" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#shape-of-multivariate-gaussian"><i class="fa fa-check"></i><b>5.6</b> Shape of multivariate gaussian</a></li>
 <li class="chapter" data-level="5.7" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#generating-bivariate-normal-from-independent"><i class="fa fa-check"></i><b>5.7</b> Generating bivariate normal from independent</a></li>
-<li class="chapter" data-level="5.8" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#determinant-gives-area-of-a-parallelogram"><i class="fa fa-check"></i><b>5.8</b> Determinant gives area of a parallelogram</a></li>
-<li class="chapter" data-level="5.9" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#independent-variables-x_i"><i class="fa fa-check"></i><b>5.9</b> Independent variables <span class="math inline">\(x_i\)</span></a></li>
+<li class="chapter" data-level="5.8" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#independent-variables-x_i"><i class="fa fa-check"></i><b>5.8</b> Independent variables <span class="math inline">\(x_i\)</span></a></li>
+<li class="chapter" data-level="5.9" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#for-oct-27"><i class="fa fa-check"></i><b>5.9</b> For Oct 27</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>6</b> Logistic Regression</a><ul>
 <li class="chapter" data-level="6.1" data-path="logistic-regression.html"><a href="logistic-regression.html#probability-and-odds"><i class="fa fa-check"></i><b>6.1</b> Probability and odds</a></li>
@@ -450,19 +450,19 @@ my_vars &lt;-<span class="st"> </span><span class="kw">sample</span>(explanatory
 new_data &lt;-<span class="st"> </span>College[ , <span class="kw">c</span>(my_vars, <span class="st">&quot;Yield&quot;</span>)]
 mod &lt;-<span class="st"> </span><span class="kw">lm</span>(Yield ~<span class="st"> </span>., <span class="dt">data =</span> new_data)
 mosaic::<span class="kw">rsquared</span>(mod)</code></pre></div>
-<pre><code>## [1] 0.4708622</code></pre>
+<pre><code>## [1] 0.4956509</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod</code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Yield ~ ., data = new_data)
 ## 
 ## Coefficients:
-## (Intercept)    S.F.Ratio   Room.Board  F.Undergrad   PrivateYes  
-##   5.200e-01    4.282e-04   -1.758e-05   -7.343e-06    1.293e-02  
-##      Accept    Top25perc     Personal     Outstate       Enroll  
-##  -6.546e-05    3.865e-04    1.788e-06   -8.423e-06    1.976e-04  
-## perc.alumni  P.Undergrad        Books  
-##  -3.272e-04    4.064e-06    4.788e-05</code></pre>
+## (Intercept)       Accept        Books     Personal  P.Undergrad  
+##   5.889e-01   -9.166e-05    4.155e-05    4.391e-07    4.268e-06  
+##  Room.Board   PrivateYes          PhD  perc.alumni     Outstate  
+##  -1.986e-05    1.139e-02   -5.820e-04   -3.023e-04   -7.345e-06  
+## F.Undergrad       Enroll         Apps  
+##  -7.469e-06    2.067e-04    1.719e-05</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span>^<span class="dv">18</span></code></pre></div>
 <pre><code>## [1] 262144</code></pre>
 <ul>
@@ -471,7 +471,7 @@ mosaic::<span class="kw">rsquared</span>(mod)</code></pre></div>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>( <span class="kw">do</span>(<span class="dv">1000</span>) *<span class="st"> </span><span class="kw">lm</span>(Yield ~<span class="st"> </span>., <span class="dt">data=</span>College))</code></pre></div>
 <pre><code>##    user  system elapsed 
-##   5.820   0.029   5.854</code></pre>
+##   6.252   0.048   6.343</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">256</span>*<span class="dv">7</span>/<span class="dv">3600</span></code></pre></div>
 <pre><code>## [1] 0.4977778</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(College)</code></pre></div>

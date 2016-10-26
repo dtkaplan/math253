@@ -240,8 +240,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.5" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#bivariate-normal-distribution-with-correlations"><i class="fa fa-check"></i><b>5.5</b> Bivariate normal distribution with correlations</a></li>
 <li class="chapter" data-level="5.6" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#shape-of-multivariate-gaussian"><i class="fa fa-check"></i><b>5.6</b> Shape of multivariate gaussian</a></li>
 <li class="chapter" data-level="5.7" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#generating-bivariate-normal-from-independent"><i class="fa fa-check"></i><b>5.7</b> Generating bivariate normal from independent</a></li>
-<li class="chapter" data-level="5.8" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#determinant-gives-area-of-a-parallelogram"><i class="fa fa-check"></i><b>5.8</b> Determinant gives area of a parallelogram</a></li>
-<li class="chapter" data-level="5.9" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#independent-variables-x_i"><i class="fa fa-check"></i><b>5.9</b> Independent variables <span class="math inline">\(x_i\)</span></a></li>
+<li class="chapter" data-level="5.8" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#independent-variables-x_i"><i class="fa fa-check"></i><b>5.8</b> Independent variables <span class="math inline">\(x_i\)</span></a></li>
+<li class="chapter" data-level="5.9" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#for-oct-27"><i class="fa fa-check"></i><b>5.9</b> For Oct 27</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>6</b> Logistic Regression</a><ul>
 <li class="chapter" data-level="6.1" data-path="logistic-regression.html"><a href="logistic-regression.html#probability-and-odds"><i class="fa fa-check"></i><b>6.1</b> Probability and odds</a></li>
@@ -357,7 +357,7 @@ sector_mod</code></pre></div>
 ## $x
 ##        LD1       LD2
 ## 1 1.352846 0.5336987</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_combos &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">wage =</span> <span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">20</span>,<span class="dt">length=</span><span class="dv">50</span>), <span class="dt">educ =</span> <span class="kw">seq</span>(<span class="dv">5</span>,<span class="dv">16</span>, <span class="dt">length =</span> <span class="dv">50</span>))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_combos &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">wage =</span> <span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">20</span>,<span class="dt">length=</span><span class="dv">100</span>), <span class="dt">educ =</span> <span class="kw">seq</span>(<span class="dv">5</span>,<span class="dv">16</span>, <span class="dt">length =</span> <span class="dv">100</span>))
 res &lt;-<span class="st"> </span><span class="kw">predict</span>(sector_mod, <span class="dt">newdata =</span> all_combos)$class
 all_combos$predicted &lt;-<span class="st"> </span>res
 <span class="kw">ggplot</span>(all_combos, <span class="kw">aes</span>(<span class="dt">x =</span> wage, <span class="dt">y =</span> educ, <span class="dt">color =</span> predicted)) +<span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
@@ -366,10 +366,10 @@ all_combos$predicted &lt;-<span class="st"> </span>res
 <div id="a-bayes-rule-approach" class="section level2">
 <h2><span class="header-section-number">5.2</span> A Bayes’ Rule approach</h2>
 <p>Suppose we have <span class="math inline">\(K\)</span> classes, <span class="math inline">\(A_1, A_2, \ldots, A_K\)</span>. We also have a set of inputs <span class="math inline">\(x_1, x_2, \ldots, x_p \equiv {\mathbf x}\)</span>.</p>
-<p>We observe <span class="math inline">\({\mathbf x}\)</span> and we want to know <span class="math inline">\(p(A_j | {\mathbf x})\)</span>. This is a <em>posterior</em> probability.</p>
-<p>Per usual, the quantities we can get from our training data are in the form of a <em>likelihood</em>: <span class="math inline">\(p({\mathbf x} | A_j)\)</span>.</p>
+<p>We observe <span class="math inline">\({\mathbf x}\)</span> and we want to know <span class="math inline">\(p(A_j \downarrow {\mathbf x})\)</span>. This is a <em>posterior</em> probability.</p>
+<p>Per usual, the quantities we can get from our training data are in the form of a <em>likelihood</em>: <span class="math inline">\(p({\mathbf x} \downarrow A_j)\)</span>.</p>
 <p>Given a <em>prior</em> <span class="math inline">\(p(A_j)\)</span> for all K classes, we can flip the likelihood into a posterior.</p>
-<p>In order to define our likelihood <span class="math inline">\(p({\mathbf x} | A_j)\)</span>, we need both the training data and a model form for the probability <span class="math inline">\(p()\)</span>.</p>
+<p>In order to define our likelihood <span class="math inline">\(p({\mathbf x} \downarrow A_j)\)</span>, we need both the training data and a model form for the probability <span class="math inline">\(p()\)</span>.</p>
 <p>A standard (but not necessarily good) model of a distribution is a multivariate Gaussian. LDA and QDA are based on a multi-variable Gaussian.</p>
 </div>
 <div id="univariate-gaussian" class="section level2">
@@ -428,16 +428,8 @@ X &lt;-<span class="st"> </span>Z %*%<span class="st"> </span>M
 <p>M transforms from iid to correlated.</p>
 <p>In formula, we transform from correlated X to iid, so use M<span class="math inline">\(^{-1}\)</span>.</p>
 </div>
-<div id="determinant-gives-area-of-a-parallelogram" class="section level2">
-<h2><span class="header-section-number">5.8</span> Determinant gives area of a parallelogram</h2>
-<p>Look at the stretching that goes on</p>
-<div class="figure">
-<img src="http://i.stack.imgur.com/gCaz3.png" alt="Proof without words" />
-<p class="caption">Proof without words</p>
-</div>
-</div>
 <div id="independent-variables-x_i" class="section level2">
-<h2><span class="header-section-number">5.9</span> Independent variables <span class="math inline">\(x_i\)</span></h2>
+<h2><span class="header-section-number">5.8</span> Independent variables <span class="math inline">\(x_i\)</span></h2>
 <ul>
 <li>Describing dependence</li>
 </ul>
@@ -460,6 +452,87 @@ x2 =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000
 <p><img src="Class_Notes__Statistical_Computing___Machine_Learning_files/figure-html/unnamed-chunk-61-1.png" width="6in" /></p>
 <p>We were looking at the likelihood: prob(observation | class)</p>
 <p>Note: Likelihood itself won’t do a very good job, since defaults are relatively uncommon. That is, p(default) <span class="math inline">\(\ll\)</span> p(not).</p>
+</div>
+<div id="for-oct-27" class="section level2">
+<h2><span class="header-section-number">5.9</span> For Oct 27</h2>
+<p>Imagine two zero-mean variables, <span class="math inline">\(x_i\)</span> and <span class="math inline">\(x_j\)</span>, e.g. education and age, and suppose that <span class="math inline">\(v_i = x_i - \mu_i\)</span> and <span class="math inline">\(v_j = x_j - \mu_j\)</span>. I’ll write these in data table format, where each column is a variable and each row is a case and denote this by</p>
+<p><span class="math inline">\(\left(\begin{array}{c}v_i\\\downarrow\end{array}\right)\)</span> and <span class="math inline">\(\left(\begin{array}{c}v_j\\\downarrow\end{array}\right)\)</span></p>
+<p>Correlations between random variables <span class="math inline">\((v_i, v_j)\)</span> are created by overlapping sums of zero-mean iid random variables <span class="math inline">\((z_i, z_j)\)</span>,</p>
+<p><span class="math display">\[\left(\begin{array}{cc}v_i &amp;v_j\\\downarrow &amp; \downarrow\end{array}\right) =  \left(\begin{array}{cc}z_i &amp; z_j \\ \downarrow &amp; \downarrow\end{array}\right) \left(\begin{array}{cc}a &amp; b\\0 &amp; c\end{array}\right)
+\equiv \left(\begin{array}{cc}z_i &amp; z_j\\\downarrow &amp; \downarrow\end{array}\right) {\mathbf A}  \]</span></p>
+<p>and add in a possibly non-zero mean to form each <span class="math inline">\(x\)</span>. <span class="math display">\[\left(\begin{array}{cc}x_i &amp;x_j\\\downarrow&amp;\downarrow\end{array}\right) = \left(\begin{array}{cc}v_i &amp; v_j\\\downarrow&amp;\downarrow\end{array}\right) + \left(\begin{array}{cc}m_i &amp; m_j\\\downarrow&amp;\downarrow\end{array}\right) \]</span> where each of <span class="math inline">\(\left(\begin{array}{c}m_i\\|\end{array}\right)\)</span> and <span class="math inline">\(\left(\begin{array}{c}m_i\\|\end{array}\right)\)</span> have every row the same.</p>
+<p>The covariance matrix <span class="math inline">\(\boldsymbol\Sigma\)</span> is</p>
+<p><span class="math display">\[{\boldsymbol \Sigma} \equiv \frac{1}{n} \left(\begin{array}{cc}v_i &amp; v_j\\\downarrow&amp;\downarrow\end{array}\right)^T \left(\begin{array}{cc}v_i &amp; v_j\\\downarrow&amp;\downarrow\end{array}\right)
+= \frac{1}{n} \left(\begin{array}{c}v_i  \longrightarrow\\v_j \longrightarrow\end{array}\right)
+ \left(\begin{array}{cc}v_i &amp; v_j\\\downarrow&amp;\downarrow\end{array}\right) \]</span></p>
+<p>Substituting in</p>
+<p><span class="math display">\[ \left(\begin{array}{cc}v_i &amp;v_j\\\downarrow &amp; \downarrow\end{array}\right) =  \left(\begin{array}{cc}z_i &amp; z_j\\\downarrow &amp; \downarrow\end{array}\right) {\mathbf A}  \]</span> we get</p>
+<p><span class="math display">\[{\boldsymbol \Sigma} = 
+\left[\left(\begin{array}{cc}z_i &amp; z_j\\\downarrow &amp; \downarrow\end{array}\right) {\mathbf A} \right]^T \left(\begin{array}{cc}z_i &amp; z_j\\\downarrow &amp; \downarrow\end{array}\right) {\mathbf A} = {\mathbf A}^T \left(\begin{array}{c}z_i \longrightarrow\\z_j \longrightarrow\end{array}\right)
+\left(\begin{array}{cc}z_i &amp; z_j\\\downarrow &amp; \downarrow\end{array}\right) {\mathbf A}\]</span></p>
+<p>Now <span class="math inline">\(\left(\begin{array}{cc}z_i &amp; z_j\\\downarrow &amp; \downarrow\end{array}\right)\)</span> are iid with zero mean and unit variance, so <span class="math display">\[\left(\begin{array}{c}z_i \longrightarrow\\z_j \longrightarrow\end{array}\right)
+\left(\begin{array}{cc}z_i &amp; z_j\\\downarrow &amp; \downarrow\end{array}\right) = \left(\begin{array}{cc}1 &amp; 0\\0 &amp; 1\end{array}\right)\]</span> so <span class="math inline">\({\boldsymbol \Sigma} = {\boldsymbol A}^T {\boldsymbol A}\)</span>.</p>
+<p>In other words, <span class="math inline">\(\boldsymbol A\)</span> is the Choleski decomposition of <span class="math inline">\(\boldsymbol \Sigma\)</span>.</p>
+<p>Operationalizing this in R</p>
+<ul>
+<li>Find <span class="math inline">\(\boldsymbol \Sigma\)</span> from data: <code>cov(data)</code>, e.g.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+Sigma &lt;-<span class="st"> </span><span class="kw">cov</span>(ISLR::Default %&gt;%<span class="st"> </span>dplyr::<span class="kw">select</span>(balance, income))
+Sigma</code></pre></div>
+<pre><code>##           balance      income
+## balance  233980.2   -982142.3
+## income  -982142.3 177865954.8</code></pre>
+<ul>
+<li>Find <span class="math inline">\(\boldsymbol A\)</span> from <span class="math inline">\(\boldsymbol \Sigma\)</span></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">A &lt;-<span class="st"> </span><span class="kw">chol</span>(Sigma)
+A</code></pre></div>
+<pre><code>##         balance    income
+## balance 483.715 -2030.415
+## income    0.000 13181.175</code></pre>
+<ul>
+<li>Generate iid <span class="math inline">\(\left(\begin{array}{cc}z_i&amp;z_j\\\downarrow&amp;\downarrow\end{array}\right)\)</span> with unit variance</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="dv">100</span> <span class="co"># say</span>
+Z &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw">rnorm</span>(n), <span class="kw">rnorm</span>(n))</code></pre></div>
+<ul>
+<li>Create the correlated <span class="math inline">\(\left(\begin{array}{cc}v_i&amp;v_j\\\downarrow&amp;\downarrow\end{array}\right)\)</span> from <span class="math inline">\(\left(\begin{array}{cc}z_i&amp;z_j\\\downarrow&amp;\downarrow\end{array}\right)\)</span></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">V &lt;-<span class="st"> </span>Z %*%<span class="st"> </span>A</code></pre></div>
+<ul>
+<li>Create a set of means <span class="math inline">\(\left(\begin{array}{cc}m_i&amp;m_j\\\downarrow&amp;\downarrow\end{array}\right)\)</span> to add on to <span class="math inline">\(\left(\begin{array}{cc}v_i&amp;v_j\\\downarrow&amp;\downarrow\end{array}\right)\)</span></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw">rep</span>(<span class="dv">3</span>, n), <span class="kw">rep</span>(-<span class="dv">2</span>, n))
+<span class="kw">head</span>(M)</code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    3   -2
+## [2,]    3   -2
+## [3,]    3   -2
+## [4,]    3   -2
+## [5,]    3   -2
+## [6,]    3   -2</code></pre>
+<ul>
+<li>Add <span class="math inline">\(\left(\begin{array}{cc}m_i&amp;m_j\\\downarrow&amp;\downarrow\end{array}\right)\)</span> to <span class="math inline">\(\left(\begin{array}{cc}v_i&amp;v_j\\\downarrow&amp;\downarrow\end{array}\right)\)</span> to create <span class="math inline">\(\left(\begin{array}{cc}x_i&amp;x_j\\\downarrow&amp;\downarrow\end{array}\right)\)</span></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">X &lt;-<span class="st"> </span>V +<span class="st"> </span>M</code></pre></div>
+<ul>
+<li>Find the covariance matrix for <span class="math inline">\(\left(\begin{array}{cc}x_i&amp;x_j\\\downarrow&amp;\downarrow\end{array}\right)\)</span></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cov</span>(X)</code></pre></div>
+<pre><code>##            balance    income
+## balance   287787.1  -2777383
+## income  -2777383.3 219764931</code></pre>
+<p>Why isn’t this exactly the same as the covariance matrix <span class="math inline">\(\boldsymbol \Sigma\)</span> that we were aiming at? Because of random fluctuations in the <span class="math inline">\(\left(\begin{array}{cc}z_i&amp;z_j\\\downarrow&amp;\downarrow\end{array}\right)\)</span>. You can reduce the impact of those fluctuations by making <span class="math inline">\(n\)</span> bigger.</p>
+<p>Notice that <span class="math inline">\({\boldsymbol A}\)</span> transforms from uncorrelated <span class="math inline">\(\left(\begin{array}{cc}z_i&amp;z_j\\\downarrow&amp;\downarrow\end{array}\right)\)</span> to correlated <span class="math inline">\(\left(\begin{array}{cc}v_i&amp;v_j\\\downarrow&amp;\downarrow\end{array}\right)\)</span>. If we have <span class="math inline">\(\left(\begin{array}{cc}x_i&amp;x_j\\\downarrow&amp;\downarrow\end{array}\right)\)</span>, we can create the uncorrelated <span class="math inline">\(\left(\begin{array}{cc}z_i&amp;z_j\\\downarrow&amp;\downarrow\end{array}\right)\)</span> with <span class="math display">\[\left(\begin{array}{cc}z_i&amp;z_j\\\downarrow&amp;\downarrow\end{array}\right) =
+\left[\left(\begin{array}{cc}x_i&amp;x_j\\\downarrow&amp;\downarrow\end{array}\right) - 
+\left(\begin{array}{cc}m_i&amp;m_j\\\downarrow&amp;\downarrow\end{array}\right)\right] {\boldsymbol A}^{-1}\]</span>.</p>
+<p>Recall <span class="math display">\[(2\pi)^{-\frac{k}{2}}|\boldsymbol\Sigma|^{-\frac{1}{2}}\, \exp\left( -\frac{1}{2}(\mathbf{x}-\boldsymbol\mu)^T\boldsymbol\Sigma^{-1}(\mathbf{x}-\boldsymbol\mu) \right)\]</span>.</p>
+<p>Since <span class="math inline">\(\boldsymbol\Sigma = \boldsymbol A^T \boldsymbol A\)</span> and <span class="math inline">\(x_i - m = v_i\)</span>, this formula is equivalent to <span class="math display">\[(2\pi)^{-\frac{k}{2}}|\boldsymbol\Sigma|^{-\frac{1}{2}}\, \exp\left( -\frac{1}{2}(\mathbf{v}^{T}\boldsymbol A^{-T} \boldsymbol A^{-1} \mathbf v) \right) = 
+(2\pi)^{-\frac{k}{2}}|\boldsymbol\Sigma|^{-\frac{1}{2}}\, \exp\left( -\frac{1}{2}(\mathbf{z}^{T}\mathbf z) \right)\]</span> Now for a pair of values like <span class="math inline">\(\mathbf x = (x_1 \ \ x_2)\)</span> finding the probability of <span class="math inline">\(\mathbf x\)</span> corresponds to finding the corresponding <span class="math inline">\(\mathbf z^T = (z_i\ \ z_j)\)</span>, where <span class="math inline">\(z_i\)</span> and <span class="math inline">\(z_j\)</span> are each a random scalars, and <span class="math inline">\((\mathbf{z}^{T}\mathbf z) = z_i^2 + z_2^2\)</span>, so the probability is</p>
+<p><span class="math display">\[(2\pi)^{-\frac{k}{2}}|\boldsymbol\Sigma|^{-\frac{1}{2}}\, \exp\left( -\frac{1}{2}(z_1^2 + z_2^2 )\right) = 
+(2\pi)^{-\frac{k}{2}}|\boldsymbol\Sigma|^{-\frac{1}{2}}\, \exp(-\frac{z_1^2}{2}) \exp(-\frac{z_2^2}{2})\]</span></p>
+<p>Look at the stretching that goes on</p>
 
 </div>
 </div>

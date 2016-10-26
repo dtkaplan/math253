@@ -1,6 +1,7 @@
 ---
 title: "LDA and QDA"
-output: html_notebook
+output:
+  html_document: default
 ---
 
 ```{r include = FALSE}
@@ -137,8 +138,6 @@ M transforms from iid to correlated.
 In formula, we transform from correlated X to iid, so use M$^{-1}$.
 
 
-
-
 ## Independent variables $x_i$
 
 * Describing dependence
@@ -186,7 +185,7 @@ $$\left(\begin{array}{cc}x_i &x_j\\\downarrow&\downarrow\end{array}\right) = \le
 where each of $\left(\begin{array}{c}m_i\\|\end{array}\right)$ and
 $\left(\begin{array}{c}m_i\\|\end{array}\right)$ have every row the same.
 
-The covariance matrix $\Sigma$ is 
+The covariance matrix $\boldsymbol\Sigma$ is 
 
 $${\boldsymbol \Sigma} \equiv \frac{1}{n} \left(\begin{array}{cc}v_i & v_j\\\downarrow&\downarrow\end{array}\right)^T \left(\begin{array}{cc}v_i & v_j\\\downarrow&\downarrow\end{array}\right)
 = \frac{1}{n} \left(\begin{array}{c}v_i  \longrightarrow\\v_j \longrightarrow\end{array}\right)
@@ -202,7 +201,6 @@ $${\boldsymbol \Sigma} =
 \left(\begin{array}{cc}z_i & z_j\\\downarrow & \downarrow\end{array}\right) {\mathbf A}$$
 
 Now $\left(\begin{array}{cc}z_i & z_j\\\downarrow & \downarrow\end{array}\right)$ are iid with zero mean and unit variance, so 
-
 $$\left(\begin{array}{c}z_i \longrightarrow\\z_j \longrightarrow\end{array}\right)
 \left(\begin{array}{cc}z_i & z_j\\\downarrow & \downarrow\end{array}\right) = \left(\begin{array}{cc}1 & 0\\0 & 1\end{array}\right)$$
 so ${\boldsymbol \Sigma} = {\boldsymbol A}^T {\boldsymbol A}$.
@@ -214,10 +212,9 @@ Operationalizing this in R
 * Find $\boldsymbol \Sigma$ from data: `cov(data)`, e.g.
 ```{r}
 library(dplyr)
-Sigma <- cov(ISLR::Default %>% select(balance, income))
+Sigma <- cov(ISLR::Default %>% dplyr::select(balance, income))
 Sigma
 ```
-
 * Find $\boldsymbol A$ from $\boldsymbol \Sigma$
 ```{r}
 A <- chol(Sigma)
@@ -254,7 +251,6 @@ cov(X)
 Why isn't this exactly the same as the covariance matrix $\boldsymbol \Sigma$ that we were aiming at? Because of random fluctuations in the $\left(\begin{array}{cc}z_i&z_j\\\downarrow&\downarrow\end{array}\right)$. You can reduce the impact of those fluctuations by making $n$ bigger.
 
 Notice that ${\boldsymbol A}$ transforms from uncorrelated $\left(\begin{array}{cc}z_i&z_j\\\downarrow&\downarrow\end{array}\right)$ to correlated $\left(\begin{array}{cc}v_i&v_j\\\downarrow&\downarrow\end{array}\right)$.
-
 If we have $\left(\begin{array}{cc}x_i&x_j\\\downarrow&\downarrow\end{array}\right)$, we can create the uncorrelated $\left(\begin{array}{cc}z_i&z_j\\\downarrow&\downarrow\end{array}\right)$ with
 $$\left(\begin{array}{cc}z_i&z_j\\\downarrow&\downarrow\end{array}\right) =
 \left[\left(\begin{array}{cc}x_i&x_j\\\downarrow&\downarrow\end{array}\right) - 
@@ -270,10 +266,8 @@ Now for a pair of values like $\mathbf x = (x_1 \ \ x_2)$ finding the probabilit
 $(\mathbf{z}^{T}\mathbf z) = z_i^2 + z_2^2$, so the probability is
 
 $$(2\pi)^{-\frac{k}{2}}|\boldsymbol\Sigma|^{-\frac{1}{2}}\, \exp\left( -\frac{1}{2}(z_1^2 + z_2^2 )\right) = 
-(2\pi)^{-\frac{k}{2}}|\boldsymbol\Sigma|^{-\frac{1}{2}}\, \exp(-\frac{z_1^2}{2}) \exp(-\frac{z_2^2}{2})
-$$
-## Determinant gives area of a parallelogram
+(2\pi)^{-\frac{k}{2}}|\boldsymbol\Sigma|^{-\frac{1}{2}}\, \exp(-\frac{z_1^2}{2}) \exp(-\frac{z_2^2}{2})$$
 
 Look at the stretching that goes on
 
-![Proof without words](http://i.stack.imgur.com/gCaz3.png)
+
