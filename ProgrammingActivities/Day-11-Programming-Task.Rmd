@@ -1,13 +1,13 @@
 ---
 title: "In-Class Programming Task 11"
-author: "Math 253: Statistical Computing & Machine Learning"
+author: 'Math 253: Statistical Computing & Machine Learning'
 date: "Correlated Random Variables"
 output:
+  tufte::tufte_html: default
   tufte::tufte_handout:
     latex_engine: xelatex
   tufte::tufte_book:
     latex_engine: xelatex
-  tufte::tufte_html: default
 params:
   show_answers: no
 ---
@@ -35,7 +35,7 @@ In the following, ${\mathbf X}_i$ will denote a vector and ${\mathbf X}_j$ is an
 
 The covariance between vectors ${\mathbf X}_i$ and ${\mathbf X}_j$, with means $\mu_i$ and $\mu_j$ respectively, is:
 
-$$ \mbox{cov}(X_i, X_j) \equiv \mbox{E}\left[ ({\mathbf X}_i - \mu_i)^T ({\mathbf X}_j - \mu_i) \right]$$
+$$ \mbox{cov}(X_i, X_j) \equiv \mbox{E}\left[ ({\mathbf X}_i - \mu_i)^T ({\mathbf X}_j - \mu_j) \right]$$
 
 The *covariance matrix* is ${\Sigma}_{ij} \equiv  \mbox{cov}({\mathbf X}_i, {\mathbf X}_j)$.  It is always a *symmetrical* matrix.
 
@@ -81,7 +81,7 @@ The result of `chol()` is a single upper triangular matrix.
 
 The *transpose* of a matrix is simply a flip around the diagonal.  In R, this is accomplished with the `t()` function. Calculate `t(A)` and confirm that it is a *lower* triangular matrix.
 
-Verify that the matrix product of `t(A)` and `A` is equivalent to A.
+Verify that the matrix product of `t(A)` and `A` is equivalent to $\Sigma$.
 
 # Orthogonal vectors and matrices
 
@@ -101,7 +101,7 @@ The *inner product* between two R vectors can be computed as `sum(x1 * x2)`.  Bu
 
 * Revise `x1` and `x2` to be *one-column* matrices.  You can use `cbind()` for this.
 
-In the matrix notation, the inner product can be computed as `t(x1) %*% x2`.  Note the use of matrix multiply `%*%` rather than ordinary multiplication.  Also note that the vector to the left of `%*%` is a *row* matrix.  The transpose turns columns into rows and *vice versa*.
+In the matrix notation, the inner product can be computed as `t(x1) %*% x2`.  Note the use of matrix multiply `%*%` rather than ordinary multiplication.  Also note that the vector to the left of `%*%` is a *row* vector.  The transpose turns columns into rows and *vice versa*.
 
 * Make a matrix `X` that has `x1` and `x2` side-by-side: a two-column matrix.  Again, you can use `cbind()` for this purpose.
 

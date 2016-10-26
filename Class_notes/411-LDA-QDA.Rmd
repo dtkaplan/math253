@@ -7,6 +7,7 @@ output: html_notebook
 require(mosaic)
 require(ISLR)
 require(MASS)
+require(dplyr)
 ```
 
 
@@ -29,7 +30,7 @@ predict(model_of_default2, newdata = list(balance = 3000, income = 40000))
 sector_mod <- lda(sector ~ wage + educ, data = CPS85)
 sector_mod
 predict(sector_mod, newdata = list(wage = 10, educ = 16))
-all_combos <- expand.grid(wage = seq(0,20,length=50), educ = seq(5,16, length = 50))
+all_combos <- expand.grid(wage = seq(0,20,length=100), educ = seq(5,16, length = 100))
 res <- predict(sector_mod, newdata = all_combos)$class
 all_combos$predicted <- res
 ggplot(all_combos, aes(x = wage, y = educ, color = predicted)) + geom_point()
@@ -39,13 +40,13 @@ ggplot(all_combos, aes(x = wage, y = educ, color = predicted)) + geom_point()
 
 Suppose we have $K$ classes, $A_1, A_2, \ldots, A_K$.  We also have a set of inputs $x_1, x_2, \ldots, x_p \equiv {\mathbf x}$. 
 
-We observe ${\mathbf x}$ and we want to know $p(A_j | {\mathbf x})$. This is a *posterior* probability.
+We observe ${\mathbf x}$ and we want to know $p(A_j \downarrow {\mathbf x})$. This is a *posterior* probability.
 
-Per usual, the quantities we can get from our training data are in the form of a *likelihood*: $p({\mathbf x} | A_j)$. 
+Per usual, the quantities we can get from our training data are in the form of a *likelihood*: $p({\mathbf x} \downarrow A_j)$. 
 
 Given a *prior* $p(A_j)$ for all K classes, we can flip the likelihood into a posterior.
 
-In order to define our likelihood $p({\mathbf x} | A_j)$, we need both the training data and a model form for the probability $p()$.
+In order to define our likelihood $p({\mathbf x} \downarrow A_j)$, we need both the training data and a model form for the probability $p()$.
 
 A standard (but not necessarily good) model of a distribution is a multivariate Gaussian.
 LDA and QDA are based on a multi-variable Gaussian.
@@ -135,11 +136,7 @@ M transforms from iid to correlated.
 
 In formula, we transform from correlated X to iid, so use M$^{-1}$.
 
-## Determinant gives area of a parallelogram
 
-Look at the stretching that goes on
-
-![Proof without words](http://i.stack.imgur.com/gCaz3.png)
 
 
 ## Independent variables $x_i$
@@ -172,4 +169,111 @@ We were looking at the likelihood: prob(observation | class)
 
 Note: Likelihood itself won't do a very good job, since defaults are relatively uncommon. That is, p(default) $\ll$ p(not).
 
+## For Oct 27
 
+Imagine two zero-mean variables, $x_i$ and $x_j$, e.g. education and age, and suppose that $v_i = x_i - \mu_i$ and $v_j = x_j - \mu_j$. I'll write these in data table format, where each column is a variable and each row is a case and denote this by
+
+$\left(\begin{array}{c}v_i\\\downarrow\end{array}\right)$ and 
+$\left(\begin{array}{c}v_j\\\downarrow\end{array}\right)$
+
+Correlations between random variables $(v_i, v_j)$ are created by overlapping sums of zero-mean iid random variables $(z_i, z_j)$, 
+
+$$\left(\begin{array}{cc}v_i &v_j\\\downarrow & \downarrow\end{array}\right) =  \left(\begin{array}{cc}z_i & z_j \\ \downarrow & \downarrow\end{array}\right) \left(\begin{array}{cc}a & b\\0 & c\end{array}\right)
+\equiv \left(\begin{array}{cc}z_i & z_j\\\downarrow & \downarrow\end{array}\right) {\mathbf A}  $$
+
+and add in a possibly non-zero mean to form each $x$.
+$$\left(\begin{array}{cc}x_i &x_j\\\downarrow&\downarrow\end{array}\right) = \left(\begin{array}{cc}v_i & v_j\\\downarrow&\downarrow\end{array}\right) + \left(\begin{array}{cc}m_i & m_j\\\downarrow&\downarrow\end{array}\right) $$
+where each of $\left(\begin{array}{c}m_i\\|\end{array}\right)$ and
+$\left(\begin{array}{c}m_i\\|\end{array}\right)$ have every row the same.
+
+The covariance matrix $\Sigma$ is 
+
+$${\boldsymbol \Sigma} \equiv \frac{1}{n} \left(\begin{array}{cc}v_i & v_j\\\downarrow&\downarrow\end{array}\right)^T \left(\begin{array}{cc}v_i & v_j\\\downarrow&\downarrow\end{array}\right)
+= \frac{1}{n} \left(\begin{array}{c}v_i  \longrightarrow\\v_j \longrightarrow\end{array}\right)
+ \left(\begin{array}{cc}v_i & v_j\\\downarrow&\downarrow\end{array}\right) $$
+
+Substituting in 
+
+$$ \left(\begin{array}{cc}v_i &v_j\\\downarrow & \downarrow\end{array}\right) =  \left(\begin{array}{cc}z_i & z_j\\\downarrow & \downarrow\end{array}\right) {\mathbf A}  $$
+we get
+
+$${\boldsymbol \Sigma} = 
+\left[\left(\begin{array}{cc}z_i & z_j\\\downarrow & \downarrow\end{array}\right) {\mathbf A} \right]^T \left(\begin{array}{cc}z_i & z_j\\\downarrow & \downarrow\end{array}\right) {\mathbf A} = {\mathbf A}^T \left(\begin{array}{c}z_i \longrightarrow\\z_j \longrightarrow\end{array}\right)
+\left(\begin{array}{cc}z_i & z_j\\\downarrow & \downarrow\end{array}\right) {\mathbf A}$$
+
+Now $\left(\begin{array}{cc}z_i & z_j\\\downarrow & \downarrow\end{array}\right)$ are iid with zero mean and unit variance, so 
+
+$$\left(\begin{array}{c}z_i \longrightarrow\\z_j \longrightarrow\end{array}\right)
+\left(\begin{array}{cc}z_i & z_j\\\downarrow & \downarrow\end{array}\right) = \left(\begin{array}{cc}1 & 0\\0 & 1\end{array}\right)$$
+so ${\boldsymbol \Sigma} = {\boldsymbol A}^T {\boldsymbol A}$.
+
+In other words, $\boldsymbol A$ is the Choleski decomposition of $\boldsymbol \Sigma$.
+
+Operationalizing this in R
+
+* Find $\boldsymbol \Sigma$ from data: `cov(data)`, e.g.
+```{r}
+library(dplyr)
+Sigma <- cov(ISLR::Default %>% select(balance, income))
+Sigma
+```
+
+* Find $\boldsymbol A$ from $\boldsymbol \Sigma$
+```{r}
+A <- chol(Sigma)
+A
+```
+
+* Generate iid $\left(\begin{array}{cc}z_i&z_j\\\downarrow&\downarrow\end{array}\right)$ with unit variance
+```{r}
+n <- 100 # say
+Z <- cbind(rnorm(n), rnorm(n))
+```
+
+* Create the correlated $\left(\begin{array}{cc}v_i&v_j\\\downarrow&\downarrow\end{array}\right)$ from $\left(\begin{array}{cc}z_i&z_j\\\downarrow&\downarrow\end{array}\right)$
+```{r}
+V <- Z %*% A
+```
+
+* Create a set of means $\left(\begin{array}{cc}m_i&m_j\\\downarrow&\downarrow\end{array}\right)$ to add on to $\left(\begin{array}{cc}v_i&v_j\\\downarrow&\downarrow\end{array}\right)$
+```{r}
+M <- cbind(rep(3, n), rep(-2, n))
+head(M)
+```
+
+* Add $\left(\begin{array}{cc}m_i&m_j\\\downarrow&\downarrow\end{array}\right)$ to $\left(\begin{array}{cc}v_i&v_j\\\downarrow&\downarrow\end{array}\right)$ to create $\left(\begin{array}{cc}x_i&x_j\\\downarrow&\downarrow\end{array}\right)$
+```{r}
+X <- V + M
+```
+
+* Find the covariance matrix for $\left(\begin{array}{cc}x_i&x_j\\\downarrow&\downarrow\end{array}\right)$
+```{r}
+cov(X)
+```
+
+Why isn't this exactly the same as the covariance matrix $\boldsymbol \Sigma$ that we were aiming at? Because of random fluctuations in the $\left(\begin{array}{cc}z_i&z_j\\\downarrow&\downarrow\end{array}\right)$. You can reduce the impact of those fluctuations by making $n$ bigger.
+
+Notice that ${\boldsymbol A}$ transforms from uncorrelated $\left(\begin{array}{cc}z_i&z_j\\\downarrow&\downarrow\end{array}\right)$ to correlated $\left(\begin{array}{cc}v_i&v_j\\\downarrow&\downarrow\end{array}\right)$.
+
+If we have $\left(\begin{array}{cc}x_i&x_j\\\downarrow&\downarrow\end{array}\right)$, we can create the uncorrelated $\left(\begin{array}{cc}z_i&z_j\\\downarrow&\downarrow\end{array}\right)$ with
+$$\left(\begin{array}{cc}z_i&z_j\\\downarrow&\downarrow\end{array}\right) =
+\left[\left(\begin{array}{cc}x_i&x_j\\\downarrow&\downarrow\end{array}\right) - 
+\left(\begin{array}{cc}m_i&m_j\\\downarrow&\downarrow\end{array}\right)\right] {\boldsymbol A}^{-1}$$.
+
+Recall
+$$(2\pi)^{-\frac{k}{2}}|\boldsymbol\Sigma|^{-\frac{1}{2}}\, \exp\left( -\frac{1}{2}(\mathbf{x}-\boldsymbol\mu)^T\boldsymbol\Sigma^{-1}(\mathbf{x}-\boldsymbol\mu) \right)$$.
+
+Since $\boldsymbol\Sigma = \boldsymbol A^T \boldsymbol A$ and $x_i - m = v_i$, this formula is equivalent to
+$$(2\pi)^{-\frac{k}{2}}|\boldsymbol\Sigma|^{-\frac{1}{2}}\, \exp\left( -\frac{1}{2}(\mathbf{v}^{T}\boldsymbol A^{-T} \boldsymbol A^{-1} \mathbf v) \right) = 
+(2\pi)^{-\frac{k}{2}}|\boldsymbol\Sigma|^{-\frac{1}{2}}\, \exp\left( -\frac{1}{2}(\mathbf{z}^{T}\mathbf z) \right)$$
+Now for a pair of values like $\mathbf x = (x_1 \ \ x_2)$ finding the probability of $\mathbf x$ corresponds to finding the corresponding $\mathbf z^T = (z_i\ \ z_j)$, where $z_i$ and $z_j$ are each a random scalars, and 
+$(\mathbf{z}^{T}\mathbf z) = z_i^2 + z_2^2$, so the probability is
+
+$$(2\pi)^{-\frac{k}{2}}|\boldsymbol\Sigma|^{-\frac{1}{2}}\, \exp\left( -\frac{1}{2}(z_1^2 + z_2^2 )\right) = 
+(2\pi)^{-\frac{k}{2}}|\boldsymbol\Sigma|^{-\frac{1}{2}}\, \exp(-\frac{z_1^2}{2}) \exp(-\frac{z_2^2}{2})
+$$
+## Determinant gives area of a parallelogram
+
+Look at the stretching that goes on
+
+![Proof without words](http://i.stack.imgur.com/gCaz3.png)
