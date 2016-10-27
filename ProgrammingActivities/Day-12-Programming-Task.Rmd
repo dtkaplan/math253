@@ -1,0 +1,153 @@
+---
+title: "In-class Programming Activity 12"
+author: "Math 253: Statistical Computing & Machine Learning"
+date: "Testing LDA and QDA"
+params: 
+  show_answers: FALSE
+output: 
+  rmarkdown::tufte_handout
+---
+
+```{r include=FALSE}
+options(width=80)
+library(mosaicData)
+library(ggplot2)
+library(scoreActivity)
+library(ISLR)
+library(scales) # for simple transparency in colors
+knitr::opts_chunk$set(tidy=FALSE, echo=params$show_answers)
+options(width=100)
+```
+
+Today, you're going to generate simulated data to test out LDA and QDA.
+
+You'll make two data sets, each of which will have two classes of outcomes: `"red"`, and `"blue`"
+
+* `SameSigma` where cases in the two classes have the same covariance matrix for the predictor variables.
+* `DifferentSigma` where the two classes have different covariance matrices.
+
+# Generating simulated data
+
+* Create an object `n_cases` with the value 100.
+* Create an object `red_mean` with the value `c(1, 0)`.
+* Create an object `green_mean` with value `c(0, -1)`.
+* Create an object `blue_mean` with value `c(-1, 1)`.
+* Create an object `covar_1` which is a 2 x 2 matrix with 3 and 1 on the diagonal and $-1.7$ on the off-diagonal. It should be structured as a covariance matrix.
+* Similarly, create an object `covar_2`, a covariance matrix with 2 and 3 on the diagonal and $1.5$ on the off-diagonal.
+* Create three matrices, `one`, `two`, and `three`.  Each should have the appropriate shape for data from `n_cases` cases and two variables. The variables should each be `n_cases` random draws from a $\mbox{N}(0, 1^2)$ distribution, that is, a normal distribution with mean zero and standard deviation $1$.\marginnote[-2cm]{In specifying the normal distribution, one needs to decide whether to report the standard deviation or the variance.  R uses \texttt{sd=}.  To help to eliminate ambiguity in mathematical notation, the form $1^2$ is used simply as a reminder that the quantity is a variance.}
+* Create an matrix `red` that is `one` times the Cholesky decomposition of `covar_1`.  The `red` matrix will contain correlated random variables with a covariance of approximately `covar_1`.
+* Similarly, create a matrix `green` which will be `two` times the Cholesky decomposition of `covar_1`.
+* Also create a matrix `blue` which will be `three` times the Cholesky decomposition of the other covariance matrix, `covar_2`.
+* Modify the `red`, `green` and `blue` matrices by adding to each column a value for the mean drawn from `red_mean`, `green_mean`, and `blue_mean` respectively.\marginnote[-2.5cm]{{\em Hint}: It won't work to do the obvious, simple thing, e.g.  add \texttt{red\_mean} to \texttt{red}. There are many ways to construct a statement that works.  Among others, there's a way using \texttt{outer()}, a way using \texttt{matrix()}, and even a way using \texttt{t()} twice.} That is, for `red`, add 1 to the first column and 0 to the second.
+
+\newpage
+
+* Create three data frames, each with variables `x`, `y`, and `class`.\marginnote{You'll use \texttt{data.frame()} to construct the data frames.  Make sure to give the optional argument \texttt{stringsAsFactors = FALSE}.  This will let the class be stored as straightforward character strings that can be used in plotting to specify the color.} 
+    - `Red` will have `x` as the first column of `red`, `y` as the second column of `red`, and `class` set equal to the string "red".
+    - `Blue` will be the same thing but using the columns of `blue` and the `class` set to `"blue"`
+    - `Green` is similar, using the columns of `green` and the class `"green"`.
+* Last step in generating the simulated data: make two data frames each of which combines "data" from two classes.
+```{r echo=TRUE, eval=FALSE}
+Sim_one <- rbind(Red, Green)
+Sim_two <- rbind(Red, Blue)
+```
+
+```{r echo=params$show_answers}
+n_cases <- 10000
+red_mean <- c(1, 0)
+green_mean <- c(0, -1)
+blue_mean <- c(-1, 1)
+covar_1 <- matrix(c(3, -1.7, -1.7, 2), nrow=2, ncol=2)
+covar_2 <- matrix(c(2, 1.5, 1.5, 3), nrow=2, ncol=2)
+one <- matrix(rnorm(2 * n_cases), ncol=2, nrow=n_cases)
+# other ways to do this
+#       cbind(rnorm(n_cases), rnorm(n_cases))
+#       matrix(rnorm(2 * n_cases), ncol=2)
+two <- matrix(rnorm(2 * n_cases), ncol=2)
+three <- matrix(rnorm(2 * n_cases), ncol=2, nrow=n_cases)
+red <- one %*% chol(covar_1) + outer(rep(1, n_cases), red_mean)
+# Another way to generate the matrix to the right of +
+#      matrix(red_mean, nrow = n_cases, ncol = 2, byrow = TRUE)
+green <- two %*% chol(covar_1) + outer(rep(1, n_cases), green_mean)
+blue <- three %*% chol(covar_2) + outer(rep(1, n_cases), blue_mean)
+Red <- data.frame(x = red[,1], y = red[,2], class="red", 
+                  stringsAsFactors = FALSE)
+Green <- data.frame(x = green[,1], y = green[,2], class="green",
+                    stringsAsFactors = FALSE)
+Blue <- data.frame(x = blue[,1], y = blue[,2], class="blue",
+                   stringsAsFactors = FALSE)
+Sim_one <- rbind(Red, Green)
+Sim_two <- rbind(Red, Blue)
+```
+```{r echo=params$show_answers, fig.margin=TRUE, eval=params$show_answers, fig.height=5, fig.width=5,out.width="2.5in"}
+plot(y ~ x, data=Sim_one, col=alpha(Sim_one$class, .02), pch=20)
+```
+```{r echo=params$show_answers, fig.margin=TRUE, , fig.height=5, fig.width=5,out.width="2.5in", fig.cap="The two classes of cases, red and blue, in \\texttt{Sim\\_two}."}
+plot(y ~ x, data=Sim_two, col=alpha(Sim_two$class, .02), pch=20)
+```
+
+# LDA and QDA
+
+Fit a linear discriminant model `class ~ x + y` to the data in `Sim_one`. Call the model `mod_LDA_one`.
+```{r echo=TRUE}
+mod_LDA_one <- MASS::lda(class ~ x + y, data = Sim_one)
+```
+
+Then use the model to test the model on the same training data to which it was fit. Store the result in `test_LDA_one`.
+```{r echo=TRUE}
+test_LDA_one <- predict(mod_LDA_one, newdata = Sim_one)
+```
+
+The resulting object, `test_LDA_one`,  is a list of three items. Make sure you understand what each of them is.
+
+QDA works in the same way: the function is `qda()`.
+
+# Confusion matrices
+
+The confusion matrix compares the actual class to the predicted class from the model.  It's straightforward to compute:
+```{r echo=TRUE, eval=params$show_answers}
+table(Sim_one$class, test_LDA_one$class)
+```
+
+* Compare the confusion matrix from LDA on `Sim_one` to that from QDA on `Sim_one`.^[Use the names `mod_QDA_one` and `test_QDA_one` to store the fitted model and the test results from `predict()` respectively.]  Which one shows better performance?
+```{r echo=params$show_answers, eval=params$show_answers}
+mod_QDA_one <- MASS::qda(class ~ x + y, data = Sim_one)
+test_QDA_one <- predict(mod_QDA_one, newdata = Sim_one)
+table(Sim_one$class, test_QDA_one$class)
+```
+
+* Fit both LDA and QDA models to `Sim_two`.  Which one performs better?
+```{r echo=params$show_answers, eval=params$show_answers}
+mod_LDA_two <- MASS::lda(class ~ x + y, data = Sim_two)
+mod_QDA_two <- MASS::qda(class ~ x + y, data = Sim_two)
+test_LDA_two <- predict(mod_LDA_two, newdata = Sim_two)
+test_QDA_two <- predict(mod_QDA_two, newdata = Sim_two)
+table(Sim_two$class, test_LDA_two$class)
+table(Sim_two$class, test_QDA_two$class)
+```
+
+# Bigger n
+
+The difference in performance of LDA and QDA in these examples is not so large that it's evident in a sample with 100 cases of each class.  Go back and set `n_cases` to be 10000, and re-evaluate the confusion matrices.
+
+\enlargethispage{1in}
+
+# Above and beyond
+
+Calculate the log likelihood for `mod_LDA_one` against the observations `Sim_one$class`.
+
+```{r echo=params$show_answers, eval=params$show_answers}
+likelihoods <-
+  with(test_LDA_one, 
+       ifelse(class == "red", posterior[,"red"], posterior[,"green"]))
+sum(log(likelihoods))
+```
+
+
+```{r echo=FALSE, eval=params$show_answers, results="asis"}
+cat("# Test statments")
+```
+
+```{r echo=params$show_answers, eval=params$show_answers}
+source("Day-12-Test-Statements.R", local=TRUE)
+```

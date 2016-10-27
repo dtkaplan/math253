@@ -168,7 +168,12 @@ We were looking at the likelihood: prob(observation | class)
 
 Note: Likelihood itself won't do a very good job, since defaults are relatively uncommon. That is, p(default) $\ll$ p(not).
 
-## For Oct 27
+## Re-explaining $\boldsymbol\Sigma$
+
+```{r echo=FALSE, fig.cap="Figure 4.8 from ISL"}
+knitr::include_graphics("Images/Chapter-4/4.8.png")
+```
+
 
 Imagine two zero-mean variables, $x_i$ and $x_j$, e.g. education and age, and suppose that $v_i = x_i - \mu_i$ and $v_j = x_j - \mu_j$. I'll write these in data table format, where each column is a variable and each row is a case and denote this by
 
@@ -268,6 +273,64 @@ $(\mathbf{z}^{T}\mathbf z) = z_i^2 + z_2^2$, so the probability is
 $$(2\pi)^{-\frac{k}{2}}|\boldsymbol\Sigma|^{-\frac{1}{2}}\, \exp\left( -\frac{1}{2}(z_1^2 + z_2^2 )\right) = 
 (2\pi)^{-\frac{k}{2}}|\boldsymbol\Sigma|^{-\frac{1}{2}}\, \exp(-\frac{z_1^2}{2}) \exp(-\frac{z_2^2}{2})$$
 
-Look at the stretching that goes on
+Look at the stretching that goes on due to a matrix:
 
+```{r echo = FALSE}
+knitr::include_graphics("Images/determinant-area.png")
+```
 
+[figure source](http://www.maa.org/programs/faculty-and-departments/classroom-capsules-and-notes/proof-without-words-a-2-x-2-determinant-is-the-area-of-a-parallelogram)
+
+The stretching is due to the matrix $\boldsymbol A$. So we should divide by the determinant of $\boldsymbol A$, that is, $|\boldsymbol A|$. The nature of the Cholesky decomposition is that $|\boldsymbol A| = \sqrt{|\boldsymbol\Sigma|}$. Note in the formula for the Gaussian that the normalizing constant involves $\sqrt{|\boldsymbol\Sigma|}$.
+
+## LDA
+
+All classes are treated as having the same ${\mathbf \Sigma}$.
+
+\includegraphics[width=\textwidth]{../ISL-Book-Figures/Chapter4/{4.6}.pdf}
+\marginnote[-2cm]{Figure 4.6 from ISL}
+
+## QDA
+
+Classes are treated with different  ${\mathbf \Sigma}_i$.
+
+```{r fig.cap="Figure 4.9 from ISL. Left: Bayes (purple dashed), LDA (black dotted), and QDA (green solid)} decision boundaries for a two-class problem with ${\\mathbf \\Sigma}_1 = {\\mathbf \\Sigma}_2$.  Right: QDA"}
+knitr::include_graphics("Images/Chapter-4/4.9.png")
+```
+
+## Error test rates on various classifiers
+
+```{r echo=FALSE,fig.cap="Figure 4.10 from ISL"}
+knitr::include_graphics("Images/Chapter-4/4.10.png")
+```
+
+Scenarios: In all, class means are different.
+
+1. Each class is two uncorrelated Gaussian random vars. 
+2. Both classes had a correlation of $-0.5$
+3. Uncorrelated, like (1), but the distribution is t(df=?): long tailed to right.
+
+```{r echo=FALSE,fig.cap="Figure 4.11 from ISL"}
+knitr::include_graphics("Images/Chapter-4/4.11.png")
+```
+
+4. Like (2), but one class has $\rho = 0.5$ and the other $\rho = -0.5$
+5. A nonlinear predictor with $X_1^2$, $X_2^2$, $X_1 \times X_2$ giving a quadratic decision boundary
+6. A decision boundary more complicated than a quadratic.
+
+## Error rates
+
+Ways to measure the performance of a classifier.
+
+* Confusion matrix
+* Rates for right-vs-wrong.
+    - Accuracy. Total error rate. Not generally useful, because there are two ways to be wrong.
+    - Sensitivity: If the real class is X, the probability that the classifier will produce an output of X.
+    - Specificity: If the real class is **not** X, the probability that the classifier will output not X.
+* Loss functions
+
+## Receiver operating curves
+
+There's always one or more parameters that can be set in a classifier. This might be as simple as the prior probability.
+
+As this parameter is changed, typically sensitivity will go up at the cost of specificity, or *vice versa*.

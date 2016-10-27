@@ -39,6 +39,8 @@ Each topic assignment is due one week *after* we finish covering that topic in c
 
 - Topic I: Sept 20. Note: Ignore the comment in `Topic-1.Rmd` about there not being any exercises. There are exercises, as you can see below.
 - Topic II: Oct 6, 2016
+- Topic III: Oct 25, 2016
+- Topic IV: Nov 3, 2016
 
 
 ## Topic I --- Introduction
@@ -92,7 +94,7 @@ Each topic assignment is due one week *after* we finish covering that topic in c
 * Topic 4 Assignment:
     - Programming Assignment: 4.7.11, 4.7.13
     - Theory assignment: 4.7.1, 4.7.8, 4.7.9
-* Programming Activities: [Oct 18](ProgrammingActivities/Day-10-Programming-Task.html), [Oct 25](ProgrammingActivities/Day-11-Programming-Task.html), [Oct 27](ProgrammingActivities/Day-12-Programming-Task.html)
+* Programming Activities: [Oct 18](ProgrammingActivities/Day-10-Programming-Task.html), [Oct 25](ProgrammingActivities/Day-11-Programming-Task.html), [Oct 27](ProgrammingActivities/Day-12-Programming-Task.pdf)
 
 
 ## Topic 5 --- Cross-validation and bootstrapping
