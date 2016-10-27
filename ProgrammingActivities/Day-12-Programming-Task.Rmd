@@ -91,7 +91,7 @@ plot(y ~ x, data=Different_sigma, col=alpha(Different_sigma$class, .02), pch=20)
 
 # LDA and QDA
 
-Fit a linear discriminant model `class ~ x + y` to the data in `Sim_one`. Call the model `mod_LDA_one`.
+Fit a linear discriminant model `class ~ x + y` to the data in `Same_sigma`. Call the model `mod_LDA_one`.
 ```{r echo=TRUE}
 library(MASS)
 mod_LDA_one <- lda(class ~ x + y, data = Same_sigma)
