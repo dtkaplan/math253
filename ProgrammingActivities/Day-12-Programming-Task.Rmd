@@ -93,7 +93,8 @@ plot(y ~ x, data=Different_sigma, col=alpha(Different_sigma$class, .02), pch=20)
 
 Fit a linear discriminant model `class ~ x + y` to the data in `Sim_one`. Call the model `mod_LDA_one`.
 ```{r echo=TRUE}
-mod_LDA_one <- MASS::lda(class ~ x + y, data = Same_sigma)
+library(MASS)
+mod_LDA_one <- lda(class ~ x + y, data = Same_sigma)
 ```
 
 Then use the model to test the model on the same training data to which it was fit. Store the result in `test_LDA_one`.
