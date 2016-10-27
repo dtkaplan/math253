@@ -201,8 +201,8 @@ Substituting in
 $$ \left(\begin{array}{cc}v_i &v_j\\\downarrow & \downarrow\end{array}\right) =  \left(\begin{array}{cc}z_i & z_j\\\downarrow & \downarrow\end{array}\right) {\mathbf A}  $$
 we get
 
-$${\boldsymbol \Sigma} = 
-\left[\left(\begin{array}{cc}z_i & z_j\\\downarrow & \downarrow\end{array}\right) {\mathbf A} \right]^T \left(\begin{array}{cc}z_i & z_j\\\downarrow & \downarrow\end{array}\right) {\mathbf A} = {\mathbf A}^T \left(\begin{array}{c}z_i \longrightarrow\\z_j \longrightarrow\end{array}\right)
+$${\boldsymbol \Sigma} = \frac{1}{n}
+\left[\left(\begin{array}{cc}z_i & z_j\\\downarrow & \downarrow\end{array}\right) {\mathbf A} \right]^T \left(\begin{array}{cc}z_i & z_j\\\downarrow & \downarrow\end{array}\right) {\mathbf A} = \frac{1}{n} {\mathbf A}^T \left(\begin{array}{c}z_i \longrightarrow\\z_j \longrightarrow\end{array}\right)
 \left(\begin{array}{cc}z_i & z_j\\\downarrow & \downarrow\end{array}\right) {\mathbf A}$$
 
 Now $\left(\begin{array}{cc}z_i & z_j\\\downarrow & \downarrow\end{array}\right)$ are iid with zero mean and unit variance, so 
@@ -322,15 +322,41 @@ knitr::include_graphics("Images/Chapter-4/4.11.png")
 
 Ways to measure the performance of a classifier.
 
+Examples: Two classifiers of employment type.
+
+```{r}
+data(CPS85, package = "mosaicData")
+classifier_1 <- lda(sector ~ wage + educ + age, data = CPS85)
+classifier_2 <- qda(sector ~ wage + educ + age, data = CPS85)
+```
+
 * Confusion matrix
+```{r}
+table(CPS85$sector, predict(classifier_1)$class)
+```
 * Rates for right-vs-wrong.
     - Accuracy. Total error rate. Not generally useful, because there are two ways to be wrong.
+    ```{r}
+    table(predict(classifier_1)$class == CPS85$sector) / nrow(CPS85)
+    ```
     - Sensitivity: If the real class is X, the probability that the classifier will produce an output of X.
+        We need to choose the output we care about. Let's use `prof`.
+    ```{r}
+    is_prof <- CPS85$sector == "prof"
+    predicts_prof <- predict(classifier_1)$class == "prof"
+    table(is_prof, predicts_prof) 
+    ```
+    105 actual `prof`, of which 81 were correctly classified. So, sensitivity is 81/105.
     - Specificity: If the real class is **not** X, the probability that the classifier will output not X.
+    See above table. 429 not `prof`, of which 354 were correctly classified. So specificity is 354/429.
 * Loss functions
+    - Social awkwardness of thinking someone is in the wrong profession.
 
 ## Receiver operating curves
 
 There's always one or more parameters that can be set in a classifier. This might be as simple as the prior probability.
 
 As this parameter is changed, typically sensitivity will go up at the cost of specificity, or *vice versa*.
+
+President Garfield's assassination.
+

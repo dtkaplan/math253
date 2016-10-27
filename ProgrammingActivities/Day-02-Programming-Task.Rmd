@@ -106,3 +106,7 @@ Since it was written just for this class, the package is not distributed via the
 devtools::install_github("dtkaplan/Math-253/DailyProgrammingTasks/scoreActivity")
 ```
 If it turns out that you don't have the `devtools` package, install it in the usual way using the "Packages" tab in RStudio.
+
+```{r echo = params$show_answers, eval = params$show_answers}
+scoreActivity::score253(2)
+```

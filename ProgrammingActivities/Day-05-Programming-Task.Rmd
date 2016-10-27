@@ -116,5 +116,5 @@ cat("# Test statments")
 ```
 
 ```{r echo=params$show_answers, eval=params$show_answers}
-source("Day-05-Test-Statements.R", local=TRUE)
+scoreActivity::score253(5)
 ```

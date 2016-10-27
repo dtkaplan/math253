@@ -98,4 +98,6 @@ You might be interested to look at the ratio of `MSE_train` to `MSE_test`. This 
 MSE_train / MSE_test
 ```
 
-
+```{r echo = params$show_answers, eval = params$show_answers}
+scoreActivity::score253(3)
+```

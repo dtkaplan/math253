@@ -206,7 +206,7 @@ Use the functions you've written to produce one that gives the best 5-card hand 
 ```
 
 ```{r eval=params$show_answers, echo=params$show_answers}
-source("Day-09-Test-Statements.R", local = TRUE)
+scoreActivity::score253(9)
 ```
 
 <!--

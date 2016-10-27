@@ -122,3 +122,7 @@ plotdensity <- function(v, data=parent.frame(), ...) {
   # Use vvals as the data and vname as the label for the x-axis
 }
 ```
+
+```{r echo = params$show_answers, eval = params$show_answers}
+scoreActivity::score253(6)
+```
