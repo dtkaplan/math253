@@ -1,9 +1,8 @@
----
-title: "Foundations: linear algebra, likelihood, and Bayes' rule"
-output: html_notebook
----
-
 # Foundations: linear algebra, likelihood and Bayes' rule
+
+```{r include = FALSE}
+library(mosaic)
+```
 
 The topics in this section --- linear algebra, Bayes' rule, and likelihood --- underlie many of the machine-learning techniques we will be studying later in the course. Bayes' rule is a way to *flip* conditional probabilities. Among other things it allows you to interpret data in the light of previous knowledge and belief (which to be fancy, we can call "theory"). Likelihood is a unifying principle for using data to estimate model parameters and is fundamental in statistical theory. It's also an essential part of Bayes' rule. And linear algebra is used throughout statistics and machine learning. Among other things, it's at work behind the motivation and calculations of regression.
 
@@ -624,6 +623,7 @@ ntests <- function(population) {
 
 How many tests needed for a population of 10,000 with a prevalence of 1%?
 ```{r}
+library(mosaic)
 do(10) * ntests(runif(10000) < 0.01)
 ```
 

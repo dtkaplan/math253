@@ -1,0 +1,100 @@
+# Programming Basics
+
+
+
+## Loops/Iteration
+
+Loops are the programming control structure that allows you to repeat the same commands many times.
+
+*A definition of insanity*: Doing something over and over again and expecting a different result.
+
+## Parts of a loop
+
+1. Preparation --- creating a place to hold the results
+
+    This is called the "accumulator."
+
+2. Identify a set to loop over.
+3. Inside the loop, modify the accumulator
+4. When the loop is done, package up the results.
+
+## Trivial examples
+
+* Find the sum of squares of a vector. (R `sum(x^2)`)
+* Find the biggest element of a vector. (R `max()`)
+* Generate $k$ random numbers from the set `1:n` (R `sample()`)
+    - with replacement: pre-allocate result, loop and select
+    - without replacement: shrink the set of possibilities each time.
+* Find the $k$th Fibonacci number: 
+    - with `previous` and `before_that` as the state
+    - with an array as the state: initialize to `c(1, 1)`
+    - with a global array as the state memoization.
+    - with an array created in the capturing environment.
+
+**In practice, we would use the already parallelized R functions. See also `Vectorize()`.
+
+
+## Bootstrapping
+
+Process
+
+* Set up accumulator --- what should we store? (all coefs)
+   - but we don't know what this should look like until we've tried it out
+* Loop:
+   - create a new random sample
+   - fit the model
+   - store away the results
+* Post-process: 
+   - Give std-err?
+   - Give covariance matrix?
+   - Give array?
+
+
+## Leave-one-out cross-validation.
+
+```{r}
+# preparation
+my_data <- mosaicData::KidsFeet
+error <- numeric(nrow(my_data))
+
+# The looping set: each row in my_data
+for (k in 1:nrow(my_data)) {
+  # the body of the loop
+  mod <- lm(width ~ length * sex, data = my_data[ -k, ])
+  mod_value <- predict(mod, newdata = my_data[k, ])
+  error[k] <- my_data$width[k] - mod_value
+}
+
+# packaging up the results
+result <- sum(error^2)
+```
+
+Look at the result:
+```{r}
+result
+regular_model <- lm(width ~ length * sex, data = my_data)
+sum(resid(regular_model)^2)
+anova(regular_model)
+```
+
+In ANOVA, we use a degrees of freedom to adjust for the under-estimate of residuals.
+
+```{r}
+sum(resid(regular_model)^2) / 35
+```
+
+In leave-one-out, we can simply average the errors:
+```{r}
+result / 38
+```
+
+## Building a package
+
+Divide up into groups of two or three.
+
+1. Open a new project: choose "new directory", "choose R package"
+2. Go to the "Build" tab, select More/Configure Build Tools and fill in the checkmark for Roxygen comments.
+3. Write functions for $C_p$, $AIC$, $BIC$, and adjusted $R^2$. The function should take a model as input.
+4. Document the functions.
+5. Compile the package.
+

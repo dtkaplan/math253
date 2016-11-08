@@ -1,0 +1,79 @@
+# Regularization, shrinkage and dimension reduction
+
+## Best subset selection
+
+Algorithm 6.1 from ISLR
+
+1. Let $M_0$ denote the null model, which contains no predictors. This model simply predicts the sample mean for each observation.
+2. For k in 1,2,...p:
+    a. Fit all p models that contain exactly k predictors. $\left(\begin{array}{c}k\\p\end{array}\right)$
+    b.  Pick the best among these k models, and call it $M_k$. Here best is defined as having the smallest RSS, or equivalently largest R$^2$.
+3. Select a single best model from among $M_0, \ldots , M_p$ using cross- validated prediction error, C$_p$, AIC, BIC, or adjusted $R^2$.
+
+```{r echo = FALSE, fig.cap='ISLR Figure 6.1.  The models from best subset selection'}
+knitr::include_graphics("Images/Chapter-6/6.1.png")
+```
+
+## Approximation to best subset selection
+
+For large $p$, there are too many possible models to fit all of them: $2^p$. So, some heuristics.
+
+1. There are only $p$ models with just one term: $d = 1$. So easy to try all of them.
+2. There are only $p(p-1)/2$ models with just two terms $d = 2$. Again, easy to try all of them.
+3. Starting out from $M_1$ or $M_2$, keep all of those terms and look for the best individual term to add. There will be only $p-(d-1)$ of them. We presume that one of these will be near the frontier of the best possible model with $d$ terms.
+4. Repeat the process $k \gg p$ times, moving forward and back randomly, adding a term or deleting a term. 
+5. This will take roughly $k p$ fits $\alpha p^2$ fits, where $\alpha$ is a constant $k/p$, say 10.
+6. Compare this to $2^p$. Setting $\alpha = 10$, find the ratio $\frac{2^p}{\alpha p^2}$ for $p = 5, \ldots, 40$.
+
+```{r}
+p <- 1:40
+(2^p) / (10 * p^2)
+```
+
+Exhaustion seems find up through about $d = 20$ --- only 100 times more expensive than the random search.
+
+
+## Classical theory of best model choice
+
+We *punish* models with lots of terms.
+
+In-sample  |  Adjusted   | Out-of-sample
+-----------|-------------|---------------
+$\frac{1}{n}$RSS | $C_p = \frac{1}{n}(\mbox{RSS} + 2 d \hat{\sigma}^2)$       | cross-validated prediction error
+. | $\mbox{AIC} = -2 \ln {\cal L} - 2 d$ | .
+. | $\mbox{AIC}_{ls} = \frac{1}{\hat{\sigma}^2}C_p$ | .
+. | $\mbox{BIC} = \frac{1}{n} (\mbox{RSS} + \ln(n) d \hat{\sigma}^2)$ | .
+R$^2$ | Adjusted R$^2$ | ???
+
+$\mbox{Adjusted R}^2 = 1 - \frac{\mbox{RSS}/(n-d-1)}{\mbox{TSS}{(n-1)}}$
+
+
+```{r echo = FALSE, fig.cap='ISLR Figure 6.2.  Note that the values on the vertical axis are the best for that "number of predictors.'}
+knitr::include_graphics("Images/Chapter-6/6.2.png")
+```
+
+
+**Uncertainty**
+
+Repeat the analysis for different test sets or using different folds in k-fold cross validation.
+
+* At each value of "Number of Predictors", there will be a distribution.
+* *One-standard-error rule*: select the smallest model for which the estimated test error is within one standard error of the lowest point on the curve.
+
+# Optimization
+
+## What are we optimizing over?
+
+Choose the best set of columns from the model matrix.
+
+```{r}
+Small <- mosaic::sample(mosaicData::KidsFeet, size = 5)
+row.names(Small) <- NULL
+M1 <- model.matrix(width ~ length + sex, data = Small)
+M2 <- model.matrix(width ~ length + sex*biggerfoot, data = Small)
+M3 <- model.matrix(width ~ length*domhand*sex + sex*biggerfoot, data = Small)
+```
+
+
+* Thursday: Shrinkage methods
+* Tuesday: Principal Components

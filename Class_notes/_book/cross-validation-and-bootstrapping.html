@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Notes for Math 253: Statistical Computing and Machine Learning</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Notes and other materials for Math 253 at Macalester College.">
+  <meta name="generator" content="bookdown 0.1.15 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Notes for Math 253: Statistical Computing and Machine Learning" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Notes and other materials for Math 253 at Macalester College." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Notes for Math 253: Statistical Computing and Machine Learning" />
+  
+  <meta name="twitter:description" content="Notes and other materials for Math 253 at Macalester College." />
+  
+
+<meta name="author" content="Daniel Kaplan">
+
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="linear-and-quadratic-discriminant-analysis.html">
+<link rel="next" href="regularization-shrinkage-and-dimension-reduction.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Math 253 Notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Placeholder</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="part"><span><b>Topic I: Linear Regression</b></span></li>
+<li class="chapter" data-level="3" data-path="placeholder-1.html"><a href="placeholder-1.html"><i class="fa fa-check"></i><b>3</b> Placeholder</a></li>
+<li class="chapter" data-level="4" data-path="notes.html"><a href="notes.html"><i class="fa fa-check"></i><b>4</b> Notes</a></li>
+<li class="part"><span><b>Topic II: Foundations: linear algebra, likelihood and Bayes’ rule</b></span></li>
+<li class="chapter" data-level="5" data-path="prior-proportional-to-lambda.html"><a href="prior-proportional-to-lambda.html"><i class="fa fa-check"></i><b>5</b> prior: proportional to lambda:</a></li>
+<li class="chapter" data-level="6" data-path="classifiers.html"><a href="classifiers.html"><i class="fa fa-check"></i><b>6</b> Classifiers</a></li>
+<li class="chapter" data-level="7" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>7</b> Logistic Regression</a></li>
+<li class="chapter" data-level="8" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html"><i class="fa fa-check"></i><b>8</b> Linear and Quadratic Discriminant Analysis</a></li>
+<li class="chapter" data-level="9" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html"><i class="fa fa-check"></i><b>9</b> Cross-Validation and Bootstrapping</a><ul>
+<li class="chapter" data-level="9.1" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html#philosophical-approaches"><i class="fa fa-check"></i><b>9.1</b> Philosophical approaches</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html#occams-razor-a-heuristic"><i class="fa fa-check"></i><b>9.1.1</b> Occam’s Razor: A heuristic</a></li>
+<li class="chapter" data-level="9.1.2" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html#einsteins-proverb"><i class="fa fa-check"></i><b>9.1.2</b> Einstein’s proverb</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html#operationalizing-model-choice"><i class="fa fa-check"></i><b>9.2</b> Operationalizing model choice</a></li>
+<li class="chapter" data-level="9.3" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html#some-definitions-of-better"><i class="fa fa-check"></i><b>9.3</b> Some definitions of “better”</a></li>
+<li class="chapter" data-level="9.4" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html#training-and-testing"><i class="fa fa-check"></i><b>9.4</b> Training and Testing</a></li>
+<li class="chapter" data-level="9.5" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html#trade-off"><i class="fa fa-check"></i><b>9.5</b> Trade-off</a></li>
+<li class="chapter" data-level="9.6" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html#classical-theory-interlude"><i class="fa fa-check"></i><b>9.6</b> Classical theory interlude</a></li>
+<li class="chapter" data-level="9.7" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html#bootstrapping"><i class="fa fa-check"></i><b>9.7</b> Bootstrapping</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html"><i class="fa fa-check"></i><b>10</b> Regularization, shrinkage and dimension reduction</a></li>
+<li class="chapter" data-level="11" data-path="programming-basics.html"><a href="programming-basics.html"><i class="fa fa-check"></i><b>11</b> Programming Basics</a></li>
+<li class="chapter" data-level="" data-path="appendices.html"><a href="appendices.html"><i class="fa fa-check"></i>Appendices</a></li>
+<li class="chapter" data-level="" data-path="connecting-rstudio-to-your-github-repository.html"><a href="connecting-rstudio-to-your-github-repository.html"><i class="fa fa-check"></i>Connecting RStudio to your GitHub repository</a></li>
+<li class="chapter" data-level="" data-path="instructions-for-the-publishing-system-bookdown.html"><a href="instructions-for-the-publishing-system-bookdown.html"><i class="fa fa-check"></i>Instructions for the publishing system: Bookdown</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/dtkaplan/math253" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notes for Math 253: Statistical Computing and Machine Learning</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="cross-validation-and-bootstrapping" class="section level1">
+<h1><span class="header-section-number">Topic 9</span> Cross-Validation and Bootstrapping</h1>
+<p>In making a statistical model (including with machine-learning techniques) we have an overall goal:</p>
+<p><strong>Make model error small</strong> for the ways the model will actually be applied.</p>
+<p>Model error has three components:</p>
+<ul>
+<li>irreducible error (<span class="math inline">\(\epsilon\)</span>)</li>
+<li>error due to bias</li>
+<li>error due to variance</li>
+</ul>
+<p>Bias refers to the ways that <span class="math inline">\(\hat{f}({\mathbf X})\)</span> is systematically different from the idealized <span class="math inline">\(f({\mathbf X})\)</span>.</p>
+<p>Variance refers to the ways that <span class="math inline">\(\hat{f}_i({\mathbf X})\)</span> varies with the particular sample <span class="math inline">\(i\)</span> used for training.</p>
+<p>The overall model error is the sum of squares of these three components.</p>
+<p>There’s nothing to be done about irreducible error.</p>
+<p>we want to do two things that can conflict with one another:</p>
+<ol style="list-style-type: decimal">
+<li>make <em>bias</em> small.
+<ul>
+<li>flexible models</li>
+<li>QDA rather than LDA</li>
+<li>include lots of explanatory variables</li>
+</ul></li>
+<li>make <em>variance</em> small
+<ul>
+<li>lots of data</li>
+<li>few degrees of freedom (vs. flexibility or QDA)</li>
+<li>avoid collinearity and weak/irrelevant explanatory variables</li>
+</ul></li>
+</ol>
+<div id="philosophical-approaches" class="section level2">
+<h2><span class="header-section-number">9.1</span> Philosophical approaches</h2>
+<p>Often, these are just drawing attention to the problem; they don’t actually offer a solution.</p>
+<div id="occams-razor-a-heuristic" class="section level3">
+<h3><span class="header-section-number">9.1.1</span> Occam’s Razor: A heuristic</h3>
+<p><em>Non sunt multiplicanda entia sine necessitate</em>.</p>
+<ul>
+<li>Entities must not be multiplied beyond necessity.</li>
+</ul>
+<p>But what’s “beyond necessity?”</p>
+</div>
+<div id="einsteins-proverb" class="section level3">
+<h3><span class="header-section-number">9.1.2</span> Einstein’s proverb</h3>
+<p><em>Man muß die Dinge so einfach wie möglich machen. Aber nicht einfacher</em>.</p>
+<ul>
+<li>Make things as simple as possible, but not one bit simpler.</li>
+</ul>
+<p>But what’s “too simple?”</p>
+<p>Basic modeling-building question:</p>
+<ul>
+<li>Does adding this [variable, model term, potential flexibility] help?
+<ul>
+<li>For reducing bias: yes</li>
+<li>For reducing variance: maybe (if it eats up residual variance)</li>
+<li>For reducing error: maybe</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="operationalizing-model-choice" class="section level2">
+<h2><span class="header-section-number">9.2</span> Operationalizing model choice</h2>
+<p>We need to be able to measure two aspects of a model:</p>
+<ol style="list-style-type: decimal">
+<li>bias: theory is difficult, since we don’t know the “true” system</li>
+<li>variance: theory is straightforward</li>
+</ol>
+<p>Bias in practice:</p>
+<ul>
+<li>Have a good measure of variance.</li>
+<li>Add in new model terms, flexibility, etc. See if the variance goes down.</li>
+</ul>
+<p>Think in terms of comparing two models to select which one is better.</p>
+<p>“Better” needs to be transitive: if A is better than B, and B is better than C, then A is better than C.</p>
+<p>Then, any number of models can be compared to find the one (or more) that is the best.</p>
+</div>
+<div id="some-definitions-of-better" class="section level2">
+<h2><span class="header-section-number">9.3</span> Some definitions of “better”</h2>
+<ul>
+<li>Larger likelihood (non-iid Gaussian error models)</li>
+<li>Smaller mean square prediction error (same as larger likelihood with iid Gaussian error model)</li>
+<li>Classification error rate is smaller</li>
+<li>Loss function is smaller</li>
+</ul>
+</div>
+<div id="training-and-testing" class="section level2">
+<h2><span class="header-section-number">9.4</span> Training and Testing</h2>
+<p>Evaluation of performance using training data is biased to give larger likelihood (smaller MSE or classification error or loss error).</p>
+<p>Unbiased evaluation is done on separate testing data.</p>
+</div>
+<div id="trade-off" class="section level2">
+<h2><span class="header-section-number">9.5</span> Trade-off</h2>
+<ul>
+<li><p>Need large testing dataset for good estimate of performance</p></li>
+<li><p>Need large training dataset for reducing variance in fit.</p></li>
+</ul>
+<p>How to get both:</p>
+<ol style="list-style-type: decimal">
+<li>Collect a huge amount of data. When this works, go for it!</li>
+<li>K-fold cross validation
+<ul>
+<li>Pull out 1/K part of the data for performance testing.</li>
+<li>Fit to the other (K-1)/K part of the data.</li>
+<li>Repeat K times and average the prediction results over the K trials.</li>
+</ul></li>
+<li>Once you’ve found the best <em>form</em> of model, fit it to the whole data set. That’s your model.</li>
+</ol>
+</div>
+<div id="classical-theory-interlude" class="section level2">
+<h2><span class="header-section-number">9.6</span> Classical theory interlude</h2>
+<p>M-estimators and robust estimation.</p>
+</div>
+<div id="bootstrapping" class="section level2">
+<h2><span class="header-section-number">9.7</span> Bootstrapping</h2>
+<div class="figure"><span id="fig:unnamed-chunk-1"></span>
+<img src="Images/Chapter-5/5.10.png" alt="ISLR Figure 5.10" width="400" />
+<p class="caption">
+Figure 9.1: ISLR Figure 5.10
+</p>
+</div>
+<p>In-class demonstration.</p>
+<ul>
+<li>How many cases don’t get used in a typical resample?</li>
+<li>Hint: It will suffice to work with indices, so the numbers <code>1:n</code> for a sample of size <code>n</code>.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cases &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">10000</span>
+ntrials &lt;-<span class="st"> </span><span class="dv">50</span>
+result &lt;-<span class="st"> </span><span class="kw">numeric</span>(ntrials)
+for (k in <span class="dv">1</span>:<span class="dv">50</span>) {
+  bootstrap_sample &lt;-<span class="st"> </span><span class="kw">sample</span>(cases, <span class="dt">size=</span><span class="kw">length</span>(cases), <span class="dt">replace =</span> <span class="ot">TRUE</span>)
+  result[k] &lt;-<span class="st"> </span><span class="kw">length</span>(<span class="kw">setdiff</span>(cases, <span class="kw">unique</span>(bootstrap_sample))) /<span class="st"> </span><span class="kw">length</span>(cases)
+}
+result</code></pre></div>
+<pre><code>##  [1] 0.3683 0.3668 0.3721 0.3666 0.3688 0.3626 0.3660 0.3681 0.3670 0.3683
+## [11] 0.3640 0.3675 0.3644 0.3670 0.3671 0.3682 0.3646 0.3693 0.3710 0.3732
+## [21] 0.3654 0.3669 0.3644 0.3624 0.3621 0.3677 0.3705 0.3671 0.3676 0.3609
+## [31] 0.3705 0.3703 0.3691 0.3713 0.3667 0.3596 0.3640 0.3689 0.3653 0.3648
+## [41] 0.3702 0.3676 0.3687 0.3649 0.3639 0.3659 0.3702 0.3692 0.3685 0.3660</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Or ...
+(<span class="dv">1</span> -<span class="st"> </span><span class="dv">1</span>/<span class="kw">length</span>(cases))^<span class="kw">length</span>(cases)</code></pre></div>
+<pre><code>## [1] 0.367861</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="linear-and-quadratic-discriminant-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="regularization-shrinkage-and-dimension-reduction.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/dtkaplan/math253/edit/master/510-Cross-Validation.Rmd",
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

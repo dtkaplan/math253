@@ -39,7 +39,7 @@ MathJax.Hub.Config({
   
   
 <link rel="prev" href="logistic-regression.html">
-<link rel="next" href="appendices.html">
+<link rel="next" href="cross-validation-and-bootstrapping.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -109,31 +109,176 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="./">Math 253 Notes</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Placeholder</a></li>
-<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a></li>
-<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
-<li class="chapter" data-level="3" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>3</b> Linear Regression</a></li>
-<li class="chapter" data-level="4" data-path="foundations-linear-algebra-likelihood-and-bayes-rule.html"><a href="foundations-linear-algebra-likelihood-and-bayes-rule.html"><i class="fa fa-check"></i><b>4</b> Foundations: linear algebra, likelihood and Bayes’ rule</a></li>
-<li class="chapter" data-level="5" data-path="classifiers.html"><a href="classifiers.html"><i class="fa fa-check"></i><b>5</b> Classifiers</a></li>
-<li class="chapter" data-level="6" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>6</b> Logistic Regression</a></li>
-<li class="chapter" data-level="7" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html"><i class="fa fa-check"></i><b>7</b> Linear and Quadratic Discriminant Analysis</a><ul>
-<li class="chapter" data-level="7.1" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#example-default-on-student-loans"><i class="fa fa-check"></i><b>7.1</b> Example: Default on student loans</a></li>
-<li class="chapter" data-level="7.2" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#a-bayes-rule-approach"><i class="fa fa-check"></i><b>7.2</b> A Bayes’ Rule approach</a></li>
-<li class="chapter" data-level="7.3" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#univariate-gaussian"><i class="fa fa-check"></i><b>7.3</b> Univariate Gaussian</a></li>
-<li class="chapter" data-level="7.4" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#uncorrelated-bivariate-gaussian"><i class="fa fa-check"></i><b>7.4</b> Uncorrelated bivariate gaussian</a></li>
-<li class="chapter" data-level="7.5" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#bivariate-normal-distribution-with-correlations"><i class="fa fa-check"></i><b>7.5</b> Bivariate normal distribution with correlations</a></li>
-<li class="chapter" data-level="7.6" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#shape-of-multivariate-gaussian"><i class="fa fa-check"></i><b>7.6</b> Shape of multivariate gaussian</a></li>
-<li class="chapter" data-level="7.7" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#generating-bivariate-normal-from-independent"><i class="fa fa-check"></i><b>7.7</b> Generating bivariate normal from independent</a></li>
-<li class="chapter" data-level="7.8" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#independent-variables-x_i"><i class="fa fa-check"></i><b>7.8</b> Independent variables <span class="math inline">\(x_i\)</span></a></li>
-<li class="chapter" data-level="7.9" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#re-explaining-boldsymbolsigma"><i class="fa fa-check"></i><b>7.9</b> Re-explaining <span class="math inline">\(\boldsymbol\Sigma\)</span></a></li>
-<li class="chapter" data-level="7.10" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#lda"><i class="fa fa-check"></i><b>7.10</b> LDA</a></li>
-<li class="chapter" data-level="7.11" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#qda"><i class="fa fa-check"></i><b>7.11</b> QDA</a></li>
-<li class="chapter" data-level="7.12" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#error-test-rates-on-various-classifiers"><i class="fa fa-check"></i><b>7.12</b> Error test rates on various classifiers</a></li>
-<li class="chapter" data-level="7.13" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#error-rates"><i class="fa fa-check"></i><b>7.13</b> Error rates</a></li>
-<li class="chapter" data-level="7.14" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#receiver-operating-curves"><i class="fa fa-check"></i><b>7.14</b> Receiver operating curves</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#math-253-and-the-macalester-statistics-curriculum"><i class="fa fa-check"></i>Math 253 and the Macalester statistics curriculum</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#these-notes-are-written-in-bookdown"><i class="fa fa-check"></i>These notes are written in Bookdown</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#statistical-and-machine-learning"><i class="fa fa-check"></i><b>1.1</b> Statistical and Machine Learning</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="introduction.html"><a href="introduction.html#example-1-machine-translation-of-natural-languages"><i class="fa fa-check"></i><b>1.1.1</b> Example 1: Machine translation of natural languages</a></li>
+<li class="chapter" data-level="1.1.2" data-path="introduction.html"><a href="introduction.html#example-2-from-library-catalogs-to-latent-semantic-indexing"><i class="fa fa-check"></i><b>1.1.2</b> Example 2: From library catalogs to latent semantic indexing</a></li>
+<li class="chapter" data-level="1.1.3" data-path="introduction.html"><a href="introduction.html#computing-technique"><i class="fa fa-check"></i><b>1.1.3</b> Computing technique</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#review-of-day-1"><i class="fa fa-check"></i><b>1.2</b> Review of Day 1</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#theoretical-concepts-isl-2.1"><i class="fa fa-check"></i><b>1.3</b> Theoretical concepts ISL §2.1</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="introduction.html"><a href="introduction.html#statistics-concepts"><i class="fa fa-check"></i><b>1.3.1</b> Statistics concepts</a></li>
+<li class="chapter" data-level="1.3.2" data-path="introduction.html"><a href="introduction.html#computing-concepts"><i class="fa fa-check"></i><b>1.3.2</b> Computing concepts</a></li>
+<li class="chapter" data-level="1.3.3" data-path="introduction.html"><a href="introduction.html#cross-fertilization"><i class="fa fa-check"></i><b>1.3.3</b> Cross fertilization</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#many-techniques"><i class="fa fa-check"></i><b>1.4</b> Many techniques</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="introduction.html"><a href="introduction.html#unsupervised-learning"><i class="fa fa-check"></i><b>1.4.1</b> Unsupervised learning</a></li>
+<li class="chapter" data-level="1.4.2" data-path="introduction.html"><a href="introduction.html#supervised-learning"><i class="fa fa-check"></i><b>1.4.2</b> Supervised learning:</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#basic-dicotomies-in-machine-learning"><i class="fa fa-check"></i><b>1.5</b> Basic dicotomies in machine learning</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="introduction.html"><a href="introduction.html#purposes-for-learning"><i class="fa fa-check"></i><b>1.5.1</b> Purposes for learning:</a></li>
+<li class="chapter" data-level="1.5.2" data-path="introduction.html"><a href="introduction.html#dicotomies"><i class="fa fa-check"></i><b>1.5.2</b> Dicotomies</a></li>
+<li class="chapter" data-level="1.5.3" data-path="introduction.html"><a href="introduction.html#prediction-versus-mechanism"><i class="fa fa-check"></i><b>1.5.3</b> Prediction versus mechanism</a></li>
+<li class="chapter" data-level="1.5.4" data-path="introduction.html"><a href="introduction.html#flexibility-versus-variance"><i class="fa fa-check"></i><b>1.5.4</b> Flexibility versus variance</a></li>
+<li class="chapter" data-level="1.5.5" data-path="introduction.html"><a href="introduction.html#black-box-vs-interpretable-models"><i class="fa fa-check"></i><b>1.5.5</b> Black box vs interpretable models</a></li>
+<li class="chapter" data-level="1.5.6" data-path="introduction.html"><a href="introduction.html#reducible-versus-irreducible-error"><i class="fa fa-check"></i><b>1.5.6</b> Reducible versus irreducible error</a></li>
+<li class="chapter" data-level="1.5.7" data-path="introduction.html"><a href="introduction.html#regression-versus-classification"><i class="fa fa-check"></i><b>1.5.7</b> Regression versus classification</a></li>
+<li class="chapter" data-level="1.5.8" data-path="introduction.html"><a href="introduction.html#supervised-versus-unsupervised"><i class="fa fa-check"></i><b>1.5.8</b> Supervised versus unsupervised</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="introduction.html"><a href="introduction.html#programming-activity-1"><i class="fa fa-check"></i><b>1.6</b> Programming Activity 1</a></li>
+<li class="chapter" data-level="1.7" data-path="introduction.html"><a href="introduction.html#review-of-day-2"><i class="fa fa-check"></i><b>1.7</b> Review of Day 2</a><ul>
+<li class="chapter" data-level="1.7.1" data-path="introduction.html"><a href="introduction.html#trade-offsdicotomies"><i class="fa fa-check"></i><b>1.7.1</b> Trade-offs/Dicotomies</a></li>
+</ul></li>
+<li class="chapter" data-level="1.8" data-path="introduction.html"><a href="introduction.html#a-classifier-example"><i class="fa fa-check"></i><b>1.8</b> A Classifier example</a></li>
+<li class="chapter" data-level="1.9" data-path="introduction.html"><a href="introduction.html#programming-activity-2"><i class="fa fa-check"></i><b>1.9</b> Programming Activity 2</a></li>
+<li class="chapter" data-level="1.10" data-path="introduction.html"><a href="introduction.html#day-3-theory-accuracy-precision-and-bias"><i class="fa fa-check"></i><b>1.10</b> Day 3 theory: accuracy, precision, and bias</a><ul>
+<li class="chapter" data-level="1.10.1" data-path="introduction.html"><a href="introduction.html#figure-2.10"><i class="fa fa-check"></i><b>1.10.1</b> Figure 2.10</a></li>
+<li class="chapter" data-level="1.10.2" data-path="introduction.html"><a href="introduction.html#another-example-a-smoother-simulated-fx."><i class="fa fa-check"></i><b>1.10.2</b> Another example: A smoother simulated <span class="math inline">\(f(x)\)</span>.</a></li>
+<li class="chapter" data-level="1.10.3" data-path="introduction.html"><a href="introduction.html#whats-the-best-of-these-models"><i class="fa fa-check"></i><b>1.10.3</b> What’s the “best” of these models?</a></li>
+<li class="chapter" data-level="1.10.4" data-path="introduction.html"><a href="introduction.html#why-is-testing-mse-u-shaped"><i class="fa fa-check"></i><b>1.10.4</b> Why is testing MSE U-shaped?</a></li>
+<li class="chapter" data-level="1.10.5" data-path="introduction.html"><a href="introduction.html#measuring-the-variance-of-independent-sources-of-variation"><i class="fa fa-check"></i><b>1.10.5</b> Measuring the variance of independent sources of variation</a></li>
+<li class="chapter" data-level="1.10.6" data-path="introduction.html"><a href="introduction.html#equation-2.7"><i class="fa fa-check"></i><b>1.10.6</b> Equation 2.7</a></li>
+</ul></li>
+<li class="chapter" data-level="1.11" data-path="introduction.html"><a href="introduction.html#programming-basics-i-names-classes-and-objects-progbasics1"><i class="fa fa-check"></i><b>1.11</b> Programming Basics I: Names, classes, and objects {progbasics1}</a><ul>
+<li class="chapter" data-level="1.11.1" data-path="introduction.html"><a href="introduction.html#names"><i class="fa fa-check"></i><b>1.11.1</b> Names</a></li>
+<li class="chapter" data-level="1.11.2" data-path="introduction.html"><a href="introduction.html#objects"><i class="fa fa-check"></i><b>1.11.2</b> Objects</a></li>
+<li class="chapter" data-level="1.11.3" data-path="introduction.html"><a href="introduction.html#vectors"><i class="fa fa-check"></i><b>1.11.3</b> Vectors</a></li>
+<li class="chapter" data-level="1.11.4" data-path="introduction.html"><a href="introduction.html#matrices"><i class="fa fa-check"></i><b>1.11.4</b> Matrices</a></li>
+<li class="chapter" data-level="1.11.5" data-path="introduction.html"><a href="introduction.html#lists"><i class="fa fa-check"></i><b>1.11.5</b> Lists</a></li>
+<li class="chapter" data-level="1.11.6" data-path="introduction.html"><a href="introduction.html#functions"><i class="fa fa-check"></i><b>1.11.6</b> Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="1.12" data-path="introduction.html"><a href="introduction.html#programming-activity-3"><i class="fa fa-check"></i><b>1.12</b> Programming Activity 3</a></li>
+<li class="chapter" data-level="1.13" data-path="introduction.html"><a href="introduction.html#review-of-day-3"><i class="fa fa-check"></i><b>1.13</b> Review of Day 3</a></li>
+<li class="chapter" data-level="1.14" data-path="introduction.html"><a href="introduction.html#start-thursday-15-sept."><i class="fa fa-check"></i><b>1.14</b> Start Thursday 15 Sept.</a></li>
+</ul></li>
+<li class="part"><span><b>Topic I: Linear Regression</b></span><ul>
+<li class="chapter" data-level="1.15" data-path="introduction.html"><a href="introduction.html#day-4-preview"><i class="fa fa-check"></i><b>1.15</b> Day 4 Preview</a></li>
+<li class="chapter" data-level="1.16" data-path="introduction.html"><a href="introduction.html#small-data"><i class="fa fa-check"></i><b>1.16</b> Small data</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="notes.html"><a href="notes.html"><i class="fa fa-check"></i><b>2</b> Notes</a><ul>
+<li class="chapter" data-level="2.1" data-path="notes.html"><a href="notes.html#programming-basics-linear-models"><i class="fa fa-check"></i><b>2.1</b> Programming basics: Linear Models</a></li>
+<li class="chapter" data-level="2.2" data-path="notes.html"><a href="notes.html#review-of-day-4-sept-15-2016"><i class="fa fa-check"></i><b>2.2</b> Review of Day 4, Sept 15, 2016</a></li>
+<li class="chapter" data-level="2.3" data-path="notes.html"><a href="notes.html#regression-and-interpretability"><i class="fa fa-check"></i><b>2.3</b> Regression and Interpretability</a></li>
+<li class="chapter" data-level="2.4" data-path="notes.html"><a href="notes.html#toward-an-automated-regression-process"><i class="fa fa-check"></i><b>2.4</b> Toward an automated regression process</a></li>
+<li class="chapter" data-level="2.5" data-path="notes.html"><a href="notes.html#selecting-model-terms"><i class="fa fa-check"></i><b>2.5</b> Selecting model terms</a></li>
+<li class="chapter" data-level="2.6" data-path="notes.html"><a href="notes.html#programming-basics-graphics"><i class="fa fa-check"></i><b>2.6</b> Programming basics: Graphics</a></li>
+<li class="chapter" data-level="2.7" data-path="notes.html"><a href="notes.html#in-class-programming-activity"><i class="fa fa-check"></i><b>2.7</b> In-class programming activity</a></li>
+<li class="chapter" data-level="2.8" data-path="notes.html"><a href="notes.html#day-5-summary"><i class="fa fa-check"></i><b>2.8</b> Day 5 Summary</a><ul>
+<li class="chapter" data-level="2.8.1" data-path="notes.html"><a href="notes.html#linear-regression"><i class="fa fa-check"></i><b>2.8.1</b> Linear regression</a></li>
+<li class="chapter" data-level="2.8.2" data-path="notes.html"><a href="notes.html#coefficients-as-quantities"><i class="fa fa-check"></i><b>2.8.2</b> Coefficients as quantities</a></li>
+<li class="chapter" data-level="2.8.3" data-path="notes.html"><a href="notes.html#graphics-basics"><i class="fa fa-check"></i><b>2.8.3</b> Graphics basics</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="notes.html"><a href="notes.html#k-nearest-neighbors"><i class="fa fa-check"></i><b>2.9</b> K-nearest neighbors</a></li>
+<li class="chapter" data-level="2.10" data-path="notes.html"><a href="notes.html#in-class-programming-activity-1"><i class="fa fa-check"></i><b>2.10</b> In-class programming activity</a></li>
+<li class="chapter" data-level="2.11" data-path="notes.html"><a href="notes.html#day-6-summary"><i class="fa fa-check"></i><b>2.11</b> Day 6 Summary</a></li>
+<li class="chapter" data-level="2.12" data-path="notes.html"><a href="notes.html#measuring-accuracy-of-the-model"><i class="fa fa-check"></i><b>2.12</b> Measuring Accuracy of the Model</a></li>
+<li class="chapter" data-level="2.13" data-path="notes.html"><a href="notes.html#bias-of-the-model"><i class="fa fa-check"></i><b>2.13</b> Bias of the model</a><ul>
+<li class="chapter" data-level="2.13.1" data-path="notes.html"><a href="notes.html#theory-of-whole-model-anova."><i class="fa fa-check"></i><b>2.13.1</b> Theory of whole-model ANOVA.</a></li>
+</ul></li>
+<li class="chapter" data-level="2.14" data-path="notes.html"><a href="notes.html#forward-backward-and-mixed-selection"><i class="fa fa-check"></i><b>2.14</b> Forward, backward and mixed selection</a></li>
+<li class="chapter" data-level="2.15" data-path="notes.html"><a href="notes.html#programming-basics-functions"><i class="fa fa-check"></i><b>2.15</b> Programming Basics: Functions</a></li>
+<li class="chapter" data-level="2.16" data-path="notes.html"><a href="notes.html#in-class-programming-activity-2"><i class="fa fa-check"></i><b>2.16</b> In-class programming activity</a></li>
+<li class="chapter" data-level="2.17" data-path="notes.html"><a href="notes.html#review-of-day-7"><i class="fa fa-check"></i><b>2.17</b> Review of Day 7</a></li>
+<li class="chapter" data-level="2.18" data-path="notes.html"><a href="notes.html#using-predict-to-calculate-precision"><i class="fa fa-check"></i><b>2.18</b> Using predict() to calculate precision</a></li>
+<li class="chapter" data-level="2.19" data-path="notes.html"><a href="notes.html#conclusion"><i class="fa fa-check"></i><b>2.19</b> Conclusion</a></li>
+</ul></li>
+<li class="part"><span><b>Topic II: Foundations: linear algebra, likelihood and Bayes’ rule</b></span><ul>
+<li class="chapter" data-level="2.20" data-path="notes.html"><a href="notes.html#linear-algebra"><i class="fa fa-check"></i><b>2.20</b> Linear Algebra</a></li>
+<li class="chapter" data-level="2.21" data-path="notes.html"><a href="notes.html#arithmetic-of-linear-algebra-operations"><i class="fa fa-check"></i><b>2.21</b> Arithmetic of linear algebra operations</a></li>
+<li class="chapter" data-level="2.22" data-path="notes.html"><a href="notes.html#the-geometry-of-fitting"><i class="fa fa-check"></i><b>2.22</b> The geometry of fitting</a></li>
+<li class="chapter" data-level="2.23" data-path="notes.html"><a href="notes.html#precision-of-the-coefficients"><i class="fa fa-check"></i><b>2.23</b> Precision of the coefficients</a></li>
+<li class="chapter" data-level="2.24" data-path="notes.html"><a href="notes.html#likelihood-and-bayes"><i class="fa fa-check"></i><b>2.24</b> Likelihood and Bayes</a></li>
+<li class="chapter" data-level="2.25" data-path="notes.html"><a href="notes.html#summary-of-day-8"><i class="fa fa-check"></i><b>2.25</b> Summary of Day 8</a></li>
+<li class="chapter" data-level="2.26" data-path="notes.html"><a href="notes.html#day-9-announcements"><i class="fa fa-check"></i><b>2.26</b> Day 9 Announcements</a><ul>
+<li class="chapter" data-level="2.26.1" data-path="notes.html"><a href="notes.html#whats-a-probability"><i class="fa fa-check"></i><b>2.26.1</b> What’s a probability?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.27" data-path="notes.html"><a href="notes.html#conditional-probability"><i class="fa fa-check"></i><b>2.27</b> Conditional probability</a></li>
+<li class="chapter" data-level="2.28" data-path="notes.html"><a href="notes.html#inverting-conditional-probabilities"><i class="fa fa-check"></i><b>2.28</b> Inverting conditional probabilities</a></li>
+<li class="chapter" data-level="2.29" data-path="notes.html"><a href="notes.html#summary-of-day-9"><i class="fa fa-check"></i><b>2.29</b> Summary of Day 9</a></li>
+<li class="chapter" data-level="2.30" data-path="notes.html"><a href="notes.html#likelihood-example"><i class="fa fa-check"></i><b>2.30</b> Likelihood example</a></li>
+<li class="chapter" data-level="2.31" data-path="notes.html"><a href="notes.html#exponential-probability-density"><i class="fa fa-check"></i><b>2.31</b> Exponential probability density</a><ul>
+<li class="chapter" data-level="2.31.1" data-path="notes.html"><a href="notes.html#meanwhile-further-north"><i class="fa fa-check"></i><b>2.31.1</b> Meanwhile, further north …</a></li>
+</ul></li>
+<li class="chapter" data-level="2.32" data-path="notes.html"><a href="notes.html#california-earthquake-warning-reprise"><i class="fa fa-check"></i><b>2.32</b> California earthquake warning, reprise</a></li>
+<li class="chapter" data-level="2.33" data-path="notes.html"><a href="notes.html#the-price-is-right"><i class="fa fa-check"></i><b>2.33</b> The Price is Right!</a></li>
+<li class="chapter" data-level="2.34" data-path="notes.html"><a href="notes.html#from-likelihood-to-bayes"><i class="fa fa-check"></i><b>2.34</b> From likelihood to Bayes</a></li>
+<li class="chapter" data-level="2.35" data-path="notes.html"><a href="notes.html#choosing-models-using-maximum-likelihood"><i class="fa fa-check"></i><b>2.35</b> Choosing models using maximum likelihood</a></li>
+<li class="chapter" data-level="2.36" data-path="notes.html"><a href="notes.html#day-9-review"><i class="fa fa-check"></i><b>2.36</b> Day 9 Review</a></li>
+<li class="chapter" data-level="2.37" data-path="notes.html"><a href="notes.html#reading-what-is-bayesian-statistics"><i class="fa fa-check"></i><b>2.37</b> Reading: <em>What is Bayesian Statistics</em></a></li>
+<li class="chapter" data-level="2.38" data-path="notes.html"><a href="notes.html#programming-basics-conditionals"><i class="fa fa-check"></i><b>2.38</b> Programming Basics: Conditionals</a></li>
+<li class="chapter" data-level="2.39" data-path="notes.html"><a href="notes.html#ifelse-examples"><i class="fa fa-check"></i><b>2.39</b> <code>ifelse()</code> examples</a></li>
+<li class="chapter" data-level="2.40" data-path="notes.html"><a href="notes.html#if-else-examples"><i class="fa fa-check"></i><b>2.40</b> if … else … examples</a></li>
+<li class="chapter" data-level="2.41" data-path="notes.html"><a href="notes.html#simple"><i class="fa fa-check"></i><b>2.41</b> Simple</a></li>
+<li class="chapter" data-level="2.42" data-path="notes.html"><a href="notes.html#blood-testing"><i class="fa fa-check"></i><b>2.42</b> Blood testing</a></li>
+<li class="chapter" data-level="2.43" data-path="notes.html"><a href="notes.html#the-hyper-volume-of-the-hypersphere."><i class="fa fa-check"></i><b>2.43</b> The (hyper)-volume of the hypersphere.</a></li>
+<li class="chapter" data-level="2.44" data-path="notes.html"><a href="notes.html#find-the-surface-area-d_n-rn-1."><i class="fa fa-check"></i><b>2.44</b> Find the surface area, <span class="math inline">\(D_n r^{n-1}\)</span>.</a></li>
+<li class="chapter" data-level="2.45" data-path="notes.html"><a href="notes.html#in-class-programming-activity-3"><i class="fa fa-check"></i><b>2.45</b> In-class programming activity</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="classifiers.html"><a href="classifiers.html"><i class="fa fa-check"></i><b>3</b> Classifiers</a><ul>
+<li class="chapter" data-level="3.1" data-path="classifiers.html"><a href="classifiers.html#classification-overview"><i class="fa fa-check"></i><b>3.1</b> Classification overview</a></li>
+<li class="chapter" data-level="3.2" data-path="classifiers.html"><a href="classifiers.html#day-10-preview"><i class="fa fa-check"></i><b>3.2</b> Day 10 preview</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>4</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="4.1" data-path="logistic-regression.html"><a href="logistic-regression.html#probability-and-odds"><i class="fa fa-check"></i><b>4.1</b> Probability and odds</a></li>
+<li class="chapter" data-level="4.2" data-path="logistic-regression.html"><a href="logistic-regression.html#log-odds"><i class="fa fa-check"></i><b>4.2</b> Log Odds</a></li>
+<li class="chapter" data-level="4.3" data-path="logistic-regression.html"><a href="logistic-regression.html#why-use-odds"><i class="fa fa-check"></i><b>4.3</b> Why use odds?</a></li>
+<li class="chapter" data-level="4.4" data-path="logistic-regression.html"><a href="logistic-regression.html#use-of-glm"><i class="fa fa-check"></i><b>4.4</b> Use of glm()</a></li>
+<li class="chapter" data-level="4.5" data-path="logistic-regression.html"><a href="logistic-regression.html#interpretation-of-coefficients"><i class="fa fa-check"></i><b>4.5</b> Interpretation of coefficients</a></li>
+<li class="chapter" data-level="4.6" data-path="logistic-regression.html"><a href="logistic-regression.html#example-logistic-regression-of-default"><i class="fa fa-check"></i><b>4.6</b> Example: Logistic regression of default</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html"><i class="fa fa-check"></i><b>5</b> Linear and Quadratic Discriminant Analysis</a><ul>
+<li class="chapter" data-level="5.1" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#example-default-on-student-loans"><i class="fa fa-check"></i><b>5.1</b> Example: Default on student loans</a></li>
+<li class="chapter" data-level="5.2" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#a-bayes-rule-approach"><i class="fa fa-check"></i><b>5.2</b> A Bayes’ Rule approach</a></li>
+<li class="chapter" data-level="5.3" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#univariate-gaussian"><i class="fa fa-check"></i><b>5.3</b> Univariate Gaussian</a></li>
+<li class="chapter" data-level="5.4" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#uncorrelated-bivariate-gaussian"><i class="fa fa-check"></i><b>5.4</b> Uncorrelated bivariate gaussian</a></li>
+<li class="chapter" data-level="5.5" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#bivariate-normal-distribution-with-correlations"><i class="fa fa-check"></i><b>5.5</b> Bivariate normal distribution with correlations</a></li>
+<li class="chapter" data-level="5.6" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#shape-of-multivariate-gaussian"><i class="fa fa-check"></i><b>5.6</b> Shape of multivariate gaussian</a></li>
+<li class="chapter" data-level="5.7" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#generating-bivariate-normal-from-independent"><i class="fa fa-check"></i><b>5.7</b> Generating bivariate normal from independent</a></li>
+<li class="chapter" data-level="5.8" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#independent-variables-x_i"><i class="fa fa-check"></i><b>5.8</b> Independent variables <span class="math inline">\(x_i\)</span></a></li>
+<li class="chapter" data-level="5.9" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#re-explaining-boldsymbolsigma"><i class="fa fa-check"></i><b>5.9</b> Re-explaining <span class="math inline">\(\boldsymbol\Sigma\)</span></a></li>
+<li class="chapter" data-level="5.10" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#lda"><i class="fa fa-check"></i><b>5.10</b> LDA</a></li>
+<li class="chapter" data-level="5.11" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#qda"><i class="fa fa-check"></i><b>5.11</b> QDA</a></li>
+<li class="chapter" data-level="5.12" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#error-test-rates-on-various-classifiers"><i class="fa fa-check"></i><b>5.12</b> Error test rates on various classifiers</a></li>
+<li class="chapter" data-level="5.13" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#error-rates"><i class="fa fa-check"></i><b>5.13</b> Error rates</a></li>
+<li class="chapter" data-level="5.14" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#receiver-operating-curves"><i class="fa fa-check"></i><b>5.14</b> Receiver operating curves</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html"><i class="fa fa-check"></i><b>6</b> Cross-Validation and Bootstrapping</a><ul>
+<li class="chapter" data-level="6.1" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html#philosophical-approaches"><i class="fa fa-check"></i><b>6.1</b> Philosophical approaches</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html#occams-razor-a-heuristic"><i class="fa fa-check"></i><b>6.1.1</b> Occam’s Razor: A heuristic</a></li>
+<li class="chapter" data-level="6.1.2" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html#einsteins-proverb"><i class="fa fa-check"></i><b>6.1.2</b> Einstein’s proverb</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html#operationalizing-model-choice"><i class="fa fa-check"></i><b>6.2</b> Operationalizing model choice</a></li>
+<li class="chapter" data-level="6.3" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html#some-definitions-of-better"><i class="fa fa-check"></i><b>6.3</b> Some definitions of “better”</a></li>
+<li class="chapter" data-level="6.4" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html#training-and-testing"><i class="fa fa-check"></i><b>6.4</b> Training and Testing</a></li>
+<li class="chapter" data-level="6.5" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html#trade-off"><i class="fa fa-check"></i><b>6.5</b> Trade-off</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="programming-basics.html"><a href="programming-basics.html"><i class="fa fa-check"></i><b>7</b> Programming Basics</a><ul>
+<li class="chapter" data-level="7.1" data-path="programming-basics.html"><a href="programming-basics.html#loopsiteration"><i class="fa fa-check"></i><b>7.1</b> Loops/Iteration</a></li>
+<li class="chapter" data-level="7.2" data-path="programming-basics.html"><a href="programming-basics.html#parts-of-a-loop"><i class="fa fa-check"></i><b>7.2</b> Parts of a loop</a></li>
+<li class="chapter" data-level="7.3" data-path="programming-basics.html"><a href="programming-basics.html#trivial-examples"><i class="fa fa-check"></i><b>7.3</b> Trivial examples</a></li>
+<li class="chapter" data-level="7.4" data-path="programming-basics.html"><a href="programming-basics.html#bootstrapping"><i class="fa fa-check"></i><b>7.4</b> Bootstrapping</a></li>
+<li class="chapter" data-level="7.5" data-path="programming-basics.html"><a href="programming-basics.html#leave-one-out-cross-validation."><i class="fa fa-check"></i><b>7.5</b> Leave-one-out cross-validation.</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="appendices.html"><a href="appendices.html"><i class="fa fa-check"></i>Appendices</a></li>
-<li class="chapter" data-level="" data-path="connecting-rstudio-to-your-github-repository.html"><a href="connecting-rstudio-to-your-github-repository.html"><i class="fa fa-check"></i>Connecting RStudio to your GitHub repository</a></li>
+<li class="chapter" data-level="" data-path="connecting-rstudio-to-your-github-repository.html"><a href="connecting-rstudio-to-your-github-repository.html"><i class="fa fa-check"></i>Connecting RStudio to your GitHub repository</a><ul>
+<li class="chapter" data-level="7.6" data-path="connecting-rstudio-to-your-github-repository.html"><a href="connecting-rstudio-to-your-github-repository.html#setting-up-your-math-253-repository"><i class="fa fa-check"></i><b>7.6</b> Setting up your Math 253 repository</a></li>
+<li class="chapter" data-level="7.7" data-path="connecting-rstudio-to-your-github-repository.html"><a href="connecting-rstudio-to-your-github-repository.html#using-your-repository"><i class="fa fa-check"></i><b>7.7</b> Using your repository</a></li>
+<li class="chapter" data-level="7.8" data-path="connecting-rstudio-to-your-github-repository.html"><a href="connecting-rstudio-to-your-github-repository.html#why-are-we-doing-this"><i class="fa fa-check"></i><b>7.8</b> Why are we doing this?</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="instructions-for-the-publishing-system-bookdown.html"><a href="instructions-for-the-publishing-system-bookdown.html"><i class="fa fa-check"></i>Instructions for the publishing system: Bookdown</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/dtkaplan/math253" target="blank">Published with bookdown</a></li>
@@ -156,9 +301,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="linear-and-quadratic-discriminant-analysis" class="section level1">
-<h1><span class="header-section-number">Topic 7</span> Linear and Quadratic Discriminant Analysis</h1>
+<h1><span class="header-section-number">Topic 5</span> Linear and Quadratic Discriminant Analysis</h1>
 <div id="example-default-on-student-loans" class="section level2">
-<h2><span class="header-section-number">7.1</span> Example: Default on student loans</h2>
+<h2><span class="header-section-number">5.1</span> Example: Default on student loans</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model_of_default2 &lt;-
 <span class="st">  </span><span class="kw">lda</span>(default ~<span class="st"> </span>balance +<span class="st"> </span>income, <span class="dt">data =</span> Default)
 model_of_default2</code></pre></div>
@@ -238,10 +383,10 @@ sector_mod</code></pre></div>
 res &lt;-<span class="st"> </span><span class="kw">predict</span>(sector_mod, <span class="dt">newdata =</span> all_combos)$class
 all_combos$predicted &lt;-<span class="st"> </span>res
 <span class="kw">ggplot</span>(all_combos, <span class="kw">aes</span>(<span class="dt">x =</span> wage, <span class="dt">y =</span> educ, <span class="dt">color =</span> predicted)) +<span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
-<p><img src="Class_Notes__Statistical_Computing___Machine_Learning_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="Class_Notes__Statistical_Computing___Machine_Learning_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
 </div>
 <div id="a-bayes-rule-approach" class="section level2">
-<h2><span class="header-section-number">7.2</span> A Bayes’ Rule approach</h2>
+<h2><span class="header-section-number">5.2</span> A Bayes’ Rule approach</h2>
 <p>Suppose we have <span class="math inline">\(K\)</span> classes, <span class="math inline">\(A_1, A_2, \ldots, A_K\)</span>. We also have a set of inputs <span class="math inline">\(x_1, x_2, \ldots, x_p \equiv {\mathbf x}\)</span>.</p>
 <p>We observe <span class="math inline">\({\mathbf x}\)</span> and we want to know <span class="math inline">\(p(A_j \downarrow {\mathbf x})\)</span>. This is a <em>posterior</em> probability.</p>
 <p>Per usual, the quantities we can get from our training data are in the form of a <em>likelihood</em>: <span class="math inline">\(p({\mathbf x} \downarrow A_j)\)</span>.</p>
@@ -250,7 +395,7 @@ all_combos$predicted &lt;-<span class="st"> </span>res
 <p>A standard (but not necessarily good) model of a distribution is a multivariate Gaussian. LDA and QDA are based on a multi-variable Gaussian.</p>
 </div>
 <div id="univariate-gaussian" class="section level2">
-<h2><span class="header-section-number">7.3</span> Univariate Gaussian</h2>
+<h2><span class="header-section-number">5.3</span> Univariate Gaussian</h2>
 <p><span class="math display">\[p(x) = \underbrace{\frac{1}{\sqrt{2 \pi \sigma^2}}}_{Normalization} \underbrace{\exp(- \frac{(x-m)^2}{2 \sigma^2})}_{Shape}\]</span></p>
 <p>Imagine that we have another variable <span class="math inline">\(z = x/3\)</span>. Geometrically, <span class="math inline">\(z\)</span> is a stretched out version of <span class="math inline">\(x\)</span>, stretched by a factor of 3 around the mean. The distribution is</p>
 <p><span class="math display">\[p(z) = \underbrace{\frac{1}{\sqrt{2 \pi (3\sigma)^2}}}_{Normalization}\ \underbrace{\exp(- \frac{(x-m)^2}{2 (3\sigma)^2})}_{Shape}\]</span></p>
@@ -258,12 +403,12 @@ all_combos$predicted &lt;-<span class="st"> </span>res
 <p>The R function <code>dnorm()</code> calculates <span class="math inline">\(p(x)\)</span> for a univariate Gaussian.</p>
 </div>
 <div id="uncorrelated-bivariate-gaussian" class="section level2">
-<h2><span class="header-section-number">7.4</span> Uncorrelated bivariate gaussian</h2>
+<h2><span class="header-section-number">5.4</span> Uncorrelated bivariate gaussian</h2>
 <p>For independent RVs x and y, p(xy) = p(x)p(y). Show that the normalization is <span class="math inline">\(\frac{1}{2 \pi \sigma_x \sigma_y}\)</span>.</p>
 <p>The sigmas multiply in the normalization, like the area of something being stretched out in two orthogonal directions.</p>
 </div>
 <div id="bivariate-normal-distribution-with-correlations" class="section level2">
-<h2><span class="header-section-number">7.5</span> Bivariate normal distribution with correlations</h2>
+<h2><span class="header-section-number">5.5</span> Bivariate normal distribution with correlations</h2>
 <p><span class="math display">\[f(x,y) =
       \frac{1}{2 \pi  \sigma_X \sigma_Y \sqrt{1-\rho^2}}
       \exp\left(
@@ -281,12 +426,12 @@ all_combos$predicted &lt;-<span class="st"> </span>res
 <p>Therefore <span class="math display">\[\boldsymbol \Sigma^{-1} \equiv  \frac{1}{\sigma_x^2 \sigma_y^2 (1 - \rho^2)} \left(\begin{array}{cc}\sigma_y^2 &amp; - \rho \sigma_x \sigma_y\\ - \rho\sigma_x\sigma_y&amp; \sigma_x^2\end{array} \right)\]</span></p>
 </div>
 <div id="shape-of-multivariate-gaussian" class="section level2">
-<h2><span class="header-section-number">7.6</span> Shape of multivariate gaussian</h2>
+<h2><span class="header-section-number">5.6</span> Shape of multivariate gaussian</h2>
 <p>As an amplitude plot <img src="https://upload.wikimedia.org/wikipedia/commons/5/57/Multivariate_Gaussian.png" alt="amplitude plot" /></p>
 <p>Showing marginals and 3-<span class="math inline">\(\sigma\)</span> contour <img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/MultivariateNormal.png" alt="marginals" /></p>
 </div>
 <div id="generating-bivariate-normal-from-independent" class="section level2">
-<h2><span class="header-section-number">7.7</span> Generating bivariate normal from independent</h2>
+<h2><span class="header-section-number">5.7</span> Generating bivariate normal from independent</h2>
 <p>We want to find a matrix, M, by which to multiply iid Z to get correlated X with specified <span class="math inline">\(\sigma_x, \sigma_y, \rho\)</span>. The covariance matrix will be</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># parameters</span>
 sigma_x &lt;-<span class="st"> </span><span class="dv">3</span>
@@ -300,20 +445,20 @@ M &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">
 X &lt;-<span class="st"> </span>Z %*%<span class="st"> </span>M
 <span class="kw">cov</span>(X)</code></pre></div>
 <pre><code>##          [,1]      [,2]
-## [1,] 9.054182 1.4805573
-## [2,] 1.480557 0.9904932</code></pre>
+## [1,] 8.667761 1.4328505
+## [2,] 1.432851 0.9602763</code></pre>
 <p>M transforms from iid to correlated.</p>
 <p>In formula, we transform from correlated X to iid, so use M<span class="math inline">\(^{-1}\)</span>.</p>
 </div>
 <div id="independent-variables-x_i" class="section level2">
-<h2><span class="header-section-number">7.8</span> Independent variables <span class="math inline">\(x_i\)</span></h2>
+<h2><span class="header-section-number">5.8</span> Independent variables <span class="math inline">\(x_i\)</span></h2>
 <ul>
 <li>Describing dependence</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x1 =<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1000</span>)
 x2 =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>, <span class="dt">mean=</span><span class="dv">3</span>*x1<span class="dv">+2</span>, <span class="dt">sd=</span>x1)
 <span class="kw">plot</span>(x1, x2)</code></pre></div>
-<p><img src="Class_Notes__Statistical_Computing___Machine_Learning_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="Class_Notes__Statistical_Computing___Machine_Learning_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
 <ul>
 <li>Linear correlations and the Gaussian</li>
 </ul>
@@ -326,16 +471,16 @@ x2 =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(Default, 
        <span class="kw">aes</span>(<span class="dt">x =</span> income, <span class="dt">y =</span> balance, <span class="dt">alpha =</span> default, <span class="dt">color =</span> default)) +<span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
-<p><img src="Class_Notes__Statistical_Computing___Machine_Learning_files/figure-html/unnamed-chunk-6-1.png" width="6in" /></p>
+<p><img src="Class_Notes__Statistical_Computing___Machine_Learning_files/figure-html/unnamed-chunk-67-1.png" width="6in" /></p>
 <p>We were looking at the likelihood: prob(observation | class)</p>
 <p>Note: Likelihood itself won’t do a very good job, since defaults are relatively uncommon. That is, p(default) <span class="math inline">\(\ll\)</span> p(not).</p>
 </div>
 <div id="re-explaining-boldsymbolsigma" class="section level2">
-<h2><span class="header-section-number">7.9</span> Re-explaining <span class="math inline">\(\boldsymbol\Sigma\)</span></h2>
-<div class="figure"><span id="fig:unnamed-chunk-7"></span>
+<h2><span class="header-section-number">5.9</span> Re-explaining <span class="math inline">\(\boldsymbol\Sigma\)</span></h2>
+<div class="figure"><span id="fig:unnamed-chunk-68"></span>
 <img src="Images/Chapter-4/4.8.png" alt="Figure 4.8 from ISL" width="400" />
 <p class="caption">
-Figure 7.1: Figure 4.8 from ISL
+Figure 5.1: Figure 4.8 from ISL
 </p>
 </div>
 <p>Imagine two zero-mean variables, <span class="math inline">\(x_i\)</span> and <span class="math inline">\(x_j\)</span>, e.g. education and age, and suppose that <span class="math inline">\(v_i = x_i - \mu_i\)</span> and <span class="math inline">\(v_j = x_j - \mu_j\)</span>. I’ll write these in data table format, where each column is a variable and each row is a case and denote this by</p>
@@ -404,8 +549,8 @@ Z &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw">r
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cov</span>(X)</code></pre></div>
 <pre><code>##           balance      income
-## balance  196768.3   -916670.2
-## income  -916670.2 178780902.4</code></pre>
+## balance  208366.0   -861153.5
+## income  -861153.5 160224764.8</code></pre>
 <p>Why isn’t this exactly the same as the covariance matrix <span class="math inline">\(\boldsymbol \Sigma\)</span> that we were aiming at? Because of random fluctuations in the <span class="math inline">\(\left(\begin{array}{cc}z_i&amp;z_j\\\downarrow&amp;\downarrow\end{array}\right)\)</span>. You can reduce the impact of those fluctuations by making <span class="math inline">\(n\)</span> bigger.</p>
 <p>Notice that <span class="math inline">\({\boldsymbol A}\)</span> transforms from uncorrelated <span class="math inline">\(\left(\begin{array}{cc}z_i&amp;z_j\\\downarrow&amp;\downarrow\end{array}\right)\)</span> to correlated <span class="math inline">\(\left(\begin{array}{cc}v_i&amp;v_j\\\downarrow&amp;\downarrow\end{array}\right)\)</span>. If we have <span class="math inline">\(\left(\begin{array}{cc}x_i&amp;x_j\\\downarrow&amp;\downarrow\end{array}\right)\)</span>, we can create the uncorrelated <span class="math inline">\(\left(\begin{array}{cc}z_i&amp;z_j\\\downarrow&amp;\downarrow\end{array}\right)\)</span> with <span class="math display">\[\left(\begin{array}{cc}z_i&amp;z_j\\\downarrow&amp;\downarrow\end{array}\right) =
 \left[\left(\begin{array}{cc}x_i&amp;x_j\\\downarrow&amp;\downarrow\end{array}\right) - 
@@ -421,27 +566,27 @@ Z &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw">r
 <p>The stretching is due to the matrix <span class="math inline">\(\boldsymbol A\)</span>. So we should divide by the determinant of <span class="math inline">\(\boldsymbol A\)</span>, that is, <span class="math inline">\(|\boldsymbol A|\)</span>. The nature of the Cholesky decomposition is that <span class="math inline">\(|\boldsymbol A| = \sqrt{|\boldsymbol\Sigma|}\)</span>. Note in the formula for the Gaussian that the normalizing constant involves <span class="math inline">\(\sqrt{|\boldsymbol\Sigma|}\)</span>.</p>
 </div>
 <div id="lda" class="section level2">
-<h2><span class="header-section-number">7.10</span> LDA</h2>
+<h2><span class="header-section-number">5.10</span> LDA</h2>
 <p>All classes are treated as having the same <span class="math inline">\({\mathbf \Sigma}\)</span>.</p>
 <p> </p>
 </div>
 <div id="qda" class="section level2">
-<h2><span class="header-section-number">7.11</span> QDA</h2>
+<h2><span class="header-section-number">5.11</span> QDA</h2>
 <p>Classes are treated with different <span class="math inline">\({\mathbf \Sigma}_i\)</span>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr::<span class="kw">include_graphics</span>(<span class="st">&quot;Images/Chapter-4/4.9.png&quot;</span>)</code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-16"></span>
+<div class="figure"><span id="fig:unnamed-chunk-77"></span>
 <img src="Images/Chapter-4/4.9.png" alt="Figure 4.9 from ISL. Left: Bayes (purple dashed), LDA (black dotted), and QDA (green solid)} decision boundaries for a two-class problem with ${\mathbf \Sigma}_1 = {\mathbf \Sigma}_2$.  Right: QDA" width="400" />
 <p class="caption">
-Figure 7.2: Figure 4.9 from ISL. Left: Bayes (purple dashed), LDA (black dotted), and QDA (green solid)} decision boundaries for a two-class problem with <span class="math inline">\({\mathbf \Sigma}_1 = {\mathbf \Sigma}_2\)</span>. Right: QDA
+Figure 5.2: Figure 4.9 from ISL. Left: Bayes (purple dashed), LDA (black dotted), and QDA (green solid)} decision boundaries for a two-class problem with <span class="math inline">\({\mathbf \Sigma}_1 = {\mathbf \Sigma}_2\)</span>. Right: QDA
 </p>
 </div>
 </div>
 <div id="error-test-rates-on-various-classifiers" class="section level2">
-<h2><span class="header-section-number">7.12</span> Error test rates on various classifiers</h2>
-<div class="figure"><span id="fig:unnamed-chunk-17"></span>
+<h2><span class="header-section-number">5.12</span> Error test rates on various classifiers</h2>
+<div class="figure"><span id="fig:unnamed-chunk-78"></span>
 <img src="Images/Chapter-4/4.10.png" alt="Figure 4.10 from ISL" width="400" />
 <p class="caption">
-Figure 7.3: Figure 4.10 from ISL
+Figure 5.3: Figure 4.10 from ISL
 </p>
 </div>
 <p>Scenarios: In all, class means are different.</p>
@@ -450,10 +595,10 @@ Figure 7.3: Figure 4.10 from ISL
 <li>Both classes had a correlation of <span class="math inline">\(-0.5\)</span></li>
 <li>Uncorrelated, like (1), but the distribution is t(df=?): long tailed to right.</li>
 </ol>
-<div class="figure"><span id="fig:unnamed-chunk-18"></span>
+<div class="figure"><span id="fig:unnamed-chunk-79"></span>
 <img src="Images/Chapter-4/4.11.png" alt="Figure 4.11 from ISL" width="400" />
 <p class="caption">
-Figure 7.4: Figure 4.11 from ISL
+Figure 5.4: Figure 4.11 from ISL
 </p>
 </div>
 <ol start="4" style="list-style-type: decimal">
@@ -463,7 +608,7 @@ Figure 7.4: Figure 4.11 from ISL
 </ol>
 </div>
 <div id="error-rates" class="section level2">
-<h2><span class="header-section-number">7.13</span> Error rates</h2>
+<h2><span class="header-section-number">5.13</span> Error rates</h2>
 <p>Ways to measure the performance of a classifier.</p>
 <p>Examples: Two classifiers of employment type.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(CPS85, <span class="dt">package =</span> <span class="st">&quot;mosaicData&quot;</span>)
@@ -513,7 +658,7 @@ predicts_prof &lt;-<span class="st"> </span><span class="kw">predict</span>(clas
 </ul>
 </div>
 <div id="receiver-operating-curves" class="section level2">
-<h2><span class="header-section-number">7.14</span> Receiver operating curves</h2>
+<h2><span class="header-section-number">5.14</span> Receiver operating curves</h2>
 <p>There’s always one or more parameters that can be set in a classifier. This might be as simple as the prior probability.</p>
 <p>As this parameter is changed, typically sensitivity will go up at the cost of specificity, or <em>vice versa</em>.</p>
 <p>President Garfield’s assassination.</p>
@@ -526,7 +671,7 @@ predicts_prof &lt;-<span class="st"> </span><span class="kw">predict</span>(clas
         </div>
       </div>
 <a href="logistic-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="appendices.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="cross-validation-and-bootstrapping.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>

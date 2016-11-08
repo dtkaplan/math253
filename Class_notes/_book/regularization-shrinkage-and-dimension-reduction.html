@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Notes for Math 253: Statistical Computing and Machine Learning</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Notes and other materials for Math 253 at Macalester College.">
+  <meta name="generator" content="bookdown 0.1.15 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Notes for Math 253: Statistical Computing and Machine Learning" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Notes and other materials for Math 253 at Macalester College." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Notes for Math 253: Statistical Computing and Machine Learning" />
+  
+  <meta name="twitter:description" content="Notes and other materials for Math 253 at Macalester College." />
+  
+
+<meta name="author" content="Daniel Kaplan">
+
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="cross-validation-and-bootstrapping.html">
+<link rel="next" href="optimization.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Math 253 Notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Placeholder</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="part"><span><b>Topic I: Linear Regression</b></span></li>
+<li class="chapter" data-level="3" data-path="placeholder-1.html"><a href="placeholder-1.html"><i class="fa fa-check"></i><b>3</b> Placeholder</a></li>
+<li class="chapter" data-level="4" data-path="notes.html"><a href="notes.html"><i class="fa fa-check"></i><b>4</b> Notes</a></li>
+<li class="part"><span><b>Topic II: Foundations: linear algebra, likelihood and Bayes’ rule</b></span></li>
+<li class="chapter" data-level="5" data-path="prior-proportional-to-lambda.html"><a href="prior-proportional-to-lambda.html"><i class="fa fa-check"></i><b>5</b> prior: proportional to lambda:</a></li>
+<li class="chapter" data-level="6" data-path="classifiers.html"><a href="classifiers.html"><i class="fa fa-check"></i><b>6</b> Classifiers</a></li>
+<li class="chapter" data-level="7" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>7</b> Logistic Regression</a></li>
+<li class="chapter" data-level="8" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html"><i class="fa fa-check"></i><b>8</b> Linear and Quadratic Discriminant Analysis</a></li>
+<li class="chapter" data-level="9" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html"><i class="fa fa-check"></i><b>9</b> Cross-Validation and Bootstrapping</a></li>
+<li class="chapter" data-level="10" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html"><i class="fa fa-check"></i><b>10</b> Regularization, shrinkage and dimension reduction</a><ul>
+<li class="chapter" data-level="10.1" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#best-subset-selection"><i class="fa fa-check"></i><b>10.1</b> Best subset selection</a></li>
+<li class="chapter" data-level="10.2" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#approximation-to-best-subset-selection"><i class="fa fa-check"></i><b>10.2</b> Approximation to best subset selection</a></li>
+<li class="chapter" data-level="10.3" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#classical-theory-of-best-model-choice"><i class="fa fa-check"></i><b>10.3</b> Classical theory of best model choice</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="optimization.html"><a href="optimization.html"><i class="fa fa-check"></i><b>11</b> Optimization</a><ul>
+<li class="chapter" data-level="11.1" data-path="optimization.html"><a href="optimization.html#what-are-we-optimizing-over"><i class="fa fa-check"></i><b>11.1</b> What are we optimizing over?</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="programming-basics.html"><a href="programming-basics.html"><i class="fa fa-check"></i><b>12</b> Programming Basics</a></li>
+<li class="chapter" data-level="" data-path="appendices.html"><a href="appendices.html"><i class="fa fa-check"></i>Appendices</a></li>
+<li class="chapter" data-level="" data-path="connecting-rstudio-to-your-github-repository.html"><a href="connecting-rstudio-to-your-github-repository.html"><i class="fa fa-check"></i>Connecting RStudio to your GitHub repository</a></li>
+<li class="chapter" data-level="" data-path="instructions-for-the-publishing-system-bookdown.html"><a href="instructions-for-the-publishing-system-bookdown.html"><i class="fa fa-check"></i>Instructions for the publishing system: Bookdown</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/dtkaplan/math253" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notes for Math 253: Statistical Computing and Machine Learning</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="regularization-shrinkage-and-dimension-reduction" class="section level1">
+<h1><span class="header-section-number">Topic 10</span> Regularization, shrinkage and dimension reduction</h1>
+<div id="best-subset-selection" class="section level2">
+<h2><span class="header-section-number">10.1</span> Best subset selection</h2>
+<p>Algorithm 6.1 from ISLR</p>
+<ol style="list-style-type: decimal">
+<li>Let <span class="math inline">\(M_0\)</span> denote the null model, which contains no predictors. This model simply predicts the sample mean for each observation.</li>
+<li>For k in 1,2,…p:
+<ol style="list-style-type: lower-alpha">
+<li>Fit all p models that contain exactly k predictors. <span class="math inline">\(\left(\begin{array}{c}k\\p\end{array}\right)\)</span></li>
+<li>Pick the best among these k models, and call it <span class="math inline">\(M_k\)</span>. Here best is defined as having the smallest RSS, or equivalently largest R<span class="math inline">\(^2\)</span>.</li>
+</ol></li>
+<li>Select a single best model from among <span class="math inline">\(M_0, \ldots , M_p\)</span> using cross- validated prediction error, C<span class="math inline">\(_p\)</span>, AIC, BIC, or adjusted <span class="math inline">\(R^2\)</span>.</li>
+</ol>
+<div class="figure"><span id="fig:unnamed-chunk-1"></span>
+<img src="Images/Chapter-6/6.1.png" alt="ISLR Figure 6.1.  The models from best subset selection" width="400" />
+<p class="caption">
+Figure 10.1: ISLR Figure 6.1. The models from best subset selection
+</p>
+</div>
+</div>
+<div id="approximation-to-best-subset-selection" class="section level2">
+<h2><span class="header-section-number">10.2</span> Approximation to best subset selection</h2>
+<p>For large <span class="math inline">\(p\)</span>, there are too many possible models to fit all of them: <span class="math inline">\(2^p\)</span>. So, some heuristics.</p>
+<ol style="list-style-type: decimal">
+<li>There are only <span class="math inline">\(p\)</span> models with just one term: <span class="math inline">\(d = 1\)</span>. So easy to try all of them.</li>
+<li>There are only <span class="math inline">\(p(p-1)/2\)</span> models with just two terms <span class="math inline">\(d = 2\)</span>. Again, easy to try all of them.</li>
+<li>Starting out from <span class="math inline">\(M_1\)</span> or <span class="math inline">\(M_2\)</span>, keep all of those terms and look for the best individual term to add. There will be only <span class="math inline">\(p-(d-1)\)</span> of them. We presume that one of these will be near the frontier of the best possible model with <span class="math inline">\(d\)</span> terms.</li>
+<li>Repeat the process <span class="math inline">\(k \gg p\)</span> times, moving forward and back randomly, adding a term or deleting a term.</li>
+<li>This will take roughly <span class="math inline">\(k p\)</span> fits <span class="math inline">\(\alpha p^2\)</span> fits, where <span class="math inline">\(\alpha\)</span> is a constant <span class="math inline">\(k/p\)</span>, say 10.</li>
+<li>Compare this to <span class="math inline">\(2^p\)</span>. Setting <span class="math inline">\(\alpha = 10\)</span>, find the ratio <span class="math inline">\(\frac{2^p}{\alpha p^2}\)</span> for <span class="math inline">\(p = 5, \ldots, 40\)</span>.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">40</span>
+(<span class="dv">2</span>^p) /<span class="st"> </span>(<span class="dv">10</span> *<span class="st"> </span>p^<span class="dv">2</span>)</code></pre></div>
+<pre><code>##  [1] 2.000000e-01 1.000000e-01 8.888889e-02 1.000000e-01 1.280000e-01
+##  [6] 1.777778e-01 2.612245e-01 4.000000e-01 6.320988e-01 1.024000e+00
+## [11] 1.692562e+00 2.844444e+00 4.847337e+00 8.359184e+00 1.456356e+01
+## [16] 2.560000e+01 4.535363e+01 8.090864e+01 1.452321e+02 2.621440e+02
+## [21] 4.755447e+02 8.665917e+02 1.585748e+03 2.912711e+03 5.368709e+03
+## [26] 9.927347e+03 1.841121e+04 3.423922e+04 6.383721e+04 1.193046e+05
+## [31] 2.234634e+05 4.194304e+05 7.887911e+05 1.486148e+06 2.804877e+06
+## [36] 5.302429e+06 1.003937e+07 1.903587e+07 3.614437e+07 6.871948e+07</code></pre>
+<p>Exhaustion seems find up through about <span class="math inline">\(d = 20\)</span> — only 100 times more expensive than the random search.</p>
+</div>
+<div id="classical-theory-of-best-model-choice" class="section level2">
+<h2><span class="header-section-number">10.3</span> Classical theory of best model choice</h2>
+<p>We <em>punish</em> models with lots of terms.</p>
+<table style="width:58%;">
+<colgroup>
+<col width="16%" />
+<col width="19%" />
+<col width="22%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>In-sample</th>
+<th>Adjusted</th>
+<th>Out-of-sample</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\frac{1}{n}\)</span>RSS</td>
+<td><span class="math inline">\(C_p = \frac{1}{n}(\mbox{RSS} + 2 d \hat{\sigma}^2)\)</span></td>
+<td>cross-validated prediction error</td>
+</tr>
+<tr class="even">
+<td>.</td>
+<td><span class="math inline">\(\mbox{AIC} = -2 \ln {\cal L} - 2 d\)</span></td>
+<td>.</td>
+</tr>
+<tr class="odd">
+<td>.</td>
+<td><span class="math inline">\(\mbox{AIC}_{ls} = \frac{1}{\hat{\sigma}^2}C_p\)</span></td>
+<td>.</td>
+</tr>
+<tr class="even">
+<td>.</td>
+<td><span class="math inline">\(\mbox{BIC} = \frac{1}{n} (\mbox{RSS} + \ln(n) d \hat{\sigma}^2)\)</span></td>
+<td>.</td>
+</tr>
+<tr class="odd">
+<td>R<span class="math inline">\(^2\)</span></td>
+<td>Adjusted R<span class="math inline">\(^2\)</span></td>
+<td>???</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(\mbox{Adjusted R}^2 = 1 - \frac{\mbox{RSS}/(n-d-1)}{\mbox{TSS}{(n-1)}}\)</span></p>
+<div class="figure"><span id="fig:unnamed-chunk-3"></span>
+<img src="Images/Chapter-6/6.2.png" alt="ISLR Figure 6.2.  Note that the values on the vertical axis are the best for that &quot;number of predictors." width="400" />
+<p class="caption">
+Figure 10.2: ISLR Figure 6.2. Note that the values on the vertical axis are the best for that “number of predictors.
+</p>
+</div>
+<p><strong>Uncertainty</strong></p>
+<p>Repeat the analysis for different test sets or using different folds in k-fold cross validation.</p>
+<ul>
+<li>At each value of “Number of Predictors”, there will be a distribution.</li>
+<li><em>One-standard-error rule</em>: select the smallest model for which the estimated test error is within one standard error of the lowest point on the curve.</li>
+</ul>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="cross-validation-and-bootstrapping.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="optimization.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/dtkaplan/math253/edit/master/610-Regularization-Shrinkage.Rmd",
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
