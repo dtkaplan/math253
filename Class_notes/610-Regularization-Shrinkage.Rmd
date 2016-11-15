@@ -1,5 +1,10 @@
 # Regularization, shrinkage and dimension reduction
 
+```{r include = FALSE}
+data(CPS85, package = "mosaicData")
+library(glmnet)
+```
+
 ## Best subset selection
 
 Algorithm 6.1 from ISLR
@@ -60,9 +65,9 @@ Repeat the analysis for different test sets or using different folds in k-fold c
 * At each value of "Number of Predictors", there will be a distribution.
 * *One-standard-error rule*: select the smallest model for which the estimated test error is within one standard error of the lowest point on the curve.
 
-# Optimization
+## Optimization
 
-## What are we optimizing over?
+### What are we optimizing over?
 
 Choose the best set of columns from the model matrix.
 
@@ -74,6 +79,286 @@ M2 <- model.matrix(width ~ length + sex*biggerfoot, data = Small)
 M3 <- model.matrix(width ~ length*domhand*sex + sex*biggerfoot, data = Small)
 ```
 
+## Shrinkage methods
 
-* Thursday: Shrinkage methods
-* Tuesday: Principal Components
+Example, a roughly quadratic cloud of points.  Better to fit it with a constant, straight line, a quadratic? 
+
+* Depends on the amount of data.
+* What if you have only n=3 or 4?
+
+Constant will have the least sampling variation but the most bias.
+
+Quadratic will have the least bias but the most sampling variation.
+
+**Shrinkage idea**: Make a linear combination of the constant model with the "full" model.
+
+### Ridge regression
+
+The objective function: minimize
+
+$$\sum_{i=1}^n \left(y_i - \beta_0 - \sum_{j = 1}^p \beta_j x_{ij}\right)^2 + \lambda \sum_{j=1}^p \beta_j^2$$
+
+
+```{r echo = FALSE, fig.cap = "ISLR Figure 6.4."}
+knitr::include_graphics("Images/Chapter-6/6.4.png")
+```
+
+Note the y-axis label: "Standardized Coefficients." 
+
+* Remember that coefficients have units that depend on the response variable and the explanatory variable(s) participating in the coefficient. 
+* Those coefficients will typically be different from model term to model term.
+* Meaningless to add up numbers with different physical dimension.
+
+... So, standardize the explanatory variables.
+
+Another perspective on the reason to standardize: Some of the coefficients might be huge numerically, others small. In such a situation, the huge coefficients will dominate; the small ones will have little influence on the shrinkage.
+
+```{r}
+data(CPS85, package = "mosaic")
+x <- model.matrix(wage ~ age + educ + sex + union + married, data = CPS85)
+foo <- glmnet(x, CPS85$wage, alpha = 0)
+foo$lambda.min
+predict(foo,s=foo$lambda.min,exact=T,type="coefficients")
+```
+For `Credit` dataset: <http://www-bcf.usc.edu/~gareth/ISL/Credit.csv>
+
+
+## LASSO
+
+The objective function: minimize
+
+$$\sum_{i=1}^n \left(y_i - \beta_0 - \sum_{j = 1}^p \beta_j x_{ij}\right)^2 + \lambda \sum_{j=1}^p |\beta_i|$$
+Almost exactly the same as ridge regression. But the small change makes a big difference.
+
+```{r echo = FALSE, fig.cap = "ISLR Figure 6.7.", out.width = "100%"}
+knitr::include_graphics("Images/Chapter-6/6.7.png")
+```
+
+```{r}
+x <- model.matrix(wage ~ age * educ * sex * union * married, data = CPS85)
+foo <- cv.glmnet(x, CPS85$wage, alpha = 1)
+foo$lambda.min
+predict(foo,s=foo$lambda.min,exact=T,type="coefficients")
+```
+
+## Review
+
+We started by considering one mathematical representation of the problem: Choose $\beta_1, \beta_2, \ldots, \beta_p$ to minimize this *objective function*
+
+$$\sum_{i=1}^n \left(y_i - \beta_0 - \sum_{j = 1}^p \beta_j x_{ij}\right)^2 + \lambda \sum_{j=1}^p \beta_j^2$$
+The result depends on the value of $\lambda$, which is often called the *Lagrange multiplier*.
+
+The motivation for this form of the objective function is rooted in two different and conflicting goals:
+
+1. Get the model as close as possible to the data: minimize the sum of square errors.
+2. Keep the $\beta$'s small: minimize the model variance.
+
+*Reductio ad absurdum* argument. Suppose $\lambda \rightarrow \infty$. Then the best $\beta$'s would be zeros. Such a model has zero model variance, since we'll get exactly the same result on every data set used to train the model.
+
+Another way to think about multi-objective optimization ...
+
+We have several goals as a function of the adjustable parameters. Let's denote them by $g_1(x), g_2(x), g_3(x), \ldots$. For instance, suppose $g_1(x)$ is the appeal of a meal as a function of the ingredients, $g_2(x)$ is the vitamin content, $g_3(x)$ is the protein content, $g_4(x)$ is the amount of salt, and so on.
+
+We want to find the parameters $x$ that minimize some mixture of the objectives, e.g. 
+
+$$T(x; \lambda_1, \lambda_2, \ldots) \equiv \lambda_1 g_1(x) + \lambda_2 g_2(x) + \ldots$$
+We don't know what the $\lambda$'s are; they reflect the relative importance of the different components of the objective function. We could, of course, make them up. But instead ...
+
+1. Let's choose one of the components to be our sole objective. It can be any of the components, the end result will be the same regardless. The others we will consider as *constraints*. For instance, we might take *taste* ($g_1(x)$) as our objective but impose constraints: calories should be between 800 and 1200, salt should be below 1200 mg, protein should be above 50 grams.
+2. Consider all the values of $x$ that satisfy the constraints. Search over these to find the one that maximizes our selected objective component. This is called *constrained optimization*.
+3. Consider each of the constraints. Find out how much the selected objective will improve if we relax that constraint a bit, say allowing salt to be 1300 mg. The ratio is the Lagrange multiplier $\lambda_i$.
+
+$$\frac{\mbox{change in taste}}{\mbox{change in constraint}_i} \equiv \lambda_i$$ 
+
+Now ask questions about priorities: If I were to ease up on the constraint, would I get enough change in the objective to be worthwhile? Or, if I were to tighten the constraint, would the resulting change in objective be acceptable? Change the constraints accordingly until you no longer see a net gain by changing the constraints.
+
+Let's translate this to ridge and lasso regression.
+
+1. The selected component of the overall objective: Minimize the in-sample sum of square error. 
+2. The constraint: how big are we willing to make the coefficients? (Remember, by standardizing the variables we make it possible to calculate a total size.)
+3. Evaluating the trade-offs between constraints and objectives: does the out-of-sample prediction error get smaller. 
+
+The picture:
+
+- the red shows the objective function
+- the blue shows the permitted region for the coefficients to satisfy the constraint.
+
+```{r echo = FALSE, fig.cap = "ISLR Figure 6.7."}
+knitr::include_graphics("Images/Chapter-6/6.7.png")
+```
+
+We can imagine increasing or decreasing the constraints, and will get a different optimum at each level of the constraint.
+
+Why the circle and diamond?
+
+Three different "metrics," that is three different ways of combining parts to get an overall size.
+
+- $L^2$ --- square-root of the sum of squares. The usual Euclidean distance. Circle
+- $L^1$ --- sum of the absolute values. Sometimes called the Manhattan metric. Diamond
+- $L^\infty$ --- the biggest individual value. Square.
+
+Predicting `Salary` in the `ISLR::Hitters` data:
+
+
+```{r eval=FALSE}
+Without_NA <- na.omit(ISLR::Hitters)
+inds <- sample(nrow(Without_NA), size = nrow(Without_NA)/2)
+Train <- Without_NA[inds,]
+Test <- Without_NA[-inds,]
+y_all <- Without_NA$Salary
+x_all <- model.matrix(Salary ~ ., data=Without_NA)
+y_train <- Train$Salary
+x_train <- model.matrix(Salary ~ ., data=Train)
+y_test <- Test$Salary
+x_test <- model.matrix(Salary ~ ., data=Test)
+ridge_mod <- cv.glmnet(x_train, y_train, alpha = 0)
+ridge_mod$lambda.min
+ridge_pred <- predict(ridge_mod, s=0, newx = x_test, exact=TRUE)
+mean((ridge_pred - y_test)^2)
+final <- glmnet(x_all, y_all, alpha=0)
+predict(final, type="coefficients", s=ridge_mod$lambda.min)
+
+```
+
+
+
+Lasso: Do we really need all of those variables?
+
+```{r eval=FALSE}
+lasso_mod <- cv.glmnet(x_train, y_train, alpha = 1)
+lasso_mod$lambda.min
+lasso_pred <- predict(lasso_mod, s=0, newx = x_test, exact=TRUE)
+mean((lasso_pred - y_test)^2)
+final <- glmnet(x_all, y_all, alpha=1)
+predict(final, type="coefficients", s=lasso_mod$lambda.min)
+```
+
+```{r echo = FALSE, fig.cap = "ISLR Figure 6.4"}
+knitr::include_graphics("Images/Chapter-6/6.4.png")
+```
+
+```{r echo = FALSE, fig.cap = "ISLR Figure 6.7"}
+knitr::include_graphics("Images/Chapter-6/6.7.png")
+```
+
+
+# Multi-collinearity
+
+
+The SAT story.
+```{r}
+summary(lm(sat ~ expend, data=mosaicData::SAT))$coef
+summary(lm(sat ~ expend + ratio, data=mosaicData::SAT))$coef
+summary(lm(sat ~ expend + ratio + salary, data=mosaicData::SAT))$coef
+mosaic::rsquared(lm(expend ~ ratio + salary, data=mosaicData::SAT))
+```
+
+\includegraphics[width=3in]{Images/CI-1.png}
+
+\includegraphics[width=7in]{Images/CI-2.png}
+
+```{r}
+load("Images/mona.rda")
+rankMatrix(mona)
+# pick a vector at random; column 151 versus the first 131 columns
+mosaic::rsquared(lm(t(mona)[,151] ~ t(mona)[,-151]))
+```
+
+
+Variance inflation factor
+
+$\mbox{VIF}(\beta_j) = \frac{1}{1 - R^2_{x_j|x_{-j}}}$
+
+Getting rid of vectors that correlate substantially with one another can reduce the variance inflation factor.
+
+
+# Creating correlations
+
+Generate points on circles of radius 1, 2, 3, ...
+
+```{r}
+make_circles <- function(radii = 1:2, nangs = 30) {
+  theta = seq(0, 2*pi, length = nangs)
+  x <- rep(cos(theta), length(radii))
+  y <- rep(sin(theta), length(radii))
+  r <- rep(radii, each = nangs)
+  col <- rep(rainbow(nangs), length(radii))
+  data.frame(x = x * r, y = y * r, r = r, col = col)
+}
+transform_circles <- function(M, circles = NULL) {
+  if (is.null(circles)) circles <- make_circles()
+  XY <- rbind(circles$x, circles$y)
+  new <- M %*% XY
+  circles$x = new[1, ]
+  circles$y = new[2, ]
+  
+  circles
+}
+
+
+
+Trans <- matrix(c(1, 2, -3, -1), nrow = 2, byrow = TRUE)
+After_trans <- transform_circles(Trans)
+plot(y ~ x, data = After_trans, col = (After_trans$col), asp = 1, pch = 20)
+
+svals <- svd(Trans)
+Start <- make_circles()
+plot(y ~ x, data = Start, col = Start$col, asp = 1, pch = 20)
+After_V <- transform_circles(t(svals$v), Start)
+plot(y ~ x, data = After_V, col = After_V$col, asp = 1, pch = 20)
+After_V_lambda <- transform_circles(diag(svals$d), After_V)
+plot(y ~ x, data <- After_V_lambda, col = After_V_lambda$col, asp = 1, pch = 20)
+After_V_lambda_U <- transform_circles(svals$u, After_V_lambda)
+plot(y ~ x, data = After_V, col = After_V_lambda_U$col, asp = 1, pch = 20)
+```
+
+
+## Idea of singular values.
+
+Find orthogonal vectors to describe the ellipsoidal cloud.  The singular value describes "how long" each ellipsoidal axis is.
+
+Correlation $R^2_{x_j | x_{-j}}$ gets increased for each *direction* that overlaps between $x_j$ and $x_{-j}$ --- it doesn't matter how big the singular value is in that direction.  Only by throwing out *directions* can we reduce $R^2_{x_j | x_{-j}}$
+
+Nice illustration:
+
+![](Images/Singular-value-picture.png)
+
+[Source](https://en.wikipedia.org/wiki/Singular_value_decomposition#/media/File:Singular-Value-Decomposition.svg)
+
+# Dimension reduction
+
+Re-arrange the variables to squeeze the juice out of them.
+
+1. Matrix
+2. Approximate matrix in a least squares sense.  If that approximation includes the same column or more, we can discard the repeats.
+2. Outer product 
+3. Rank-1 matrix constructed by creating multiples of one column.
+4. Create another vector and another rank-1 matrix.  Add it up and we get closer to the target.
+
+Creating those singular vectors:
+
+* singular value decomposition
+* ${\mathbf D}$ gives information on how big they are
+* orthogonal to one another
+* cumulative sum of ${\mathbf D}$ components gives the amount of variance in the approximation.
+```{r}
+res <- svd(mona)
+approx <- 0
+for (i in 1:20) {
+  approx <- approx + outer(res$u[,i], res$v[,i]) * res$d[i]
+}
+image(approx, asp=1)
+```
+
+
+
+Picture in terms of gaussian cloud.  The covariance matrix tells all that you need.
+
+Using `pcr()` to fit models, interpreting the output.
+
+```{r}
+library(pls)
+pcr.fit <- pcr(Salary ~ ., data = ISLR::Hitters, scale=TRUE, validation="CV")
+summary(pcr.fit)
+validationplot(pcr.fit, val.type = "MSEP")
+```

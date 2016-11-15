@@ -39,7 +39,7 @@ MathJax.Hub.Config({
   
   
 <link rel="prev" href="cross-validation-and-bootstrapping.html">
-<link rel="next" href="optimization.html">
+<link rel="next" href="multi-collinearity.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -115,8 +115,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="part"><span><b>Topic I: Linear Regression</b></span></li>
 <li class="chapter" data-level="3" data-path="placeholder-1.html"><a href="placeholder-1.html"><i class="fa fa-check"></i><b>3</b> Placeholder</a></li>
 <li class="chapter" data-level="4" data-path="notes.html"><a href="notes.html"><i class="fa fa-check"></i><b>4</b> Notes</a></li>
-<li class="part"><span><b>Topic II: Foundations: linear algebra, likelihood and Bayes’ rule</b></span></li>
-<li class="chapter" data-level="5" data-path="prior-proportional-to-lambda.html"><a href="prior-proportional-to-lambda.html"><i class="fa fa-check"></i><b>5</b> prior: proportional to lambda:</a></li>
+<li class="chapter" data-level="5" data-path="foundations-linear-algebra-likelihood-and-bayes-rule.html"><a href="foundations-linear-algebra-likelihood-and-bayes-rule.html"><i class="fa fa-check"></i><b>5</b> Foundations: linear algebra, likelihood and Bayes’ rule</a></li>
 <li class="chapter" data-level="6" data-path="classifiers.html"><a href="classifiers.html"><i class="fa fa-check"></i><b>6</b> Classifiers</a></li>
 <li class="chapter" data-level="7" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>7</b> Logistic Regression</a></li>
 <li class="chapter" data-level="8" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html"><i class="fa fa-check"></i><b>8</b> Linear and Quadratic Discriminant Analysis</a></li>
@@ -125,11 +124,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="10.1" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#best-subset-selection"><i class="fa fa-check"></i><b>10.1</b> Best subset selection</a></li>
 <li class="chapter" data-level="10.2" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#approximation-to-best-subset-selection"><i class="fa fa-check"></i><b>10.2</b> Approximation to best subset selection</a></li>
 <li class="chapter" data-level="10.3" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#classical-theory-of-best-model-choice"><i class="fa fa-check"></i><b>10.3</b> Classical theory of best model choice</a></li>
+<li class="chapter" data-level="10.4" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#optimization"><i class="fa fa-check"></i><b>10.4</b> Optimization</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#what-are-we-optimizing-over"><i class="fa fa-check"></i><b>10.4.1</b> What are we optimizing over?</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="optimization.html"><a href="optimization.html"><i class="fa fa-check"></i><b>11</b> Optimization</a><ul>
-<li class="chapter" data-level="11.1" data-path="optimization.html"><a href="optimization.html#what-are-we-optimizing-over"><i class="fa fa-check"></i><b>11.1</b> What are we optimizing over?</a></li>
+<li class="chapter" data-level="10.5" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#shrinkage-methods"><i class="fa fa-check"></i><b>10.5</b> Shrinkage methods</a><ul>
+<li class="chapter" data-level="10.5.1" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#ridge-regression"><i class="fa fa-check"></i><b>10.5.1</b> Ridge regression</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="programming-basics.html"><a href="programming-basics.html"><i class="fa fa-check"></i><b>12</b> Programming Basics</a></li>
+<li class="chapter" data-level="10.6" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#lasso"><i class="fa fa-check"></i><b>10.6</b> LASSO</a></li>
+<li class="chapter" data-level="10.7" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#review"><i class="fa fa-check"></i><b>10.7</b> Review</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="multi-collinearity.html"><a href="multi-collinearity.html"><i class="fa fa-check"></i><b>11</b> Multi-collinearity</a></li>
+<li class="chapter" data-level="12" data-path="creating-correlations.html"><a href="creating-correlations.html"><i class="fa fa-check"></i><b>12</b> Creating correlations</a><ul>
+<li class="chapter" data-level="12.1" data-path="creating-correlations.html"><a href="creating-correlations.html#idea-of-singular-values."><i class="fa fa-check"></i><b>12.1</b> Idea of singular values.</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="dimension-reduction.html"><a href="dimension-reduction.html"><i class="fa fa-check"></i><b>13</b> Dimension reduction</a></li>
+<li class="chapter" data-level="14" data-path="programming-basics.html"><a href="programming-basics.html"><i class="fa fa-check"></i><b>14</b> Programming Basics</a></li>
 <li class="chapter" data-level="" data-path="appendices.html"><a href="appendices.html"><i class="fa fa-check"></i>Appendices</a></li>
 <li class="chapter" data-level="" data-path="connecting-rstudio-to-your-github-repository.html"><a href="connecting-rstudio-to-your-github-repository.html"><i class="fa fa-check"></i>Connecting RStudio to your GitHub repository</a></li>
 <li class="chapter" data-level="" data-path="instructions-for-the-publishing-system-bookdown.html"><a href="instructions-for-the-publishing-system-bookdown.html"><i class="fa fa-check"></i>Instructions for the publishing system: Bookdown</a></li>
@@ -167,7 +176,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ol></li>
 <li>Select a single best model from among <span class="math inline">\(M_0, \ldots , M_p\)</span> using cross- validated prediction error, C<span class="math inline">\(_p\)</span>, AIC, BIC, or adjusted <span class="math inline">\(R^2\)</span>.</li>
 </ol>
-<div class="figure"><span id="fig:unnamed-chunk-1"></span>
+<div class="figure"><span id="fig:unnamed-chunk-2"></span>
 <img src="Images/Chapter-6/6.1.png" alt="ISLR Figure 6.1.  The models from best subset selection" width="400" />
 <p class="caption">
 Figure 10.1: ISLR Figure 6.1. The models from best subset selection
@@ -242,7 +251,7 @@ Figure 10.1: ISLR Figure 6.1. The models from best subset selection
 </tbody>
 </table>
 <p><span class="math inline">\(\mbox{Adjusted R}^2 = 1 - \frac{\mbox{RSS}/(n-d-1)}{\mbox{TSS}{(n-1)}}\)</span></p>
-<div class="figure"><span id="fig:unnamed-chunk-3"></span>
+<div class="figure"><span id="fig:unnamed-chunk-4"></span>
 <img src="Images/Chapter-6/6.2.png" alt="ISLR Figure 6.2.  Note that the values on the vertical axis are the best for that &quot;number of predictors." width="400" />
 <p class="caption">
 Figure 10.2: ISLR Figure 6.2. Note that the values on the vertical axis are the best for that “number of predictors.
@@ -255,6 +264,368 @@ Figure 10.2: ISLR Figure 6.2. Note that the values on the vertical axis are the 
 <li><em>One-standard-error rule</em>: select the smallest model for which the estimated test error is within one standard error of the lowest point on the curve.</li>
 </ul>
 </div>
+<div id="optimization" class="section level2">
+<h2><span class="header-section-number">10.4</span> Optimization</h2>
+<div id="what-are-we-optimizing-over" class="section level3">
+<h3><span class="header-section-number">10.4.1</span> What are we optimizing over?</h3>
+<p>Choose the best set of columns from the model matrix.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Small &lt;-<span class="st"> </span>mosaic::<span class="kw">sample</span>(mosaicData::KidsFeet, <span class="dt">size =</span> <span class="dv">5</span>)
+<span class="kw">row.names</span>(Small) &lt;-<span class="st"> </span><span class="ot">NULL</span>
+M1 &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(width ~<span class="st"> </span>length +<span class="st"> </span>sex, <span class="dt">data =</span> Small)
+M2 &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(width ~<span class="st"> </span>length +<span class="st"> </span>sex*biggerfoot, <span class="dt">data =</span> Small)
+M3 &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(width ~<span class="st"> </span>length*domhand*sex +<span class="st"> </span>sex*biggerfoot, <span class="dt">data =</span> Small)</code></pre></div>
+</div>
+</div>
+<div id="shrinkage-methods" class="section level2">
+<h2><span class="header-section-number">10.5</span> Shrinkage methods</h2>
+<p>Example, a roughly quadratic cloud of points. Better to fit it with a constant, straight line, a quadratic?</p>
+<ul>
+<li>Depends on the amount of data.</li>
+<li>What if you have only n=3 or 4?</li>
+</ul>
+<p>Constant will have the least sampling variation but the most bias.</p>
+<p>Quadratic will have the least bias but the most sampling variation.</p>
+<p><strong>Shrinkage idea</strong>: Make a linear combination of the constant model with the “full” model.</p>
+<div id="ridge-regression" class="section level3">
+<h3><span class="header-section-number">10.5.1</span> Ridge regression</h3>
+<p>The objective function: minimize</p>
+<p><span class="math display">\[\sum_{i=1}^n \left(y_i - \beta_0 - \sum_{j = 1}^p \beta_j x_{ij}\right)^2 + \lambda \sum_{j=1}^p \beta_j^2\]</span></p>
+<div class="figure"><span id="fig:unnamed-chunk-6"></span>
+<img src="Images/Chapter-6/6.4.png" alt="ISLR Figure 6.4." width="400" />
+<p class="caption">
+Figure 10.3: ISLR Figure 6.4.
+</p>
+</div>
+<p>Note the y-axis label: “Standardized Coefficients.”</p>
+<ul>
+<li>Remember that coefficients have units that depend on the response variable and the explanatory variable(s) participating in the coefficient.</li>
+<li>Those coefficients will typically be different from model term to model term.</li>
+<li>Meaningless to add up numbers with different physical dimension.</li>
+</ul>
+<p>… So, standardize the explanatory variables.</p>
+<p>Another perspective on the reason to standardize: Some of the coefficients might be huge numerically, others small. In such a situation, the huge coefficients will dominate; the small ones will have little influence on the shrinkage.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(CPS85, <span class="dt">package =</span> <span class="st">&quot;mosaic&quot;</span>)</code></pre></div>
+<pre><code>## Warning in data(CPS85, package = &quot;mosaic&quot;): data set &#39;CPS85&#39; not found</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(wage ~<span class="st"> </span>age +<span class="st"> </span>educ +<span class="st"> </span>sex +<span class="st"> </span>union +<span class="st"> </span>married, <span class="dt">data =</span> CPS85)
+foo &lt;-<span class="st"> </span><span class="kw">glmnet</span>(x, CPS85$wage, <span class="dt">alpha =</span> <span class="dv">0</span>)
+foo$lambda.min</code></pre></div>
+<pre><code>## NULL</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">predict</span>(foo,<span class="dt">s=</span>foo$lambda.min,<span class="dt">exact=</span>T,<span class="dt">type=</span><span class="st">&quot;coefficients&quot;</span>)</code></pre></div>
+<pre><code>## 7 x 100 sparse Matrix of class &quot;dgCMatrix&quot;</code></pre>
+<pre><code>##    [[ suppressing 100 column names &#39;s0&#39;, &#39;s1&#39;, &#39;s2&#39; ... ]]</code></pre>
+<pre><code>##                                                                      
+## (Intercept)    9.024064e+00  8.9845500258  8.9807084640  8.9764945908
+## (Intercept)    .             .             .             .           
+## age            7.833801e-38  0.0002223183  0.0002439361  0.0002676496
+## educ           7.580412e-37  0.0021509145  0.0023600259  0.0025894031
+## sexM           2.137431e-36  0.0060625175  0.0066516621  0.0072978516
+## unionUnion     2.184744e-36  0.0061916460  0.0067927982  0.0074520479
+## marriedSingle -1.097614e-36 -0.0031093285 -0.0034110717 -0.0037419469
+##                                                                     
+## (Intercept)    8.971872561  8.9668031280  8.9612433278  8.9551461420
+## (Intercept)    .            .             .             .           
+## age            0.000293661  0.0003221914  0.0003534828  0.0003878003
+## educ           0.002840997  0.0031169438  0.0034195819  0.0037514703
+## sexM           0.008006567  0.0087838090  0.0096361411  0.0105707449
+## unionUnion     0.008174955  0.0089676003  0.0098366324  0.0107893174
+## marriedSingle -0.004104736 -0.0045024806 -0.0049385043 -0.0054164378
+##                                                                     
+## (Intercept)    8.9484601281  8.9411290199  8.933091297  8.9242797166
+## (Intercept)    .             .             .            .           
+## age            0.0004254338  0.0004667008  0.000511948  0.0005615549
+## educ           0.0041154088  0.0045144596  0.004951971  0.0054316019
+## sexM           0.0115954738  0.0127189125  0.013950443  0.0153003109
+## unionUnion     0.0118335936  0.0129781289  0.014232384  0.0156066793
+## marriedSingle -0.0059402456 -0.0065142539 -0.007143182 -0.0078321724
+##                                                                      
+## (Intercept)    8.9146208149  8.9040343629  8.8924327880  8.8797205546
+## (Intercept)    .             .             .             .           
+## age            0.0006159361  0.0006755443  0.0007408743  0.0008124655
+## educ           0.0059573508  0.0065335834  0.0071650649  0.0078569941
+## sexM           0.0167797050  0.0184008330  0.0201770102  0.0221227462
+## unionUnion     0.0171122647  0.0187613975  0.0205674209  0.0225448498
+## marriedSingle -0.0085868290 -0.0094132503 -0.0103180689 -0.0113084920
+##                                                                   
+## (Intercept)    8.8657934983  8.8505381222  8.833830848  8.81553723
+## (Intercept)    .             .             .            .         
+## age            0.0008909068  0.0009768399  0.001070964  0.00117404
+## educ           0.0086150384  0.0094453731  0.010354721  0.01135040
+## sexM           0.0242538476  0.0265875170  0.029142461  0.03193901
+## unionUnion     0.0247094586  0.0270783749  0.029670175  0.03250498
+## marriedSingle -0.0123923429 -0.0135781042 -0.014874962 -0.01629285
+##                                                                  
+## (Intercept)    8.795511112  8.773593781  8.749613049  8.723382330
+## (Intercept)    .            .            .            .          
+## age            0.001286896  0.001410431  0.001545623  0.001693531
+## educ           0.012440352  0.013633217  0.014938358  0.016365920
+## sexM           0.034999211  0.038346996  0.042008261  0.046011017
+## unionUnion     0.035604563  0.038992442  0.042693981  0.046736492
+## marriedSingle -0.017842503 -0.019535481 -0.021384232 -0.023402122
+##                                                                 
+## (Intercept)    8.694699697  8.66334692  8.629088521  8.591670836
+## (Intercept)    .            .           .            .          
+## age            0.001855303  0.00203218  0.002225506  0.002436727
+## educ           0.017926885  0.01963311  0.021497409  0.023533552
+## sexM           0.050385511  0.05516435  0.060382633  0.066078045
+## unionUnion     0.051149320  0.05596393  0.061213970  0.066935341
+## marriedSingle -0.025603471 -0.02800358 -0.030618769 -0.033466351
+##                                                                  
+## (Intercept)    8.550821131  8.506246777  8.457634524  8.404649905
+## (Intercept)    .            .            .            .          
+## age            0.002667402  0.002919208  0.003193942  0.003493528
+## educ           0.025756363  0.028181734  0.030826673  0.033709334
+## sexM           0.072290980  0.079064621  0.086445009  0.094481084
+## unionUnion     0.073166217  0.079947059  0.087320592  0.095331734
+## marriedSingle -0.036564669 -0.039933055 -0.043591796 -0.047562072
+##                                                                 
+## (Intercept)    8.346936807  8.284117277  8.21579158  8.141538616
+## (Intercept)    .            .            .           .          
+## age            0.003820021  0.004175608  0.00456261  0.004983484
+## educ           0.036849035  0.040266269  0.04398269  0.048021111
+## sexM           0.103224702  0.112730595  0.12305630  0.134262014
+## unionUnion     0.104027489  0.113456777  0.12367019  0.134719696
+## marriedSingle -0.051865865 -0.056525832 -0.06156514 -0.067007279
+##                                                                  
+## (Intercept)    8.060916717  7.973464940  7.878704903  7.776143265
+## (Intercept)    .            .            .            .          
+## age            0.005440816  0.005937322  0.006475838  0.007059311
+## educ           0.052405411  0.057160500  0.062312194  0.067887072
+## sexM           0.146410399  0.159566289  0.173796323  0.189168465
+## unionUnion     0.146658213  0.159539140  0.173415734  0.188340405
+## marriedSingle -0.072875762 -0.079193859 -0.085984206 -0.093268375
+##                                                                           
+## (Intercept)    7.665274929  7.54558705  7.416563927  7.27769283  7.1284709
+## (Intercept)    .            .           .            .           .        
+## age            0.007690785  0.00837338  0.009110276  0.00990468  0.0107598
+## educ           0.073912294  0.08041537  0.087423891  0.09496517  0.1030659
+## sexM           0.205751424  0.22361395  0.242824003  0.26344778  0.2855486
+## unionUnion     0.204363867  0.22153418  0.239895671  0.25948770  0.2803434
+## marriedSingle -0.101066377 -0.10939610 -0.118272683 -0.12770782 -0.1377091
+##                                                                         
+## (Intercept)    6.96841279  6.79705996  6.61399012  6.41882823  6.2112579
+## (Intercept)    .           .           .           .           .        
+## age            0.01167879  0.01266472  0.01372055  0.01484901  0.0160526
+## educ           0.11175163  0.12104636  0.13097192  0.14154739  0.1527884
+## sexM           0.30918583  0.33441321  0.36127774  0.38981798  0.4200625
+## unionUnion     0.30248814  0.32593832  0.35069962  0.37676565  0.4041166
+## marriedSingle -0.14827895 -0.15941437 -0.17110566 -0.18333586 -0.1960801
+##                                                                        
+## (Intercept)    5.9910334  5.7579921  5.51206649  5.25329617  4.98183860
+## (Intercept)    .          .          .           .           .         
+## age            0.0173335  0.0186935  0.02013392  0.02165556  0.02325861
+## educ           0.1647066  0.1773089  0.19059658  0.20456512  0.21920324
+## sexM           0.4520282  0.4857189  0.52112390  0.55821629  0.59695227
+## unionUnion     0.4327179  0.4625192  0.49345370  0.52543758  0.55837010
+## marriedSingle -0.2093050 -0.2229683 -0.23701831 -0.25139453 -0.26602738
+##                                                                          
+## (Intercept)    4.69797856  4.40213581  4.09487021  3.77688286  3.44901969
+## (Intercept)    .           .           .           .           .         
+## age            0.02494258  0.02670626  0.02854762  0.03046385  0.03245118
+## educ           0.23449256  0.25040721  0.26691358  0.28397034  0.30152843
+## sexM           0.63727009  0.67908961  0.72231213  0.76682031  0.81248048
+## unionUnion     0.59213404  0.62659667  0.66161129  0.69701946  0.73265266
+## marriedSingle -0.28083903 -0.29574427 -0.31065174 -0.32546539 -0.34008662
+##                                                                          
+## (Intercept)    3.11226065  2.76771551  2.41661109  2.06027583  1.70012110
+## (Intercept)    .           .           .           .           .         
+## age            0.03450504  0.03661995  0.03878962  0.04100694  0.04326407
+## educ           0.31953158  0.33791673  0.35661486  0.37555188  0.39464982
+## sexM           0.85914169  0.90663875  0.95479401  1.00341984  1.05232141
+## unionUnion     0.76833644  0.80389287  0.83914426  0.87391666  0.90804331
+## marriedSingle -0.35441592 -0.36835537 -0.38181085 -0.39469431 -0.40692595
+##                                                                          
+## (Intercept)    1.33761998  0.97428376  0.61163733  0.25119401 -0.10556916
+## (Intercept)    .           .           .           .           .         
+## age            0.04555258  0.04786348  0.05018744  0.05251487  0.05483612
+## educ           0.41382804  0.43300458  0.45209753  0.47102648  0.48971376
+## sexM           1.10129972  1.15015470  1.19868837  1.24670797  1.29402881
+## unionUnion     0.94136790  0.97374751  1.00505497  1.03518081  1.06403449
+## marriedSingle -0.41843607 -0.42916675 -0.43907299 -0.44812347 -0.45630085
+##                                                                          
+## (Intercept)   -0.45723496 -0.80246738 -1.14003052 -1.46880417 -1.78779598
+## (Intercept)    .           .           .           .           .         
+## age            0.05714158  0.05942192  0.06166817  0.06387188  0.06602526
+## educ           0.50808576  0.52607395  0.54361585  0.56065574  0.57714518
+## sexM           1.34047696  1.38589155  1.43012672  1.47305307  1.51455874
+## unionUnion     1.09154508  1.11766129  1.14235091  1.16559986  1.18741066
+## marriedSingle -0.46360157 -0.47003518 -0.47562331 -0.48039836 -0.48440181
+##                                                                         
+## (Intercept)   -2.09614984 -2.39315067 -2.6782256 -2.95094196 -3.21100222
+## (Intercept)    .           .           .          .           .         
+## age            0.06812123  0.07015356  0.0721169  0.07400677  0.07581963
+## educ           0.59304334  0.60831709  0.6229410  0.63689689  0.65017384
+## sexM           1.55455004  1.59295153  1.6297059  1.66477322  1.69813027
+## unionUnion     1.20780080  1.22680071  1.2444518  1.26080428  1.27591536
+## marriedSingle -0.48768253 -0.49029496 -0.4922973 -0.49374981 -0.49471329
+##                                                                          
+## (Intercept)   -3.45823680 -3.69259470 -3.91413280 -4.12300419 -4.31944604
+## (Intercept)    .           .           .           .           .         
+## age            0.07755284  0.07920461  0.08077398  0.08226072  0.08366532
+## educ           0.66276734  0.67467888  0.68591532  0.69648818  0.70641303
+## sexM           1.72976918  1.75969624  1.78793039  1.81450170  1.83944980
+## unionUnion     1.28984720  1.30266526  1.31443681  1.32522960  1.33511079
+## marriedSingle -0.49524770 -0.49541101 -0.49525830 -0.49484107 -0.49420673
+##                                                                          
+## (Intercept)   -4.50376732 -4.67633677 -4.83757141 -4.98792574 -5.12788178
+## (Intercept)    .           .           .           .           .         
+## age            0.08498886  0.08623295  0.08739966  0.08849141  0.08951095
+## educ           0.71570878  0.72439708  0.73250174  0.74004811  0.74706270
+## sexM           1.86282238  1.88467367  1.90506303  1.92405372  1.94171161
+## unionUnion     1.34414606  1.35239889  1.35993009  1.36679741  1.37305531
+## marriedSingle -0.49339833 -0.49245445 -0.49140918 -0.49029227 -0.48912933
+##                                                                        
+## (Intercept)   -5.25794016 -5.3786121 -5.49041268 -5.59385451 -5.6894432
+## (Intercept)    .           .          .           .           .        
+## age            0.09046123  0.0913454  0.09216668  0.09292837  0.0936338
+## educ           0.75357262  0.7596053  0.76518802  0.77034787  0.7751113
+## sexM           1.95810424  1.9732998  1.98736634  2.00037119  2.0123803
+## unionUnion     1.37875481  1.3839435  1.38866554  1.39296178  1.3968698
+## marriedSingle -0.48794212 -0.4867489 -0.48556453 -0.48440129 -0.4832687
+##                                                                          
+## (Intercept)   -5.77767290 -5.85902333 -5.93390991 -6.00287296 -6.06628568
+## (Intercept)    .           .           .           .           .         
+## age            0.09428624  0.09488895  0.09544397  0.09595664  0.09642875
+## educ           0.77950393  0.78355064  0.78727494  0.79070015  0.79384759
+## sexM           2.02345769  2.03366541  2.04306574  2.05170968  2.05965435
+## unionUnion     1.40042429  1.40365684  1.40658991  1.40926359  1.41169502
+## marriedSingle -0.48217421 -0.48112327 -0.48012751 -0.47917354 -0.47827092</code></pre>
+<p>For <code>Credit</code> dataset: <a href="http://www-bcf.usc.edu/~gareth/ISL/Credit.csv" class="uri">http://www-bcf.usc.edu/~gareth/ISL/Credit.csv</a></p>
+</div>
+</div>
+<div id="lasso" class="section level2">
+<h2><span class="header-section-number">10.6</span> LASSO</h2>
+<p>The objective function: minimize</p>
+<p><span class="math display">\[\sum_{i=1}^n \left(y_i - \beta_0 - \sum_{j = 1}^p \beta_j x_{ij}\right)^2 + \lambda \sum_{j=1}^p |\beta_i|\]</span> Almost exactly the same as ridge regression. But the small change makes a big difference.</p>
+<div class="figure"><span id="fig:unnamed-chunk-8"></span>
+<img src="Images/Chapter-6/6.7.png" alt="ISLR Figure 6.7." width="100%" />
+<p class="caption">
+Figure 10.4: ISLR Figure 6.7.
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(wage ~<span class="st"> </span>age *<span class="st"> </span>educ *<span class="st"> </span>sex *<span class="st"> </span>union *<span class="st"> </span>married, <span class="dt">data =</span> CPS85)
+foo &lt;-<span class="st"> </span><span class="kw">cv.glmnet</span>(x, CPS85$wage, <span class="dt">alpha =</span> <span class="dv">1</span>)
+foo$lambda.min</code></pre></div>
+<pre><code>## [1] 0.1151468</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">predict</span>(foo,<span class="dt">s=</span>foo$lambda.min,<span class="dt">exact=</span>T,<span class="dt">type=</span><span class="st">&quot;coefficients&quot;</span>)</code></pre></div>
+<pre><code>## 33 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##                                                    1
+## (Intercept)                            -2.0991197769
+## (Intercept)                             .           
+## age                                     .           
+## educ                                    0.5571311487
+## sexM                                    .           
+## unionUnion                              1.1466046258
+## marriedSingle                           .           
+## age:educ                                0.0054950311
+## age:sexM                                0.0584831785
+## educ:sexM                               .           
+## age:unionUnion                          .           
+## educ:unionUnion                         .           
+## sexM:unionUnion                         .           
+## age:marriedSingle                       .           
+## educ:marriedSingle                      .           
+## sexM:marriedSingle                      .           
+## unionUnion:marriedSingle                .           
+## age:educ:sexM                           0.0001569151
+## age:educ:unionUnion                     .           
+## age:sexM:unionUnion                     .           
+## educ:sexM:unionUnion                    .           
+## age:educ:marriedSingle                  .           
+## age:sexM:marriedSingle                  .           
+## educ:sexM:marriedSingle                -0.0473336688
+## age:unionUnion:marriedSingle            .           
+## educ:unionUnion:marriedSingle           .           
+## sexM:unionUnion:marriedSingle           .           
+## age:educ:sexM:unionUnion                .           
+## age:educ:sexM:marriedSingle             .           
+## age:educ:unionUnion:marriedSingle      -0.0003658836
+## age:sexM:unionUnion:marriedSingle       .           
+## educ:sexM:unionUnion:marriedSingle      .           
+## age:educ:sexM:unionUnion:marriedSingle  .</code></pre>
+</div>
+<div id="review" class="section level2">
+<h2><span class="header-section-number">10.7</span> Review</h2>
+<p>We started by considering one mathematical representation of the problem: Choose <span class="math inline">\(\beta_1, \beta_2, \ldots, \beta_p\)</span> to minimize this <em>objective function</em></p>
+<p><span class="math display">\[\sum_{i=1}^n \left(y_i - \beta_0 - \sum_{j = 1}^p \beta_j x_{ij}\right)^2 + \lambda \sum_{j=1}^p \beta_j^2\]</span> The result depends on the value of <span class="math inline">\(\lambda\)</span>, which is often called the <em>Lagrange multiplier</em>.</p>
+<p>The motivation for this form of the objective function is rooted in two different and conflicting goals:</p>
+<ol style="list-style-type: decimal">
+<li>Get the model as close as possible to the data: minimize the sum of square errors.</li>
+<li>Keep the <span class="math inline">\(\beta\)</span>’s small: minimize the model variance.</li>
+</ol>
+<p><em>Reductio ad absurdum</em> argument. Suppose <span class="math inline">\(\lambda \rightarrow \infty\)</span>. Then the best <span class="math inline">\(\beta\)</span>’s would be zeros. Such a model has zero model variance, since we’ll get exactly the same result on every data set used to train the model.</p>
+<p>Another way to think about multi-objective optimization …</p>
+<p>We have several goals as a function of the adjustable parameters. Let’s denote them by <span class="math inline">\(g_1(x), g_2(x), g_3(x), \ldots\)</span>. For instance, suppose <span class="math inline">\(g_1(x)\)</span> is the appeal of a meal as a function of the ingredients, <span class="math inline">\(g_2(x)\)</span> is the vitamin content, <span class="math inline">\(g_3(x)\)</span> is the protein content, <span class="math inline">\(g_4(x)\)</span> is the amount of salt, and so on.</p>
+<p>We want to find the parameters <span class="math inline">\(x\)</span> that minimize some mixture of the objectives, e.g.</p>
+<p><span class="math display">\[T(x; \lambda_1, \lambda_2, \ldots) \equiv \lambda_1 g_1(x) + \lambda_2 g_2(x) + \ldots\]</span> We don’t know what the <span class="math inline">\(\lambda\)</span>’s are; they reflect the relative importance of the different components of the objective function. We could, of course, make them up. But instead …</p>
+<ol style="list-style-type: decimal">
+<li>Let’s choose one of the components to be our sole objective. It can be any of the components, the end result will be the same regardless. The others we will consider as <em>constraints</em>. For instance, we might take <em>taste</em> (<span class="math inline">\(g_1(x)\)</span>) as our objective but impose constraints: calories should be between 800 and 1200, salt should be below 1200 mg, protein should be above 50 grams.</li>
+<li>Consider all the values of <span class="math inline">\(x\)</span> that satisfy the constraints. Search over these to find the one that maximizes our selected objective component. This is called <em>constrained optimization</em>.</li>
+<li>Consider each of the constraints. Find out how much the selected objective will improve if we relax that constraint a bit, say allowing salt to be 1300 mg. The ratio is the Lagrange multiplier <span class="math inline">\(\lambda_i\)</span>.</li>
+</ol>
+<p><span class="math display">\[\frac{\mbox{change in taste}}{\mbox{change in constraint}_i} \equiv \lambda_i\]</span></p>
+<p>Now ask questions about priorities: If I were to ease up on the constraint, would I get enough change in the objective to be worthwhile? Or, if I were to tighten the constraint, would the resulting change in objective be acceptable? Change the constraints accordingly until you no longer see a net gain by changing the constraints.</p>
+<p>Let’s translate this to ridge and lasso regression.</p>
+<ol style="list-style-type: decimal">
+<li>The selected component of the overall objective: Minimize the in-sample sum of square error.</li>
+<li>The constraint: how big are we willing to make the coefficients? (Remember, by standardizing the variables we make it possible to calculate a total size.)</li>
+<li>Evaluating the trade-offs between constraints and objectives: does the out-of-sample prediction error get smaller.</li>
+</ol>
+<p>The picture:</p>
+<ul>
+<li>the red shows the objective function</li>
+<li>the blue shows the permitted region for the coefficients to satisfy the constraint.</li>
+</ul>
+<div class="figure"><span id="fig:unnamed-chunk-10"></span>
+<img src="Images/Chapter-6/6.7.png" alt="ISLR Figure 6.7." width="400" />
+<p class="caption">
+Figure 10.5: ISLR Figure 6.7.
+</p>
+</div>
+<p>We can imagine increasing or decreasing the constraints, and will get a different optimum at each level of the constraint.</p>
+<p>Why the circle and diamond?</p>
+<p>Three different “metrics,” that is three different ways of combining parts to get an overall size.</p>
+<ul>
+<li><span class="math inline">\(L^2\)</span> — square-root of the sum of squares. The usual Euclidean distance. Circle</li>
+<li><span class="math inline">\(L^1\)</span> — sum of the absolute values. Sometimes called the Manhattan metric. Diamond</li>
+<li><span class="math inline">\(L^\infty\)</span> — the biggest individual value. Square.</li>
+</ul>
+<p>Predicting <code>Salary</code> in the <code>ISLR::Hitters</code> data:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Without_NA &lt;-<span class="st"> </span><span class="kw">na.omit</span>(ISLR::Hitters)
+inds &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(Without_NA), <span class="dt">size =</span> <span class="kw">nrow</span>(Without_NA)/<span class="dv">2</span>)
+Train &lt;-<span class="st"> </span>Without_NA[inds,]
+Test &lt;-<span class="st"> </span>Without_NA[-inds,]
+y_all &lt;-<span class="st"> </span>Without_NA$Salary
+x_all &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(Salary ~<span class="st"> </span>., <span class="dt">data=</span>Without_NA)
+y_train &lt;-<span class="st"> </span>Train$Salary
+x_train &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(Salary ~<span class="st"> </span>., <span class="dt">data=</span>Train)
+y_test &lt;-<span class="st"> </span>Test$Salary
+x_test &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(Salary ~<span class="st"> </span>., <span class="dt">data=</span>Test)
+ridge_mod &lt;-<span class="st"> </span><span class="kw">cv.glmnet</span>(x_train, y_train, <span class="dt">alpha =</span> <span class="dv">0</span>)
+ridge_mod$lambda.min
+ridge_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(ridge_mod, <span class="dt">s=</span><span class="dv">0</span>, <span class="dt">newx =</span> x_test, <span class="dt">exact=</span><span class="ot">TRUE</span>)
+<span class="kw">mean</span>((ridge_pred -<span class="st"> </span>y_test)^<span class="dv">2</span>)
+final &lt;-<span class="st"> </span><span class="kw">glmnet</span>(x_all, y_all, <span class="dt">alpha=</span><span class="dv">0</span>)
+<span class="kw">predict</span>(final, <span class="dt">type=</span><span class="st">&quot;coefficients&quot;</span>, <span class="dt">s=</span>ridge_mod$lambda.min)</code></pre></div>
+<p>Lasso: Do we really need all of those variables?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lasso_mod &lt;-<span class="st"> </span><span class="kw">cv.glmnet</span>(x_train, y_train, <span class="dt">alpha =</span> <span class="dv">1</span>)
+lasso_mod$lambda.min
+lasso_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(lasso_mod, <span class="dt">s=</span><span class="dv">0</span>, <span class="dt">newx =</span> x_test, <span class="dt">exact=</span><span class="ot">TRUE</span>)
+<span class="kw">mean</span>((lasso_pred -<span class="st"> </span>y_test)^<span class="dv">2</span>)
+final &lt;-<span class="st"> </span><span class="kw">glmnet</span>(x_all, y_all, <span class="dt">alpha=</span><span class="dv">1</span>)
+<span class="kw">predict</span>(final, <span class="dt">type=</span><span class="st">&quot;coefficients&quot;</span>, <span class="dt">s=</span>lasso_mod$lambda.min)</code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-13"></span>
+<img src="Images/Chapter-6/6.4.png" alt="ISLR Figure 6.4" width="400" />
+<p class="caption">
+Figure 10.6: ISLR Figure 6.4
+</p>
+</div>
+<div class="figure"><span id="fig:unnamed-chunk-14"></span>
+<img src="Images/Chapter-6/6.7.png" alt="ISLR Figure 6.7" width="400" />
+<p class="caption">
+Figure 10.7: ISLR Figure 6.7
+</p>
+</div>
+</div>
 </div>
             </section>
 
@@ -262,7 +633,7 @@ Figure 10.2: ISLR Figure 6.2. Note that the values on the vertical axis are the 
         </div>
       </div>
 <a href="cross-validation-and-bootstrapping.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="optimization.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="multi-collinearity.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>

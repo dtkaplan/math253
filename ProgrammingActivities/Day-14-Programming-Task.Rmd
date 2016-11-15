@@ -1,0 +1,105 @@
+---
+title: "In-Class Computing Task 14"
+author: "Math 253: Statistical Computing & Machine Learning"
+date: "Shrinkage and out-of-sample prediction error"
+params:
+  show_answers: FALSE
+output: 
+  rmarkdown::tufte_handout
+---
+
+```{r include=FALSE}
+options(width=80)
+library(mosaicData)
+library(ggplot2)
+library(scoreActivity)
+library(ISLR)
+knitr::opts_chunk$set(tidy=FALSE, echo=params$show_answers)
+options(width=100)
+```
+
+In this activity, you're going to examine how a shrinkage approach can reduce *out-of-sample* prediction error.
+
+Install the `glmnet` package.^[Remember, *installing* a package is different than loading it with `libaray()`. You need to install a package only once, and it will work in any document. So don't put the installation command in your your document: use the Packages tab.  Your document should contain only the commands to load packages that have been installed previously.]
+
+```{r message = FALSE}
+library(glmnet)
+```
+
+You're going to use the `glmnet()` function to fit ridge regression models.
+The data used in the examples can be loaded with 
+```{r echo=TRUE}
+GenCont <- read.csv("http://tiny.cc/dcf/GenCont.csv")
+```
+
+This is a data table about the expression of 12 genes and their possible relationship to the expression of a phenotype. The variable `Phenotypes` will be the response in your model. The 12 genes will be the explanatory variables.
+
+\enlargethispage{1.5in}
+
+
+# Comparing OLS to ridge
+
+Write a function with this interface:
+```{r echo=TRUE}
+compare_ols_ridge <- function(responses, predictors, lambda=1){
+  # your statements will go here
+}
+```
+
+Your `compare_ols_ridge()` should do the following:
+
+1. Create a training data set by choosing about half the cases at random. You will need to make both the responses and the predictors.
+2. Create a testing data set which will be the remaining cases. Again, you'll need both the responses and the predictors.
+3. Fit an ordinary linear regression using `lm()` on the training data.
+4. Fit a ridge regression for the specified `lambda` using `glmnet()`. Set `alpha=0` as an argument to get ridge regression. 
+5. For each of the models in (3) and (4), calculate the *in-sample* predictions using `predict()` and then turn these into an in-sample mean square prediction error.
+6. Using the testing data set, calculate the *out-of-sample* mean square prediction error.
+7. Your function should return a named vector with these five components: `lambda` as well as `ols_in`, `ridge_in`, `ols_out`, `ridge_out`, each of which has the corresponding mean square prediction error. 
+8. Use your function to create an object called `Shrink_results` with `lambda = 1` and the `GenCont` data . 
+
+```{r echo = params$show_answers}
+compare_ols_ridge <- function(responses = GenCont[,1], 
+                              predictors = GenCont[,-1], 
+                              lambda=1) {
+  training_inds <- sample(1:length(responses), size = floor(length(responses)/2))
+  resp_train <- responses[training_inds]
+  pred_train <- predictors[training_inds,]
+  resp_test <- responses[-training_inds]
+  pred_test <- predictors[-training_inds,]
+  ols_mod <- lm(resp_train ~ as.matrix(pred_train))
+  ridge_mod <- glmnet(as.matrix(pred_train), resp_train, alpha = 0, lambda = lambda)
+  ols_in <- mean((resp_train - predict(ols_mod))^2)
+  ols_out <- mean((resp_test - predict(ols_mod, newx=pred_test))^2)
+  ridge_in <- mean((resp_train - predict(ridge_mod, newx=as.matrix(pred_train)))^2)
+  ridge_out <- mean((resp_test - predict(ridge_mod, newx=as.matrix(pred_test)))^2)
+  
+  return(c(lambda = lambda, 
+           ols_in = ols_in,     ols_out = ols_out, 
+           ridge_in = ridge_in, ridge_out = ridge_out))
+  
+}
+
+Shrink_results <- compare_ols_ridge(responses = GenCont[,1], 
+                              predictors = GenCont[,-1], 
+                              lambda=1)
+```
+
+
+## Exploring Lambda
+
+Use your `compare_ols_ridge()` to look at the in- and out-of-sample prediction errors for a range of $\lambda$ from 0.1 to 100
+
+
+
+
+```{r echo=FALSE, eval=params$show_answers, results="asis"}
+cat("# Test statments")
+```
+
+```{r echo=params$show_answers, eval=params$show_answers}
+scoreActivity::score253(14)
+```
+
+```{r echo = FALSE, eval = FALSE}
+compare_ols_ridge(GenCont[,1], GenCont[,-1], lambda = 1)
+```

@@ -139,4 +139,25 @@ result
 ```
 
 
+```{r}
+library(mosaic)
+do(100) * {
+  n <- 100000
+  s <- sample(1:n, size = n, replace = TRUE)
+  n - length(unique(s))
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
