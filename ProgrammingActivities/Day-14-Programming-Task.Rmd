@@ -78,7 +78,7 @@ compare_ols_ridge <- function(responses = GenCont[,1],
            ridge_in = ridge_in, ridge_out = ridge_out))
   
 }
-
+set.seed(1)
 Shrink_results <- compare_ols_ridge(responses = GenCont[,1], 
                               predictors = GenCont[,-1], 
                               lambda=1)
