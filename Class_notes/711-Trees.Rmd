@@ -1,0 +1,135 @@
+# Trees for Regression and Classification
+
+We're working on a straightforward framework for regression and classification modeling: tree-based models.
+
+
+
+Let's work with two examples: one a regression model `y ~ x` and the other a classification model `class ~ x`. We'll use these training data.
+
+```{r echo = FALSE}
+knitr::kable(data.frame(
+  x = 1:8,
+  y = c(2,5,1,3,8,5,4,6),
+  class = c("A", "B", "A", "A", "B", "B", "A", "B")
+))
+```
+
+First, the regression model. The data can be split by $x$ in 7 different ways: 
+
+1. `1` vs `2:8`     
+2. `1:2` vs `3:8`   
+
+and so on, up to
+
+7. `1:7` vs `8`
+
+For each of these 7 possible splits, find the mean $y$ of the left and right groups, and calculate the sum of square residuals from the mean of the points in that each group. Add these to get a total sum of squares. We'll use this to pick the "best" split. Then repeat for the left group and for the right group until the sum of square errors for the groups is zero. A tree!
+
+A **branch point** (fork? bifurcation?) divides the data under consideration into two branches based on a single explanatory variable.  The division is chosen, by exhaustion, to decrease the **deviance** of the response variable. For regression, the model is a simple **mean**^[which is itself a maximum-likelihood estimator] and the deviance is equivalent to the **sum of squared residuals**.  For classification, the model is a vector of observed probabilities and the deviance is proportional to minus 2 times the **log-likelihood** of the response variable given those probabilities.
+
+```{r echo = FALSE, fig.cap='ISLR Figure 8.8 from ISLR'}
+knitr::include_graphics("Images/Chapter-8/8.8.png")
+```
+
+Branches are followed by additional branch points or by a **single leaf**.  A leaf contains a single case^[or by multiple cases with the same value for the response variable] from the original data (which, by necessity, cannot be further divided into cases). The process of branching is applied **recursively** until there is a leaf for every case in the original data.  I call this a **pure** tree; the log likelihood is as large as possible: 0.
+
+Deviance (which amounts to sum of square residuals in a regression setting), is a value that results from summing over every case.  The data cases and model values leading into each branch point produce a given deviance.  Similarly, each of the branches stemming from the branch point has a deviance. The sum of the branches' deviances is always less than the deviance of the input to the branch point.  That **reduction in deviance** can be ascribed to the variable used in the branch point.  By summing over all the branch points using a particular variable, the total reduction in deviance due to that variable can be calculated.  This can be a useful measure of the **importance** of each variable in contributing to the "explanation" of the response variable.  It's analogous to the sum of squares reported in ANOVA for each model term.  But, unlike ANOVA, there is no fixed order of which term comes first. (This is good in some ways and bad in others.)
+
+## Splitting Criteria for Classification Trees
+
+ISLR considers three measures to determine which of all the possible splits is best.
+
+Let $m$ be a region and $k$ a class. Also, let $\hat{p}_{mk}$ be the proportion of the training observations in region $m$ of class $k$. Finally, let $\hat{n}_{mk}$ be the *count* of cases of class $k$ in region $m$. Thus $$\hat{p}_{mk} \equiv \frac{\hat{n}_{mk}}{\sum_k \hat{n}_{mk}}$$
+
+1. Classification error rate: $$E = 1 - \max_k(\hat{p}_{mk}).$$ This is the fraction of cases that were not in the most popular class.  The book describes this as too coarse a measure to be effective for tree-growing.
+2. The "Gini index": $$G = \sum_{k=1}^K \hat{p}_{mk}(1 - \hat{p}_mk)$$
+3. The "cross entropy": $$D = - \sum_{k=1}^K \hat{p}_{mk}\ln(\hat{p}_{mk})$$
+
+Note that (2) and (3) are very similar for small $\hat{p}_{mk}$, since a first-order Taylor expansion gives
+$$\ln(x) \approx \ln(x)|_{x = 1} + \frac{d\ln}{dx}|_{x = 1} (x - 1) = 0  + \frac{1}{1}(x - 1) = x - 1$$ So $-\ln(x)$ which appears in $D$ is $\approx 1 - x$.
+
+I find it easier to think about the deviance, or, more simply, the negative log likelihood (which is $-2$ times the deviance). This is the sum of all cases of the negative log likelihood of each class, or $${\cal L} \equiv - \sum_k \left[\hat{n}_{mk} \ln( \hat{p}_{mk})\right]$$ This is $\sum_k \hat{n}_{mk}$ times the cross entropy.
+
+I prefer ${\cal L}$ this because it is an [extensive quantity](https://en.wikipedia.org/wiki/Intensive_and_extensive_properties) and so we can consider the whole as the sum of the parts.  Example from physics: temperature is intensive, energy is extensive.
+
+Perform the same exercise as in constructing the model `y ~ x` but with `class ~ x`. Use ${\cal L}$ as the figure of merit in determining which is the "best" split at each stage.
+
+## Variable importance
+
+The tree construction allows a simple measure of how important each variable is in the model. At each fork, there is one variable being split up. That splits results in a reduction of ${\cal L}$ which can be ascribed to that variable.
+
+Across all of the forks, add up the ${\cal L}$ reductions for each variable. That gives the relative importance of each variable.
+
+Another possibility would be to use an ANOVA type strategy of nested models, but the order of explanatory variables would, as in ANOVA on linear models, play a role in the results.
+
+
+```{r echo = FALSE, fig.cap='ISLR Figure 8.9 from ISLR'}
+knitr::include_graphics("Images/Chapter-8/8.9.png")
+```
+
+## Avoiding overfitting
+
+The model-fitting method we've explored will produce a model whose leaves have deviance of zero.
+
+Of course, the pure tree is likely to be an overfit.  The out-of-sample prediction error is almost certain to be larger than the in-sample error.  There are several ways to extend the process to produce better out-of-sample performance.
+
+1. **Prune** the tree. The controlling parameter is the number of leaves in the pruned tree.
+2. **Average** over bootstrap replications.  **Don't prune**.
+3. **Shrink** the tree to a very simple structure (e.g. 2-4 leaves) and fit successive trees to the residual. **Heavy pruning** for each tree.
+
+```{r}
+library(ISLR)
+library(tree)
+Heart <- na.omit(read.csv("Heart.csv"))
+Heart$X <- NULL
+mod1 <- tree(ChestPain ~ ., data = Heart)
+in_sample <- predict(mod1, data = Heart, type= "class", split=TRUE)
+table(Heart$ChestPain, in_sample)
+```
+
+## Pruning
+
+```{r include = FALSE}
+old_width <- options(width = 100)
+```
+
+```{r}
+prune1 <- prune.misclass(mod1, best=8)
+in_sample <- predict(prune1, data = Heart, type= "class", split=TRUE)
+table(Heart$ChestPain, in_sample)
+```
+
+## Averaging
+
+Each tree produces sharp division points.  The precise division point has high variance.  So bootstrap to produce a cohort of trees and average them.
+
+```{r}
+library(randomForest)
+mod2 <- randomForest(ChestPain ~ ., data = Heart, importance = TRUE)
+
+```
+
+In **random forests**, we also "bootstrap" the available variables for each branching point. This produces trees that are uncorrelated with one another, thereby giving additional opportunities to create variance and average over it.
+
+```{r}
+mod3 <- randomForest(ChestPain ~ ., data = Heart, mtry=5, importance = TRUE)
+```
+
+## Shrinking  ("Boosting")
+
+
+
+```{r}
+library(gbm)
+Heart$pain <- ifelse(Heart$ChestPain == "asymptomatic", 0, 1)
+mod4 <- gbm(pain ~ ., data=Heart, distribution="bernoulli", n.trees=5000, interaction.depth = 4)
+```
+
+
+Slow down the learning process to avoid the pitfalls of greedy optimization.
+
+This importance is analogous to the mean square 
+
+Similarity to **stepwise selection** in linear regression.
+
+

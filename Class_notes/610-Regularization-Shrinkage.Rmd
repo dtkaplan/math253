@@ -242,7 +242,7 @@ knitr::include_graphics("Images/Chapter-6/6.7.png")
 ```
 
 
-# Multi-collinearity
+## Multi-collinearity
 
 
 The SAT story.
@@ -253,9 +253,14 @@ summary(lm(sat ~ expend + ratio + salary, data=mosaicData::SAT))$coef
 mosaic::rsquared(lm(expend ~ ratio + salary, data=mosaicData::SAT))
 ```
 
-\includegraphics[width=3in]{Images/CI-1.png}
+```{r echo = FALSE, fig.cap = "Confidence interval explanation"}
+knitr::include_graphics("Images/CI-1.png")
+```
 
-\includegraphics[width=7in]{Images/CI-2.png}
+```{r echo = FALSE, fig.cap = "Confidence interval explanation, part 2"}
+knitr::include_graphics("Images/CI-2.png")
+```
+
 
 ```{r}
 load("Images/mona.rda")
@@ -272,7 +277,7 @@ $\mbox{VIF}(\beta_j) = \frac{1}{1 - R^2_{x_j|x_{-j}}}$
 Getting rid of vectors that correlate substantially with one another can reduce the variance inflation factor.
 
 
-# Creating correlations
+## Creating correlations
 
 Generate points on circles of radius 1, 2, 3, ...
 
@@ -312,6 +317,28 @@ After_V_lambda_U <- transform_circles(svals$u, After_V_lambda)
 plot(y ~ x, data = After_V, col = After_V_lambda_U$col, asp = 1, pch = 20)
 ```
 
+## Rank 1 Matrices
+
+Suppose all the columns in a matrix are simple multiples of the first column. All of the columns would be exactly collinear, so `lm()` will produce `NA` for all but one of the coefficients (putting the intercept aside). Lasso would zero out all but one of the coefficients, ridge would ...
+
+```{r}
+set.seed(101)
+one <- outer(rnorm(100), rnorm(10))
+two <- outer(rnorm(100), rnorm(10))
+three <- outer(rnorm(100), rnorm(10))
+y <- rnorm(100) + 7 * one[, 1] - 2 * two[, 1]
+x <- one + two
+
+dim(one)
+lm(y ~ x)
+lasso_mod <- cv.glmnet(x, y, alpha = 1)
+lasso_mod$lambda.min
+predict(lasso_mod, type="coefficients", s=lasso_mod$lambda.min)
+ridge_mod <- cv.glmnet(one, y, alpha = 0)
+ridge_mod$lambda.min
+predict(ridge_mod, type="coefficients", s=ridge_mod$lambda.min)
+```
+
 
 ## Idea of singular values.
 
@@ -325,7 +352,7 @@ Nice illustration:
 
 [Source](https://en.wikipedia.org/wiki/Singular_value_decomposition#/media/File:Singular-Value-Decomposition.svg)
 
-# Dimension reduction
+## Dimension reduction
 
 Re-arrange the variables to squeeze the juice out of them.
 
@@ -344,7 +371,7 @@ Creating those singular vectors:
 ```{r}
 res <- svd(mona)
 approx <- 0
-for (i in 1:20) {
+for (i in 1:10) {
   approx <- approx + outer(res$u[,i], res$v[,i]) * res$d[i]
 }
 image(approx, asp=1)

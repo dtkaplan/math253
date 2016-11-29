@@ -1,0 +1,276 @@
+# Nonlinearity in linear models
+
+Basic idea: Use linear regression to construct models $f(x)$ that are nonlinear in $x$.
+
+```{r include=FALSE}
+require(mosaic)
+require(ISLR)
+require(glmnet)
+require(pls)
+knitr::opts_chunk$set(tidy=FALSE)
+```
+
+## Smoothers
+
+Sometimes the model form we want to impose is described by broad properties:
+
+1. The "smoothness" of the model.
+2. The generalizability of the model, e.g. extrapolation outside the range of the inputs
+
+The broad class of model forms used here are called smoothers. They are a linear combination of a set of functions, called *basis functions*, that have nice properties.
+
+### Ideas of smoothness
+
+* Continuity: Is the $n$th derivative continuous?  The higher is $n$, the smoother is the function.
+* Bumpiness: The integral of the absolute value of the 2nd derivative.
+
+- Aside: Is continuity always good? [Regression discontinuity video](https://www.youtube.com/watch?v=TfKwgGT2fSM)
+
+### Polynomials
+
+Polynomials have been central to math education for a long time, and there has been a rich theory of them since around the 13th century.  For instance:
+
+> The fundamental theorem of algebra states that every non-constant single-variable polynomial with complex coefficients has at least one complex root. This includes polynomials with real coefficients, since every real number is a complex number with an imaginary part equal to zero.
+
+* Polynomials are completely smooth in the sense of continuity: all derivatives are continuous.
+* But they may be bumpy
+* And their behavior for large and small $x$ is crazy.
+
+### The model matrix
+
+The set of basis functions evaluated at the inputs $x$.
+
+```{r}
+make_model_matrix <- function(x, basis_funs) {
+  MM <- matrix(0, nrow=length(x), ncol=length(basis_funs))
+  for (i in 1:length(basis_funs)) {
+    MM[,i] = basis_funs[[i]](x)
+  }
+  
+  return(MM)
+}
+```
+
+Polynomial basis functions:
+```{r}
+polynomial_basis_3 <- list(
+  function(x) 1,
+  function(x) x,
+  function(x) x^2,
+  function(x) x^3
+)
+```
+
+```{r}
+monomial <- function(k) function(x) x^k
+
+make_polynomial_basis <- function(p) {
+  lapply(0:p, FUN=monomial)
+}
+```
+
+```{r echo=FALSE}
+show_smoother <- function(data = Wage, basis, bootstrap=0, confidence=FALSE, ...){
+  plot(wage ~ age, data=data, pch=20, col=rgb(0,0,0,.2), ...)
+  MM <- make_model_matrix(data$age, basis)
+  mod <- lm(data$wage ~ MM - 1)
+  x <- seq(0,100, length=1000)
+  MMM <- make_model_matrix(x, basis)
+  y <- MMM %*% coef(mod)
+  se <- sqrt(rowSums(MMM %*% vcov(mod) * MMM))
+  lines(x,y, col='red', lwd=2)
+  if (confidence) {
+    lines(x, y+2*se, col="blue")
+    lines(x, y-2*se, col="blue")
+  }
+  for (k in seq_len(bootstrap)) {
+      data2 <- mosaic::resample(data)
+      MM <- make_model_matrix(data2$age, basis)
+      mod <- lm(data2$wage ~ MM - 1)
+      x <- seq(0,100, length=1000)
+      MMM <- make_model_matrix(x, basis)
+      y <- MMM %*% coef(mod)
+      lines(x,y, col=rgb(1,0,0,.4), lwd=2)
+  }
+}
+```
+
+```{r}
+show_smoother(basis=make_polynomial_basis(10),
+              data=sample(CPS85, size=100), bootstrap=10, confidence=TRUE)
+```
+
+### Sigmoidal Functions
+
+```{r}
+sigmoidal_basis <- list(
+  function(x) 1, 
+  function(x) dnorm(x, mean=25, sd = 10),
+  function(x) dnorm(x, mean=40, sd = 15),
+  function(x) dnorm(x, mean=55, sd=10)
+)
+```
+
+### Hat functions
+
+```{r}
+hat <- function(from, width) 
+  function(x) {ifelse(x>from & x<(from+width), 1, 0)}
+hat_basis <- list(
+  function(x) 1,
+  hat(20, 10), 
+  hat(30, 10),
+  hat(40, 10),
+  hat(43, 17),
+  hat(22, 6),
+  hat(50, 10)
+)
+```
+
+### Fourier analysis 
+
+E.g. taking a function apart into Fourier components --- sines and cosines
+```{r}
+fourier <- function(fun, period) {
+  function(x) fun(2*pi*x / period)
+}
+fourier_set <- list(
+  function(x) 1,
+#  fourier(cos, 5),
+#  fourier(cos, 10),
+  fourier(cos, 20),
+  fourier(cos, 30),
+#  fourier(sin, 5),
+#  fourier(sin, 10),
+  fourier(sin, 20),
+  fourier(sin, 30))
+show_smoother(basis=fourier_set, data=mosaic::sample(Wage, size=100), bootstrap=20, confidence=TRUE)
+```
+
+
+
+```{r}
+show_smoother(basis=hat_basis, data=mosaic::sample(Wage, size=100), bootstrap=20, confidence=FALSE)
+```
+
+## Steps
+
+```{r}
+step_fun <- function(where) { function(x) ifelse(x > where, 1, 0)}
+step_basis <- list(
+  function(x) 1,
+  step_fun(30),
+  step_fun(35),
+  step_fun(50),
+  step_fun(55)
+)
+show_smoother(basis=step_basis, data=mosaic::sample(Wage, size=100), bootstrap=0, confidence=FALSE)
+```
+
+## Other functions
+
+* triangles
+* gaussian: `dnorm()`
+* sigmoidals: `pnorm()`
+* spline basis: 1, $x$, $x^2$, $x^3$, $(x-\xi_j)^3_+$
+
+
+
+## Holes in the data
+
+Leave out the middle of the data
+
+## Bootstrapping
+
+## Normal theory confidence bands
+
+* covariance matrix for model coefficients
+* `rowSums(MM %*% cov * MM)`
+
+```{r}
+data(SwimRecords, package = "mosaicData")
+model_formula <- time ~ year
+MM <- model.matrix(model_formula, data=SwimRecords)
+mod <- lm(model_formula, data = SwimRecords)
+SE <- rowSums(MM %*% vcov(mod) * MM)
+top <- fitted(mod) + 2*SE
+bottom <- fitted(mod) - 2*SE
+#if(!is.null(knitr::current_input() ))
+   plot(time ~ year, data=SwimRecords)
+points(MM[,2], top, pch=20)
+points(MM[,2], bottom, pch=20)
+```
+
+
+## Splines
+
+### B-splines
+```{r}
+library(splines)
+x <- seq(0, 100, by = 0.1)
+funs <- splines::bs(x, df = 15)
+plot(x, funs[,1], type="l")
+for (k in 1:ncol(funs))
+  lines(x, funs[,k], col=topo.colors(ncol(funs))[k])
+mod <- lm(time ~ sex * splines::bs(year, df=5), data=SwimRecords)
+plot(time ~ year, data=SwimRecords)
+with(SwimRecords, points(year, fitted(mod), pch=20))
+For_plotting <- expand.grid(sex = c("F", "M"), year = x)
+preds <- predict(mod, newdata = For_plotting)
+plot(preds ~ year, col = sex, pch=20, data = For_plotting)
+with(SwimRecords, points(year, time))
+```
+
+
+### Natural splines
+
+```{r}
+funs <- splines::ns(x, df = 15)
+plot(x, funs[,1], type="l")
+for (k in 1:ncol(funs))
+  lines(x, funs[,k], col=topo.colors(ncol(funs))[k])
+mod <- lm(time ~ sex * splines::bs(year, df=5), data=SwimRecords)
+plot(time ~ year, data=SwimRecords)
+with(SwimRecords, points(year, fitted(mod), pch=20))
+For_plotting <- expand.grid(sex = c("F", "M"), year = x)
+preds <- predict(mod, newdata = For_plotting)
+plot(preds ~ year, col = sex, pch=20, data = For_plotting)
+with(SwimRecords, points(year, time))
+```
+
+### Smoothing splines
+
+```{r}
+mod <- with(SwimRecords, smooth.spline(year, time, df = 5))
+multiples <- duplicated( SwimRecords$time )
+mod2 <- with(SwimRecords, smooth.spline(year, time, cv = TRUE))
+mod2$df
+plot(time ~ year, data=SwimRecords)
+lines(mod, col="red", lwd=2)
+lines(mod2, col="blue", lwd=3)
+```
+
+
+### Smoothers in k dimensions
+
+## GAMS
+
+SOMETHING'S WRONG
+
+```{r eval = FALSE}
+library(gam)
+mod <- gam(time ~ sex * s(year, 2), data=SwimRecords)
+preds <- predict(mod, newdata=X)
+plot(X$year, preds)
+```
+
+
+# Programming Activity
+
+# Where to place knots?
+
+Show the ecdf() of some data.  Invert this to get the quantiles.
+
+Show `mosaic::qdata()` and `mosaic::pdata()` as inverses.
+
+`quantile()` is the original version of this.

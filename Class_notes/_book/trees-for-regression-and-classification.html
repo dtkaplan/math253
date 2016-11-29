@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Notes for Math 253: Statistical Computing and Machine Learning</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Notes and other materials for Math 253 at Macalester College.">
+  <meta name="generator" content="bookdown 0.1.15 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Notes for Math 253: Statistical Computing and Machine Learning" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Notes and other materials for Math 253 at Macalester College." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Notes for Math 253: Statistical Computing and Machine Learning" />
+  
+  <meta name="twitter:description" content="Notes and other materials for Math 253 at Macalester College." />
+  
+
+<meta name="author" content="Daniel Kaplan">
+
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="nonlinearity-in-linear-models.html">
+<link rel="next" href="programming-basics.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Math 253 Notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Placeholder</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="part"><span><b>Topic I: Linear Regression</b></span></li>
+<li class="chapter" data-level="3" data-path="placeholder-1.html"><a href="placeholder-1.html"><i class="fa fa-check"></i><b>3</b> Placeholder</a></li>
+<li class="chapter" data-level="4" data-path="notes.html"><a href="notes.html"><i class="fa fa-check"></i><b>4</b> Notes</a></li>
+<li class="chapter" data-level="5" data-path="foundations-linear-algebra-likelihood-and-bayes-rule.html"><a href="foundations-linear-algebra-likelihood-and-bayes-rule.html"><i class="fa fa-check"></i><b>5</b> Foundations: linear algebra, likelihood and Bayes’ rule</a></li>
+<li class="chapter" data-level="6" data-path="classifiers.html"><a href="classifiers.html"><i class="fa fa-check"></i><b>6</b> Classifiers</a></li>
+<li class="chapter" data-level="7" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>7</b> Logistic Regression</a></li>
+<li class="chapter" data-level="8" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html"><i class="fa fa-check"></i><b>8</b> Linear and Quadratic Discriminant Analysis</a></li>
+<li class="chapter" data-level="9" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html"><i class="fa fa-check"></i><b>9</b> Cross-Validation and Bootstrapping</a></li>
+<li class="chapter" data-level="10" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html"><i class="fa fa-check"></i><b>10</b> Regularization, shrinkage and dimension reduction</a></li>
+<li class="chapter" data-level="11" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html"><i class="fa fa-check"></i><b>11</b> Nonlinearity in linear models</a></li>
+<li class="chapter" data-level="12" data-path="trees-for-regression-and-classification.html"><a href="trees-for-regression-and-classification.html"><i class="fa fa-check"></i><b>12</b> Trees for Regression and Classification</a><ul>
+<li class="chapter" data-level="12.1" data-path="trees-for-regression-and-classification.html"><a href="trees-for-regression-and-classification.html#splitting-criteria-for-classification-trees"><i class="fa fa-check"></i><b>12.1</b> Splitting Criteria for Classification Trees</a></li>
+<li class="chapter" data-level="12.2" data-path="trees-for-regression-and-classification.html"><a href="trees-for-regression-and-classification.html#variable-importance"><i class="fa fa-check"></i><b>12.2</b> Variable importance</a></li>
+<li class="chapter" data-level="12.3" data-path="trees-for-regression-and-classification.html"><a href="trees-for-regression-and-classification.html#avoiding-overfitting"><i class="fa fa-check"></i><b>12.3</b> Avoiding overfitting</a></li>
+<li class="chapter" data-level="12.4" data-path="trees-for-regression-and-classification.html"><a href="trees-for-regression-and-classification.html#pruning"><i class="fa fa-check"></i><b>12.4</b> Pruning</a></li>
+<li class="chapter" data-level="12.5" data-path="trees-for-regression-and-classification.html"><a href="trees-for-regression-and-classification.html#averaging"><i class="fa fa-check"></i><b>12.5</b> Averaging</a></li>
+<li class="chapter" data-level="12.6" data-path="trees-for-regression-and-classification.html"><a href="trees-for-regression-and-classification.html#shrinking-boosting"><i class="fa fa-check"></i><b>12.6</b> Shrinking (“Boosting”)</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="programming-basics.html"><a href="programming-basics.html"><i class="fa fa-check"></i><b>13</b> Programming Basics</a></li>
+<li class="chapter" data-level="" data-path="appendices.html"><a href="appendices.html"><i class="fa fa-check"></i>Appendices</a></li>
+<li class="chapter" data-level="" data-path="connecting-rstudio-to-your-github-repository.html"><a href="connecting-rstudio-to-your-github-repository.html"><i class="fa fa-check"></i>Connecting RStudio to your GitHub repository</a></li>
+<li class="chapter" data-level="" data-path="instructions-for-the-publishing-system-bookdown.html"><a href="instructions-for-the-publishing-system-bookdown.html"><i class="fa fa-check"></i>Instructions for the publishing system: Bookdown</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/dtkaplan/math253" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notes for Math 253: Statistical Computing and Machine Learning</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="trees-for-regression-and-classification" class="section level1">
+<h1><span class="header-section-number">Topic 12</span> Trees for Regression and Classification</h1>
+<p>We’re working on a straightforward framework for regression and classification modeling: tree-based models.</p>
+<p>Let’s work with two examples: one a regression model <code>y ~ x</code> and the other a classification model <code>class ~ x</code>. We’ll use these training data.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">x</th>
+<th align="right">y</th>
+<th align="left">class</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="left">A</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">5</td>
+<td align="left">B</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="left">A</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">3</td>
+<td align="left">A</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="right">8</td>
+<td align="left">B</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="right">5</td>
+<td align="left">B</td>
+</tr>
+<tr class="odd">
+<td align="right">7</td>
+<td align="right">4</td>
+<td align="left">A</td>
+</tr>
+<tr class="even">
+<td align="right">8</td>
+<td align="right">6</td>
+<td align="left">B</td>
+</tr>
+</tbody>
+</table>
+<p>First, the regression model. The data can be split by <span class="math inline">\(x\)</span> in 7 different ways:</p>
+<ol style="list-style-type: decimal">
+<li><code>1</code> vs <code>2:8</code><br />
+</li>
+<li><code>1:2</code> vs <code>3:8</code></li>
+</ol>
+<p>and so on, up to</p>
+<ol start="7" style="list-style-type: decimal">
+<li><code>1:7</code> vs <code>8</code></li>
+</ol>
+<p>For each of these 7 possible splits, find the mean <span class="math inline">\(y\)</span> of the left and right groups, and calculate the sum of square residuals from the mean of the points in that each group. Add these to get a total sum of squares. We’ll use this to pick the “best” split. Then repeat for the left group and for the right group until the sum of square errors for the groups is zero. A tree!</p>
+<p>A <strong>branch point</strong> (fork? bifurcation?) divides the data under consideration into two branches based on a single explanatory variable. The division is chosen, by exhaustion, to decrease the <strong>deviance</strong> of the response variable. For regression, the model is a simple <strong>mean</strong><a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> and the deviance is equivalent to the <strong>sum of squared residuals</strong>. For classification, the model is a vector of observed probabilities and the deviance is proportional to minus 2 times the <strong>log-likelihood</strong> of the response variable given those probabilities.</p>
+<div class="figure"><span id="fig:unnamed-chunk-2"></span>
+<img src="Images/Chapter-8/8.8.png" alt="ISLR Figure 8.8 from ISLR" width="400" />
+<p class="caption">
+Figure 12.1: ISLR Figure 8.8 from ISLR
+</p>
+</div>
+<p>Branches are followed by additional branch points or by a <strong>single leaf</strong>. A leaf contains a single case<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> from the original data (which, by necessity, cannot be further divided into cases). The process of branching is applied <strong>recursively</strong> until there is a leaf for every case in the original data. I call this a <strong>pure</strong> tree; the log likelihood is as large as possible: 0.</p>
+<p>Deviance (which amounts to sum of square residuals in a regression setting), is a value that results from summing over every case. The data cases and model values leading into each branch point produce a given deviance. Similarly, each of the branches stemming from the branch point has a deviance. The sum of the branches’ deviances is always less than the deviance of the input to the branch point. That <strong>reduction in deviance</strong> can be ascribed to the variable used in the branch point. By summing over all the branch points using a particular variable, the total reduction in deviance due to that variable can be calculated. This can be a useful measure of the <strong>importance</strong> of each variable in contributing to the “explanation” of the response variable. It’s analogous to the sum of squares reported in ANOVA for each model term. But, unlike ANOVA, there is no fixed order of which term comes first. (This is good in some ways and bad in others.)</p>
+<div id="splitting-criteria-for-classification-trees" class="section level2">
+<h2><span class="header-section-number">12.1</span> Splitting Criteria for Classification Trees</h2>
+<p>ISLR considers three measures to determine which of all the possible splits is best.</p>
+<p>Let <span class="math inline">\(m\)</span> be a region and <span class="math inline">\(k\)</span> a class. Also, let <span class="math inline">\(\hat{p}_{mk}\)</span> be the proportion of the training observations in region <span class="math inline">\(m\)</span> of class <span class="math inline">\(k\)</span>. Finally, let <span class="math inline">\(\hat{n}_{mk}\)</span> be the <em>count</em> of cases of class <span class="math inline">\(k\)</span> in region <span class="math inline">\(m\)</span>. Thus <span class="math display">\[\hat{p}_{mk} \equiv \frac{\hat{n}_{mk}}{\sum_k \hat{n}_{mk}}\]</span></p>
+<ol style="list-style-type: decimal">
+<li>Classification error rate: <span class="math display">\[E = 1 - \max_k(\hat{p}_{mk}).\]</span> This is the fraction of cases that were not in the most popular class. The book describes this as too coarse a measure to be effective for tree-growing.</li>
+<li>The “Gini index”: <span class="math display">\[G = \sum_{k=1}^K \hat{p}_{mk}(1 - \hat{p}_mk)\]</span></li>
+<li>The “cross entropy”: <span class="math display">\[D = - \sum_{k=1}^K \hat{p}_{mk}\ln(\hat{p}_{mk})\]</span></li>
+</ol>
+<p>Note that (2) and (3) are very similar for small <span class="math inline">\(\hat{p}_{mk}\)</span>, since a first-order Taylor expansion gives <span class="math display">\[\ln(x) \approx \ln(x)|_{x = 1} + \frac{d\ln}{dx}|_{x = 1} (x - 1) = 0  + \frac{1}{1}(x - 1) = x - 1\]</span> So <span class="math inline">\(-\ln(x)\)</span> which appears in <span class="math inline">\(D\)</span> is <span class="math inline">\(\approx 1 - x\)</span>.</p>
+<p>I find it easier to think about the deviance, or, more simply, the negative log likelihood (which is <span class="math inline">\(-2\)</span> times the deviance). This is the sum of all cases of the negative log likelihood of each class, or <span class="math display">\[{\cal L} \equiv - \sum_k \left[\hat{n}_{mk} \ln( \hat{p}_{mk})\right]\]</span> This is <span class="math inline">\(\sum_k \hat{n}_{mk}\)</span> times the cross entropy.</p>
+<p>I prefer <span class="math inline">\({\cal L}\)</span> this because it is an <a href="https://en.wikipedia.org/wiki/Intensive_and_extensive_properties">extensive quantity</a> and so we can consider the whole as the sum of the parts. Example from physics: temperature is intensive, energy is extensive.</p>
+<p>Perform the same exercise as in constructing the model <code>y ~ x</code> but with <code>class ~ x</code>. Use <span class="math inline">\({\cal L}\)</span> as the figure of merit in determining which is the “best” split at each stage.</p>
+</div>
+<div id="variable-importance" class="section level2">
+<h2><span class="header-section-number">12.2</span> Variable importance</h2>
+<p>The tree construction allows a simple measure of how important each variable is in the model. At each fork, there is one variable being split up. That splits results in a reduction of <span class="math inline">\({\cal L}\)</span> which can be ascribed to that variable.</p>
+<p>Across all of the forks, add up the <span class="math inline">\({\cal L}\)</span> reductions for each variable. That gives the relative importance of each variable.</p>
+<p>Another possibility would be to use an ANOVA type strategy of nested models, but the order of explanatory variables would, as in ANOVA on linear models, play a role in the results.</p>
+<div class="figure"><span id="fig:unnamed-chunk-3"></span>
+<img src="Images/Chapter-8/8.9.png" alt="ISLR Figure 8.9 from ISLR" width="400" />
+<p class="caption">
+Figure 12.2: ISLR Figure 8.9 from ISLR
+</p>
+</div>
+</div>
+<div id="avoiding-overfitting" class="section level2">
+<h2><span class="header-section-number">12.3</span> Avoiding overfitting</h2>
+<p>The model-fitting method we’ve explored will produce a model whose leaves have deviance of zero.</p>
+<p>Of course, the pure tree is likely to be an overfit. The out-of-sample prediction error is almost certain to be larger than the in-sample error. There are several ways to extend the process to produce better out-of-sample performance.</p>
+<ol style="list-style-type: decimal">
+<li><strong>Prune</strong> the tree. The controlling parameter is the number of leaves in the pruned tree.</li>
+<li><strong>Average</strong> over bootstrap replications. <strong>Don’t prune</strong>.</li>
+<li><strong>Shrink</strong> the tree to a very simple structure (e.g. 2-4 leaves) and fit successive trees to the residual. <strong>Heavy pruning</strong> for each tree.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ISLR)
+<span class="kw">library</span>(tree)
+Heart &lt;-<span class="st"> </span><span class="kw">na.omit</span>(<span class="kw">read.csv</span>(<span class="st">&quot;Heart.csv&quot;</span>))
+Heart$X &lt;-<span class="st"> </span><span class="ot">NULL</span>
+mod1 &lt;-<span class="st"> </span><span class="kw">tree</span>(ChestPain ~<span class="st"> </span>., <span class="dt">data =</span> Heart)
+in_sample &lt;-<span class="st"> </span><span class="kw">predict</span>(mod1, <span class="dt">data =</span> Heart, <span class="dt">type=</span> <span class="st">&quot;class&quot;</span>, <span class="dt">split=</span><span class="ot">TRUE</span>)
+<span class="kw">table</span>(Heart$ChestPain, in_sample)</code></pre></div>
+<pre><code>##               in_sample
+##                asymptomatic nonanginal nontypical typical
+##   asymptomatic          123         11          4       4
+##   nonanginal             31         41          8       3
+##   nontypical              7         12         27       3
+##   typical                 5          4          1      13</code></pre>
+</div>
+<div id="pruning" class="section level2">
+<h2><span class="header-section-number">12.4</span> Pruning</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prune1 &lt;-<span class="st"> </span><span class="kw">prune.misclass</span>(mod1, <span class="dt">best=</span><span class="dv">8</span>)
+in_sample &lt;-<span class="st"> </span><span class="kw">predict</span>(prune1, <span class="dt">data =</span> Heart, <span class="dt">type=</span> <span class="st">&quot;class&quot;</span>, <span class="dt">split=</span><span class="ot">TRUE</span>)
+<span class="kw">table</span>(Heart$ChestPain, in_sample)</code></pre></div>
+<pre><code>##               in_sample
+##                asymptomatic nonanginal nontypical typical
+##   asymptomatic          125         14          0       3
+##   nonanginal             30         47          0       6
+##   nontypical             12         28          7       2
+##   typical                 8          6          0       9</code></pre>
+</div>
+<div id="averaging" class="section level2">
+<h2><span class="header-section-number">12.5</span> Averaging</h2>
+<p>Each tree produces sharp division points. The precise division point has high variance. So bootstrap to produce a cohort of trees and average them.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(randomForest)</code></pre></div>
+<pre><code>## randomForest 4.6-12</code></pre>
+<pre><code>## Type rfNews() to see new features/changes/bug fixes.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod2 &lt;-<span class="st"> </span><span class="kw">randomForest</span>(ChestPain ~<span class="st"> </span>., <span class="dt">data =</span> Heart, <span class="dt">importance =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p>In <strong>random forests</strong>, we also “bootstrap” the available variables for each branching point. This produces trees that are uncorrelated with one another, thereby giving additional opportunities to create variance and average over it.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod3 &lt;-<span class="st"> </span><span class="kw">randomForest</span>(ChestPain ~<span class="st"> </span>., <span class="dt">data =</span> Heart, <span class="dt">mtry=</span><span class="dv">5</span>, <span class="dt">importance =</span> <span class="ot">TRUE</span>)</code></pre></div>
+</div>
+<div id="shrinking-boosting" class="section level2">
+<h2><span class="header-section-number">12.6</span> Shrinking (“Boosting”)</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(gbm)</code></pre></div>
+<pre><code>## Loading required package: survival</code></pre>
+<pre><code>## Loading required package: lattice</code></pre>
+<pre><code>## Loading required package: splines</code></pre>
+<pre><code>## Loading required package: parallel</code></pre>
+<pre><code>## Loaded gbm 2.1.1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Heart$pain &lt;-<span class="st"> </span><span class="kw">ifelse</span>(Heart$ChestPain ==<span class="st"> &quot;asymptomatic&quot;</span>, <span class="dv">0</span>, <span class="dv">1</span>)
+mod4 &lt;-<span class="st"> </span><span class="kw">gbm</span>(pain ~<span class="st"> </span>., <span class="dt">data=</span>Heart, <span class="dt">distribution=</span><span class="st">&quot;bernoulli&quot;</span>, <span class="dt">n.trees=</span><span class="dv">5000</span>, <span class="dt">interaction.depth =</span> <span class="dv">4</span>)</code></pre></div>
+<p>Slow down the learning process to avoid the pitfalls of greedy optimization.</p>
+<p>This importance is analogous to the mean square</p>
+<p>Similarity to <strong>stepwise selection</strong> in linear regression.</p>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>which is itself a maximum-likelihood estimator<a href="trees-for-regression-and-classification.html#fnref1">↩</a></p></li>
+<li id="fn2"><p>or by multiple cases with the same value for the response variable<a href="trees-for-regression-and-classification.html#fnref2">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="nonlinearity-in-linear-models.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="programming-basics.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/dtkaplan/math253/edit/master/711-Trees.Rmd",
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

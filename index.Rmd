@@ -42,7 +42,7 @@ Each topic assignment is due one week *after* we finish covering that topic in c
 - Topic III: Oct 25, 2016
 - Topic IV: Nov 8, 2016
 - Topic V: Nov 15, 2016
-
+- Remaining work: By the end of exam period.
 
 ## Topic I --- Introduction
 
@@ -103,6 +103,7 @@ Each topic assignment is due one week *after* we finish covering that topic in c
 * Readings: In Chapter 5 of ISL §5.1, §5.2
 * Programming basics 5: Loops and accumulators
 * Assignment: finish the in-class programming activities for the first five topics.
+* Programming Activity: [Nov 8](ProgrammingActivities/Day-13-Programming-Task.pdf)
 
 ## Topic 6 --- Selecting model terms
 
@@ -111,6 +112,7 @@ Each topic assignment is due one week *after* we finish covering that topic in c
 * Assignment: 
     - Theory 6.8.1, 6.8.2. 
     - Applied, 6.8.9
+* Programming Activities: [Nov 15](ProgrammingActivities/Day-14-Programming-Task.pdf), [Nov 17](ProgrammingActivities/Day-15-Programming-Task.pdf)
 
 ## Topic 7 --- Nonlinear regression
 
@@ -118,6 +120,7 @@ Each topic assignment is due one week *after* we finish covering that topic in c
 * Assignment:
     - programming: 7.9.11
     - theory: in §7.9 problems 3, 4, and 5
+* Programming Activity: [Nov 22](ProgrammingActivities/Day-16-Programming-Task.pdf)
  
 ## Topic 8 --- Tree-based methods
 
@@ -125,10 +128,12 @@ Each topic assignment is due one week *after* we finish covering that topic in c
 * Assignment:
     - programming: 8.4.12
     - theory: In §8.4 problems 1, 2, 3, 4, and 5
+* Programming Activity: [Nov 29](ProgrammingActivities/Day-17-Programming-Task.pdf)
 
 ## Topic 9 --- Support vector machines
 
 * Readings: Chapter 9 of ISL
+* Programming Activity: [Dec 1](ProgrammingActivities/Day-18-Programming-Task.pdf)
 
 ## Topic 10 --- Unsupervised learning
 
