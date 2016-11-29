@@ -38,8 +38,8 @@ MathJax.Hub.Config({
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="where-to-place-knots.html">
-<link rel="next" href="programming-basics.html">
+<link rel="prev" href="nonlinearity-in-linear-models.html">
+<link rel="next" href="where-to-place-knots.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -353,188 +353,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="trees-for-regression-and-classification" class="section level1">
-<h1><span class="header-section-number">Topic 12</span> Trees for Regression and Classification</h1>
-<p>We’re working on a straightforward framework for regression and classification modeling: tree-based models.</p>
-<p>Let’s work with two examples: one a regression model <code>y ~ x</code> and the other a classification model <code>class ~ x</code>. We’ll use these training data.</p>
-<table>
-<thead>
-<tr class="header">
-<th align="right">x</th>
-<th align="right">y</th>
-<th align="left">class</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="left">A</td>
-</tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="right">5</td>
-<td align="left">B</td>
-</tr>
-<tr class="odd">
-<td align="right">3</td>
-<td align="right">1</td>
-<td align="left">A</td>
-</tr>
-<tr class="even">
-<td align="right">4</td>
-<td align="right">3</td>
-<td align="left">A</td>
-</tr>
-<tr class="odd">
-<td align="right">5</td>
-<td align="right">8</td>
-<td align="left">B</td>
-</tr>
-<tr class="even">
-<td align="right">6</td>
-<td align="right">5</td>
-<td align="left">B</td>
-</tr>
-<tr class="odd">
-<td align="right">7</td>
-<td align="right">4</td>
-<td align="left">A</td>
-</tr>
-<tr class="even">
-<td align="right">8</td>
-<td align="right">6</td>
-<td align="left">B</td>
-</tr>
-</tbody>
-</table>
-<p>First, the regression model. The data can be split by <span class="math inline">\(x\)</span> in 7 different ways:</p>
-<ol style="list-style-type: decimal">
-<li><code>1</code> vs <code>2:8</code><br />
-</li>
-<li><code>1:2</code> vs <code>3:8</code></li>
-</ol>
-<p>and so on, up to</p>
-<ol start="7" style="list-style-type: decimal">
-<li><code>1:7</code> vs <code>8</code></li>
-</ol>
-<p>For each of these 7 possible splits, find the mean <span class="math inline">\(y\)</span> of the left and right groups, and calculate the sum of square residuals from the mean of the points in that each group. Add these to get a total sum of squares. We’ll use this to pick the “best” split. Then repeat for the left group and for the right group until the sum of square errors for the groups is zero. A tree!</p>
-<p>A <strong>branch point</strong> (fork? bifurcation?) divides the data under consideration into two branches based on a single explanatory variable. The division is chosen, by exhaustion, to decrease the <strong>deviance</strong> of the response variable. For regression, the model is a simple <strong>mean</strong><a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> and the deviance is equivalent to the <strong>sum of squared residuals</strong>. For classification, the model is a vector of observed probabilities and the deviance is proportional to minus 2 times the <strong>log-likelihood</strong> of the response variable given those probabilities.</p>
-<div class="figure"><span id="fig:unnamed-chunk-127"></span>
-<img src="Images/Chapter-8/8.8.png" alt="ISLR Figure 8.8 from ISLR" width="400" />
-<p class="caption">
-Figure 12.1: ISLR Figure 8.8 from ISLR
-</p>
-</div>
-<p>Branches are followed by additional branch points or by a <strong>single leaf</strong>. A leaf contains a single case<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a> from the original data (which, by necessity, cannot be further divided into cases). The process of branching is applied <strong>recursively</strong> until there is a leaf for every case in the original data. I call this a <strong>pure</strong> tree; the log likelihood is as large as possible: 0.</p>
-<p>Deviance (which amounts to sum of square residuals in a regression setting), is a value that results from summing over every case. The data cases and model values leading into each branch point produce a given deviance. Similarly, each of the branches stemming from the branch point has a deviance. The sum of the branches’ deviances is always less than the deviance of the input to the branch point. That <strong>reduction in deviance</strong> can be ascribed to the variable used in the branch point. By summing over all the branch points using a particular variable, the total reduction in deviance due to that variable can be calculated. This can be a useful measure of the <strong>importance</strong> of each variable in contributing to the “explanation” of the response variable. It’s analogous to the sum of squares reported in ANOVA for each model term. But, unlike ANOVA, there is no fixed order of which term comes first. (This is good in some ways and bad in others.)</p>
-<div id="splitting-criteria-for-classification-trees" class="section level2">
-<h2><span class="header-section-number">12.1</span> Splitting Criteria for Classification Trees</h2>
-<p>ISLR considers three measures to determine which of all the possible splits is best.</p>
-<p>Let <span class="math inline">\(m\)</span> be a region and <span class="math inline">\(k\)</span> a class. Also, let <span class="math inline">\(\hat{p}_{mk}\)</span> be the proportion of the training observations in region <span class="math inline">\(m\)</span> of class <span class="math inline">\(k\)</span>. Finally, let <span class="math inline">\(\hat{n}_{mk}\)</span> be the <em>count</em> of cases of class <span class="math inline">\(k\)</span> in region <span class="math inline">\(m\)</span>. Thus <span class="math display">\[\hat{p}_{mk} \equiv \frac{\hat{n}_{mk}}{\sum_k \hat{n}_{mk}}\]</span></p>
-<ol style="list-style-type: decimal">
-<li>Classification error rate: <span class="math display">\[E = 1 - \max_k(\hat{p}_{mk}).\]</span> This is the fraction of cases that were not in the most popular class. The book describes this as too coarse a measure to be effective for tree-growing.</li>
-<li>The “Gini index”: <span class="math display">\[G = \sum_{k=1}^K \hat{p}_{mk}(1 - \hat{p}_mk)\]</span></li>
-<li>The “cross entropy”: <span class="math display">\[D = - \sum_{k=1}^K \hat{p}_{mk}\ln(\hat{p}_{mk})\]</span></li>
-</ol>
-<p>Note that (2) and (3) are very similar for small <span class="math inline">\(\hat{p}_{mk}\)</span>, since a first-order Taylor expansion gives <span class="math display">\[\ln(x) \approx \ln(x)|_{x = 1} + \frac{d\ln}{dx}|_{x = 1} (x - 1) = 0  + \frac{1}{1}(x - 1) = x - 1\]</span> So <span class="math inline">\(-\ln(x)\)</span> which appears in <span class="math inline">\(D\)</span> is <span class="math inline">\(\approx 1 - x\)</span>.</p>
-<p>I find it easier to think about the deviance, or, more simply, the negative log likelihood (which is <span class="math inline">\(-2\)</span> times the deviance). This is the sum of all cases of the negative log likelihood of each class, or <span class="math display">\[{\cal L} \equiv - \sum_k \left[\hat{n}_{mk} \ln( \hat{p}_{mk})\right]\]</span> This is <span class="math inline">\(\sum_k \hat{n}_{mk}\)</span> times the cross entropy.</p>
-<p>I prefer <span class="math inline">\({\cal L}\)</span> this because it is an <a href="https://en.wikipedia.org/wiki/Intensive_and_extensive_properties">extensive quantity</a> and so we can consider the whole as the sum of the parts. Example from physics: temperature is intensive, energy is extensive.</p>
-<p>Perform the same exercise as in constructing the model <code>y ~ x</code> but with <code>class ~ x</code>. Use <span class="math inline">\({\cal L}\)</span> as the figure of merit in determining which is the “best” split at each stage.</p>
-</div>
-<div id="variable-importance" class="section level2">
-<h2><span class="header-section-number">12.2</span> Variable importance</h2>
-<p>The tree construction allows a simple measure of how important each variable is in the model. At each fork, there is one variable being split up. That splits results in a reduction of <span class="math inline">\({\cal L}\)</span> which can be ascribed to that variable.</p>
-<p>Across all of the forks, add up the <span class="math inline">\({\cal L}\)</span> reductions for each variable. That gives the relative importance of each variable.</p>
-<p>Another possibility would be to use an ANOVA type strategy of nested models, but the order of explanatory variables would, as in ANOVA on linear models, play a role in the results.</p>
-<div class="figure"><span id="fig:unnamed-chunk-128"></span>
-<img src="Images/Chapter-8/8.9.png" alt="ISLR Figure 8.9 from ISLR" width="400" />
-<p class="caption">
-Figure 12.2: ISLR Figure 8.9 from ISLR
-</p>
-</div>
-</div>
-<div id="avoiding-overfitting" class="section level2">
-<h2><span class="header-section-number">12.3</span> Avoiding overfitting</h2>
-<p>The model-fitting method we’ve explored will produce a model whose leaves have deviance of zero.</p>
-<p>Of course, the pure tree is likely to be an overfit. The out-of-sample prediction error is almost certain to be larger than the in-sample error. There are several ways to extend the process to produce better out-of-sample performance.</p>
-<ol style="list-style-type: decimal">
-<li><strong>Prune</strong> the tree. The controlling parameter is the number of leaves in the pruned tree.</li>
-<li><strong>Average</strong> over bootstrap replications. <strong>Don’t prune</strong>.</li>
-<li><strong>Shrink</strong> the tree to a very simple structure (e.g. 2-4 leaves) and fit successive trees to the residual. <strong>Heavy pruning</strong> for each tree.</li>
-</ol>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ISLR)
-<span class="kw">library</span>(tree)
-Heart &lt;-<span class="st"> </span><span class="kw">na.omit</span>(<span class="kw">read.csv</span>(<span class="st">&quot;Heart.csv&quot;</span>))
-Heart$X &lt;-<span class="st"> </span><span class="ot">NULL</span>
-mod1 &lt;-<span class="st"> </span><span class="kw">tree</span>(ChestPain ~<span class="st"> </span>., <span class="dt">data =</span> Heart)
-in_sample &lt;-<span class="st"> </span><span class="kw">predict</span>(mod1, <span class="dt">data =</span> Heart, <span class="dt">type=</span> <span class="st">&quot;class&quot;</span>, <span class="dt">split=</span><span class="ot">TRUE</span>)
-<span class="kw">table</span>(Heart$ChestPain, in_sample)</code></pre></div>
-<pre><code>##               in_sample
-##                asymptomatic nonanginal nontypical typical
-##   asymptomatic          122         13          3       4
-##   nonanginal             30         42          8       3
-##   nontypical              7         11         28       3
-##   typical                 5          4          1      13</code></pre>
-</div>
-<div id="pruning" class="section level2">
-<h2><span class="header-section-number">12.4</span> Pruning</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prune1 &lt;-<span class="st"> </span><span class="kw">prune.misclass</span>(mod1, <span class="dt">best=</span><span class="dv">8</span>)
-in_sample &lt;-<span class="st"> </span><span class="kw">predict</span>(prune1, <span class="dt">data =</span> Heart, <span class="dt">type=</span> <span class="st">&quot;class&quot;</span>, <span class="dt">split=</span><span class="ot">TRUE</span>)
-<span class="kw">table</span>(Heart$ChestPain, in_sample)</code></pre></div>
-<pre><code>##               in_sample
-##                asymptomatic nonanginal nontypical typical
-##   asymptomatic          125         14          0       3
-##   nonanginal             30         47          0       6
-##   nontypical             12         28          7       2
-##   typical                 8          6          0       9</code></pre>
-</div>
-<div id="averaging" class="section level2">
-<h2><span class="header-section-number">12.5</span> Averaging</h2>
-<p>Each tree produces sharp division points. The precise division point has high variance. So bootstrap to produce a cohort of trees and average them.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(randomForest)</code></pre></div>
-<pre><code>## randomForest 4.6-12</code></pre>
-<pre><code>## Type rfNews() to see new features/changes/bug fixes.</code></pre>
-<pre><code>## 
-## Attaching package: &#39;randomForest&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:ggplot2&#39;:
-## 
-##     margin</code></pre>
-<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
-## 
-##     combine</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod2 &lt;-<span class="st"> </span><span class="kw">randomForest</span>(ChestPain ~<span class="st"> </span>., <span class="dt">data =</span> Heart, <span class="dt">importance =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p>In <strong>random forests</strong>, we also “bootstrap” the available variables for each branching point. This produces trees that are uncorrelated with one another, thereby giving additional opportunities to create variance and average over it.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod3 &lt;-<span class="st"> </span><span class="kw">randomForest</span>(ChestPain ~<span class="st"> </span>., <span class="dt">data =</span> Heart, <span class="dt">mtry=</span><span class="dv">5</span>, <span class="dt">importance =</span> <span class="ot">TRUE</span>)</code></pre></div>
-</div>
-<div id="shrinking-boosting" class="section level2">
-<h2><span class="header-section-number">12.6</span> Shrinking (“Boosting”)</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(gbm)</code></pre></div>
-<pre><code>## Loading required package: survival</code></pre>
-<pre><code>## Loading required package: parallel</code></pre>
-<pre><code>## Loaded gbm 2.1.1</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Heart$pain &lt;-<span class="st"> </span><span class="kw">ifelse</span>(Heart$ChestPain ==<span class="st"> &quot;asymptomatic&quot;</span>, <span class="dv">0</span>, <span class="dv">1</span>)
-mod4 &lt;-<span class="st"> </span><span class="kw">gbm</span>(pain ~<span class="st"> </span>., <span class="dt">data=</span>Heart, <span class="dt">distribution=</span><span class="st">&quot;bernoulli&quot;</span>, <span class="dt">n.trees=</span><span class="dv">5000</span>, <span class="dt">interaction.depth =</span> <span class="dv">4</span>)</code></pre></div>
-<p>Slow down the learning process to avoid the pitfalls of greedy optimization.</p>
-<p>This importance is analogous to the mean square</p>
-<p>Similarity to <strong>stepwise selection</strong> in linear regression.</p>
-
-</div>
-</div>
-<div class="footnotes">
-<hr />
-<ol start="2">
-<li id="fn2"><p>which is itself a maximum-likelihood estimator<a href="trees-for-regression-and-classification.html#fnref2">↩</a></p></li>
-<li id="fn3"><p>or by multiple cases with the same value for the response variable<a href="trees-for-regression-and-classification.html#fnref3">↩</a></p></li>
-</ol>
+<div id="programming-activity" class="section level1">
+<h1><span class="header-section-number">Topic 10</span> Programming Activity</h1>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="where-to-place-knots.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="programming-basics.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="nonlinearity-in-linear-models.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="where-to-place-knots.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
@@ -561,7 +389,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/dtkaplan/math253/edit/master/711-Trees.Rmd",
+"link": "https://github.com/dtkaplan/math253/edit/master/710-nonlinear-functions.Rmd",
 "text": null
 },
 "download": null,
