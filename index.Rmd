@@ -8,7 +8,7 @@ output:
 # Statistical Computing and Machine Learning
 ## Fall 2016
 
-
+[Course-project topic selection](https://docs.google.com/spreadsheets/d/1_9j27pURZTR07kC0n-FcIirJ2PZ2K8NwJGkOrwfL-gY/edit?usp=sharing)
 
 
 * Instructor: **Danny Kaplan**, Olin-Rice 231, `kaplan@macalester.edu`

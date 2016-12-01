@@ -1,5 +1,11 @@
 # Trees for Regression and Classification
 
+```{r include = FALSE}
+library(rpart)
+library(randomForest)
+library(tree)
+```
+
 We're working on a straightforward framework for regression and classification modeling: tree-based models.
 
 
