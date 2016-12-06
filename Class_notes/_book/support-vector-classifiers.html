@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Notes for Math 253: Statistical Computing and Machine Learning</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Notes and other materials for Math 253 at Macalester College.">
+  <meta name="generator" content="bookdown 0.1.15 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Notes for Math 253: Statistical Computing and Machine Learning" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Notes and other materials for Math 253 at Macalester College." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Notes for Math 253: Statistical Computing and Machine Learning" />
+  
+  <meta name="twitter:description" content="Notes and other materials for Math 253 at Macalester College." />
+  
+
+<meta name="author" content="Daniel Kaplan">
+
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="trees-for-regression-and-classification.html">
+<link rel="next" href="programming-basics.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Math 253 Notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Placeholder</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="part"><span><b>Topic I: Linear Regression</b></span></li>
+<li class="chapter" data-level="3" data-path="placeholder-1.html"><a href="placeholder-1.html"><i class="fa fa-check"></i><b>3</b> Placeholder</a></li>
+<li class="chapter" data-level="4" data-path="notes.html"><a href="notes.html"><i class="fa fa-check"></i><b>4</b> Notes</a></li>
+<li class="chapter" data-level="5" data-path="foundations-linear-algebra-likelihood-and-bayes-rule.html"><a href="foundations-linear-algebra-likelihood-and-bayes-rule.html"><i class="fa fa-check"></i><b>5</b> Foundations: linear algebra, likelihood and Bayes’ rule</a></li>
+<li class="chapter" data-level="6" data-path="classifiers.html"><a href="classifiers.html"><i class="fa fa-check"></i><b>6</b> Classifiers</a></li>
+<li class="chapter" data-level="7" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>7</b> Logistic Regression</a></li>
+<li class="chapter" data-level="8" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html"><i class="fa fa-check"></i><b>8</b> Linear and Quadratic Discriminant Analysis</a></li>
+<li class="chapter" data-level="9" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html"><i class="fa fa-check"></i><b>9</b> Cross-Validation and Bootstrapping</a></li>
+<li class="chapter" data-level="10" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html"><i class="fa fa-check"></i><b>10</b> Regularization, shrinkage and dimension reduction</a></li>
+<li class="chapter" data-level="11" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html"><i class="fa fa-check"></i><b>11</b> Nonlinearity in linear models</a></li>
+<li class="chapter" data-level="12" data-path="trees-for-regression-and-classification.html"><a href="trees-for-regression-and-classification.html"><i class="fa fa-check"></i><b>12</b> Trees for Regression and Classification</a></li>
+<li class="chapter" data-level="13" data-path="support-vector-classifiers.html"><a href="support-vector-classifiers.html"><i class="fa fa-check"></i><b>13</b> Support Vector Classifiers</a><ul>
+<li class="chapter" data-level="13.1" data-path="support-vector-classifiers.html"><a href="support-vector-classifiers.html#lines-planes-and-hyperplanes"><i class="fa fa-check"></i><b>13.1</b> Lines, planes, and hyperplanes</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="support-vector-classifiers.html"><a href="support-vector-classifiers.html#rescaling-x"><i class="fa fa-check"></i><b>13.1.1</b> Rescaling X</a></li>
+<li class="chapter" data-level="13.1.2" data-path="support-vector-classifiers.html"><a href="support-vector-classifiers.html#impose-an-absolute-constraint"><i class="fa fa-check"></i><b>13.1.2</b> Impose an absolute constraint</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="support-vector-classifiers.html"><a href="support-vector-classifiers.html#optimizing-within-the-constraint"><i class="fa fa-check"></i><b>13.2</b> Optimizing within the constraint</a></li>
+<li class="chapter" data-level="13.3" data-path="support-vector-classifiers.html"><a href="support-vector-classifiers.html#allowing-violations-of-the-boundary"><i class="fa fa-check"></i><b>13.3</b> Allowing violations of the boundary</a></li>
+<li class="chapter" data-level="13.4" data-path="support-vector-classifiers.html"><a href="support-vector-classifiers.html#nonlinear-boundaries"><i class="fa fa-check"></i><b>13.4</b> Nonlinear Boundaries</a></li>
+<li class="chapter" data-level="13.5" data-path="support-vector-classifiers.html"><a href="support-vector-classifiers.html#support-vector-machine"><i class="fa fa-check"></i><b>13.5</b> Support Vector Machine</a></li>
+<li class="chapter" data-level="13.6" data-path="support-vector-classifiers.html"><a href="support-vector-classifiers.html#kernels"><i class="fa fa-check"></i><b>13.6</b> Kernels</a></li>
+<li class="chapter" data-level="13.7" data-path="support-vector-classifiers.html"><a href="support-vector-classifiers.html#svm-versus-logistic-regression"><i class="fa fa-check"></i><b>13.7</b> SVM versus logistic regression</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="programming-basics.html"><a href="programming-basics.html"><i class="fa fa-check"></i><b>14</b> Programming Basics</a></li>
+<li class="chapter" data-level="" data-path="appendices.html"><a href="appendices.html"><i class="fa fa-check"></i>Appendices</a></li>
+<li class="chapter" data-level="" data-path="connecting-rstudio-to-your-github-repository.html"><a href="connecting-rstudio-to-your-github-repository.html"><i class="fa fa-check"></i>Connecting RStudio to your GitHub repository</a></li>
+<li class="chapter" data-level="" data-path="instructions-for-the-publishing-system-bookdown.html"><a href="instructions-for-the-publishing-system-bookdown.html"><i class="fa fa-check"></i>Instructions for the publishing system: Bookdown</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/dtkaplan/math253" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notes for Math 253: Statistical Computing and Machine Learning</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="support-vector-classifiers" class="section level1">
+<h1><span class="header-section-number">Topic 13</span> Support Vector Classifiers</h1>
+<p>The methods we have studied so far use <em>all</em> the data to fit the model. But for classification, it may be that only the cases that are intermixed are telling for distinguishing one group from the other. The bulk of cases, clustered happily in their home country, may not be so useful.</p>
+<div id="lines-planes-and-hyperplanes" class="section level2">
+<h2><span class="header-section-number">13.1</span> Lines, planes, and hyperplanes</h2>
+<ul>
+<li><span class="math inline">\(y = m x + b = \beta_0 + \beta_1 x\)</span></li>
+<li><span class="math inline">\(z = a + b x + c y = \beta_0 + \beta_1 x + \beta_2 y = \beta_0 + \beta_1 x_1 + \beta_2 x_2\)</span>
+<ul>
+<li><span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\beta_2\)</span> give the partial derivatives w.r.t. <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>.</li>
+<li>But what if the plane is intended to be parallel to the z-axis? Partials are infinite.</li>
+<li>We would write the formula with <span class="math inline">\(x_1\)</span> or <span class="math inline">\(x_2\)</span> on the left-hand side.</li>
+<li><span class="math inline">\(0 = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3\)</span></li>
+<li><span class="math inline">\(\beta_0\)</span> sets the distance of the plane from the origin.</li>
+<li><span class="math inline">\(\beta_1, \beta_2, ...\)</span> set the orientation of the plane.</li>
+</ul></li>
+</ul>
+<p>Another perspective. <span class="math inline">\(d\)</span> points in <span class="math inline">\(d\)</span>-dimensional space define a hyperplane. The hyperplane is a linear combination of the <span class="math inline">\(d-1\)</span> vectors <span class="math inline">\(x_2 - x_1\)</span>, <span class="math inline">\(x_3 - x_1\)</span>, <span class="math inline">\(x_4 - x_1\)</span>, …</p>
+<p>The unique normal to the place is the vector not in the <span class="math inline">\(d-1\)</span> dimensional subspace.</p>
+<div class="figure">
+<img src="http://mathworld.wolfram.com/images/eps-gif/Plane_1001.gif" alt="Plane" />
+<p class="caption">Plane</p>
+</div>
+<div id="rescaling-x" class="section level3">
+<h3><span class="header-section-number">13.1.1</span> Rescaling X</h3>
+<p>It’s the relative size of the <span class="math inline">\(\beta_j\)</span> that’s important. So let’s agree to scale them so that <span class="math inline">\(\sum_{j=1}^p \beta_j^2 = 1\)</span>.</p>
+</div>
+<div id="impose-an-absolute-constraint" class="section level3">
+<h3><span class="header-section-number">13.1.2</span> Impose an absolute constraint</h3>
+<p>Formalism:</p>
+<ul>
+<li><span class="math inline">\(y_i = 1\)</span> means class A</li>
+<li><span class="math inline">\(y_i = -1\)</span> means class B</li>
+</ul>
+<p>Constraints:</p>
+<p><span class="math inline">\(y_i ( \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots + \beta_p x_{ip}) &gt; 0\)</span></p>
+<p>Says, “You must be on the right side of the boundary.”</p>
+<ul>
+<li>Alternative:</li>
+</ul>
+<p><span class="math inline">\(y_i ( \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots + \beta_p x_{ip}) &gt; M &gt; 0\)</span></p>
+<p>Says, “You must be on the right side of the boundary and at least <span class="math inline">\(M\)</span> units away from the boundary.” Like, “You must produce <span class="math inline">\(M\)</span> units less than your permits allow, or less.”</p>
+<div class="figure"><span id="fig:unnamed-chunk-2"></span>
+<img src="Images/Chapter-9/9.2.png" alt="ISLR Figure 9.2 from ISLR" width="450" />
+<p class="caption">
+Figure 13.1: ISLR Figure 9.2 from ISLR
+</p>
+</div>
+<p>There may be no <em>feasible solution</em>, or there may be many. This formulation provides no way to deal with the no-solution situation, and no way to choose the best of the many solutions.</p>
+<div class="figure"><span id="fig:unnamed-chunk-3"></span>
+<img src="Images/Chapter-9/9.3.png" alt="ISLR Figure 9.3 from ISLR" width="350" />
+<p class="caption">
+Figure 13.2: ISLR Figure 9.3 from ISLR
+</p>
+</div>
+</div>
+</div>
+<div id="optimizing-within-the-constraint" class="section level2">
+<h2><span class="header-section-number">13.2</span> Optimizing within the constraint</h2>
+<ul>
+<li>maximize over <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span>, … the quantity <span class="math inline">\(M\)</span></li>
+<li>constraints that <span class="math inline">\(y_i ( \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots + \beta_p x_{ip}) &gt; M\)</span></li>
+<li>and remember that <span class="math inline">\(\sum_{j=1}^{p} \beta_j^2 = 1\)</span>.</li>
+</ul>
+<p>Says, “You must be on the right side of the boundary and as far from it as possible.” <span class="math inline">\(M\)</span> measures how far from boundary.</p>
+<div class="figure"><span id="fig:unnamed-chunk-4"></span>
+<img src="Images/Chapter-9/9.5.png" alt="ISLR Figure 9.5 from ISLR" width="400" />
+<p class="caption">
+Figure 13.3: ISLR Figure 9.5 from ISLR
+</p>
+</div>
+</div>
+<div id="allowing-violations-of-the-boundary" class="section level2">
+<h2><span class="header-section-number">13.3</span> Allowing violations of the boundary</h2>
+<ul>
+<li>maximize over <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span>, … the quantity <span class="math inline">\(M\)</span></li>
+<li>constraints that <span class="math inline">\(y_i ( \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots + \beta_p x_{ip}) &gt; M (1 - \epsilon_i)\)</span></li>
+<li><span class="math inline">\(\epsilon_i \geq 0\)</span> — Once you’re on the good side of the margin, you don’t get any credit that could be used to increase <span class="math inline">\(M\)</span>!</li>
+<li><span class="math inline">\(\sum_{i=1}^n \epsilon_i &lt; C\)</span> — but let’s keep the epsilons small. We’re willing to trade off between epsilons.
+<ul>
+<li><span class="math inline">\(C\)</span> is the budget for violations, a <em>tuning parameter</em>.</li>
+<li>For a given <span class="math inline">\(C\)</span>, there’s no guarantee that we can meet the constraints. (That is, no guarantee that there’s a <em>feasible solution</em>.)</li>
+<li>But there will be some <span class="math inline">\(C\)</span> for which there is a feasible solution.</li>
+</ul></li>
+<li>and remember that <span class="math inline">\(\sum_{j=1}^{p} \beta_j^2 = 1\)</span>.</li>
+</ul>
+<div class="figure"><span id="fig:unnamed-chunk-5"></span>
+<img src="Images/Chapter-9/9.6.png" alt="ISLR Figure 9.6 from ISLR" width="350" />
+<p class="caption">
+Figure 13.4: ISLR Figure 9.6 from ISLR
+</p>
+</div>
+<p>FIGURE 9.6. Left: A support vector classifier was fit to a small data set. The hyperplane is shown as a solid line and the margins are shown as dashed lines. Purple observations: Observations 3,4,5, and 6 are on the correct side of the margin, observation 2 is on the margin, and observation 1 is on the wrong side of the margin. Blue observations: Observations 7 and 10 are on the correct side of the margin, observation 9 is on the margin, and observation 8 is on the wrong side of the margin. No observations are on the wrong side of the hyperplane. Right: Same as left panel with two additional points, 11 and 12. These two observations are on the wrong side of the hyperplane and the wrong side of the margin.</p>
+<div class="figure"><span id="fig:unnamed-chunk-6"></span>
+<img src="Images/Chapter-9/9.7.png" alt="ISLR Figure 9.7 from ISLR" width="400" />
+<p class="caption">
+Figure 13.5: ISLR Figure 9.7 from ISLR
+</p>
+</div>
+<p>Figure 9.7 from ISL. A support vector classifier was fit using four different values of the tuning parameter <span class="math inline">\(C\)</span> in (9.12)–(9.15). The largest value of <span class="math inline">\(C\)</span> was used in the top left panel, and smaller values were used in the top right, bottom left, and bottom right panels. When <span class="math inline">\(C\)</span> is large, then there is a high tolerance for observations being on the wrong side of the margin, and so the margin will be large. As <span class="math inline">\(C\)</span> decreases, the tolerance for observations being on the wrong side of the margin decreases, and the margin narrows.</p>
+</div>
+<div id="nonlinear-boundaries" class="section level2">
+<h2><span class="header-section-number">13.4</span> Nonlinear Boundaries</h2>
+<p>The <em>support vector “classifier”</em> builds a boundary based on a linear combination of linear function. One can add in nonlinear transformations of the predictors as well as interactions. This increases the dimension of the predictor space. The resulting boundary will still be linear in the values of the predictors, but when considered in the original predictor space, can be nonlinear.</p>
+<p>Example: A linear function of <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, <span class="math inline">\(x^2\)</span>, <span class="math inline">\(y^2\)</span>, and <span class="math inline">\(xy\)</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(mosaic)
+f &lt;-<span class="st"> </span>function(x,y){<span class="dv">3</span>*x -<span class="st"> </span><span class="dv">2</span>*y +<span class="st"> </span>x^<span class="dv">2</span> +<span class="st"> </span><span class="dv">2</span>*y^<span class="dv">2</span> -<span class="st"> </span>x*y}
+<span class="kw">plotFun</span>(<span class="kw">f</span>(x,y) ~<span class="st"> </span>x &amp;<span class="st"> </span>y)</code></pre></div>
+<p><img src="Class_Notes__Statistical_Computing___Machine_Learning_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Let’s consider <span class="math inline">\(f(x,y)\)</span> to be the classifier function. <span class="math inline">\(f(x,y) = 0\)</span> is the boundary between positive and negative predictions.</p>
+</div>
+<div id="support-vector-machine" class="section level2">
+<h2><span class="header-section-number">13.5</span> Support Vector Machine</h2>
+<p>Consider a classification function of this form:</p>
+<p><span class="math inline">\(f(x) = \beta_0 + \sum_{i=1}^{n} \alpha_i &lt; x, x_i &gt;\)</span></p>
+<p>There are <span class="math inline">\(n\)</span> training cases <span class="math inline">\(x_i\)</span>.</p>
+<p>The physicists will recognize <span class="math inline">\(&lt;x, y&gt;\)</span> as bra-ket notation for an inner product.</p>
+<p>In a support vector machine, only those cases that are on or across the margin will contribute. <span class="math inline">\(\alpha_i = 0\)</span> for any <span class="math inline">\(x_i\)</span> on the proper side of the boundary.</p>
+</div>
+<div id="kernels" class="section level2">
+<h2><span class="header-section-number">13.6</span> Kernels</h2>
+<p>The function <span class="math inline">\(&lt; x, x_i &gt;\)</span> could be replaced with any other function of <span class="math inline">\(x\)</span> and <span class="math inline">\(x_i\)</span>. Such functions are called <em>kernels</em>.</p>
+<p>Explanation of kernels in terms of:</p>
+<ul>
+<li>high and low-pass filters</li>
+<li>point-spread functions for images</li>
+</ul>
+<p>Examples:</p>
+<p>Remember: <span class="math inline">\(i\)</span> refers to the case. <span class="math inline">\(j\)</span> refers to the variable.</p>
+<ul>
+<li>Polynomial kernel <span class="math display">\[K(x, x_i) = (1 + \sum_{j=1}^p x_{ij} x_{i&#39;j})^d\]</span> (Bad notation when it depends on a superscript to a subscript!)</li>
+<li>Radial kernel: <span class="math display">\[K(x, x_i) = \exp\left( - \gamma \sum_{j=1}^p (x_{ij} - x_{i&#39;j}) \right)\]</span></li>
+</ul>
+<div class="figure"><span id="fig:unnamed-chunk-8"></span>
+<img src="Images/Chapter-9/9.9.png" alt="Figure 9.9 from ISL. Left: A SVM with a polynomial kernel of degree 3. Right: Using a radial kernel." width="350" />
+<p class="caption">
+Figure 13.6: Figure 9.9 from ISL. Left: A SVM with a polynomial kernel of degree 3. Right: Using a radial kernel.
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="st">&quot;Blood-Cell-data.rda&quot;</span>)
+training_inds &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span>:<span class="kw">nrow</span>(Cells1), <span class="dt">size=</span><span class="dv">5000</span>)
+Training &lt;-<span class="st"> </span>Cells1[training_inds,]
+Testing  &lt;-<span class="st"> </span>Cells1[ -<span class="st"> </span>training_inds,] 
+<span class="kw">ggplot</span>(Training, <span class="kw">aes</span>(<span class="dt">x=</span>x1, <span class="dt">y=</span>x2, <span class="dt">color=</span>class)) +
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
+<p><img src="Class_Notes__Statistical_Computing___Machine_Learning_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(e1071)
+mod &lt;-<span class="st"> </span><span class="kw">svm</span>(<span class="kw">as.factor</span>(class) ~<span class="st"> </span>x1 +<span class="st"> </span>x2, <span class="dt">data =</span> Training, <span class="dt">kernel =</span> <span class="st">&quot;radial&quot;</span>, <span class="dt">cost =</span> <span class="dv">10</span>)</code></pre></div>
+<p>In sample error:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">preds &lt;-<span class="st"> </span><span class="kw">predict</span>(mod, <span class="dt">newdata =</span> Training)
+<span class="kw">table</span>(Training$class, preds)</code></pre></div>
+<pre><code>##    preds
+##        A    B    C    D    F
+##   A  677   10    0    0   17
+##   B   16  356   42    0    0
+##   C    0   27 3433    1    0
+##   D    0    0   60   70    0
+##   F   29    1    1    1  259</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">GotWrong &lt;-
+<span class="st">  </span>Training %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(preds !=<span class="st"> </span>class)
+<span class="kw">ggplot</span>(Training, <span class="kw">aes</span>(<span class="dt">x=</span>x1, <span class="dt">y=</span>x2, <span class="dt">color=</span>class)) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>() +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>GotWrong, <span class="kw">aes</span>(<span class="dt">x=</span>x1, <span class="dt">y=</span>x2, <span class="dt">color=</span><span class="ot">NA</span>, <span class="dt">shape=</span>class))</code></pre></div>
+<p><img src="Class_Notes__Statistical_Computing___Machine_Learning_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>Out-of-sample error:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">preds &lt;-<span class="st"> </span><span class="kw">predict</span>(mod, <span class="dt">newdata =</span> Testing)
+<span class="kw">table</span>(Testing$class, preds)</code></pre></div>
+<pre><code>##    preds
+##         A     B     C     D     F
+##   A  4424    45     0     0   119
+##   B   105  2061   270     0     8
+##   C     0   147 20782    10     3
+##   D     0     0   352   359    14
+##   F   203     6    14     4  1607</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">GotWrong &lt;-
+<span class="st">  </span>Testing %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(preds !=<span class="st"> </span>class)
+<span class="kw">ggplot</span>(Testing, <span class="kw">aes</span>(<span class="dt">x=</span>x1, <span class="dt">y=</span>x2, <span class="dt">color=</span>class)) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> .<span class="dv">1</span>) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>GotWrong, <span class="kw">aes</span>(<span class="dt">x=</span>x1, <span class="dt">y=</span>x2, <span class="dt">color=</span><span class="ot">NA</span>, <span class="dt">shape=</span>class))</code></pre></div>
+<p><img src="Class_Notes__Statistical_Computing___Machine_Learning_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>What could we do to improve things?</p>
+<ul>
+<li>Is there a loss function?</li>
+<li>Bayesian prior?</li>
+<li>Optimize parameters (e.g. cost, radial kernel <span class="math inline">\(\gamma\)</span>) by cross validation</li>
+<li>Build specialized classifiers to resolve particular sources of mis-classification, e.g. D versus C.</li>
+</ul>
+<p>Actual problem: Build a classifier that they can implement in a small amount of code that will work in real time, and where they can demonstrate to regulators that the code does what it says it does. In other words, everything must be done from scratch with simple mathematics: addition, multiplication, exponentiation.</p>
+<ol style="list-style-type: decimal">
+<li>They asked for 80% accuracy for distinguishing certain pairs of cell types.</li>
+<li>I got &gt; 90% out of the box. At this point, I presented my results rather than trying to optimize the classifier parameters. I wanted to make sure that what I was giving them a solution to their problem rather than to the problem as I conceived it.
+<ul>
+<li>Is there a clinical loss function? How will the results of the classification be used?</li>
+</ul></li>
+<li>Then they asked for 95% accuracy. This wasn’t hard to accomplish by some optimization of parameters</li>
+<li>Then they gave me some “bad runs,” where the human “gold-standard” classifier had a hard time. Performace was worse on these.
+<ul>
+<li>mis-alignment of optics? Patient-specific properties of cells?</li>
+<li>non-Bayesian classification by human “gold standard?”</li>
+</ul></li>
+<li>Building a model of human mis-classification is too hard a problem for me.</li>
+<li>Instead, I gave them a classifier for whether a given sample was “reliable” or “unreliable.”
+<ul>
+<li>With this you can ring a bell for unreliable runs and have it done again.</li>
+</ul></li>
+</ol>
+</div>
+<div id="svm-versus-logistic-regression" class="section level2">
+<h2><span class="header-section-number">13.7</span> SVM versus logistic regression</h2>
+<p>Recall the shape of the logistic function that transforms the link function value to likelihood. For points far from the transition, a change in the function has practically no impact on the likelihood function. Thus, logistic regression also discounts “mainstream” cases.</p>
+<p>Could use radial or polynomial kernels in logistic regression as well, but we’d have to decide where to place them.</p>
+<div class="figure"><span id="fig:unnamed-chunk-14"></span>
+<img src="Images/Chapter-9/9.12.png" alt="Figure 9.12 from ISL: SVM and logistic loss functions. SVM has zero loss on the correct side of the boundary: it's **harder** than logistic." width="350" />
+<p class="caption">
+Figure 13.7: Figure 9.12 from ISL: SVM and logistic loss functions. SVM has zero loss on the correct side of the boundary: it’s <strong>harder</strong> than logistic.
+</p>
+</div>
+<p>Machine learning technique like bagging, boosting, and random forests are designed to soften the boundaries of tree-based models.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="trees-for-regression-and-classification.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="programming-basics.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/dtkaplan/math253/edit/master/715-support-vector-classifiers.Rmd",
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
