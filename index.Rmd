@@ -6,7 +6,7 @@ output:
 
 # Syllabus for Math 253
 # Statistical Computing and Machine Learning
-## Spring 2017
+## Spring 2017 
 
 
 * Instructor: **Danny Kaplan**, Olin-Rice 231, `kaplan@macalester.edu`
@@ -149,3 +149,6 @@ In the few weeks of the course, the class will be working on end-of-term project
 * [Course project report rubric](Assignments/Kaggle-project-rubric.html)
 
 
+------------------
+
+*Updated Jan 12, 2017*
