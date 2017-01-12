@@ -5,15 +5,27 @@ output:
   pdf_document: default
 ---
 
+## Setting up RStudio
+
+It's likely that most students in the class will work with the Macalester RStudio server which you access at [rstudio.macalester.edu](http://rstudio.macalester.edu). You can login with your usual Macalester email credentials. The server already has all the necessary software installed. (If you are a junior or senior, you may have an account on another server named `www.macalester.edu/rstudio`. Do **not** use that server. It's obsolete.)
+
+Some students may wish to set up RStudio on their own laptop. This is a three step process:
+
+1. Install the latest version of R from [this site](https://cloud.r-project.org/)
+2. Install the RStudio [Preview Edition](https://www.rstudio.com/products/rstudio/download/preview/)
+3. Install the [git software](https://git-scm.com/downloads). 
+
+Git is open-source software for managing complex sets of documents. In contrast, GitHub, is a web service that provides a place for you to store, backup, and distribute your work. You use git commands for communicating with GitHub.
+
 ## Setting up your Math 253 repository
 
-First, we have to set up communications between your RStudio system and GitHub. You need only do this once on each RStudio system. But if you want to work on, say, a new computer or new RStudio server, you'll need to do it again.
+First, we have to set up communications between your RStudio system and GitHub. You need only do this once on each RStudio system. But if you want to work on, say, a new computer or new RStudio server, you'll need to do it again on that computer. 
 
 1. Make sure you have a GitHub account. You'll need two pieces of information about your account:
     a. Your GitHub ID. For the instructions, I'll call in `brosenberg`, but remember to use your own ID
     b. The email address you gave when you set up your account. I'll use `brosenberg@macalester.edu` for the example.
 2. Start up RStudio and do the following:
-    a. In the console, give these commands:
+    a. In the console, give these commands appropriately customized for your situation:
     ```{r eval = FALSE}
 system('git config --global user.name "Brian MacAlistair"')
 system('git config --global user.email "brosenberg@macalester.edu"')

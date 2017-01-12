@@ -6,11 +6,7 @@ output:
 
 # Syllabus for Math 253
 # Statistical Computing and Machine Learning
-## Fall 2016
-
-[Course-project topic selection](https://docs.google.com/spreadsheets/d/1_9j27pURZTR07kC0n-FcIirJ2PZ2K8NwJGkOrwfL-gY/edit?usp=sharing)
-
-[Course project report rubric](Assignments/Kaggle-project-rubric.html)
+## Spring 2017
 
 
 * Instructor: **Danny Kaplan**, Olin-Rice 231, `kaplan@macalester.edu`
@@ -18,20 +14,20 @@ output:
     - Tues and Thurs: 3:00pm-4:30pm and 
     - Wed: 2:00pm-3:30pm
     - Anytime by appointment. And if my office door is open, just drop in.
-* Preceptor: **Leqi Zhao** `lzhao@macalester.edu`
-    - Office hours: Monday 7-9pm, MSCS Reading Room
+* Preceptor: **Yifan (Eva) Gong** `ygong@macalester.edu`
+    - Office hours: TBA
 * Text: [An Introduction to Statistical Learning](http://www.springer.com/us/book/9781461471370).  The authors also provide [access via PDF](http://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf).
 * **Class notes**. [In-class notes for the entire semester](Class_notes/_book/introduction.html). (An evolving document.)
 * [Online discussion site](https://github.com/dtkaplan/math253-discussion/issues).
 * An [introduction to R/RStudio/Markdown](http://ismayc.github.io/rbasics-book)
-* The registrar has scheduled our **final exam** for Wednesday 14 December from 1:30pm to 3:30.
+* The registrar has scheduled our **final exam** for Friday May 5 at 1:30pm - 3:30pm. 
 
 ### Starting the semester
 
 * [Course policies](policies.html)
 * [Installing and using GitHub from RStudio](github.html)
 * [Why I don't use Moodle](why-not-moodle.html)
-* Make an account on <GitHub.com> and enter your account ID and the corresponding email address on [this form](https://docs.google.com/forms/d/e/1FAIpQLSemXlrenuLKVY0GNf-gBGDh6QTkaw3hS7fEZojBxBY3K_e2uA/viewform#responses).
+* Make an account on <GitHub.com> and enter your account ID and the corresponding email address on [this form](https://docs.google.com/forms/d/e/1FAIpQLSdEMEn_uHkv4Wm3BDYZ4TU_XxrrSVfXlQ5S7NK0vZvTTm5u-Q/viewform).
 
 ### Due dates
 
@@ -39,11 +35,11 @@ You should "push" your daily programming activity to your repository *before* le
 
 Each topic assignment is due one week *after* we finish covering that topic in class.
 
-- Topic I: Sept 20, 2016
-- Topic II: Oct 6, 2016
-- Topic III: Oct 25, 2016
-- Topic IV: Nov 8, 2016
-- Topic V: Nov 15, 2016
+- Topic I: TBA
+- Topic II: TBA
+- Topic III: TBA
+- Topic IV: TBA
+- Topic V: TBA
 - Remaining work: By the end of exam period.
 
 ## Topic I --- Introduction
@@ -58,7 +54,7 @@ Each topic assignment is due one week *after* we finish covering that topic in c
     * Computing assignment: ISL 2.4.8, 2.4.9
         - As an example: [a solution to 2.4.10](Assignments/ISL-2/example-week-2-programming.html).
     * Theory assignment: ISL 2.4.2, 2.4.7.
-* Programming activities: [Sept 1](ProgrammingActivities/Day-01-Programming-Task.html), [Sept 6](ProgrammingActivities/Day-02-Programming-Task.html), [Sept 8](ProgrammingActivities/Day-03-Programming-Task.html)
+* Programming activities: [One (Jan 24)](ProgrammingActivities/Day-01-Programming-Task.html), [Two (Jan 29)](ProgrammingActivities/Day-02-Programming-Task.html), [Three (Jan 31)](ProgrammingActivities/Day-03-Programming-Task.html)
 
 ## Topic 2 --- Linear regression
 
@@ -77,7 +73,7 @@ Each topic assignment is due one week *after* we finish covering that topic in c
             1. On p. 66 the authors state, "This is clearly not true in Fig. 3.1" Explain why.
             2. On p. 77 the authors state, "In this case we cannot even fit the multiple regression models using least squares ...." Explain why.
         - ISL 3.7.3 and 3.7.4.
-* Programming activities: [Sept 20](ProgrammingActivities/Day-04-Programming-Task.html), [Sept 22](ProgrammingActivities/Day-05-Programming-Task.html), [Sept 27](ProgrammingActivities/Day-06-Programming-Task.html)
+* Programming activities: [Four](ProgrammingActivities/Day-04-Programming-Task.html), [Five](ProgrammingActivities/Day-05-Programming-Task.html), [Six](ProgrammingActivities/Day-06-Programming-Task.html)
 
 
 ## Topic 3 --- Foundations: Linear Algebra, Bayes' Rule, and Likelihood
@@ -87,7 +83,7 @@ Each topic assignment is due one week *after* we finish covering that topic in c
     - Michael Lavine: "What is Bayesian statistics and why everything else is wrong" [PDF](Resources/Likelihood-Lavine.pdf)
 * Programming basics 3: Conditionals
 * Visualization: Base graphics: lines, polygons, ...
-* Programming Activities: [Oct 4](ProgrammingActivities/Day-07-Programming-Task.html), [Oct 6](ProgrammingActivities/Day-08-Programming-Task.html), [Oct 11](ProgrammingActivities/Day-09-Programming-Task.html)
+* Programming Activities: [Seven](ProgrammingActivities/Day-07-Programming-Task.html), [Eight](ProgrammingActivities/Day-08-Programming-Task.html), [Nine](ProgrammingActivities/Day-09-Programming-Task.html)
 * Topic assignment: there are no exercises from the textbook, so ... finish the exponential likelihood and taxicab in-class activities. 
 
 ## Topic 4 --- Classification
@@ -97,7 +93,7 @@ Each topic assignment is due one week *after* we finish covering that topic in c
 * Topic 4 Assignment:
     - Programming Assignment: 4.7.11, 4.7.13
     - Theory assignment: 4.7.1, 4.7.8, 4.7.9
-* Programming Activities: [Oct 18](ProgrammingActivities/Day-10-Programming-Task.html), [Oct 25](ProgrammingActivities/Day-11-Programming-Task.html), [Oct 27](ProgrammingActivities/Day-12-Programming-Task.pdf)
+* Programming Activities: [Ten](ProgrammingActivities/Day-10-Programming-Task.html), [Eleven](ProgrammingActivities/Day-11-Programming-Task.html), [Twelve](ProgrammingActivities/Day-12-Programming-Task.pdf)
 
 
 ## Topic 5 --- Cross-validation and bootstrapping
@@ -105,7 +101,7 @@ Each topic assignment is due one week *after* we finish covering that topic in c
 * Readings: In Chapter 5 of ISL §5.1, §5.2
 * Programming basics 5: Loops and accumulators
 * Assignment: finish the in-class programming activities for the first five topics.
-* Programming Activity: [Nov 8](ProgrammingActivities/Day-13-Programming-Task.pdf)
+* Programming Activity: [Thirteen](ProgrammingActivities/Day-13-Programming-Task.pdf)
 
 ## Topic 6 --- Selecting model terms
 
@@ -114,7 +110,7 @@ Each topic assignment is due one week *after* we finish covering that topic in c
 * Assignment: 
     - Theory 6.8.1, 6.8.2. 
     - Applied, 6.8.9
-* Programming Activities: [Nov 15](ProgrammingActivities/Day-14-Programming-Task.pdf), [Nov 17](ProgrammingActivities/Day-15-Programming-Task.pdf)
+* Programming Activities: [Fourteen](ProgrammingActivities/Day-14-Programming-Task.pdf), [Fifteen](ProgrammingActivities/Day-15-Programming-Task.pdf)
 
 ## Topic 7 --- Nonlinear regression
 
@@ -122,7 +118,7 @@ Each topic assignment is due one week *after* we finish covering that topic in c
 * Assignment:
     - programming: 7.9.11
     - theory: in §7.9 problems 3, 4, and 5
-* Programming Activity: [Nov 22](ProgrammingActivities/Day-16-Programming-Task.pdf)
+* Programming Activity: [Sixteen](ProgrammingActivities/Day-16-Programming-Task.pdf)
  
 ## Topic 8 --- Tree-based methods
 
@@ -130,12 +126,12 @@ Each topic assignment is due one week *after* we finish covering that topic in c
 * Assignment:
     - programming: 8.4.12
     - theory: In §8.4 problems 1, 2, 3, 4, and 5
-* Programming Activity: [Nov 29](ProgrammingActivities/Day-17-Programming-Task.pdf)
+* Programming Activity: [Seventeen](ProgrammingActivities/Day-17-Programming-Task.pdf)
 
 ## Topic 9 --- Support vector machines
 
 * Readings: Chapter 9 of ISL
-* Programming Activity: [Dec 1](ProgrammingActivities/Day-18-Programming-Task.pdf)
+* Programming Activity: [Eighteen](ProgrammingActivities/Day-18-Programming-Task.pdf)
 
 ## Topic 10 --- Unsupervised learning
 
@@ -145,6 +141,11 @@ Each topic assignment is due one week *after* we finish covering that topic in c
 
 ## End-of-term Project
 
+In the few weeks of the course, the class will be working on end-of-term projects. You do not need to do anything before that time arrives.
+
 * You'll form groups of two to three students and choose a problem from the Kaggle machine-learning competition site. You don't need to think about this until we get toward the end of the semester. At that point, the in-class programming activities will be given over to the project.
 * If you have your own idea for a project, please get my approval before embarking on it.
-* [Rubric for presentation](rubric.html)
+* [Course-project topic selection](https://docs.google.com/spreadsheets/d/1_9j27pURZTR07kC0n-FcIirJ2PZ2K8NwJGkOrwfL-gY/edit?usp=sharing)
+* [Course project report rubric](Assignments/Kaggle-project-rubric.html)
+
+
