@@ -1,5 +1,212 @@
 # Programming Basics
 
+## Programming Basics I: Names, classes, and objects {progbasics1}
+
+### Names 
+
+Composed of letters, numbers, `_` and `.`.    
+- Don't use `.` --- it's a bad habit.  But plenty of people do.
+- Can't lead with a number.
+- Capitalization counts.
+- Unquoted (... almost always)
+
+### Objects 
+
+Information (bits) in a particular format.    
+- Different formats for different purposes.
+- The format is the `class()` or `mode()`.  `mode` is more basic than `class`.
+
+**Assignment**: Give a name to an object
+
+### Vectors 
+
+1-dimensional homogeneous collections of numbers, character strings, booleans/logicals, etc.
+
+#### Must Know!
+
+There are some basic types of vectors. The most common are:
+
+1. **numeric**, e.g. `3`, `3.14159`, `6.023e26`,`6.626196e-34`
+2. **character**, e.g. `"hello"`, `"When in the course of human events ..."
+3. **logical** (or "booleans"). The only allowable values: `TRUE` and `FALSE`
+
+Much of the software you'll use in this course will work with an alternative to character strings called "factors." 
+
+4. **factor**, an encoded representation of levels of a categorical variable.
+
+Some operations you will use when dealing with categorical variables are `as.character()` and (for older software) `as.factor()`.
+
+Vectors are "1-dimensional" collections. That is, you need only one index to refer to a specific element.
+```{r}
+my_vector <- c("apple", "berry", "cherry")
+my_vector[2]
+my_vector[c(3, 1, 2, 2)]
+my_vector[4] <- "durian"
+```
+
+Boolean indexing
+```{r}
+my_vector[my_vector > "b"]
+```
+
+If you want, you can convert the boolean style to a number style with `which()`.
+    
+
+
+Other important functions:
+
+- `length()`, to say how many elements there are in the vector. The length can be zero. 
+- Arithmetic operations, e.g. `sum()`, `mean()`, `max()`, `cumsum()`, and other functions (e.g. `sqrt()`, `log()`, `sin()`), ...
+- Logical operations, that is, operations that transform vectors into a logical vector. Examples:
+    - Comparison: `>`, `==`, `>=`, `!=`, `<`, `<=`
+    - Boolean operations: `!`, `|`, `&`. (Note, these are single characters.) 
+- Categorical operations, e.g. `table()`
+```{r}
+funny <- ceiling(length(my_vector)*runif(10))
+my_vector[funny]
+length(my_vector)
+dim(my_vector)
+```
+
+### Matrices    
+
+* 2-dimensional homogeneous collections of numbers or of character strings. These collections are called *matrices*
+    - 2-dimensional means you need two indices to refer to a specific element.
+    - `dim()`
+    - Operations, e.g., `t()`, `colSums()`, `rowSums()`, `%*%`, ...
+    - Index matrices with `[ , ]`. You need to give two 
+
+### Lists
+
+1-dimensional heterogeneous collections   
+
+- create with `list()`
+```{r}
+my_list <- list(magic = 1:10, greeting = "hello", is_wednesday = FALSE)
+my_list[c("greeting", "magic", "magic")]
+my_list$magic
+```
+- index with `[[ ]]` or `[ ]`. The first is for an individual item which you want in the form of that item itself. The second is to create a subset of the list which will be a list itself.
+- you can name items in lists and refer to them by name. `[["name"]]` To set names of list items, use named arguments to `list()` or use the `names()` function on the left-hand side of the `<-` operation. (The left-hand side of `<-` is called an "assignable." These can be names, but they can be other things as well such as indexed arrays, `names()`, etc.)
+
+* Data frames
+
+A list of vectors.
+
+- Each component in a given vector must be the same kind of thing as the other components. (Special cases: `NA` for missing data. Two more special things for numerical data.`NaN`, & `Inf`) 
+- Important functions: `nrow()`, `names()`, `$`.
+
+
+### Functions
+
+Take inputs and produce an output (and maybe a side-effect).
+- Make them with `function(){ }`, a special form. (It's not actually a function!)
+- Try this
+```{r error = TRUE}
+class(sin)
+class(3)
+class("a string")
+class(function)
+```
+## Programming basics: Linear Models
+
+Syntactic element: **formulas**. Formulas provide a way of using variables "symbolically." This is useful, for instance, in depicting the desired relationship among variables. Two forms:
+
+- `y ~ x` two-sided
+- `~ x` one-sided
+- NOT ALLOWED, `y ~`
+
+Important functions: 
+
+- `lm()`, `predict()` , `anova()`, `summary()`.
+- For later: `solve()`, `model.matrix()`.
+- From 155: `coef()`, `fitted()`, `resid()`
+
+Training with `lm()`: Specify formula `Y ~ X1 + X2` ...
+
+```{r}
+data(College, package = "ISLR")
+mod <- lm(Outstate ~ Enroll + Accept + perc.alumni, data = College ) 
+coef(mod)
+```
+
+What kind of thing is `mod`?
+
+Model output with `predict()`
+```{r}
+predict(mod, 
+        newdata = data.frame(Enroll = 100, Accept = 1000, perc.alumni = 25))
+```
+
+What kind of thing is the output of `predict()`?
+
+```{r}
+predict(mod, interval = "confidence",
+        newdata = data.frame(Enroll = 100, Accept = 1000, perc.alumni = 25))
+predict(mod, interval = "prediction",
+        newdata = data.frame(Enroll = 100, Accept = 1000, perc.alumni = 25))
+```
+
+Why is the "confidence interval" so much narrower than the "prediction interval?"
+
+**Inference** with `anova()` and `summary()`. This is all "in-sample" inference, not cross-validated.
+
+```{r}
+M <- model.matrix(~ Enroll + Accept * perc.alumni, data = College)
+qr.solve(M, College$Outstate)
+```
+
+For the people who have had linear algebra, why doesn't this work?
+```{r error = TRUE}
+solve(M, College$Outstate)
+```
+
+
+[Indexing on data: training and testing data sets](../ProgrammingActivities/Day-03-Programming.html)
+
+### Graphics basics
+
+1. API for graphics: `plot()`, `points()`, `lines()`, `polygon()`, `text()`, ...
+
+
+## K-nearest neighbors
+
+K-nearest neighbors is a simple, general kind of function-building method.  But some problems:
+
+* Interpretability: but you can always take partial derivatives.
+* When you have prediction (aka "explanatory") variables in dollars and in miles, how do you calculate the distance between points?  What are the dimensions of distance?
+    - Dimensionality refers to the physical feature, e.g. time, distance, area, volume, money, charge, luminance, mass, ...
+    - Units are the ways in which dimensions are measured, e.g., cups, gallons, liters ... all refer to volume
+        * Give some examples of units for each of the dimensions.
+        * Some everyday quantities are dimensionless, e.g. pure numbers.  Give some examples: ... (angles, percent, fractions, ... but not ratios in general.)
+    - Regression fixes units automatically, since the coefficients themselves have dimensionality. They will adjust automatically to changes in units, so the model is the same regardless of whether we use miles, km, parsecs, ... 
+    - In KNN, to avoid dependence on units, need to do some standardization by dividing by something in the same units, e.g. sd.
+* Curse of dimensionality.
+    Let's create 1000 randomly placed points in the unit square:
+```{r}
+rpts <- matrix(runif(2*1000), ncol=2)
+```
+
+What's the distribution of distances from a single random point to the 1000 others:
+```{r}
+our_point <- runif(2)
+```
+
+The distance between our point and each of the others
+```{r}
+tmp <- matrix(our_point, ncol=2, nrow=1000, byrow=TRUE)
+delta <- sqrt(rowSums((rpts - tmp)^2))
+```
+
+* How far away is a typical point?
+* Write a function that takes the matrix of points and the "our point" and finds the distance from our point to each and every one of the points in the matrix.
+* How far away is a typical point in 1-dimensional space?
+* In 10-dimensional space?
+* In 100-dimensional space?
+
+
+
+
 
 
 ## Loops/Iteration

@@ -1,61 +1,8 @@
 # Notes
 
-## Programming basics: Linear Models
-
-Syntactic element: **formulas**. Formulas provide a way of using variables "symbolically." This is useful, for instance, in depicting the desired relationship among variables. Two forms:
-
-- `y ~ x` two-sided
-- `~ x` one-sided
-- NOT ALLOWED, `y ~`
-
-Important functions: 
-
-- `lm()`, `predict()` , `anova()`, `summary()`.
-- For later: `solve()`, `model.matrix()`.
-- From 155: `coef()`, `fitted()`, `resid()`
-
-Training with `lm()`: Specify formula `Y ~ X1 + X2` ...
-
-```{r}
-data(College, package = "ISLR")
-mod <- lm(Outstate ~ Enroll + Accept + perc.alumni, data = College ) 
-coef(mod)
+```{r include = FALSE}
+library(mosaic)
 ```
-
-What kind of thing is `mod`?
-
-Model output with `predict()`
-```{r}
-predict(mod, 
-        newdata = data.frame(Enroll = 100, Accept = 1000, perc.alumni = 25))
-```
-
-What kind of thing is the output of `predict()`?
-
-```{r}
-predict(mod, interval = "confidence",
-        newdata = data.frame(Enroll = 100, Accept = 1000, perc.alumni = 25))
-predict(mod, interval = "prediction",
-        newdata = data.frame(Enroll = 100, Accept = 1000, perc.alumni = 25))
-```
-
-Why is the "confidence interval" so much narrower than the "prediction interval?"
-
-**Inference** with `anova()` and `summary()`. This is all "in-sample" inference, not cross-validated.
-
-```{r}
-M <- model.matrix(~ Enroll + Accept * perc.alumni, data = College)
-qr.solve(M, College$Outstate)
-```
-
-For the people who have had linear algebra, why doesn't this work?
-```{r error = TRUE}
-solve(M, College$Outstate)
-```
-
-
-[Indexing on data: training and testing data sets](../ProgrammingActivities/Day-03-Programming.html)
-
 
 ## Review of Day 4, Sept 15, 2016
 
@@ -185,48 +132,6 @@ Coefficients in linear models are not just numbers, they are physical quantities
 * Dimensions are always (dim of response)/(dim of this term)
 * The model doesn't depend on the units of these quantities.  The units only set the magnitude to the numerical part of the coefficient, but as a quantity a coefficient is the same thing regardless of units.
 * Conversion from one unit to another by multiplying by 1, but expressed in different units, e.g. 60 seconds per minute, 2.2 pounds per kilogram.
-
-
-### Graphics basics
-
-1. API for graphics: `plot()`, `points()`, `lines()`, `polygon()`, `text()`, ...
-
-
-## K-nearest neighbors
-
-K-nearest neighbors is a simple, general kind of function-building method.  But some problems:
-
-* Interpretability: but you can always take partial derivatives.
-* When you have prediction (aka "explanatory") variables in dollars and in miles, how do you calculate the distance between points?  What are the dimensions of distance?
-    - Dimensionality refers to the physical feature, e.g. time, distance, area, volume, money, charge, luminance, mass, ...
-    - Units are the ways in which dimensions are measured, e.g., cups, gallons, liters ... all refer to volume
-        * Give some examples of units for each of the dimensions.
-        * Some everyday quantities are dimensionless, e.g. pure numbers.  Give some examples: ... (angles, percent, fractions, ... but not ratios in general.)
-    - Regression fixes units automatically, since the coefficients themselves have dimensionality. They will adjust automatically to changes in units, so the model is the same regardless of whether we use miles, km, parsecs, ... 
-    - In KNN, to avoid dependence on units, need to do some standardization by dividing by something in the same units, e.g. sd.
-* Curse of dimensionality.
-    Let's create 1000 randomly placed points in the unit square:
-```{r}
-rpts <- matrix(runif(2*1000), ncol=2)
-```
-
-What's the distribution of distances from a single random point to the 1000 others:
-```{r}
-our_point <- runif(2)
-```
-
-The distance between our point and each of the others
-```{r}
-tmp <- matrix(our_point, ncol=2, nrow=1000, byrow=TRUE)
-delta <- sqrt(rowSums((rpts - tmp)^2))
-```
-
-* How far away is a typical point?
-* Write a function that takes the matrix of points and the "our point" and finds the distance from our point to each and every one of the points in the matrix.
-* How far away is a typical point in 1-dimensional space?
-* In 10-dimensional space?
-* In 100-dimensional space?
-
 
 
 
