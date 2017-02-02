@@ -1,0 +1,26 @@
+```{r include = FALSE}
+data(CPS85, package = "mosaicData")
+```
+
+
+Build a model of wage ~ age
+
+```{r}
+LL <- function(params) {
+  a <- params[1]
+  b <- params[2]
+  sigma <- params[3]
+  
+  devs <- with(CPS85,
+        wage - (a*age + b))
+
+  probs <- dnorm(devs, mean=0, sd = sigma)
+  
+  sum(log(probs))
+  
+}
+```
+
+```{r}
+L(c(1,-10, 2))
+```

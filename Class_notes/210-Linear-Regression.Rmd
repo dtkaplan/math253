@@ -4,15 +4,19 @@
 library(mosaic)
 ```
 
+<!-- 
+
 ## Review of Day 4, Sept 15, 2016
 
-* Discussed the linear regression architecture and how it relates to machine learning.
+* How the linear regression architecture relates to machine learning.
     - linear regression is designed to work even in "small data" situations where
         a. cross-validation is not appropriate
         b. the number of model degrees of freedom may be almost as large as $n$
     - provides a ready definition of the "size" of a model: the number of coefficients.
-* Introduced the main software used in linear regression, `lm()` and `predict()`
+* Main software used in linear regression, `lm()` and `predict()`
 * Programming basics: indexing of vectors, matrices and data frames.
+
+
 
 ## Regression and Interpretability
 
