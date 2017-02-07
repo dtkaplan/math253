@@ -4,8 +4,6 @@
 library(mosaic)
 ```
 
-<!-- 
-
 ## Review of Day 4, Sept 15, 2016
 
 * How the linear regression architecture relates to machine learning.
