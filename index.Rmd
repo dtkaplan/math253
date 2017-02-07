@@ -36,7 +36,7 @@ You should "push" your daily programming activity to your repository *before* le
 Each topic assignment is due one week *after* we finish covering that topic in class.
 
 - Topic I: Thurs Feb 9, 2017
-- Topic II: TBA
+- Topic II: Thurs Feb 16, 2017
 - Topic III: TBA
 - Topic IV: TBA
 - Topic V: TBA
