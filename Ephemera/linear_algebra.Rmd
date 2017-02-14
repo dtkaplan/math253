@@ -1,0 +1,6 @@
+
+vscale <- function(a, v){
+  a * v
+}
+
+vadd <- 

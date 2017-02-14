@@ -1,0 +1,37 @@
+---
+title: "Graphics basics"
+author: "Danny Kaplan"
+date: "February 2, 2017"
+output: html_document
+---
+
+```{r}
+xyplot(mpg ~ hp, data = mtcars)
+ggplot(mtcars, aes(x = hp, y = mpg)) + geom_point()
+gf_point(hp ~ mpg + color:cyl, data = mtcars)
+```
+
+
+* plot
+* points
+* lines
+* polygon
+* text
+
+```{r}
+plot(1, type = "n", xlim = c(0,100), ylim= c(-10,10))
+points(c(40,60), c(-5,5), pch = 20, col = c("red", "aquamarine"))
+lines(c(40,60, 80, 20), c(-5,5, 5,10 ), col = "red")
+lines(c(0, 100), c(-10,8), col="green", lwd = 5)
+text(c(40, 20), c(-8,5), c("hello", "goodbye"))
+polygon(c(0,40,40), c(-10, -10, 10), col="tomato")
+points(50,0, cex = 10, col = "blue", pch= 20 )
+
+plot(1:10)
+```
+
+
+```{r}
+points(50,0, cex = 10, col = "blue", pch= 20 )
+```
+

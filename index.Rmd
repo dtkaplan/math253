@@ -73,7 +73,7 @@ Each topic assignment is due one week *after* we finish covering that topic in c
             1. On p. 66 the authors state, "This is clearly not true in Fig. 3.1" Explain why.
             2. On p. 77 the authors state, "In this case we cannot even fit the multiple regression models using least squares ...." Explain why.
         - ISL 3.7.3 and 3.7.4.
-* Programming activities: [Feb 2](ProgrammingActivities/Day-04-Programming-Task.html), [Feb 7](ProgrammingActivities/Day-05-Programming-Task.html), [Six](ProgrammingActivities/Day-06-Programming-Task.html)
+* Programming activities: [Feb 2](ProgrammingActivities/Day-04-Programming-Task.html), [Feb 7](ProgrammingActivities/Day-05-Programming-Task.html), [Feb 14](ProgrammingActivities/Day-06-Programming-Task.html)
 
 
 ## Topic 3 --- Foundations: Linear Algebra, Bayes' Rule, and Likelihood
