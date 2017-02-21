@@ -37,7 +37,7 @@ Each topic assignment is due one week *after* we finish covering that topic in c
 
 - Topic I: Thurs Feb 9, 2017
 - Topic II: Thurs Feb 16, 2017
-- Topic III: TBA
+- Topic III: Thurs March 2, 2017
 - Topic IV: TBA
 - Topic V: TBA
 - Remaining work: By the end of exam period.
@@ -73,7 +73,7 @@ Each topic assignment is due one week *after* we finish covering that topic in c
             1. On p. 66 the authors state, "This is clearly not true in Fig. 3.1" Explain why.
             2. On p. 77 the authors state, "In this case we cannot even fit the multiple regression models using least squares ...." Explain why.
         - ISL 3.7.3 and 3.7.4.
-* Programming activities: [Feb 2](ProgrammingActivities/Day-04-Programming-Task.html), [Feb 7](ProgrammingActivities/Day-05-Programming-Task.html), [Feb 14](ProgrammingActivities/Day-06-Programming-Task.html)
+* Programming activities: [Four (Feb 2)](ProgrammingActivities/Day-04-Programming-Task.html), [Five (Feb 7)](ProgrammingActivities/Day-05-Programming-Task.html), [Six (Feb 14)](ProgrammingActivities/Day-06-Programming-Task.html)
 
 
 ## Topic 3 --- Foundations: Linear Algebra, Bayes' Rule, and Likelihood
@@ -83,7 +83,7 @@ Each topic assignment is due one week *after* we finish covering that topic in c
     - Michael Lavine: "What is Bayesian statistics and why everything else is wrong" [PDF](Resources/Likelihood-Lavine.pdf)
 * Programming basics 3: Conditionals
 * Visualization: Base graphics: lines, polygons, ...
-* Programming Activities: [Seven](ProgrammingActivities/Day-07-Programming-Task.html), [Eight](ProgrammingActivities/Day-08-Programming-Task.html), [Nine](ProgrammingActivities/Day-09-Programming-Task.html)
+* Programming Activities: [Seven (Feb 16)](ProgrammingActivities/Day-07-Programming-Task.html), [Eight (Feb 21)](ProgrammingActivities/Day-08-Programming-Task.html), [Nine (Feb 23)](ProgrammingActivities/Day-09-Programming-Task.html)
 * Topic assignment: there are no exercises from the textbook, so ... finish the exponential likelihood and taxicab in-class activities. 
 
 ## Topic 4 --- Classification

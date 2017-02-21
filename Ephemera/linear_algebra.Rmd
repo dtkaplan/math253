@@ -1,6 +1,27 @@
+# Linear Algebra functions
 
+Some basic function
+```{r}
 vscale <- function(a, v){
   a * v
 }
+```
 
-vadd <- 
+Testing ...
+```{r}
+testthat::expect_equal(
+  vscale(2, c(2, 7.5, -6, 1)), 
+  c(4, 15, -12, 2))
+```
+```{r}
+vdot <- function(v1, v2){
+  return(sum(v1 * v2))
+}
+```
+
+
+```{r}
+vadd <- function(v1, v2) {
+  v1 + v2
+}
+```

@@ -153,7 +153,7 @@ Reading for Thursday: "What is Bayesian statistics and why everything else is wr
 * Frequentist: Number of "favorable events" / number of events
 * Bayesian. Number between 0 and 1.
 
-$ p(rain | Sept 29, Libra, Thursday )$
+$ p(\mbox{rain} | \mbox{Feb 27}, \mbox{Libra}, \mbox{Thursday} )$
 
 * densities
 * cumulative --- this is really what probability refers to.
