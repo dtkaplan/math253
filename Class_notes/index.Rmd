@@ -1,7 +1,7 @@
 --- 
-title: "Notes for Math 253: Statistical Computing and Machine Learning"
+title: "Notes for Statistical Computing & Machine Learning"
 author: "Daniel Kaplan"
-date: "Fall 2016, Macalester College"
+date: "Math 253 Macalester College"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
