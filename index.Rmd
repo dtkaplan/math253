@@ -16,6 +16,7 @@ output:
     - Anytime by appointment. And if my office door is open, just drop in.
 * Preceptor: **Yifan (Eva) Gong** `ygong@macalester.edu`
     - Wed 8:00pm-10:00pm, MSCS reading room. 
+    - Thurs 7:00pm - 9:30pm, OLRI 245
 * Text: [An Introduction to Statistical Learning](http://www.springer.com/us/book/9781461471370).  The authors also provide [access via PDF](http://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf).
 * **Class notes**. [In-class notes for the entire semester](Class_notes/_book/introduction.html). (An evolving document.)
 * An [introduction to R/RStudio/Markdown](http://ismayc.github.io/rbasics-book)
