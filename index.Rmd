@@ -18,15 +18,14 @@ output:
     - Wed 8:00pm-10:00pm, MSCS reading room. 
 * Text: [An Introduction to Statistical Learning](http://www.springer.com/us/book/9781461471370).  The authors also provide [access via PDF](http://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf).
 * **Class notes**. [In-class notes for the entire semester](Class_notes/_book/introduction.html). (An evolving document.)
-* [Online discussion site](https://github.com/dtkaplan/math253-discussion/issues).
 * An [introduction to R/RStudio/Markdown](http://ismayc.github.io/rbasics-book)
+* A [introduction to git and GitHub](http://happygitwithr.com/classroom-overview.html) oriented to the classroom.
 * The registrar has scheduled our **final exam** for Friday May 5 at 1:30pm - 3:30pm. 
 
 ### Starting the semester
 
 * [Course policies](policies.html)
 * [Installing and using GitHub from RStudio](github.html)
-* [Why I don't use Moodle](why-not-moodle.html)
 * Make an account on <GitHub.com> and enter your account ID and the corresponding email address on [this form](https://docs.google.com/forms/d/e/1FAIpQLSdEMEn_uHkv4Wm3BDYZ4TU_XxrrSVfXlQ5S7NK0vZvTTm5u-Q/viewform).
 
 ### Due dates
@@ -93,7 +92,7 @@ Each topic assignment is due one week *after* we finish covering that topic in c
 * Topic 4 Assignment:
     - Programming Assignment: 4.7.11, 4.7.13
     - Theory assignment: 4.7.1, 4.7.8, 4.7.9
-* Programming Activities: [Ten](ProgrammingActivities/Day-10-Programming-Task.html), [Eleven](ProgrammingActivities/Day-11-Programming-Task.html), [Twelve](ProgrammingActivities/Day-12-Programming-Task.pdf)
+* Programming Activities: [Ten (Feb 28)](ProgrammingActivities/Day-10-Programming-Task.html), [Eleven (March 2)](ProgrammingActivities/Day-11-Programming-Task.html), [Twelve (March 7)](ProgrammingActivities/Day-12-Programming-Task.pdf)
 
 
 ## Topic 5 --- Cross-validation and bootstrapping

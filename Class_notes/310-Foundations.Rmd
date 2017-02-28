@@ -282,7 +282,7 @@ Have students propose distributions and justify them.
 The Salton Sea earthquake happens. Our prior on large $\lambda$ immediately surges, so there is a significant probability of a quake in the next hours. But as more time goes by, that probability goes down.
 
 * We're interested in $\lambda$ in the exponential distribution 
-$\lambda \exp(-lambda t)$ . This has a cumulative $1 - \exp(-\lambda t)$.
+$\lambda \exp(-\lambda t)$ . This has a cumulative $1 - \exp(-\lambda t)$.
 * Observation: Earthquake hasn't occurred after D days. Likelihood is 1 minus the cumulative, or $\exp(-\lambda D)$.
 * Prior: a mix of the conventional (very small lambda) and some small probability of very high lambda.
 
@@ -297,7 +297,7 @@ The area to the right of 5 days (in expected time to the next quake) is the conv
 
 Plot this out as a function of $1/\lambda$, so we need to adjust the density by $| df/d\lambda | = | d \frac{1}{\lambda} / d\lambda| = \lambda^2$
 ```{r}
-D <- 30
+D <- .1
 lambda <- 100/(1:5000) 
 # prior: proportional to lambda: 
 #  small lambda unlikely, so short time to next earthquake
@@ -305,7 +305,7 @@ prior <- function(lambda) (ifelse(lambda < .2, 25, 1/lambda))
 plot(lambda, ( prior(lambda)), type = "l", xlim = c(0,5))
 plot(1/lambda, exp( - lambda * D) * prior(lambda) * (lambda^2), 
      type = "l", xlab = "Expected time to the big one, days.",
-     xlim = c(0, 10))
+     xlim = c(0, 20))
 lines(1/lambda, lambda*.005/prior(lambda), col = "red")
 ```
 

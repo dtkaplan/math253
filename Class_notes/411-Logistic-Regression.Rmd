@@ -1,9 +1,7 @@
 ---
 title: "Logistic Regression"
-output: html_notebook
 ---
 
-# Logistic Regression
 
 ```{r include = FALSE}
 library(mosaic)

@@ -33,7 +33,7 @@
   
   
 <link rel="prev" href="foundations-linear-algebra-likelihood-and-bayes-rule.html">
-<link rel="next" href="logistic-regression.html">
+<link rel="next" href="linear-and-quadratic-discriminant-analysis.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -214,131 +214,129 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4" data-path="classifiers.html"><a href="classifiers.html"><i class="fa fa-check"></i><b>4</b> Classifiers</a><ul>
 <li class="chapter" data-level="4.1" data-path="classifiers.html"><a href="classifiers.html#classification-overview"><i class="fa fa-check"></i><b>4.1</b> Classification overview</a></li>
 <li class="chapter" data-level="4.2" data-path="classifiers.html"><a href="classifiers.html#day-10-preview"><i class="fa fa-check"></i><b>4.2</b> Day 10 preview</a></li>
+<li class="chapter" data-level="4.3" data-path="classifiers.html"><a href="classifiers.html#probability-and-odds"><i class="fa fa-check"></i><b>4.3</b> Probability and odds</a></li>
+<li class="chapter" data-level="4.4" data-path="classifiers.html"><a href="classifiers.html#log-odds"><i class="fa fa-check"></i><b>4.4</b> Log Odds</a></li>
+<li class="chapter" data-level="4.5" data-path="classifiers.html"><a href="classifiers.html#why-use-odds"><i class="fa fa-check"></i><b>4.5</b> Why use odds?</a></li>
+<li class="chapter" data-level="4.6" data-path="classifiers.html"><a href="classifiers.html#use-of-glm"><i class="fa fa-check"></i><b>4.6</b> Use of glm()</a></li>
+<li class="chapter" data-level="4.7" data-path="classifiers.html"><a href="classifiers.html#interpretation-of-coefficients"><i class="fa fa-check"></i><b>4.7</b> Interpretation of coefficients</a></li>
+<li class="chapter" data-level="4.8" data-path="classifiers.html"><a href="classifiers.html#example-logistic-regression-of-default"><i class="fa fa-check"></i><b>4.8</b> Example: Logistic regression of default</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>5</b> Logistic Regression</a><ul>
-<li class="chapter" data-level="5.1" data-path="logistic-regression.html"><a href="logistic-regression.html#probability-and-odds"><i class="fa fa-check"></i><b>5.1</b> Probability and odds</a></li>
-<li class="chapter" data-level="5.2" data-path="logistic-regression.html"><a href="logistic-regression.html#log-odds"><i class="fa fa-check"></i><b>5.2</b> Log Odds</a></li>
-<li class="chapter" data-level="5.3" data-path="logistic-regression.html"><a href="logistic-regression.html#why-use-odds"><i class="fa fa-check"></i><b>5.3</b> Why use odds?</a></li>
-<li class="chapter" data-level="5.4" data-path="logistic-regression.html"><a href="logistic-regression.html#use-of-glm"><i class="fa fa-check"></i><b>5.4</b> Use of glm()</a></li>
-<li class="chapter" data-level="5.5" data-path="logistic-regression.html"><a href="logistic-regression.html#interpretation-of-coefficients"><i class="fa fa-check"></i><b>5.5</b> Interpretation of coefficients</a></li>
-<li class="chapter" data-level="5.6" data-path="logistic-regression.html"><a href="logistic-regression.html#example-logistic-regression-of-default"><i class="fa fa-check"></i><b>5.6</b> Example: Logistic regression of default</a></li>
+<li class="chapter" data-level="5" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html"><i class="fa fa-check"></i><b>5</b> Linear and Quadratic Discriminant Analysis</a><ul>
+<li class="chapter" data-level="5.1" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#example-default-on-student-loans"><i class="fa fa-check"></i><b>5.1</b> Example: Default on student loans</a></li>
+<li class="chapter" data-level="5.2" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#a-bayes-rule-approach"><i class="fa fa-check"></i><b>5.2</b> A Bayes’ Rule approach</a></li>
+<li class="chapter" data-level="5.3" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#univariate-gaussian"><i class="fa fa-check"></i><b>5.3</b> Univariate Gaussian</a></li>
+<li class="chapter" data-level="5.4" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#uncorrelated-bivariate-gaussian"><i class="fa fa-check"></i><b>5.4</b> Uncorrelated bivariate gaussian</a></li>
+<li class="chapter" data-level="5.5" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#bivariate-normal-distribution-with-correlations"><i class="fa fa-check"></i><b>5.5</b> Bivariate normal distribution with correlations</a></li>
+<li class="chapter" data-level="5.6" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#shape-of-multivariate-gaussian"><i class="fa fa-check"></i><b>5.6</b> Shape of multivariate gaussian</a></li>
+<li class="chapter" data-level="5.7" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#generating-bivariate-normal-from-independent"><i class="fa fa-check"></i><b>5.7</b> Generating bivariate normal from independent</a></li>
+<li class="chapter" data-level="5.8" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#independent-variables-x_i"><i class="fa fa-check"></i><b>5.8</b> Independent variables <span class="math inline">\(x_i\)</span></a></li>
+<li class="chapter" data-level="5.9" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#re-explaining-boldsymbolsigma"><i class="fa fa-check"></i><b>5.9</b> Re-explaining <span class="math inline">\(\boldsymbol\Sigma\)</span></a></li>
+<li class="chapter" data-level="5.10" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#lda"><i class="fa fa-check"></i><b>5.10</b> LDA</a></li>
+<li class="chapter" data-level="5.11" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#qda"><i class="fa fa-check"></i><b>5.11</b> QDA</a></li>
+<li class="chapter" data-level="5.12" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#error-test-rates-on-various-classifiers"><i class="fa fa-check"></i><b>5.12</b> Error test rates on various classifiers</a></li>
+<li class="chapter" data-level="5.13" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#error-rates"><i class="fa fa-check"></i><b>5.13</b> Error rates</a></li>
+<li class="chapter" data-level="5.14" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#receiver-operating-curves"><i class="fa fa-check"></i><b>5.14</b> Receiver operating curves</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html"><i class="fa fa-check"></i><b>6</b> Linear and Quadratic Discriminant Analysis</a><ul>
-<li class="chapter" data-level="6.1" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#example-default-on-student-loans"><i class="fa fa-check"></i><b>6.1</b> Example: Default on student loans</a></li>
-<li class="chapter" data-level="6.2" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#a-bayes-rule-approach"><i class="fa fa-check"></i><b>6.2</b> A Bayes’ Rule approach</a></li>
-<li class="chapter" data-level="6.3" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#univariate-gaussian"><i class="fa fa-check"></i><b>6.3</b> Univariate Gaussian</a></li>
-<li class="chapter" data-level="6.4" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#uncorrelated-bivariate-gaussian"><i class="fa fa-check"></i><b>6.4</b> Uncorrelated bivariate gaussian</a></li>
-<li class="chapter" data-level="6.5" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#bivariate-normal-distribution-with-correlations"><i class="fa fa-check"></i><b>6.5</b> Bivariate normal distribution with correlations</a></li>
-<li class="chapter" data-level="6.6" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#shape-of-multivariate-gaussian"><i class="fa fa-check"></i><b>6.6</b> Shape of multivariate gaussian</a></li>
-<li class="chapter" data-level="6.7" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#generating-bivariate-normal-from-independent"><i class="fa fa-check"></i><b>6.7</b> Generating bivariate normal from independent</a></li>
-<li class="chapter" data-level="6.8" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#independent-variables-x_i"><i class="fa fa-check"></i><b>6.8</b> Independent variables <span class="math inline">\(x_i\)</span></a></li>
-<li class="chapter" data-level="6.9" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#re-explaining-boldsymbolsigma"><i class="fa fa-check"></i><b>6.9</b> Re-explaining <span class="math inline">\(\boldsymbol\Sigma\)</span></a></li>
-<li class="chapter" data-level="6.10" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#lda"><i class="fa fa-check"></i><b>6.10</b> LDA</a></li>
-<li class="chapter" data-level="6.11" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#qda"><i class="fa fa-check"></i><b>6.11</b> QDA</a></li>
-<li class="chapter" data-level="6.12" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#error-test-rates-on-various-classifiers"><i class="fa fa-check"></i><b>6.12</b> Error test rates on various classifiers</a></li>
-<li class="chapter" data-level="6.13" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#error-rates"><i class="fa fa-check"></i><b>6.13</b> Error rates</a></li>
-<li class="chapter" data-level="6.14" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html#receiver-operating-curves"><i class="fa fa-check"></i><b>6.14</b> Receiver operating curves</a></li>
+<li class="chapter" data-level="6" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html"><i class="fa fa-check"></i><b>6</b> Cross-Validation and Bootstrapping</a><ul>
+<li class="chapter" data-level="6.1" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html#philosophical-approaches"><i class="fa fa-check"></i><b>6.1</b> Philosophical approaches</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html#occams-razor-a-heuristic"><i class="fa fa-check"></i><b>6.1.1</b> Occam’s Razor: A heuristic</a></li>
+<li class="chapter" data-level="6.1.2" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html#einsteins-proverb"><i class="fa fa-check"></i><b>6.1.2</b> Einstein’s proverb</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html"><i class="fa fa-check"></i><b>7</b> Cross-Validation and Bootstrapping</a><ul>
-<li class="chapter" data-level="7.1" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html#philosophical-approaches"><i class="fa fa-check"></i><b>7.1</b> Philosophical approaches</a><ul>
-<li class="chapter" data-level="7.1.1" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html#occams-razor-a-heuristic"><i class="fa fa-check"></i><b>7.1.1</b> Occam’s Razor: A heuristic</a></li>
-<li class="chapter" data-level="7.1.2" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html#einsteins-proverb"><i class="fa fa-check"></i><b>7.1.2</b> Einstein’s proverb</a></li>
+<li class="chapter" data-level="6.2" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html#operationalizing-model-choice"><i class="fa fa-check"></i><b>6.2</b> Operationalizing model choice</a></li>
+<li class="chapter" data-level="6.3" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html#some-definitions-of-better"><i class="fa fa-check"></i><b>6.3</b> Some definitions of “better”</a></li>
+<li class="chapter" data-level="6.4" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html#training-and-testing"><i class="fa fa-check"></i><b>6.4</b> Training and Testing</a></li>
+<li class="chapter" data-level="6.5" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html#trade-off"><i class="fa fa-check"></i><b>6.5</b> Trade-off</a></li>
+<li class="chapter" data-level="6.6" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html#classical-theory-interlude"><i class="fa fa-check"></i><b>6.6</b> Classical theory interlude</a></li>
+<li class="chapter" data-level="6.7" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html#bootstrapping"><i class="fa fa-check"></i><b>6.7</b> Bootstrapping</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html#operationalizing-model-choice"><i class="fa fa-check"></i><b>7.2</b> Operationalizing model choice</a></li>
-<li class="chapter" data-level="7.3" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html#some-definitions-of-better"><i class="fa fa-check"></i><b>7.3</b> Some definitions of “better”</a></li>
-<li class="chapter" data-level="7.4" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html#training-and-testing"><i class="fa fa-check"></i><b>7.4</b> Training and Testing</a></li>
-<li class="chapter" data-level="7.5" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html#trade-off"><i class="fa fa-check"></i><b>7.5</b> Trade-off</a></li>
-<li class="chapter" data-level="7.6" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html#classical-theory-interlude"><i class="fa fa-check"></i><b>7.6</b> Classical theory interlude</a></li>
-<li class="chapter" data-level="7.7" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html#bootstrapping"><i class="fa fa-check"></i><b>7.7</b> Bootstrapping</a></li>
+<li class="chapter" data-level="7" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html"><i class="fa fa-check"></i><b>7</b> Regularization, shrinkage and dimension reduction</a><ul>
+<li class="chapter" data-level="7.1" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#best-subset-selection"><i class="fa fa-check"></i><b>7.1</b> Best subset selection</a></li>
+<li class="chapter" data-level="7.2" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#approximation-to-best-subset-selection"><i class="fa fa-check"></i><b>7.2</b> Approximation to best subset selection</a></li>
+<li class="chapter" data-level="7.3" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#classical-theory-of-best-model-choice"><i class="fa fa-check"></i><b>7.3</b> Classical theory of best model choice</a></li>
+<li class="chapter" data-level="7.4" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#optimization"><i class="fa fa-check"></i><b>7.4</b> Optimization</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#what-are-we-optimizing-over"><i class="fa fa-check"></i><b>7.4.1</b> What are we optimizing over?</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html"><i class="fa fa-check"></i><b>8</b> Regularization, shrinkage and dimension reduction</a><ul>
-<li class="chapter" data-level="8.1" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#best-subset-selection"><i class="fa fa-check"></i><b>8.1</b> Best subset selection</a></li>
-<li class="chapter" data-level="8.2" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#approximation-to-best-subset-selection"><i class="fa fa-check"></i><b>8.2</b> Approximation to best subset selection</a></li>
-<li class="chapter" data-level="8.3" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#classical-theory-of-best-model-choice"><i class="fa fa-check"></i><b>8.3</b> Classical theory of best model choice</a></li>
-<li class="chapter" data-level="8.4" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#optimization"><i class="fa fa-check"></i><b>8.4</b> Optimization</a><ul>
-<li class="chapter" data-level="8.4.1" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#what-are-we-optimizing-over"><i class="fa fa-check"></i><b>8.4.1</b> What are we optimizing over?</a></li>
+<li class="chapter" data-level="7.5" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#shrinkage-methods"><i class="fa fa-check"></i><b>7.5</b> Shrinkage methods</a><ul>
+<li class="chapter" data-level="7.5.1" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#ridge-regression"><i class="fa fa-check"></i><b>7.5.1</b> Ridge regression</a></li>
 </ul></li>
-<li class="chapter" data-level="8.5" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#shrinkage-methods"><i class="fa fa-check"></i><b>8.5</b> Shrinkage methods</a><ul>
-<li class="chapter" data-level="8.5.1" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#ridge-regression"><i class="fa fa-check"></i><b>8.5.1</b> Ridge regression</a></li>
+<li class="chapter" data-level="7.6" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#lasso"><i class="fa fa-check"></i><b>7.6</b> LASSO</a></li>
+<li class="chapter" data-level="7.7" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#review"><i class="fa fa-check"></i><b>7.7</b> Review</a></li>
+<li class="chapter" data-level="7.8" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#multi-collinearity"><i class="fa fa-check"></i><b>7.8</b> Multi-collinearity</a></li>
+<li class="chapter" data-level="7.9" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#creating-correlations"><i class="fa fa-check"></i><b>7.9</b> Creating correlations</a></li>
+<li class="chapter" data-level="7.10" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#rank-1-matrices"><i class="fa fa-check"></i><b>7.10</b> Rank 1 Matrices</a></li>
+<li class="chapter" data-level="7.11" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#idea-of-singular-values."><i class="fa fa-check"></i><b>7.11</b> Idea of singular values.</a></li>
+<li class="chapter" data-level="7.12" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#dimension-reduction"><i class="fa fa-check"></i><b>7.12</b> Dimension reduction</a></li>
 </ul></li>
-<li class="chapter" data-level="8.6" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#lasso"><i class="fa fa-check"></i><b>8.6</b> LASSO</a></li>
-<li class="chapter" data-level="8.7" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#review"><i class="fa fa-check"></i><b>8.7</b> Review</a></li>
-<li class="chapter" data-level="8.8" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#multi-collinearity"><i class="fa fa-check"></i><b>8.8</b> Multi-collinearity</a></li>
-<li class="chapter" data-level="8.9" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#creating-correlations"><i class="fa fa-check"></i><b>8.9</b> Creating correlations</a></li>
-<li class="chapter" data-level="8.10" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#rank-1-matrices"><i class="fa fa-check"></i><b>8.10</b> Rank 1 Matrices</a></li>
-<li class="chapter" data-level="8.11" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#idea-of-singular-values."><i class="fa fa-check"></i><b>8.11</b> Idea of singular values.</a></li>
-<li class="chapter" data-level="8.12" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html#dimension-reduction"><i class="fa fa-check"></i><b>8.12</b> Dimension reduction</a></li>
+<li class="chapter" data-level="8" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html"><i class="fa fa-check"></i><b>8</b> Nonlinearity in linear models</a><ul>
+<li class="chapter" data-level="8.1" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#smoothers"><i class="fa fa-check"></i><b>8.1</b> Smoothers</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#ideas-of-smoothness"><i class="fa fa-check"></i><b>8.1.1</b> Ideas of smoothness</a></li>
+<li class="chapter" data-level="8.1.2" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#polynomials"><i class="fa fa-check"></i><b>8.1.2</b> Polynomials</a></li>
+<li class="chapter" data-level="8.1.3" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#the-model-matrix"><i class="fa fa-check"></i><b>8.1.3</b> The model matrix</a></li>
+<li class="chapter" data-level="8.1.4" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#sigmoidal-functions"><i class="fa fa-check"></i><b>8.1.4</b> Sigmoidal Functions</a></li>
+<li class="chapter" data-level="8.1.5" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#hat-functions"><i class="fa fa-check"></i><b>8.1.5</b> Hat functions</a></li>
+<li class="chapter" data-level="8.1.6" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#fourier-analysis"><i class="fa fa-check"></i><b>8.1.6</b> Fourier analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html"><i class="fa fa-check"></i><b>9</b> Nonlinearity in linear models</a><ul>
-<li class="chapter" data-level="9.1" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#smoothers"><i class="fa fa-check"></i><b>9.1</b> Smoothers</a><ul>
-<li class="chapter" data-level="9.1.1" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#ideas-of-smoothness"><i class="fa fa-check"></i><b>9.1.1</b> Ideas of smoothness</a></li>
-<li class="chapter" data-level="9.1.2" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#polynomials"><i class="fa fa-check"></i><b>9.1.2</b> Polynomials</a></li>
-<li class="chapter" data-level="9.1.3" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#the-model-matrix"><i class="fa fa-check"></i><b>9.1.3</b> The model matrix</a></li>
-<li class="chapter" data-level="9.1.4" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#sigmoidal-functions"><i class="fa fa-check"></i><b>9.1.4</b> Sigmoidal Functions</a></li>
-<li class="chapter" data-level="9.1.5" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#hat-functions"><i class="fa fa-check"></i><b>9.1.5</b> Hat functions</a></li>
-<li class="chapter" data-level="9.1.6" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#fourier-analysis"><i class="fa fa-check"></i><b>9.1.6</b> Fourier analysis</a></li>
+<li class="chapter" data-level="8.2" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#steps"><i class="fa fa-check"></i><b>8.2</b> Steps</a></li>
+<li class="chapter" data-level="8.3" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#other-functions"><i class="fa fa-check"></i><b>8.3</b> Other functions</a></li>
+<li class="chapter" data-level="8.4" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#holes-in-the-data"><i class="fa fa-check"></i><b>8.4</b> Holes in the data</a></li>
+<li class="chapter" data-level="8.5" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#bootstrapping-1"><i class="fa fa-check"></i><b>8.5</b> Bootstrapping</a></li>
+<li class="chapter" data-level="8.6" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#normal-theory-confidence-bands"><i class="fa fa-check"></i><b>8.6</b> Normal theory confidence bands</a></li>
+<li class="chapter" data-level="8.7" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#splines"><i class="fa fa-check"></i><b>8.7</b> Splines</a><ul>
+<li class="chapter" data-level="8.7.1" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#b-splines"><i class="fa fa-check"></i><b>8.7.1</b> B-splines</a></li>
+<li class="chapter" data-level="8.7.2" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#natural-splines"><i class="fa fa-check"></i><b>8.7.2</b> Natural splines</a></li>
+<li class="chapter" data-level="8.7.3" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#smoothing-splines"><i class="fa fa-check"></i><b>8.7.3</b> Smoothing splines</a></li>
+<li class="chapter" data-level="8.7.4" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#smoothers-in-k-dimensions"><i class="fa fa-check"></i><b>8.7.4</b> Smoothers in k dimensions</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#steps"><i class="fa fa-check"></i><b>9.2</b> Steps</a></li>
-<li class="chapter" data-level="9.3" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#other-functions"><i class="fa fa-check"></i><b>9.3</b> Other functions</a></li>
-<li class="chapter" data-level="9.4" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#holes-in-the-data"><i class="fa fa-check"></i><b>9.4</b> Holes in the data</a></li>
-<li class="chapter" data-level="9.5" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#bootstrapping-1"><i class="fa fa-check"></i><b>9.5</b> Bootstrapping</a></li>
-<li class="chapter" data-level="9.6" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#normal-theory-confidence-bands"><i class="fa fa-check"></i><b>9.6</b> Normal theory confidence bands</a></li>
-<li class="chapter" data-level="9.7" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#splines"><i class="fa fa-check"></i><b>9.7</b> Splines</a><ul>
-<li class="chapter" data-level="9.7.1" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#b-splines"><i class="fa fa-check"></i><b>9.7.1</b> B-splines</a></li>
-<li class="chapter" data-level="9.7.2" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#natural-splines"><i class="fa fa-check"></i><b>9.7.2</b> Natural splines</a></li>
-<li class="chapter" data-level="9.7.3" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#smoothing-splines"><i class="fa fa-check"></i><b>9.7.3</b> Smoothing splines</a></li>
-<li class="chapter" data-level="9.7.4" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#smoothers-in-k-dimensions"><i class="fa fa-check"></i><b>9.7.4</b> Smoothers in k dimensions</a></li>
+<li class="chapter" data-level="8.8" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#gams"><i class="fa fa-check"></i><b>8.8</b> GAMS</a></li>
 </ul></li>
-<li class="chapter" data-level="9.8" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html#gams"><i class="fa fa-check"></i><b>9.8</b> GAMS</a></li>
+<li class="chapter" data-level="9" data-path="programming-activity.html"><a href="programming-activity.html"><i class="fa fa-check"></i><b>9</b> Programming Activity</a></li>
+<li class="chapter" data-level="10" data-path="where-to-place-knots.html"><a href="where-to-place-knots.html"><i class="fa fa-check"></i><b>10</b> Where to place knots?</a></li>
+<li class="chapter" data-level="11" data-path="trees-for-regression-and-classification.html"><a href="trees-for-regression-and-classification.html"><i class="fa fa-check"></i><b>11</b> Trees for Regression and Classification</a><ul>
+<li class="chapter" data-level="11.1" data-path="trees-for-regression-and-classification.html"><a href="trees-for-regression-and-classification.html#splitting-criteria-for-classification-trees"><i class="fa fa-check"></i><b>11.1</b> Splitting Criteria for Classification Trees</a></li>
+<li class="chapter" data-level="11.2" data-path="trees-for-regression-and-classification.html"><a href="trees-for-regression-and-classification.html#variable-importance"><i class="fa fa-check"></i><b>11.2</b> Variable importance</a></li>
+<li class="chapter" data-level="11.3" data-path="trees-for-regression-and-classification.html"><a href="trees-for-regression-and-classification.html#avoiding-overfitting"><i class="fa fa-check"></i><b>11.3</b> Avoiding overfitting</a></li>
+<li class="chapter" data-level="11.4" data-path="trees-for-regression-and-classification.html"><a href="trees-for-regression-and-classification.html#pruning"><i class="fa fa-check"></i><b>11.4</b> Pruning</a></li>
+<li class="chapter" data-level="11.5" data-path="trees-for-regression-and-classification.html"><a href="trees-for-regression-and-classification.html#averaging"><i class="fa fa-check"></i><b>11.5</b> Averaging</a></li>
+<li class="chapter" data-level="11.6" data-path="trees-for-regression-and-classification.html"><a href="trees-for-regression-and-classification.html#shrinking-boosting"><i class="fa fa-check"></i><b>11.6</b> Shrinking (“Boosting”)</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="programming-activity.html"><a href="programming-activity.html"><i class="fa fa-check"></i><b>10</b> Programming Activity</a></li>
-<li class="chapter" data-level="11" data-path="where-to-place-knots.html"><a href="where-to-place-knots.html"><i class="fa fa-check"></i><b>11</b> Where to place knots?</a></li>
-<li class="chapter" data-level="12" data-path="trees-for-regression-and-classification.html"><a href="trees-for-regression-and-classification.html"><i class="fa fa-check"></i><b>12</b> Trees for Regression and Classification</a><ul>
-<li class="chapter" data-level="12.1" data-path="trees-for-regression-and-classification.html"><a href="trees-for-regression-and-classification.html#splitting-criteria-for-classification-trees"><i class="fa fa-check"></i><b>12.1</b> Splitting Criteria for Classification Trees</a></li>
-<li class="chapter" data-level="12.2" data-path="trees-for-regression-and-classification.html"><a href="trees-for-regression-and-classification.html#variable-importance"><i class="fa fa-check"></i><b>12.2</b> Variable importance</a></li>
-<li class="chapter" data-level="12.3" data-path="trees-for-regression-and-classification.html"><a href="trees-for-regression-and-classification.html#avoiding-overfitting"><i class="fa fa-check"></i><b>12.3</b> Avoiding overfitting</a></li>
-<li class="chapter" data-level="12.4" data-path="trees-for-regression-and-classification.html"><a href="trees-for-regression-and-classification.html#pruning"><i class="fa fa-check"></i><b>12.4</b> Pruning</a></li>
-<li class="chapter" data-level="12.5" data-path="trees-for-regression-and-classification.html"><a href="trees-for-regression-and-classification.html#averaging"><i class="fa fa-check"></i><b>12.5</b> Averaging</a></li>
-<li class="chapter" data-level="12.6" data-path="trees-for-regression-and-classification.html"><a href="trees-for-regression-and-classification.html#shrinking-boosting"><i class="fa fa-check"></i><b>12.6</b> Shrinking (“Boosting”)</a></li>
+<li class="chapter" data-level="12" data-path="support-vector-classifiers.html"><a href="support-vector-classifiers.html"><i class="fa fa-check"></i><b>12</b> Support Vector Classifiers</a><ul>
+<li class="chapter" data-level="12.1" data-path="support-vector-classifiers.html"><a href="support-vector-classifiers.html#lines-planes-and-hyperplanes"><i class="fa fa-check"></i><b>12.1</b> Lines, planes, and hyperplanes</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="support-vector-classifiers.html"><a href="support-vector-classifiers.html#rescaling-x"><i class="fa fa-check"></i><b>12.1.1</b> Rescaling X</a></li>
+<li class="chapter" data-level="12.1.2" data-path="support-vector-classifiers.html"><a href="support-vector-classifiers.html#impose-an-absolute-constraint"><i class="fa fa-check"></i><b>12.1.2</b> Impose an absolute constraint</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="support-vector-classifiers.html"><a href="support-vector-classifiers.html"><i class="fa fa-check"></i><b>13</b> Support Vector Classifiers</a><ul>
-<li class="chapter" data-level="13.1" data-path="support-vector-classifiers.html"><a href="support-vector-classifiers.html#lines-planes-and-hyperplanes"><i class="fa fa-check"></i><b>13.1</b> Lines, planes, and hyperplanes</a><ul>
-<li class="chapter" data-level="13.1.1" data-path="support-vector-classifiers.html"><a href="support-vector-classifiers.html#rescaling-x"><i class="fa fa-check"></i><b>13.1.1</b> Rescaling X</a></li>
-<li class="chapter" data-level="13.1.2" data-path="support-vector-classifiers.html"><a href="support-vector-classifiers.html#impose-an-absolute-constraint"><i class="fa fa-check"></i><b>13.1.2</b> Impose an absolute constraint</a></li>
+<li class="chapter" data-level="12.2" data-path="support-vector-classifiers.html"><a href="support-vector-classifiers.html#optimizing-within-the-constraint"><i class="fa fa-check"></i><b>12.2</b> Optimizing within the constraint</a></li>
+<li class="chapter" data-level="12.3" data-path="support-vector-classifiers.html"><a href="support-vector-classifiers.html#allowing-violations-of-the-boundary"><i class="fa fa-check"></i><b>12.3</b> Allowing violations of the boundary</a></li>
+<li class="chapter" data-level="12.4" data-path="support-vector-classifiers.html"><a href="support-vector-classifiers.html#nonlinear-boundaries"><i class="fa fa-check"></i><b>12.4</b> Nonlinear Boundaries</a></li>
+<li class="chapter" data-level="12.5" data-path="support-vector-classifiers.html"><a href="support-vector-classifiers.html#support-vector-machine"><i class="fa fa-check"></i><b>12.5</b> Support Vector Machine</a></li>
+<li class="chapter" data-level="12.6" data-path="support-vector-classifiers.html"><a href="support-vector-classifiers.html#kernels"><i class="fa fa-check"></i><b>12.6</b> Kernels</a></li>
+<li class="chapter" data-level="12.7" data-path="support-vector-classifiers.html"><a href="support-vector-classifiers.html#svm-versus-logistic-regression"><i class="fa fa-check"></i><b>12.7</b> SVM versus logistic regression</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="support-vector-classifiers.html"><a href="support-vector-classifiers.html#optimizing-within-the-constraint"><i class="fa fa-check"></i><b>13.2</b> Optimizing within the constraint</a></li>
-<li class="chapter" data-level="13.3" data-path="support-vector-classifiers.html"><a href="support-vector-classifiers.html#allowing-violations-of-the-boundary"><i class="fa fa-check"></i><b>13.3</b> Allowing violations of the boundary</a></li>
-<li class="chapter" data-level="13.4" data-path="support-vector-classifiers.html"><a href="support-vector-classifiers.html#nonlinear-boundaries"><i class="fa fa-check"></i><b>13.4</b> Nonlinear Boundaries</a></li>
-<li class="chapter" data-level="13.5" data-path="support-vector-classifiers.html"><a href="support-vector-classifiers.html#support-vector-machine"><i class="fa fa-check"></i><b>13.5</b> Support Vector Machine</a></li>
-<li class="chapter" data-level="13.6" data-path="support-vector-classifiers.html"><a href="support-vector-classifiers.html#kernels"><i class="fa fa-check"></i><b>13.6</b> Kernels</a></li>
-<li class="chapter" data-level="13.7" data-path="support-vector-classifiers.html"><a href="support-vector-classifiers.html#svm-versus-logistic-regression"><i class="fa fa-check"></i><b>13.7</b> SVM versus logistic regression</a></li>
+<li class="chapter" data-level="13" data-path="programming-basics.html"><a href="programming-basics.html"><i class="fa fa-check"></i><b>13</b> Programming Basics</a><ul>
+<li class="chapter" data-level="13.1" data-path="programming-basics.html"><a href="programming-basics.html#programming-basics-i-names-classes-and-objects-progbasics1"><i class="fa fa-check"></i><b>13.1</b> Programming Basics I: Names, classes, and objects {progbasics1}</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="programming-basics.html"><a href="programming-basics.html#names"><i class="fa fa-check"></i><b>13.1.1</b> Names</a></li>
+<li class="chapter" data-level="13.1.2" data-path="programming-basics.html"><a href="programming-basics.html#objects"><i class="fa fa-check"></i><b>13.1.2</b> Objects</a></li>
+<li class="chapter" data-level="13.1.3" data-path="programming-basics.html"><a href="programming-basics.html#vectors"><i class="fa fa-check"></i><b>13.1.3</b> Vectors</a></li>
+<li class="chapter" data-level="13.1.4" data-path="programming-basics.html"><a href="programming-basics.html#matrices"><i class="fa fa-check"></i><b>13.1.4</b> Matrices</a></li>
+<li class="chapter" data-level="13.1.5" data-path="programming-basics.html"><a href="programming-basics.html#lists"><i class="fa fa-check"></i><b>13.1.5</b> Lists</a></li>
+<li class="chapter" data-level="13.1.6" data-path="programming-basics.html"><a href="programming-basics.html#functions"><i class="fa fa-check"></i><b>13.1.6</b> Functions</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="programming-basics.html"><a href="programming-basics.html"><i class="fa fa-check"></i><b>14</b> Programming Basics</a><ul>
-<li class="chapter" data-level="14.1" data-path="programming-basics.html"><a href="programming-basics.html#programming-basics-i-names-classes-and-objects-progbasics1"><i class="fa fa-check"></i><b>14.1</b> Programming Basics I: Names, classes, and objects {progbasics1}</a><ul>
-<li class="chapter" data-level="14.1.1" data-path="programming-basics.html"><a href="programming-basics.html#names"><i class="fa fa-check"></i><b>14.1.1</b> Names</a></li>
-<li class="chapter" data-level="14.1.2" data-path="programming-basics.html"><a href="programming-basics.html#objects"><i class="fa fa-check"></i><b>14.1.2</b> Objects</a></li>
-<li class="chapter" data-level="14.1.3" data-path="programming-basics.html"><a href="programming-basics.html#vectors"><i class="fa fa-check"></i><b>14.1.3</b> Vectors</a></li>
-<li class="chapter" data-level="14.1.4" data-path="programming-basics.html"><a href="programming-basics.html#matrices"><i class="fa fa-check"></i><b>14.1.4</b> Matrices</a></li>
-<li class="chapter" data-level="14.1.5" data-path="programming-basics.html"><a href="programming-basics.html#lists"><i class="fa fa-check"></i><b>14.1.5</b> Lists</a></li>
-<li class="chapter" data-level="14.1.6" data-path="programming-basics.html"><a href="programming-basics.html#functions"><i class="fa fa-check"></i><b>14.1.6</b> Functions</a></li>
+<li class="chapter" data-level="13.2" data-path="programming-basics.html"><a href="programming-basics.html#programming-basics-linear-models"><i class="fa fa-check"></i><b>13.2</b> Programming basics: Linear Models</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="programming-basics.html"><a href="programming-basics.html#graphics-basics"><i class="fa fa-check"></i><b>13.2.1</b> Graphics basics</a></li>
 </ul></li>
-<li class="chapter" data-level="14.2" data-path="programming-basics.html"><a href="programming-basics.html#programming-basics-linear-models"><i class="fa fa-check"></i><b>14.2</b> Programming basics: Linear Models</a><ul>
-<li class="chapter" data-level="14.2.1" data-path="programming-basics.html"><a href="programming-basics.html#graphics-basics"><i class="fa fa-check"></i><b>14.2.1</b> Graphics basics</a></li>
-</ul></li>
-<li class="chapter" data-level="14.3" data-path="programming-basics.html"><a href="programming-basics.html#k-nearest-neighbors"><i class="fa fa-check"></i><b>14.3</b> K-nearest neighbors</a></li>
-<li class="chapter" data-level="14.4" data-path="programming-basics.html"><a href="programming-basics.html#loopsiteration"><i class="fa fa-check"></i><b>14.4</b> Loops/Iteration</a></li>
-<li class="chapter" data-level="14.5" data-path="programming-basics.html"><a href="programming-basics.html#parts-of-a-loop"><i class="fa fa-check"></i><b>14.5</b> Parts of a loop</a></li>
-<li class="chapter" data-level="14.6" data-path="programming-basics.html"><a href="programming-basics.html#trivial-examples"><i class="fa fa-check"></i><b>14.6</b> Trivial examples</a></li>
-<li class="chapter" data-level="14.7" data-path="programming-basics.html"><a href="programming-basics.html#bootstrapping-2"><i class="fa fa-check"></i><b>14.7</b> Bootstrapping</a></li>
-<li class="chapter" data-level="14.8" data-path="programming-basics.html"><a href="programming-basics.html#leave-one-out-cross-validation."><i class="fa fa-check"></i><b>14.8</b> Leave-one-out cross-validation.</a></li>
-<li class="chapter" data-level="14.9" data-path="programming-basics.html"><a href="programming-basics.html#building-a-package"><i class="fa fa-check"></i><b>14.9</b> Building a package</a></li>
+<li class="chapter" data-level="13.3" data-path="programming-basics.html"><a href="programming-basics.html#k-nearest-neighbors"><i class="fa fa-check"></i><b>13.3</b> K-nearest neighbors</a></li>
+<li class="chapter" data-level="13.4" data-path="programming-basics.html"><a href="programming-basics.html#loopsiteration"><i class="fa fa-check"></i><b>13.4</b> Loops/Iteration</a></li>
+<li class="chapter" data-level="13.5" data-path="programming-basics.html"><a href="programming-basics.html#parts-of-a-loop"><i class="fa fa-check"></i><b>13.5</b> Parts of a loop</a></li>
+<li class="chapter" data-level="13.6" data-path="programming-basics.html"><a href="programming-basics.html#trivial-examples"><i class="fa fa-check"></i><b>13.6</b> Trivial examples</a></li>
+<li class="chapter" data-level="13.7" data-path="programming-basics.html"><a href="programming-basics.html#bootstrapping-2"><i class="fa fa-check"></i><b>13.7</b> Bootstrapping</a></li>
+<li class="chapter" data-level="13.8" data-path="programming-basics.html"><a href="programming-basics.html#leave-one-out-cross-validation."><i class="fa fa-check"></i><b>13.8</b> Leave-one-out cross-validation.</a></li>
+<li class="chapter" data-level="13.9" data-path="programming-basics.html"><a href="programming-basics.html#building-a-package"><i class="fa fa-check"></i><b>13.9</b> Building a package</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="appendices.html"><a href="appendices.html"><i class="fa fa-check"></i>Appendices</a></li>
 <li class="chapter" data-level="" data-path="connecting-rstudio-to-your-github-repository.html"><a href="connecting-rstudio-to-your-github-repository.html"><i class="fa fa-check"></i>Connecting RStudio to your GitHub repository</a><ul>
-<li class="chapter" data-level="14.10" data-path="connecting-rstudio-to-your-github-repository.html"><a href="connecting-rstudio-to-your-github-repository.html#setting-up-rstudio"><i class="fa fa-check"></i><b>14.10</b> Setting up RStudio</a></li>
-<li class="chapter" data-level="14.11" data-path="connecting-rstudio-to-your-github-repository.html"><a href="connecting-rstudio-to-your-github-repository.html#setting-up-your-math-253-repository"><i class="fa fa-check"></i><b>14.11</b> Setting up your Math 253 repository</a></li>
-<li class="chapter" data-level="14.12" data-path="connecting-rstudio-to-your-github-repository.html"><a href="connecting-rstudio-to-your-github-repository.html#using-your-repository"><i class="fa fa-check"></i><b>14.12</b> Using your repository</a></li>
-<li class="chapter" data-level="14.13" data-path="connecting-rstudio-to-your-github-repository.html"><a href="connecting-rstudio-to-your-github-repository.html#why-are-we-doing-this"><i class="fa fa-check"></i><b>14.13</b> Why are we doing this?</a></li>
+<li class="chapter" data-level="13.10" data-path="connecting-rstudio-to-your-github-repository.html"><a href="connecting-rstudio-to-your-github-repository.html#setting-up-rstudio"><i class="fa fa-check"></i><b>13.10</b> Setting up RStudio</a></li>
+<li class="chapter" data-level="13.11" data-path="connecting-rstudio-to-your-github-repository.html"><a href="connecting-rstudio-to-your-github-repository.html#setting-up-your-math-253-repository"><i class="fa fa-check"></i><b>13.11</b> Setting up your Math 253 repository</a></li>
+<li class="chapter" data-level="13.12" data-path="connecting-rstudio-to-your-github-repository.html"><a href="connecting-rstudio-to-your-github-repository.html#using-your-repository"><i class="fa fa-check"></i><b>13.12</b> Using your repository</a></li>
+<li class="chapter" data-level="13.13" data-path="connecting-rstudio-to-your-github-repository.html"><a href="connecting-rstudio-to-your-github-repository.html#why-are-we-doing-this"><i class="fa fa-check"></i><b>13.13</b> Why are we doing this?</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="instructions-for-the-publishing-system-bookdown.html"><a href="instructions-for-the-publishing-system-bookdown.html"><i class="fa fa-check"></i>Instructions for the publishing system: Bookdown</a></li>
 <li class="divider"></li>
@@ -402,6 +400,117 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ol>
 
 </div>
+<div id="probability-and-odds" class="section level2">
+<h2><span class="header-section-number">4.3</span> Probability and odds</h2>
+<p>Probability <span class="math inline">\(p(event)\)</span> is a number between zero and one.</p>
+<p>Simple way to make a probability model for yes/no variable: encode outcome as zero and one, use regression.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Whickham$alive &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">with</span>(Whickham, outcome ==<span class="st"> &quot;Alive&quot;</span>))</code></pre></div>
+<p>Model of mortality in Whickham</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res &lt;-<span class="st"> </span><span class="kw">mean</span>( alive ~<span class="st"> </span>smoker, <span class="dt">data=</span>Whickham)
+res</code></pre></div>
+<pre><code>##        No       Yes 
+## 0.6857923 0.7611684</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res /<span class="st"> </span>(<span class="dv">1</span>-res)</code></pre></div>
+<pre><code>##       No      Yes 
+## 2.182609 3.187050</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod2 &lt;-<span class="st"> </span><span class="kw">glm</span>(alive ~<span class="st"> </span>age, <span class="dt">data=</span>Whickham, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)
+f &lt;-<span class="st"> </span><span class="kw">makeFun</span>(mod2)
+<span class="kw">plotFun</span>(<span class="kw">f</span>(age) ~<span class="st"> </span>age, <span class="dt">age.lim =</span> <span class="kw">c</span>(<span class="dv">20</span>,<span class="dv">100</span>))</code></pre></div>
+<p><img src="Class_Notes__Statistical_Computing___Machine_Learning_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plotPoints</span>(<span class="kw">jitter</span>(alive) ~<span class="st"> </span>age, <span class="dt">data=</span>Whickham, <span class="dt">add=</span><span class="ot">TRUE</span>,
+           <span class="dt">pch=</span><span class="dv">20</span>, <span class="dt">alpha=</span>.<span class="dv">3</span>)</code></pre></div>
+<p><img src="Class_Notes__Statistical_Computing___Machine_Learning_files/figure-html/unnamed-chunk-48-2.png" width="672" /></p>
+<p>If we’re going to use likelihood to fit, the estimated probability can’t be <span class="math inline">\(\leq 0\)</span>.</p>
+</div>
+<div id="log-odds" class="section level2">
+<h2><span class="header-section-number">4.4</span> Log Odds</h2>
+<p>Gerolamo Cardano (1501-1576) defined <em>odds</em> as the ratio of favorable to unfavorable outcomes.</p>
+<p>For an event whose <em>probability</em> is <span class="math inline">\(p\)</span>, it’s <em>odds</em> are <span class="math inline">\(w = \frac{p}{1-p}\)</span>.</p>
+<p>A probability is a number between 0 and one.</p>
+<p>An odds is a ratio of two positive numbers. 5:9, 9:5, etc.</p>
+<p>“Odds are against it,” could be taken to mean that the odds is less than 1. More unfavorable outcomes than favorable ones.</p>
+<p>Given odds <span class="math inline">\(w\)</span>, the probability is <span class="math inline">\(p = \frac{w}{1+w}\)</span>. There’s a one-to-one correspondence between probability and odds.</p>
+<p>The log odds is a number between <span class="math inline">\(-\infty\)</span> and <span class="math inline">\(\infty\)</span>.</p>
+</div>
+<div id="why-use-odds" class="section level2">
+<h2><span class="header-section-number">4.5</span> Why use odds?</h2>
+<p><strong>Making Book</strong></p>
+<p>Several horses in a race. People bet on each one amounts <span class="math inline">\(H_i\)</span>.</p>
+<p>What should be the winnings when horse <span class="math inline">\(j\)</span> wins? Payoff means you get your original stake back plus your winnings.</p>
+<p>If it’s arranged to pay winnings of<br />
+<span class="math inline">\(\sum{i \neq j} \frac{H_i}{H_j}\)</span> + the amount <span class="math inline">\(H_j\)</span><br />
+the net income will be zero for the bookie.</p>
+<p><em>Shaving the odds</em> means to pay less than the zero-net-income winnings.</p>
+<p><strong>Link function</strong></p>
+<p>You can build a linear regression to predict the log odds, <span class="math inline">\(\ln w\)</span>. The output of the linear regression is free to range from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(\infty\)</span>. Then, to measure likelihood, unlog to get odds <span class="math inline">\(w\)</span>, then <span class="math inline">\(p = \frac{w}{1+w}\)</span>.</p>
+</div>
+<div id="use-of-glm" class="section level2">
+<h2><span class="header-section-number">4.6</span> Use of glm()</h2>
+<p>Response should be 0 or 1. We don’t take the log odds of the response. Instead, the likelihood is<br />
+- <span class="math inline">\(p\)</span> if the outcome is 1 - <span class="math inline">\(1-p\)</span> if the outcome is 0</p>
+<p>Multiply these together of all the cases to get the total likelihood.</p>
+</div>
+<div id="interpretation-of-coefficients" class="section level2">
+<h2><span class="header-section-number">4.7</span> Interpretation of coefficients</h2>
+<p>Each adds to the log odds in the normal, linear regression way. Negative means less likely; positive more likely.</p>
+</div>
+<div id="example-logistic-regression-of-default" class="section level2">
+<h2><span class="header-section-number">4.8</span> Example: Logistic regression of default</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(Default)</code></pre></div>
+<pre><code>## [1] &quot;default&quot; &quot;student&quot; &quot;balance&quot; &quot;income&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(Default, 
+       <span class="kw">aes</span>(<span class="dt">x =</span> income, <span class="dt">y =</span> balance, <span class="dt">alpha =</span> default, <span class="dt">color =</span> default)) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="co">#+ facet_wrap( ~ student)</span></code></pre></div>
+<p><img src="Class_Notes__Statistical_Computing___Machine_Learning_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model_of_default &lt;-
+<span class="st">  </span><span class="kw">glm</span>(default ==<span class="st"> &quot;Yes&quot;</span> ~<span class="st"> </span>balance +<span class="st"> </span>income, <span class="dt">data =</span> Default, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)
+f &lt;-<span class="st"> </span><span class="kw">makeFun</span>(model_of_default)
+<span class="kw">plotFun</span>(<span class="kw">f</span>(<span class="dt">income=</span>income, <span class="dt">balance=</span>balance) ~<span class="st"> </span>income +<span class="st"> </span>balance,
+        income.lim &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">70000</span>), <span class="dt">balance.lim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">3000</span>))</code></pre></div>
+<p><img src="Class_Notes__Statistical_Computing___Machine_Learning_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(model_of_default)</code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = default == &quot;Yes&quot; ~ balance + income, family = &quot;binomial&quot;, 
+##     data = Default)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.4725  -0.1444  -0.0574  -0.0211   3.7245  
+## 
+## Coefficients:
+##               Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -1.154e+01  4.348e-01 -26.545  &lt; 2e-16 ***
+## balance      5.647e-03  2.274e-04  24.836  &lt; 2e-16 ***
+## income       2.081e-05  4.985e-06   4.174 2.99e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 2920.6  on 9999  degrees of freedom
+## Residual deviance: 1579.0  on 9997  degrees of freedom
+## AIC: 1585
+## 
+## Number of Fisher Scoring iterations: 8</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">logodds &lt;-<span class="st"> </span><span class="kw">predict</span>(model_of_default, <span class="dt">newdata =</span> <span class="kw">list</span>(<span class="dt">balance =</span> <span class="dv">1000</span>, <span class="dt">income =</span> <span class="dv">40000</span>)) <span class="co">#,</span>
+                   <span class="co"># type = &quot;response&quot;)</span>
+logodds</code></pre></div>
+<pre><code>##         1 
+## -5.061006</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">odds &lt;-<span class="st"> </span><span class="kw">exp</span>(logodds)
+odds /<span class="st"> </span>(<span class="dv">1</span> +<span class="st"> </span>odds)</code></pre></div>
+<pre><code>##           1 
+## 0.006299244</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">logistic &lt;-<span class="st"> </span>function(x) {<span class="kw">exp</span>(x) /<span class="st"> </span>(<span class="dv">1</span> +<span class="st"> </span><span class="kw">exp</span>(x))}
+<span class="kw">logistic</span>(-<span class="fl">3.36</span>)</code></pre></div>
+<pre><code>## [1] 0.03356922</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(Default$default)</code></pre></div>
+<pre><code>## 
+##   No  Yes 
+## 9667  333</code></pre>
+
+</div>
 </div>
             </section>
 
@@ -409,7 +518,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         </div>
       </div>
 <a href="foundations-linear-algebra-likelihood-and-bayes-rule.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="logistic-regression.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="linear-and-quadratic-discriminant-analysis.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
