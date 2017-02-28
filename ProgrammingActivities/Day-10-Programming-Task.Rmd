@@ -107,7 +107,7 @@ Your function should
 
 1. use `linear_combine()` on `data` and `coefs` to produce a number for each case in `data`.
 2. put the result of (1) through `logistic()`.  The output will be a probability for each case in `data`, which I'll write here as $p_i$.
-3. set the likelihood for each case in `data` to be $p_i$ if the result is `TRUE`, otherwise set the likelihood to be $1 - p_i$.
+3. set the likelihood for each case in `data` to be $p_i$ if the outcome is `TRUE`, otherwise set the likelihood to be $1 - p_i$.
 4. combine the likelihoods of the individual cases into an overall log likelihood.
 
 ```{r echo=params$show_answers}

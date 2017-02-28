@@ -1,3 +1,52 @@
+--- 
+title: "Notes for Statistical Computing & Machine Learning"
+author: "Daniel Kaplan"
+date: "Math 253 Macalester College"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+description: "Notes and other materials for Math 253 at Macalester College."
+---
+
+# Placeholder
+
+<!--chapter:end:index.Rmd-->
+
+
+# Preface {-} 
+
+<!--chapter:end:010-Preface.Rmd-->
+
+
+# Introduction {#introduction}
+
+<!--chapter:end:110-Introduction.Rmd-->
+
+
+# (PART) Topic I: Linear Regression {-}
+# Placeholder
+
+<!--chapter:end:200-Linear-Regression.Rmd-->
+
+
+# Notes
+
+<!--chapter:end:210-Linear-Regression.Rmd-->
+
+
+# Foundations: linear algebra, likelihood and Bayes' rule
+
+<!--chapter:end:310-Foundations.Rmd-->
+
+
+# Classifiers
+
+<!--chapter:end:410-Classifiers.Rmd-->
+
 ---
 title: "Logistic Regression"
 ---
@@ -124,4 +173,57 @@ table(Default$default)
 
 
 
+
+
+<!--chapter:end:411-Logistic-Regression.Rmd-->
+
+
+# Linear and Quadratic Discriminant Analysis
+
+<!--chapter:end:412-LDA-QDA.Rmd-->
+
+
+# Cross-Validation and Bootstrapping
+
+<!--chapter:end:510-Cross-Validation.Rmd-->
+
+
+# Regularization, shrinkage and dimension reduction
+
+<!--chapter:end:610-Regularization-Shrinkage.Rmd-->
+
+
+# Nonlinearity in linear models
+
+<!--chapter:end:710-nonlinear-functions.Rmd-->
+
+
+# Trees for Regression and Classification
+
+<!--chapter:end:711-Trees.Rmd-->
+
+
+# Support Vector Classifiers
+
+<!--chapter:end:715-support-vector-classifiers.Rmd-->
+
+
+# Programming Basics
+
+<!--chapter:end:850-Programming.Rmd-->
+
+
+# Appendices {-}
+
+<!--chapter:end:902-Appendices.Rmd-->
+
+
+# Connecting RStudio to your GitHub repository {-}
+
+<!--chapter:end:910-github.Rmd-->
+
+
+# Instructions for the publishing system: Bookdown {-}
+
+<!--chapter:end:950-Bookdown-Instructions.Rmd-->
 
