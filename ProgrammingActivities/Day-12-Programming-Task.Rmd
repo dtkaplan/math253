@@ -4,8 +4,12 @@ author: "Math 253: Statistical Computing & Machine Learning"
 date: "Testing LDA and QDA"
 params: 
   show_answers: FALSE
-output: 
-  rmarkdown::tufte_handout
+output:
+  tufte::tufte_html: default
+  tufte::tufte_handout:
+    latex_engine: xelatex
+  tufte::tufte_book:
+    latex_engine: xelatex
 ---
 
 ```{r include=FALSE}
@@ -33,22 +37,27 @@ Today, you're going to generate simulated data to test out LDA and QDA. The data
 * Create an object `blue_mean` with value `c(-1, 1)`.
 * Create an object `covar_red` which is a 2 x 2 matrix with 3 and 1 on the diagonal and $-1.7$ on the off-diagonal. It should be structured as a covariance matrix.
 * Similarly, create an object `covar_blue`, a covariance matrix with 2 and 3 on the diagonal and $1.5$ on the off-diagonal.
-* Create three matrices, `One`, `Two`, and `Three`.  Each should have the appropriate shape for data from `n_cases` cases and two variables. The variables should each be `n_cases` random draws from a $\mbox{N}(0, 1^2)$ distribution, that is, a normal distribution with mean zero and standard deviation $1$.\marginnote[-2cm]{In specifying the normal distribution, one needs to decide whether to report the standard deviation or the variance.  R uses \texttt{sd=}.  To help to eliminate ambiguity in mathematical notation, the form $1^2$ is used simply as a reminder that the quantity is a variance.}
-* Now you're going to transform `One`, `Two` and `Three` to create correlations between the two columns. 
-    - Create an matrix `Red` that is `One` times the Cholesky decomposition of `covar_red`.  The `Red` matrix will contain correlated random variables with a covariance of approximately `covar_red`.
-    -  Similarly, create a matrix `Green` which will be `Two` times the Cholesky decomposition of `covar_red`. That is, `Green` and `Red` will have the same correlation structure.
-    - Now create a matrix `Blue` which will be `Three` times the Cholesky decomposition of the other covariance matrix, `covar_blue`.
+* Create three matrices, `One`, `Two`, and `Three`.  Each should have the appropriate shape for data from `n_cases` cases and two variables. The variables should each be `n_cases` random draws from a $\mbox{N}(0, 1^2)$ distribution, that is, a normal distribution with mean zero and standard deviation $1$.^[In specifying the normal distribution, one needs to decide whether to report the standard deviation or the variance.  R uses `sd=`.  To help to eliminate ambiguity in mathematical notation, the form $1^2$ is used simply as a reminder that the quantity is a variance.]
+* Now you're going to transform `One`, `Two` and `Three` to create correlations between the two columns.     
+    a -- Create an matrix `Red` that is `One` times the Cholesky decomposition of `covar_red`.  The `Red` matrix will contain correlated random variables with a covariance of approximately `covar_red`.
+    
+    b -- Similarly, create a matrix `Green` which will be `Two` times the Cholesky decomposition of `covar_red`. That is, `Green` and `Red` will have the same correlation structure.
+
+    c -- Now create a matrix `Blue` which will be `Three` times the Cholesky decomposition of the other covariance matrix, `covar_blue`.
 
 \enlargethispage{1in}
 
-* Modify the `Red`, `Green` and `Blue` matrices by adding to each column a value for the mean drawn from `red_mean`, `green_mean`, and `blue_mean` respectively.\marginnote[-1.5cm]{{\em Hint}: It won't work to do the obvious, simple thing, e.g.  add \texttt{red\_mean} to \texttt{Red}. There are many ways to construct a statement that works.  Among others, there's a way using \texttt{outer()}, a way using \texttt{matrix()}, and even a way using \texttt{t()} twice.} That is, for `Red`, add 1 to the first column and 0 to the second.
+* Modify the `Red`, `Green` and `Blue` matrices by adding to each column a value for the mean drawn from `red_mean`, `green_mean`, and `blue_mean` respectively.^[*Hint*: It won't work to do the obvious, simple thing, e.g.  add `red_mean` to `Red`. There are many ways to construct a statement that works.  Among others, there's a way using `outer()`, a way using `matrix()`, and even a way using `t()` twice.] That is, for `Red`, add 1 to the first column and 0 to the second.
 
 \newpage
 
-* Create three data frames, each with variables `x`, `y`, and `class`.\marginnote{You'll use \texttt{data.frame()} to construct the data frames.  Make sure to give the optional argument \texttt{stringsAsFactors = FALSE}.  This will let the class be stored as straightforward character strings that can be used in plotting to specify the color.} 
-    - `Red` will have `x` as the first column of `Red`, `y` as the second column of `Red`, and `class` set equal to the string `"red"`.
-    - `Blue` will be the same thing but using the columns of `blue` and the `class` set to `"blue"`
-    - `Green` is similar, using the columns of `Green` and the class `"green"`.
+* Create three data frames, each with variables `x`, `y`, and `class`^[You'll use `data.frame()` to construct the data frames.  Make sure to give the optional argument `stringsAsFactors = FALSE`.  This will let the class be stored as straightforward character strings that can be used in plotting to specify the color.]
+    
+    a -- `Red` will have `x` as the first column of `Red`, `y` as the second column of `Red`, and `class` set equal to the string `"red"`.
+    
+    b --  `Blue` will be the same thing but using the columns of `blue` and the `class` set to `"blue"`.
+    
+    c --  `Green` is similar, using the columns of `Green` and the class `"green"`.
 * Last step in generating the simulated data: make two data frames each of which combines "data" from two classes.
 ```{r echo=TRUE, eval=FALSE}
 Same_sigma <- rbind(Red, Green)

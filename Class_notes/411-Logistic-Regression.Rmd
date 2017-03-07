@@ -29,6 +29,16 @@ res / (1-res)
 ```
 
 ```{r}
+library(splines)
+mod <- lm(alive ~ smoker + age, data = Whickham)
+gmodel(mod, ~ age + smoker) %>% gf_jitter(alive ~ age + color:smoker, alpha = .2, data = Whickham)
+mod2 <- glm(alive ~ smoker * age, data = Whickham, family="binomial")
+summary(mod2)
+gmodel(mod2, ~ age + smoker)
+```
+
+
+```{r}
 mod2 <- glm(alive ~ age, data=Whickham, family = "binomial")
 
 gmodel(mod2) %>%
