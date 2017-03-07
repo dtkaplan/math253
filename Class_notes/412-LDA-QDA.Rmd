@@ -360,3 +360,43 @@ As this parameter is changed, typically sensitivity will go up at the cost of sp
 
 President Garfield's assassination.
 
+# Example: Blood Cells
+
+```{r echo = FALSE}
+load("/Users/kaplan/Dropbox/Projects/Consulting/Ativamed/Ativamed/AtivamedPackage/data/good_set1.rda")
+library(dplyr)
+Cells <- good_set1 %>%
+  select(X = SALS, Y = FALS, Type = GatingCode) %>%
+  mutate(Type = as.character(Type))
+```
+
+```{r}
+library(ggplot2)
+library(MASS)
+Cells %>%
+  ggplot(aes(x = X, y = Y)) + geom_point(aes(color = Type))
+mod <- qda(Type ~ X + Y, data = Cells)
+Grid <- expand.grid(X = seq(2590, 66000, length = 151), Y = seq(11000,65000, length = 151))
+preds_in <- predict(mod)
+preds <- predict(mod, newdata = Grid)
+Grid$class <- preds$class
+Grid %>% 
+  ggplot(aes(x = X, y = Y)) + geom_point(aes(color=class), alpha = .1) + 
+  geom_point(data = Cells, aes(x = X, y = Y, color = Type), alpha = .1)
+table(Cells$Type, preds_in$class)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
