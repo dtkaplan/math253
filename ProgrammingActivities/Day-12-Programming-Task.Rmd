@@ -129,7 +129,7 @@ test_QDA_one <- predict(mod_QDA_one, newdata = Same_sigma)
 table(Same_sigma$class, test_QDA_one$class)
 ```
 
-* Fit both LDA and QDA models to `Sim_two`.  Which one performs better?
+* Fit both LDA and QDA models to `Different_sigma`.  Which one performs better?
 ```{r echo=params$show_answers, eval=params$show_answers}
 mod_LDA_two <- MASS::lda(class ~ x + y, data = Different_sigma)
 mod_QDA_two <- MASS::qda(class ~ x + y, data = Different_sigma)
