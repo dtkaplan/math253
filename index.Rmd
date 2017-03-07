@@ -93,7 +93,7 @@ Each topic assignment is due one week *after* we finish covering that topic in c
 * Topic 4 Assignment:
     - Programming Assignment: 4.7.11, 4.7.13
     - Theory assignment: 4.7.1, 4.7.8, 4.7.9
-* Programming Activities: [Ten (Feb 28)](ProgrammingActivities/Day-10-Programming-Task.html), [Eleven (March 2)](ProgrammingActivities/Day-11-Programming-Task.html), [Twelve (March 7)](ProgrammingActivities/Day-12-Programming-Task.pdf)
+* Programming Activities: [Ten (Feb 28)](ProgrammingActivities/Day-10-Programming-Task.html), [Eleven (March 2)](ProgrammingActivities/Day-11-Programming-Task.html), [Twelve (March 7)](ProgrammingActivities/Day-12-Programming-Task.html)
 
 
 ## Topic 5 --- Cross-validation and bootstrapping
