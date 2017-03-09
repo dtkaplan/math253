@@ -1,11 +1,13 @@
 ---
 title: "In-Class Programming Activity 13"
 author: 'Math 253: Statistical Computing & Machine Learning'
-date: "k-1 cross-validation"
+date: "k-fold cross-validation"
 output:
-  tint::tintHtml:
-    keep_md: yes
-  tufte::tufte_handout: default
+  tufte::tufte_html: default
+  tufte::tufte_handout:
+    latex_engine: xelatex
+  tufte::tufte_book:
+    latex_engine: xelatex
 params:
   show_answers: no
 ---
