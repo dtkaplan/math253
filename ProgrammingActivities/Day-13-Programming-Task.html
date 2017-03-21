@@ -4,7 +4,7 @@
 
 <head>
 
-<meta charset="utf-8">
+<meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 
@@ -45,6 +45,7 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 
 
 
+<hr />
 <p>Today you are going to write a function to carry out k-fold cross validation. Recall that this involves dividing the available data set into k equal-sized, independent sets. For each of the k sets, reserve that set as testing data, fit your model to the remaining data, and evaluate the fitted model on the reserved set. In doing this, you will accumulate k different estimates of the model error. Average those to produce an overall estimate of model error.</p>
 <div id="a-function-framework" class="section level1">
 <h1>A function framework</h1>
@@ -65,30 +66,48 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <h1>The loop</h1>
 <p>Your function will perform the same operation k times. Doing this will produce k numbers, the mean square prediction error for each of the k test data sets. In writing a loop, you …</p>
 <ol style="list-style-type: decimal">
-<li>Set up the state<label for="tufte-mn-2" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-2" class="margin-toggle"><span class="marginnote">Here’s a code fragment that handles (1), (2), and (4).</span> <label for="tufte-mn-3" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-3" class="margin-toggle"><span class="marginnote"><code>mspe &lt;- numeric(k)</code></br><code>for (i in 1:k) {     </code></br><code># Your statements go here</code></br><code>}</code></br><code>mean(mspe)</code></span> or “accumulator” that will be updated as you go through the loop</li>
+<li>Set up the state. Here’s a code fragment that handles (1), (2), (3) and (5).</li>
 <li>Construct the outline of the loop</li>
-<li>Fill in the operations to be carried out inside the loop. <label for="tufte-mn-4" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-4" class="margin-toggle"><span class="marginnote">Make sure that you understand what <code>numeric(k)</code> is doing.</span></li>
-<li>Tidy up the accumulator to produce the final result.</li>
+<li>Set up the initial state, or “accumulator.” Make sure that you understand what <code>numeric(k)</code> is doing.*</li>
+<li>Fill in the operations to be carried out inside the loop.</li>
+<li><p>Tidy up the accumulator to produce the final result.</p>
+<pre class="r"><code>## accumulator will be updated as you go through the loop
+mspe &lt;- numeric(k)
+for (i in 1:k) {     
+  mspe[i] &lt;- Your statements go here
+}
+mean(mspe)</code></pre></li>
 </ol>
+<pre><code> 
+
+
+
+
+
+# Inside the loop
+
+As you can see, the statements inside the loop will be evaluated k times.  The object `i` can be used inside the loop to indicate which of these k passes through the loop is currently being performed.
+
+Here's what to do inside the loop:
+
+1. Compare `i` to `sets` to create a logical (that is, `TRUE`/`FALSE` vector) of the rows to be used for the **test** set. Create a new data frame, `For_Testing` that has just these rows.
+2. Using logical negation (that is, `!`) to create another data frame, fill a data frame `For_Training` with the remaining rows.
+3. Fit your model using `For_Training`.  For simplicity in developing your function, you can use a particular model appropriate for the `mtcars` data set: `mod &lt;- lm(mpg ~ hp + wt + am)`.  Note that `mpg` is the response variable.  Later on, you'll replace this with a more general statement.
+4. Evaluate the model on the `For_Testing` data. You can do this with `pred_vals &lt;- predict(mod, newdata = For_Testing)`
+5. Calculate the mean square prediction error (MSPE). This will be `mean((For_Testing[[&quot;mpg&quot;]] - pred_vals)^2 )`
+6. Save the MSPE in the appropriate slot of `mspe`.
+
+
+
+
+# Trying out your function
+
+At this point, you should have a function `k_fold1()` that, when evaluated with the default settings for the arguments, returns a number.  That number should be very roughly similar in size to this one, which is called the &quot;in-sample&quot; error.
+</code></pre>
+<div id="section" class="section level2">
+<h2>[1] 5.634096</h2>
+<p>``` In-sample prediction errors are biased to be lower than cross-validated prediction errors.</p>
 </div>
-<div id="inside-the-loop" class="section level1">
-<h1>Inside the loop</h1>
-<p>As you can see, the statements inside the loop will be evaluated k times. The object <code>i</code> can be used inside the loop to indicate which of these k passes through the loop is currently being performed.</p>
-<p>Here’s what to do inside the loop:</p>
-<ol style="list-style-type: decimal">
-<li>Compare <code>i</code> to <code>sets</code> to create a logical (that is, <code>TRUE</code>/<code>FALSE</code> vector) of the rows to be used for the <strong>test</strong> set. Create a new data frame, <code>For_Testing</code> that has just these rows.</li>
-<li>Using logical negation (that is, <code>!</code>) to create another data frame, fill a data frame <code>For_Training</code> with the remaining rows.</li>
-<li>Fit your model using <code>For_Training</code>. For simplicity in developing your function, you can use a particular model appropriate for the <code>mtcars</code> data set: <code>mod &lt;- lm(mpg ~ hp + wt + am)</code>. Note that <code>mpg</code> is the response variable. Later on, you’ll replace this with a more general statement.</li>
-<li>Evaluate the model on the <code>For_Testing</code> data. You can do this with <code>pred_vals &lt;- predict(mod, newdata = For_Testing)</code></li>
-<li>Calculate the mean square prediction error (MSPE). This will be <code>mean((For_Testing[[&quot;mpg&quot;]] - pred_vals)^2 )</code></li>
-<li>Save the MSPE in the appropriate slot of <code>mspe</code>.</li>
-</ol>
-</div>
-<div id="trying-out-your-function" class="section level1">
-<h1>Trying out your function</h1>
-<p>At this point, you should have a function <code>k_fold1()</code> that, when evaluated with the default settings for the arguments, returns a number. That number should be very roughly similar in size to this one, which is called the “in-sample” error.</p>
-<pre><code>## [1] 5.634096</code></pre>
-<p>In-sample prediction errors are biased to be lower than cross-validated prediction errors.</p>
 </div>
 <div id="generalizing-the-function" class="section level1">
 <h1>Generalizing the function</h1>
@@ -98,7 +117,7 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <li>Replace <code>mpg ~ hp + wt + am</code> with <code>formula</code>. This will allow you to specify the formula on as the first argument.</li>
 <li>Replace <code>lm()</code> with <code>method()</code>. This will allow your function to use modeling types other than <code>lm()</code></li>
 <li>Replace <code>predict()</code> with <code>predfun()</code></li>
-<li>Replace <code>[[&quot;mpg&quot;]]</code> with <code>[[as.character(formula[[2]])]]</code>.<label for="tufte-mn-5" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-5" class="margin-toggle"><span class="marginnote">Indexing formula objects enables extraction of parts of the formula. For those with an interest in computer languages, a formula can be used as a parse tree, with the operator (e.g. <code>~</code> or <code>+</code>, etc.) at the top and the arguments underneath.</span></li>
+<li>Replace <code>[[&quot;mpg&quot;]]</code> with <code>[[as.character(formula[[2]])]]</code>.<label for="tufte-mn-2" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-2" class="margin-toggle"><span class="marginnote">Indexing formula objects enables extraction of parts of the formula. For those with an interest in computer languages, a formula can be used as a parse tree, with the operator (e.g. <code>~</code> or <code>+</code>, etc.) at the top and the arguments underneath.</span></li>
 </ul>
 <p>Test out your function using the same data and formula as before, that is:</p>
 <pre class="r"><code>k_fold(formula = mpg ~ hp + wt + am, data=mtcars)</code></pre>

@@ -2,14 +2,16 @@
 title: "In-Class Programming Activity 13"
 author: 'Math 253: Statistical Computing & Machine Learning'
 date: "k-fold cross-validation"
+params: 
+  show_answers: FALSE
 output:
   tufte::tufte_html: default
   tufte::tufte_handout:
     latex_engine: xelatex
   tufte::tufte_book:
     latex_engine: xelatex
-params:
-  show_answers: no
+---
+
 ---
 
 ```{r include=FALSE}
@@ -59,11 +61,22 @@ sets <- rep(1:k, each = 51/k, length.out = 51)
 Your function will perform the same operation k times.  Doing this will produce k numbers, the mean square prediction error for each of the k test data sets.  In writing a loop, you ... 
 
 
-1. Set up the state`r margin_note("Here's a code fragment that handles (1), (2), and (4).")` `r margin_note(string_to_code("mspe <- numeric(k)\nfor (i in 1:k) {     \n# Your statements go here\n}\nmean(mspe)\n"))` or "accumulator" that will be updated as you go through the loop
+1. Set up the state. Here's a code fragment that handles (1), (2), (3) and (5).
 2. Construct the outline of the loop
-3. Fill in the operations to be carried out inside the loop. `r margin_content("\\noindent Make sure that you understand what <code>numeric(k)</code> is doing.")`
-4. Tidy up the accumulator to produce the final result.
-    
+3. Set up the initial state, or "accumulator." Make sure that you understand what `numeric(k)` is doing.*
+4. Fill in the operations to be carried out inside the loop. 
+5. Tidy up the accumulator to produce the final result.
+```r
+## accumulator will be updated as you go through the loop
+mspe <- numeric(k)
+for (i in 1:k) {     
+  mspe[i] <- Your statements go here
+}
+mean(mspe)
+```
+  
+```
+ 
 
 ```{r eval=FALSE, echo=FALSE}
 mspe <- numeric(k)
