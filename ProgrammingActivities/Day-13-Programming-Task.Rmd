@@ -74,8 +74,6 @@ for (i in 1:k) {
 }
 mean(mspe)
 ```
-  
-```
  
 
 ```{r eval=FALSE, echo=FALSE}
@@ -137,7 +135,7 @@ Modify `k_fold()` in the following ways:
 * Replace `mpg ~ hp + wt + am` with `formula`.  This will allow you to specify the formula on as the first argument.
 * Replace `lm()` with `method()`.  This will allow your function to use modeling types other than `lm()`
 * Replace `predict()` with `predfun()`
-* Replace `[["mpg"]]` with `[[as.character(formula[[2]])]]`.`r margin_content("Indexing formula objects enables extraction of parts of the formula.  For those with an interest in computer languages, a formula can be used as a parse tree, with the operator (e.g. <code>\\~</code> or <code>+</code>, etc.) at the top and the arguments underneath.")`
+* Replace `[["mpg"]]` with `[[as.character(formula[[2]])]]`.^[Indexing formula objects enables extraction of parts of the formula.  For those with an interest in computer languages, a formula can be used as a parse tree, with the operator (e.g. `~` or `+`, etc.) at the top and the arguments underneath.]
 
 ```{r echo = params$show_answers}
 k_fold <- function(formula, method = lm, data = mtcars, predfun = predict, k = 10) {

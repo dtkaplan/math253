@@ -101,7 +101,7 @@ Each topic assignment is due one week *after* we finish covering that topic in c
 * Readings: In Chapter 5 of ISL §5.1, §5.2
 * Programming basics 5: Loops and accumulators
 * Assignment: finish the in-class programming activities for the first five topics.
-* Programming Activity: [Thirteen - Mar 21](ProgrammingActivities/Day-13-Programming-Task.html)
+* Programming Activity: [Thirteen - Mar 23](ProgrammingActivities/Day-13-Programming-Task.html)
 
 ## Topic 6 --- Selecting model terms
 
