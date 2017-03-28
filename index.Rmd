@@ -110,7 +110,7 @@ Each topic assignment is due one week *after* we finish covering that topic in c
 * Assignment: 
     - Theory 6.8.1, 6.8.2. 
     - Applied, 6.8.9
-* Programming Activities: [Fourteen](ProgrammingActivities/Day-14-Programming-Task.pdf), [Fifteen](ProgrammingActivities/Day-15-Programming-Task.pdf)
+* Programming Activities: [Fourteen - Mar 28](ProgrammingActivities/Day-14-Programming-Task.html), [Fifteen - Mar 30](ProgrammingActivities/Day-15-Programming-Task.html)
 
 ## Topic 7 --- Nonlinear regression
 
