@@ -128,7 +128,7 @@ Recall that each of the principal components of a matrix has a scalar --- called
 sing_vals <- svd(X)$d
 ```
 
-```{r eval = TRUE, fig.margin=TRUE, fig.cap="Linear Lisa? This is \\texttt{X\\_corr} and has the same covariance as \\texttt{mona}.", echo=FALSE}
+```{r eval = TRUE, fig.margin=TRUE, fig.cap="Linear Lisa? This is `X_corr` and has the same covariance as `mona`.", echo=FALSE}
 image(X_corr, asp=1, xaxt='n', yaxt='n', bty="n")
 ```
 

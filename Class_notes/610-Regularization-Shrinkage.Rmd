@@ -3,6 +3,7 @@
 ```{r include = FALSE}
 data(CPS85, package = "mosaicData")
 library(glmnet)
+library(ISLR)
 ```
 
 ## Best subset selection
@@ -114,13 +115,34 @@ Note the y-axis label: "Standardized Coefficients."
 Another perspective on the reason to standardize: Some of the coefficients might be huge numerically, others small. In such a situation, the huge coefficients will dominate; the small ones will have little influence on the shrinkage.
 
 ```{r}
-data(CPS85, package = "mosaic")
-x <- model.matrix(wage ~ age + educ + sex + union + married, data = CPS85)
-foo <- glmnet(x, CPS85$wage, alpha = 0)
+data(CPS85, package = "mosaicData")
+lmod <- lm(wage ~ age + educ + sex + exper + union + married, data = CPS85)
+x <- model.matrix(wage ~ age + educ + sex + exper + union + married, data = CPS85)
+foo <- glmnet(x, CPS85$wage, alpha = 0, lambda = 1)
 foo$lambda.min
-predict(foo,s=foo$lambda.min,exact=T,type="coefficients")
+predict(foo,s=0.1,exact=TRUE,type="coefficients")
+coef(foo, exact = FALSE)
 ```
 For `Credit` dataset: <http://www-bcf.usc.edu/~gareth/ISL/Credit.csv>
+
+
+### Carseats
+
+```{r}
+lmod <- lm(Sales ~ ., data = Carseats)
+x <- model.matrix(Sales ~ ., data = Carseats)
+foo <- glmnet(x, Carseats$Sales, alpha = 1, lambda = 0.1)
+foo$lambda.min
+predict(foo,s=0.1,exact=TRUE,type="coefficients")
+preds <- predict(foo, newx = x, type = "response")
+mean((fitted(lmod)- Carseats$Sales)^2)
+mean((preds - Carseats$Sales)^2)
+coef(foo, exact = FALSE)
+```
+
+Questions:
+
+- Why is the mean square error worse for the ridge than for OLS?
 
 
 ## LASSO
@@ -135,10 +157,14 @@ knitr::include_graphics("Images/Chapter-6/6.7.png")
 ```
 
 ```{r}
+lmod <- lm(wage ~ age * educ * sex * union * married, data = CPS85)
 x <- model.matrix(wage ~ age * educ * sex * union * married, data = CPS85)
-foo <- cv.glmnet(x, CPS85$wage, alpha = 1)
+foo <- glmnet(x, CPS85$wage, alpha = 1, lambda = 0.16)
 foo$lambda.min
-predict(foo,s=foo$lambda.min,exact=T,type="coefficients")
+predict(foo,s=foo$lambda.min,exact=TRUE,type="coefficients")
+preds <- predict(foo, s = 0.16, newx = x, type = "response")
+mean((preds - CPS85$wage)^2)
+mean((fitted(lmod)- CPS85$wage)^2)
 ```
 
 ## Review
@@ -369,9 +395,10 @@ Creating those singular vectors:
 * orthogonal to one another
 * cumulative sum of ${\mathbf D}$ components gives the amount of variance in the approximation.
 ```{r}
+load("images/mona.rda")
 res <- svd(mona)
 approx <- 0
-for (i in 1:10) {
+for (i in 100) {
   approx <- approx + outer(res$u[,i], res$v[,i]) * res$d[i]
 }
 image(approx, asp=1)
