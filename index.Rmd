@@ -110,7 +110,7 @@ Each topic assignment is due one week *after* we finish covering that topic in c
 * Assignment: 
     - Theory 6.8.1, 6.8.2. 
     - Applied, 6.8.9
-* Programming Activities: [Fourteen - Mar 28](ProgrammingActivities/Day-14-Programming-Task.html), [Fifteen - Mar 30](ProgrammingActivities/Day-15-Programming-Task.html)
+* Programming Activities: [Fourteen - Mar 28](ProgrammingActivities/Day-14-Programming-Task.html), [Fifteen - Apr 4](ProgrammingActivities/Day-15-Programming-Task.html)
 
 ## Topic 7 --- Nonlinear regression
 
@@ -118,7 +118,7 @@ Each topic assignment is due one week *after* we finish covering that topic in c
 * Assignment:
     - programming: 7.9.11
     - theory: in §7.9 problems 3, 4, and 5
-* Programming Activity: [Sixteen](ProgrammingActivities/Day-16-Programming-Task.pdf)
+* Programming Activity: [Sixteen Apr 6](ProgrammingActivities/Day-16-Programming-Task.html)
  
 ## Topic 8 --- Tree-based methods
 
