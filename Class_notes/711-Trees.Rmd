@@ -48,13 +48,16 @@ ISLR considers three measures to determine which of all the possible splits is b
 Let $m$ be a region and $k$ a class. Also, let $\hat{p}_{mk}$ be the proportion of the training observations in region $m$ of class $k$. Finally, let $\hat{n}_{mk}$ be the *count* of cases of class $k$ in region $m$. Thus $$\hat{p}_{mk} \equiv \frac{\hat{n}_{mk}}{\sum_k \hat{n}_{mk}}$$
 
 1. Classification error rate: $$E = 1 - \max_k(\hat{p}_{mk}).$$ This is the fraction of cases that were not in the most popular class.  The book describes this as too coarse a measure to be effective for tree-growing.
-2. The "Gini index": $$G = \sum_{k=1}^K \hat{p}_{mk}(1 - \hat{p}_mk)$$
+2. The "Gini index": $$G = \sum_{k=1}^K \hat{p}_{mk}(1 - \hat{p}_{mk})$$
 3. The "cross entropy": $$D = - \sum_{k=1}^K \hat{p}_{mk}\ln(\hat{p}_{mk})$$
 
 Note that (2) and (3) are very similar for small $\hat{p}_{mk}$, since a first-order Taylor expansion gives
 $$\ln(x) \approx \ln(x)|_{x = 1} + \frac{d\ln}{dx}|_{x = 1} (x - 1) = 0  + \frac{1}{1}(x - 1) = x - 1$$ So $-\ln(x)$ which appears in $D$ is $\approx 1 - x$.
 
-I find it easier to think about the deviance, or, more simply, the negative log likelihood (which is $-2$ times the deviance). This is the sum of all cases of the negative log likelihood of each class, or $${\cal L} \equiv - \sum_k \left[\hat{n}_{mk} \ln( \hat{p}_{mk})\right]$$ This is $\sum_k \hat{n}_{mk}$ times the cross entropy.
+I find it easier to think about the deviance, or, more simply, the negative log likelihood (which is $-2$ times the deviance). This is the sum of all cases of the negative log likelihood of each class, or $${\cal L} \equiv - \sum_k \left[\hat{n}_{mk} \ln( \hat{p}_{mk})\right]$$ This is locally proportional (In any region $m$) to the cross entropy.
+
+$${\cal L} = \sum_{k=1}^K n_m \hat{p}_{mk}\ln(\hat{p}_{mk}) = \sum_{k=1}^K n_{mk}\ln(\hat{p}_{mk})$$
+Interpretation: In region $m$ there are $n_{mk}$ cases of class $k$, each of which has a log likelihood of $\ln{\hat{p}_{mk}}$
 
 I prefer ${\cal L}$ this because it is an [extensive quantity](https://en.wikipedia.org/wiki/Intensive_and_extensive_properties) and so we can consider the whole as the sum of the parts.  Example from physics: temperature is intensive, energy is extensive.
 
