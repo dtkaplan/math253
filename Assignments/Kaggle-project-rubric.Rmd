@@ -2,7 +2,9 @@
 
 ## Form 
 
-An Rmd -> HTML document roughly equivalent to 2-4 pages of printed material.
+Please push the data and any .Rmd or .R files you created for your project to your github repository.
+
+If you've made slides, you can push them also, or just provide a link in your .Rmd file to the Google-drive (or whatever) file. But it is not necessary to hand in your slides. I'll see them in class.
 
 ## Content
 

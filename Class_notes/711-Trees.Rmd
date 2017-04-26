@@ -13,11 +13,31 @@ We're working on a straightforward framework for regression and classification m
 Let's work with two examples: one a regression model `y ~ x` and the other a classification model `class ~ x`. We'll use these training data.
 
 ```{r echo = FALSE}
-knitr::kable(data.frame(
+Example1 <- data.frame(
   x = 1:8,
   y = c(2,5,1,3,8,5,4,6),
   class = c("A", "B", "A", "A", "B", "B", "A", "B")
-))
+)
+knitr::kable(Example1)
+
+```
+
+```{r}
+r.pure <- rpart(y ~ x, data = Example1, control=rpart.control(minsplit=2, cp=0))
+prp(r.pure)
+r.pure
+```
+
+```{r}
+c.pure <- rpart(class ~ x, data = Example1, control=rpart.control(minsplit=2, cp=0))
+prp(c.pure)
+c.pure
+```
+
+```{r}
+p <- c(.4, .05, .02, .57)
+sum(p * log2(p))
+
 ```
 
 First, the regression model. The data can be split by $x$ in 7 different ways: 
