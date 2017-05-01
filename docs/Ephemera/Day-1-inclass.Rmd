@@ -1,0 +1,25 @@
+# Sept 6 In-Class
+
+## Task 5 from Day 1 Programming
+
+```{r}
+x <- runif(1000000, min = 0, max = 1)
+y <- runif(1000000, min = 0, max = 1)
+plot(y ~ x)
+dist_to_origin <- sqrt(x^2 + y^2)
+```
+
+Proportion less than or equal to 1.
+```{r}
+result <- ifthen(dist_to_origin < 1, TRUE, FALSE) 
+4 * table(dist_to_origin < 1)
+```
+
+
+I'm done now.  Push it. Please.
+
+
+
+
+
+

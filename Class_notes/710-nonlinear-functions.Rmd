@@ -1,3 +1,15 @@
+---
+title: "Topic 7: Nonlinear Models"
+author: 'Math 253: Statistical Computing & Machine Learning'
+date: "Daniel Kaplan"
+output:
+  tufte::tufte_html: default
+  tufte::tufte_handout:
+    latex_engine: xelatex
+  tufte::tufte_book:
+    latex_engine: xelatex
+---
+
 # Nonlinearity in linear models
 
 Basic idea: Use linear regression to construct models $f(x)$ that are nonlinear in $x$.
@@ -264,13 +276,3 @@ preds <- predict(mod, newdata=X)
 plot(X$year, preds)
 ```
 
-
-# Programming Activity
-
-# Where to place knots?
-
-Show the ecdf() of some data.  Invert this to get the quantiles.
-
-Show `mosaic::qdata()` and `mosaic::pdata()` as inverses.
-
-`quantile()` is the original version of this.

@@ -1,0 +1,177 @@
+---
+title: "In-Class Computing Task 15"
+author: "Math 253: Statistical Computing & Machine Learning"
+date: "Dimension Reduction Methods"
+params:
+  show_answers: FALSE
+output:
+  tufte::tufte_html: default
+  tufte::tufte_handout:
+    latex_engine: xelatex
+  tufte::tufte_book:
+    latex_engine: xelatex
+---
+
+```{r include=FALSE}
+options(width=80)
+library(mosaicData)
+library(ggplot2)
+library(scoreActivity)
+library(ISLR)
+library(pls)
+library(glmnet)
+knitr::opts_chunk$set(tidy=FALSE)
+options(width=100)
+```
+
+In this activity, you're going to synthesize data from a linear system with multiple inputs and a single output, where only a few of the inputs contribute to the output.
+
+## Overview
+
+A linear system is often written
+
+$${\mathbf Y} =  {\mathbf X} \cdot \beta + \epsilon$$
+
+In this notation, $\beta$ are the *coefficients* of the system, ${\mathbf X}$ is the model matrix, and ${\mathbf Y}$ is the output.  ${\mathbf Y}$ is not completely set by ${\mathbf X} \cdot {\beta}$, there is some random part to ${\mathbf Y}$, unrelated to any of the columns in ${\mathbf X}$, represented by $\epsilon$.
+
+We are going to make a seemingly strange choice of ${\mathbf X}$: the columns from a matrix representing a monochrome version of the Mona Lisa.^[The file is available at `"http://tiny.cc/dcf/mona.rda"` and contains a matrix `mona`.  I suggest you first download the file (`download.file()`) to your computer, with `destfile = "mona.rda"`. Do this just once and **don't** put the `download.file()` command in your `.R` script unless you have commented it out. It is meant to be run only once. In your script, you can load `mona` using `load("mona.rda")`.] This matrix has strong correlations among the columns.
+```{r echo=params$show_answers}
+load("../Class_notes/Images/mona.rda")
+```
+
+You will use the matrix `mona` to form ${\mathbf X}$ in your simulation.^[Why use the transpose operator, `t()`?  The row-column convention for images are reversed from those for matrices.  `t(mona)` gives a matrix with 250 rows and 191 columns.]
+```{r createX}
+X <- t(mona) - mean(mona[])
+```
+The `[]` in `mona[]` means to treat `mona` as one long vector rather than as a matrix.^[A matrix can be thought of as a collection of vectors.] 
+
+\enlargethispage{1.5in}
+Make two more matrices:
+
+1. `X_rand` with has the same size as `X` but consists of iid N($0$,$1^2$) noise.
+2. `X_corr` with columns that have the covariance as `X`.^[Remember, you can create correlated noise from iid noise by post-multiplying by the square-root of the desired covariance matrix.  That is, post-multiply `Xrand` with `chol(var(X))`.]
+
+```{r echo=params$show_answers}
+X_rand <- matrix(rnorm(191*250), ncol=191)
+X_corr <- X_rand %*% chol(var(X))
+```
+
+```{r fig.margin=TRUE, fig.cap="Mona Lisa? Same data as the original, but the order of variables and cases has been randomized.", echo=FALSE}
+image(X[sample(1:250, size=250),sample(1:191, size=191)], asp=1, xaxt='n', yaxt='n', bty="n")
+```
+
+
+## Sparse beta
+
+There are 191 columns in each of `X`, `Xrand` and `Xcorr`.  Create a vector `beta` that has 191 numbers.  Of these 191 numbers, 175 should be 0.  The other 16 should have values of 2, 5, $-3$, or $-4$.  The order should be random. (Hints: Use these functions `rep()`, `sample(1:191)` as well as indexing.) A vector or matrix consisting mainly of zeros is called *sparse*.  The sparse $\beta$ you are using here simulates a system where there are many inter-related variables in ${\mathbf X}$, but just a few of them contribute to the formation of ${\mathbf Y}$
+
+```{r echo = params$show_answers}
+beta <- c(rep(0, 175), rep(2, 4), rep(5, 4), rep(-3, 4), rep(-4, 4))
+beta <- sample(beta)
+```
+
+## The output
+
+Create two output vectors based on ${\mathbf X} \cdot {\beta}$, using `X` for ${\mathbf X}$. Each of these output vectors will play the role of $Y$ in the linear system you are simulating.
+
+\newpage
+
+1. `Y_pure` which is simply ${\mathbf X} \cdot {\beta}$.
+2. `Y_real` which is ${\mathbf X} \cdot {\beta}$ plus noise which is iid normal with mean 0 and a variance that is 10% of the variance of `Ypure`.
+
+```{r echo = params$show_answers}
+Y_pure <- X %*% beta
+Y_real <- X %*% beta + rnorm(nrow(X), 0.1 * sd(X[]))
+```
+
+## Least squares
+
+Use `lm()` to fit `Y_pure` against `X`. Create a vector `beta_hat_pure` to hold the coefficients.  Plot `beta_hat_pure` against `beta` and draw a conclusion about the performance of `lm()` in this case.^[Remember that your `X` has no vector corresponding to the intercept.  Discard the intercept from the coefficients found by `lm()`.]
+
+```{r echo=params$show_answers, eval=params$show_answers, fig.margin=TRUE,fig.cap="\\texttt{beta\\_hat\\_pure} is an almost exact match to \\texttt{beta}."}
+mod_lm <- lm(Y_pure ~ X)
+beta_hat_pure <- coef(mod_lm)
+plot(beta, beta_hat_pure[-1])
+```
+
+Now do the same for `Y_real`, creating a vector of fitted coefficients `beta_hat_real` and comparing that to your actual `beta`.
+
+```{r echo=params$show_answers, eval=params$show_answers, fig.margin=TRUE,fig.cap="\\texttt{beta\\_hat\\_real} has little relationship to $\\beta$."}
+mod_lm_real <- lm(Y_real ~ X)
+beta_hat_real <- coef(mod_lm)
+plot(beta, beta_hat_real[-1])
+```
+
+Would you be able to detect from `beta_hat_real` that ${\beta}$ is sparse?
+
+## The lasso estimator
+
+Use the lasso method to estimate ${\hat{\beta}}$, which you can store in a vector `beta_lasso`. The `glmnet` package has a command `cv.glmnet()` which uses cross-validation to choose an appropriate value of $\lambda$. The commands look like this:
+
+```{r cache=TRUE}
+library(glmnet)
+lasso_mod <- cv.glmnet(X, Y_real, alpha=1)
+beta_lasso <- predict(lasso_mod, type = "coefficients", s = lasso_mod$lambda.min)
+```
+
+
+```{r echo=params$show_answers, eval=params$show_answers, fig.margin=TRUE}
+plot(jitter(beta), beta_lasso[-1] ) # [-1] get rid of intercept
+```
+
+\enlargethispage{1.5in}
+
+## Principal components
+
+Recall that each of the principal components of a matrix has a scalar --- called the *singular value* --- indicating the "size" of that principal component in contributing to the reconstruction of the matrix.  You can find these scalars like this:
+```{r}
+sing_vals <- svd(X)$d
+```
+
+```{r eval = TRUE, fig.margin=TRUE, fig.cap="Linear Lisa? This is `X_corr` and has the same covariance as `mona`.", echo=FALSE}
+image(X_corr, asp=1, xaxt='n', yaxt='n', bty="n")
+```
+
+```{r fig.margin=TRUE, fig.cap="Iid Lisa?", echo=FALSE}
+image(X_rand, asp=1, xaxt='n', yaxt='n', bty="n")
+```
+
+
+The cumulative sum `cumsum(sing_vals^2)` divided by `sum(sing_vals^2)` produces the $R^2$ of the approximation of `X` using successively $k = 1, 2, 3, ..., 191$ principal components.
+
+Find the singular values of `X_rand` and `X_corr`. On the same graph, plot out $R^2$ versus $k$ for the singular values from each of  `X`, `X_rand`, and `X_corr`.
+
+Calculate how many principal components are needed to reconstruct the matrix with an $R^2$ of 99%.  Call your answers `n99`, `n99_rand` and `n99_corr` respectively.
+
+```{r echo = params$show_answers}
+sing_vals_rand <- svd(X_rand)$d
+sing_vals_corr <- svd(X_corr)$d
+Rsq <- cumsum(sing_vals^2) / sum(sing_vals^2)
+Rsq_rand <- cumsum(sing_vals_rand^2) / sum(sing_vals_rand^2)
+Rsq_corr <- cumsum(sing_vals_corr^2) / sum(sing_vals_corr^2)
+n99 <- 1 + sum(Rsq < 0.99)
+n99_rand <- 1 + sum(Rsq_rand < 0.99)
+n99_corr <- 1 + sum(Rsq_corr < 0.99)
+```
+
+
+
+\newthought{Finally, use principal components to model} `Y_real` against `X`.  The commands look like this.
+
+```{r}
+library(pls)
+pcr.fit <- pcr(Y_real ~ X, scale = TRUE, validation="CV") 
+```
+
+Using `R2(pcr.fit)`, examine the cross-validated $R^2$ as a function of the number of components used.  How many components are needed to get to, say, $R^2 = 0.85$.  
+
+
+```{r echo=FALSE, eval=params$show_answers, results="asis"}
+cat("# Test statments")
+```
+
+```{r echo=params$show_answers, eval=params$show_answers}
+scoreActivity::score253(15)
+```
+
+

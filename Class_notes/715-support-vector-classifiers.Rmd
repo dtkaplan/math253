@@ -1,3 +1,16 @@
+---
+title: "Topic 9: Support Vector Classifiers"
+author: 'Math 253: Statistical Computing & Machine Learning'
+date: "Daniel Kaplan"
+output:
+  tufte::tufte_html: default
+  tufte::tufte_handout:
+    latex_engine: xelatex
+  tufte::tufte_book:
+    latex_engine: xelatex
+---
+
+
 ```{r include=FALSE}
 require(mosaic)
 require(ISLR)
@@ -6,8 +19,6 @@ require(pls)
 require(gam)
 knitr::opts_chunk$set(tidy=FALSE)
 ```
-
-# Support Vector Classifiers
 
 The methods we have studied so far use *all* the data to fit the model.  But for classification, it may be that only the cases that are intermixed are telling for distinguishing one group from the other.  The bulk of cases, clustered happily in their home country, may not be so useful.
 

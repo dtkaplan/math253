@@ -1,0 +1,8 @@
+# Connecting RStudio to your GitHub repository {-}
+
+
+```{r child = "../github.Rmd"}
+```
+
+
+

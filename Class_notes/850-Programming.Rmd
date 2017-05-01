@@ -1,10 +1,22 @@
-# Programming Basics
+---
+title: "Programming Basics"
+author: 'Math 253: Statistical Computing & Machine Learning'
+date: "Daniel Kaplan"
+output:
+  tufte::tufte_html: default
+  tufte::tufte_handout:
+    latex_engine: xelatex
+  tufte::tufte_book:
+    latex_engine: xelatex
+---
+
 
 ## Programming Basics I: Names, classes, and objects {progbasics1}
 
 ### Names 
 
-Composed of letters, numbers, `_` and `.`.    
+Composed of letters, numbers, `_` and `.`.  
+
 - Don't use `.` --- it's a bad habit.  But plenty of people do.
 - Can't lead with a number.
 - Capitalization counts.
@@ -13,6 +25,7 @@ Composed of letters, numbers, `_` and `.`.
 ### Objects 
 
 Information (bits) in a particular format.    
+
 - Different formats for different purposes.
 - The format is the `class()` or `mode()`.  `mode` is more basic than `class`.
 

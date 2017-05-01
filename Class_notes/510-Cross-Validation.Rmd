@@ -1,4 +1,14 @@
-# Cross-Validation and Bootstrapping
+---
+title: "Topic 5: Cross-Validation and Bootstrapping"
+author: 'Math 253: Statistical Computing & Machine Learning'
+date: "Daniel Kaplan"
+output:
+  tufte::tufte_html: default
+  tufte::tufte_handout:
+    latex_engine: xelatex
+  tufte::tufte_book:
+    latex_engine: xelatex
+---
 
 In making a statistical model (including with machine-learning techniques) we have an overall goal:
 

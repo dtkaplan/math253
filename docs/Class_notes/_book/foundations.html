@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Notes for Math 253: Statistical Computing and Machine Learning</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Notes and other materials for Math 253 at Macalester College.">
+  <meta name="generator" content="bookdown 0.1.15 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Notes for Math 253: Statistical Computing and Machine Learning" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Notes and other materials for Math 253 at Macalester College." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Notes for Math 253: Statistical Computing and Machine Learning" />
+  
+  <meta name="twitter:description" content="Notes and other materials for Math 253 at Macalester College." />
+  
+
+<meta name="author" content="Daniel Kaplan">
+
+  
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="linear-regression.html">
+<link rel="next" href="appendices.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Math 253 Notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#math-253-and-the-macalester-statistics-curriculum"><i class="fa fa-check"></i>Math 253 and the Macalester statistics curriculum</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#these-notes-are-written-in-bookdown"><i class="fa fa-check"></i>These notes are written in Bookdown</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#statistical-and-machine-learning"><i class="fa fa-check"></i><b>1.1</b> Statistical and Machine Learning</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="introduction.html"><a href="introduction.html#example-1-machine-translation-of-natural-languages"><i class="fa fa-check"></i><b>1.1.1</b> Example 1: Machine translation of natural languages</a></li>
+<li class="chapter" data-level="1.1.2" data-path="introduction.html"><a href="introduction.html#example-2-from-library-catalogs-to-latent-semantic-indexing"><i class="fa fa-check"></i><b>1.1.2</b> Example 2: From library catalogs to latent semantic indexing</a></li>
+<li class="chapter" data-level="1.1.3" data-path="introduction.html"><a href="introduction.html#computing-technique"><i class="fa fa-check"></i><b>1.1.3</b> Computing technique</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#review-of-day-1"><i class="fa fa-check"></i><b>1.2</b> Review of Day 1</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#theoretical-concepts-isl-2.1"><i class="fa fa-check"></i><b>1.3</b> Theoretical concepts ISL §2.1</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="introduction.html"><a href="introduction.html#statistics-concepts"><i class="fa fa-check"></i><b>1.3.1</b> Statistics concepts</a></li>
+<li class="chapter" data-level="1.3.2" data-path="introduction.html"><a href="introduction.html#computing-concepts"><i class="fa fa-check"></i><b>1.3.2</b> Computing concepts</a></li>
+<li class="chapter" data-level="1.3.3" data-path="introduction.html"><a href="introduction.html#cross-fertilization"><i class="fa fa-check"></i><b>1.3.3</b> Cross fertilization</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#many-techniques"><i class="fa fa-check"></i><b>1.4</b> Many techniques</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="introduction.html"><a href="introduction.html#unsupervised-learning"><i class="fa fa-check"></i><b>1.4.1</b> Unsupervised learning</a></li>
+<li class="chapter" data-level="1.4.2" data-path="introduction.html"><a href="introduction.html#supervised-learning"><i class="fa fa-check"></i><b>1.4.2</b> Supervised learning:</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#basic-dicotomies-in-machine-learning"><i class="fa fa-check"></i><b>1.5</b> Basic dicotomies in machine learning</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="introduction.html"><a href="introduction.html#purposes-for-learning"><i class="fa fa-check"></i><b>1.5.1</b> Purposes for learning:</a></li>
+<li class="chapter" data-level="1.5.2" data-path="introduction.html"><a href="introduction.html#dicotomies"><i class="fa fa-check"></i><b>1.5.2</b> Dicotomies</a></li>
+<li class="chapter" data-level="1.5.3" data-path="introduction.html"><a href="introduction.html#prediction-versus-mechanism"><i class="fa fa-check"></i><b>1.5.3</b> Prediction versus mechanism</a></li>
+<li class="chapter" data-level="1.5.4" data-path="introduction.html"><a href="introduction.html#flexibility-versus-variance"><i class="fa fa-check"></i><b>1.5.4</b> Flexibility versus variance</a></li>
+<li class="chapter" data-level="1.5.5" data-path="introduction.html"><a href="introduction.html#black-box-vs-interpretable-models"><i class="fa fa-check"></i><b>1.5.5</b> Black box vs interpretable models</a></li>
+<li class="chapter" data-level="1.5.6" data-path="introduction.html"><a href="introduction.html#reducible-versus-irreducible-error"><i class="fa fa-check"></i><b>1.5.6</b> Reducible versus irreducible error</a></li>
+<li class="chapter" data-level="1.5.7" data-path="introduction.html"><a href="introduction.html#regression-versus-classification"><i class="fa fa-check"></i><b>1.5.7</b> Regression versus classification</a></li>
+<li class="chapter" data-level="1.5.8" data-path="introduction.html"><a href="introduction.html#supervised-versus-unsupervised"><i class="fa fa-check"></i><b>1.5.8</b> Supervised versus unsupervised</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="introduction.html"><a href="introduction.html#programming-activity-1"><i class="fa fa-check"></i><b>1.6</b> Programming Activity 1</a></li>
+<li class="chapter" data-level="1.7" data-path="introduction.html"><a href="introduction.html#review-of-day-2"><i class="fa fa-check"></i><b>1.7</b> Review of Day 2</a><ul>
+<li class="chapter" data-level="1.7.1" data-path="introduction.html"><a href="introduction.html#trade-offsdicotomies"><i class="fa fa-check"></i><b>1.7.1</b> Trade-offs/Dicotomies</a></li>
+</ul></li>
+<li class="chapter" data-level="1.8" data-path="introduction.html"><a href="introduction.html#a-classifier-example"><i class="fa fa-check"></i><b>1.8</b> A Classifier example</a></li>
+<li class="chapter" data-level="1.9" data-path="introduction.html"><a href="introduction.html#programming-activity-2"><i class="fa fa-check"></i><b>1.9</b> Programming Activity 2</a></li>
+<li class="chapter" data-level="1.10" data-path="introduction.html"><a href="introduction.html#day-3-theory-accuracy-precision-and-bias"><i class="fa fa-check"></i><b>1.10</b> Day 3 theory: accuracy, precision, and bias</a><ul>
+<li class="chapter" data-level="1.10.1" data-path="introduction.html"><a href="introduction.html#figure-2.10"><i class="fa fa-check"></i><b>1.10.1</b> Figure 2.10</a></li>
+<li class="chapter" data-level="1.10.2" data-path="introduction.html"><a href="introduction.html#another-example-a-smoother-simulated-fx."><i class="fa fa-check"></i><b>1.10.2</b> Another example: A smoother simulated <span class="math inline">\(f(x)\)</span>.</a></li>
+<li class="chapter" data-level="1.10.3" data-path="introduction.html"><a href="introduction.html#whats-the-best-of-these-models"><i class="fa fa-check"></i><b>1.10.3</b> What’s the “best” of these models?</a></li>
+<li class="chapter" data-level="1.10.4" data-path="introduction.html"><a href="introduction.html#why-is-testing-mse-u-shaped"><i class="fa fa-check"></i><b>1.10.4</b> Why is testing MSE U-shaped?</a></li>
+<li class="chapter" data-level="1.10.5" data-path="introduction.html"><a href="introduction.html#measuring-the-variance-of-independent-sources-of-variation"><i class="fa fa-check"></i><b>1.10.5</b> Measuring the variance of independent sources of variation</a></li>
+<li class="chapter" data-level="1.10.6" data-path="introduction.html"><a href="introduction.html#equation-2.7"><i class="fa fa-check"></i><b>1.10.6</b> Equation 2.7</a></li>
+</ul></li>
+<li class="chapter" data-level="1.11" data-path="introduction.html"><a href="introduction.html#programming-basics-i-names-classes-and-objects-progbasics1"><i class="fa fa-check"></i><b>1.11</b> Programming Basics I: Names, classes, and objects {progbasics1}</a><ul>
+<li class="chapter" data-level="1.11.1" data-path="introduction.html"><a href="introduction.html#names"><i class="fa fa-check"></i><b>1.11.1</b> Names</a></li>
+<li class="chapter" data-level="1.11.2" data-path="introduction.html"><a href="introduction.html#objects"><i class="fa fa-check"></i><b>1.11.2</b> Objects</a></li>
+<li class="chapter" data-level="1.11.3" data-path="introduction.html"><a href="introduction.html#vectors"><i class="fa fa-check"></i><b>1.11.3</b> Vectors</a></li>
+<li class="chapter" data-level="1.11.4" data-path="introduction.html"><a href="introduction.html#matrices"><i class="fa fa-check"></i><b>1.11.4</b> Matrices</a></li>
+<li class="chapter" data-level="1.11.5" data-path="introduction.html"><a href="introduction.html#lists"><i class="fa fa-check"></i><b>1.11.5</b> Lists</a></li>
+<li class="chapter" data-level="1.11.6" data-path="introduction.html"><a href="introduction.html#functions"><i class="fa fa-check"></i><b>1.11.6</b> Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="1.12" data-path="introduction.html"><a href="introduction.html#programming-activity-3"><i class="fa fa-check"></i><b>1.12</b> Programming Activity 3</a></li>
+<li class="chapter" data-level="1.13" data-path="introduction.html"><a href="introduction.html#review-of-day-3"><i class="fa fa-check"></i><b>1.13</b> Review of Day 3</a></li>
+<li class="chapter" data-level="1.14" data-path="introduction.html"><a href="introduction.html#start-thursday-15-sept."><i class="fa fa-check"></i><b>1.14</b> Start Thursday 15 Sept.</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>2</b> Linear Regression</a><ul>
+<li class="chapter" data-level="2.1" data-path="linear-regression.html"><a href="linear-regression.html#day-4-preview"><i class="fa fa-check"></i><b>2.1</b> Day 4 Preview</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="linear-regression.html"><a href="linear-regression.html#isl-books-statement-on-why-to-study-linear-regression"><i class="fa fa-check"></i><b>2.1.1</b> ISL book’s statement on why to study linear regression</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="linear-regression.html"><a href="linear-regression.html#small-data"><i class="fa fa-check"></i><b>2.2</b> Small data</a></li>
+<li class="chapter" data-level="2.3" data-path="linear-regression.html"><a href="linear-regression.html#programming-basics-linear-models"><i class="fa fa-check"></i><b>2.3</b> Programming basics: Linear Models</a></li>
+<li class="chapter" data-level="2.4" data-path="linear-regression.html"><a href="linear-regression.html#review-of-day-4-sept-15-2016"><i class="fa fa-check"></i><b>2.4</b> Review of Day 4, Sept 15, 2016</a></li>
+<li class="chapter" data-level="2.5" data-path="linear-regression.html"><a href="linear-regression.html#regression-and-interpretability"><i class="fa fa-check"></i><b>2.5</b> Regression and Interpretability</a></li>
+<li class="chapter" data-level="2.6" data-path="linear-regression.html"><a href="linear-regression.html#toward-an-automated-regression-process"><i class="fa fa-check"></i><b>2.6</b> Toward an automated regression process</a></li>
+<li class="chapter" data-level="2.7" data-path="linear-regression.html"><a href="linear-regression.html#selecting-model-terms"><i class="fa fa-check"></i><b>2.7</b> Selecting model terms</a></li>
+<li class="chapter" data-level="2.8" data-path="linear-regression.html"><a href="linear-regression.html#programming-basics-graphics"><i class="fa fa-check"></i><b>2.8</b> Programming basics: Graphics</a></li>
+<li class="chapter" data-level="2.9" data-path="linear-regression.html"><a href="linear-regression.html#in-class-programming-activity"><i class="fa fa-check"></i><b>2.9</b> In-class programming activity</a></li>
+<li class="chapter" data-level="2.10" data-path="linear-regression.html"><a href="linear-regression.html#day-5-summary"><i class="fa fa-check"></i><b>2.10</b> Day 5 Summary</a><ul>
+<li class="chapter" data-level="2.10.1" data-path="linear-regression.html"><a href="linear-regression.html#linear-regression"><i class="fa fa-check"></i><b>2.10.1</b> Linear regression</a></li>
+<li class="chapter" data-level="2.10.2" data-path="linear-regression.html"><a href="linear-regression.html#coefficients-as-quantities"><i class="fa fa-check"></i><b>2.10.2</b> Coefficients as quantities</a></li>
+<li class="chapter" data-level="2.10.3" data-path="linear-regression.html"><a href="linear-regression.html#graphics-basics"><i class="fa fa-check"></i><b>2.10.3</b> Graphics basics</a></li>
+</ul></li>
+<li class="chapter" data-level="2.11" data-path="linear-regression.html"><a href="linear-regression.html#k-nearest-neighbors"><i class="fa fa-check"></i><b>2.11</b> K-nearest neighbors</a></li>
+<li class="chapter" data-level="2.12" data-path="linear-regression.html"><a href="linear-regression.html#in-class-programming-activity-1"><i class="fa fa-check"></i><b>2.12</b> In-class programming activity</a></li>
+<li class="chapter" data-level="2.13" data-path="linear-regression.html"><a href="linear-regression.html#day-6-summary"><i class="fa fa-check"></i><b>2.13</b> Day 6 Summary</a></li>
+<li class="chapter" data-level="2.14" data-path="linear-regression.html"><a href="linear-regression.html#measuring-accuracy-of-the-model"><i class="fa fa-check"></i><b>2.14</b> Measuring Accuracy of the Model</a></li>
+<li class="chapter" data-level="2.15" data-path="linear-regression.html"><a href="linear-regression.html#bias-of-the-model"><i class="fa fa-check"></i><b>2.15</b> Bias of the model</a><ul>
+<li class="chapter" data-level="2.15.1" data-path="linear-regression.html"><a href="linear-regression.html#theory-of-whole-model-anova."><i class="fa fa-check"></i><b>2.15.1</b> Theory of whole-model ANOVA.</a></li>
+</ul></li>
+<li class="chapter" data-level="2.16" data-path="linear-regression.html"><a href="linear-regression.html#forward-backward-and-mixed-selection"><i class="fa fa-check"></i><b>2.16</b> Forward, backward and mixed selection</a></li>
+<li class="chapter" data-level="2.17" data-path="linear-regression.html"><a href="linear-regression.html#programming-basics-functions"><i class="fa fa-check"></i><b>2.17</b> Programming Basics: Functions</a></li>
+<li class="chapter" data-level="2.18" data-path="linear-regression.html"><a href="linear-regression.html#in-class-programming-activity-2"><i class="fa fa-check"></i><b>2.18</b> In-class programming activity</a></li>
+<li class="chapter" data-level="2.19" data-path="linear-regression.html"><a href="linear-regression.html#review-of-day-7"><i class="fa fa-check"></i><b>2.19</b> Review of Day 7</a></li>
+<li class="chapter" data-level="2.20" data-path="linear-regression.html"><a href="linear-regression.html#using-predict-to-calculate-precision"><i class="fa fa-check"></i><b>2.20</b> Using predict() to calculate precision</a></li>
+<li class="chapter" data-level="2.21" data-path="linear-regression.html"><a href="linear-regression.html#conclusion"><i class="fa fa-check"></i><b>2.21</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="foundations.html"><a href="foundations.html"><i class="fa fa-check"></i><b>3</b> Foundations</a><ul>
+<li class="chapter" data-level="3.1" data-path="foundations.html"><a href="foundations.html#linear-algebra"><i class="fa fa-check"></i><b>3.1</b> Linear Algebra</a></li>
+<li class="chapter" data-level="3.2" data-path="foundations.html"><a href="foundations.html#arithmetic-of-linear-algebra-operations"><i class="fa fa-check"></i><b>3.2</b> Arithmetic of linear algebra operations</a></li>
+<li class="chapter" data-level="3.3" data-path="foundations.html"><a href="foundations.html#the-geometry-of-fitting"><i class="fa fa-check"></i><b>3.3</b> The geometry of fitting</a></li>
+<li class="chapter" data-level="3.4" data-path="foundations.html"><a href="foundations.html#precision-of-the-coefficients"><i class="fa fa-check"></i><b>3.4</b> Precision of the coefficients</a></li>
+<li class="chapter" data-level="3.5" data-path="foundations.html"><a href="foundations.html#likelihood-and-bayes"><i class="fa fa-check"></i><b>3.5</b> Likelihood and Bayes</a></li>
+<li class="chapter" data-level="3.6" data-path="foundations.html"><a href="foundations.html#summary-of-day-8"><i class="fa fa-check"></i><b>3.6</b> Summary of Day 8</a></li>
+<li class="chapter" data-level="3.7" data-path="foundations.html"><a href="foundations.html#day-9-announcements"><i class="fa fa-check"></i><b>3.7</b> Day 9 Announcements</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="foundations.html"><a href="foundations.html#whats-a-probability"><i class="fa fa-check"></i><b>3.7.1</b> What’s a probability?</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="foundations.html"><a href="foundations.html#conditional-probability"><i class="fa fa-check"></i><b>3.8</b> Conditional probability</a></li>
+<li class="chapter" data-level="3.9" data-path="foundations.html"><a href="foundations.html#inverting-conditional-probabilities"><i class="fa fa-check"></i><b>3.9</b> Inverting conditional probabilities</a></li>
+<li class="chapter" data-level="3.10" data-path="foundations.html"><a href="foundations.html#summary-of-day-9"><i class="fa fa-check"></i><b>3.10</b> Summary of Day 9</a></li>
+<li class="chapter" data-level="3.11" data-path="foundations.html"><a href="foundations.html#likelihood-example"><i class="fa fa-check"></i><b>3.11</b> Likelihood example</a></li>
+<li class="chapter" data-level="3.12" data-path="foundations.html"><a href="foundations.html#exponential-probability-density"><i class="fa fa-check"></i><b>3.12</b> Exponential probability density</a><ul>
+<li class="chapter" data-level="3.12.1" data-path="foundations.html"><a href="foundations.html#meanwhile-further-north"><i class="fa fa-check"></i><b>3.12.1</b> Meanwhile, further north …</a></li>
+</ul></li>
+<li class="chapter" data-level="3.13" data-path="foundations.html"><a href="foundations.html#california-earthquake-warning-reprise"><i class="fa fa-check"></i><b>3.13</b> California earthquake warning, reprise</a></li>
+<li class="chapter" data-level="3.14" data-path="foundations.html"><a href="foundations.html#the-price-is-right"><i class="fa fa-check"></i><b>3.14</b> The Price is Right!</a></li>
+<li class="chapter" data-level="3.15" data-path="foundations.html"><a href="foundations.html#from-likelihood-to-bayes"><i class="fa fa-check"></i><b>3.15</b> From likelihood to Bayes</a></li>
+<li class="chapter" data-level="3.16" data-path="foundations.html"><a href="foundations.html#choosing-models-using-maximum-likelihood"><i class="fa fa-check"></i><b>3.16</b> Choosing models using maximum likelihood</a></li>
+<li class="chapter" data-level="3.17" data-path="foundations.html"><a href="foundations.html#day-9-review"><i class="fa fa-check"></i><b>3.17</b> Day 9 Review</a></li>
+<li class="chapter" data-level="3.18" data-path="foundations.html"><a href="foundations.html#reading-what-is-bayesian-statistics"><i class="fa fa-check"></i><b>3.18</b> Reading: <em>What is Bayesian Statistics</em></a></li>
+<li class="chapter" data-level="3.19" data-path="foundations.html"><a href="foundations.html#programming-basics-conditionals"><i class="fa fa-check"></i><b>3.19</b> Programming Basics: Conditionals</a></li>
+<li class="chapter" data-level="3.20" data-path="foundations.html"><a href="foundations.html#ifelse-examples"><i class="fa fa-check"></i><b>3.20</b> <code>ifelse()</code> examples</a></li>
+<li class="chapter" data-level="3.21" data-path="foundations.html"><a href="foundations.html#if-else-examples"><i class="fa fa-check"></i><b>3.21</b> if … else … examples</a></li>
+<li class="chapter" data-level="3.22" data-path="foundations.html"><a href="foundations.html#simple"><i class="fa fa-check"></i><b>3.22</b> Simple</a></li>
+<li class="chapter" data-level="3.23" data-path="foundations.html"><a href="foundations.html#blood-testing"><i class="fa fa-check"></i><b>3.23</b> Blood testing</a></li>
+<li class="chapter" data-level="3.24" data-path="foundations.html"><a href="foundations.html#the-hyper-volume-of-the-hypersphere."><i class="fa fa-check"></i><b>3.24</b> The (hyper)-volume of the hypersphere.</a></li>
+<li class="chapter" data-level="3.25" data-path="foundations.html"><a href="foundations.html#find-the-surface-area-d_n-rn-1."><i class="fa fa-check"></i><b>3.25</b> Find the surface area, <span class="math inline">\(D_n r^{n-1}\)</span>.</a></li>
+<li class="chapter" data-level="3.26" data-path="foundations.html"><a href="foundations.html#in-class-programming-activity-3"><i class="fa fa-check"></i><b>3.26</b> In-class programming activity</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="appendices.html"><a href="appendices.html"><i class="fa fa-check"></i>Appendices</a></li>
+<li class="chapter" data-level="" data-path="connecting-rstudio-to-your-github-repository.html"><a href="connecting-rstudio-to-your-github-repository.html"><i class="fa fa-check"></i>Connecting RStudio to your GitHub repository</a><ul>
+<li class="chapter" data-level="3.27" data-path="connecting-rstudio-to-your-github-repository.html"><a href="connecting-rstudio-to-your-github-repository.html#setting-up-your-math-253-repository"><i class="fa fa-check"></i><b>3.27</b> Setting up your Math 253 repository</a></li>
+<li class="chapter" data-level="3.28" data-path="connecting-rstudio-to-your-github-repository.html"><a href="connecting-rstudio-to-your-github-repository.html#using-your-repository"><i class="fa fa-check"></i><b>3.28</b> Using your repository</a></li>
+<li class="chapter" data-level="3.29" data-path="connecting-rstudio-to-your-github-repository.html"><a href="connecting-rstudio-to-your-github-repository.html#why-are-we-doing-this"><i class="fa fa-check"></i><b>3.29</b> Why are we doing this?</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="instructions-for-the-publishing-system-bookdown.html"><a href="instructions-for-the-publishing-system-bookdown.html"><i class="fa fa-check"></i>Instructions for the publishing system: Bookdown</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/dtkaplan/math253" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notes for Math 253: Statistical Computing and Machine Learning</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="foundations" class="section level1">
+<h1><span class="header-section-number">Topic 3</span> Foundations</h1>
+<p>The topics in this section — linear algebra, Bayes’ rule, and likelihood — underlie many of the machine-learning techniques we will be studying later in the course. Bayes’ rule is a way to <em>flip</em> conditional probabilities. Among other things it allows you to interpret data in the light of previous knowledge and belief (which to be fancy, we can call “theory”). Likelihood is a unifying principle for using data to estimate model parameters and is fundamental in statistical theory. It’s also an essential part of Bayes’ rule. And linear algebra is used throughout statistics and machine learning. Among other things, it’s at work behind the motivation and calculations of regression.</p>
+<div id="linear-algebra" class="section level2">
+<h2><span class="header-section-number">3.1</span> Linear Algebra</h2>
+<p>The idea here is not to teach you linear algebra, but to expose you to some of the terminology and operations of linear algebra, so that when you see it again later in the course you’ll have a good start.</p>
+<ul>
+<li>A vector — a column of numbers. The <em>dimension</em> is the count of numbers in the vector.</li>
+<li>A <em>space</em>: the set of all possible vectors of a given dimension.</li>
+<li><em>Scalar multiplication</em></li>
+<li><em>Vector addition</em>: walk the first vector, then the second.</li>
+<li><em>Linear combination</em>: do scalar multiplication on each vector, then add.</li>
+<li>A <em>matrix</em> — a collection of vectors (all the same dimension).</li>
+<li><em>Dot product</em>: a basic calculations on vectors:
+<ul>
+<li>the length (via Pythagorus)</li>
+<li>the angle between two vectors</li>
+<li>orthogonality: when two vectors are perpendicular, their dot product is zero.</li>
+</ul></li>
+<li>Matrix operation: <em>Linear combination</em>.
+<ul>
+<li>Take a linear combination of the vectors in a matrix. Analogous to taking a trip. Result: a vector representing the end-point of the trip.</li>
+</ul></li>
+<li>The <em>subspace</em> spanned by the matrix: the set of all possible points you can get to with a linear combination.</li>
+<li>Matrix operation: <em>Orthogonalization</em> — Find perpendicular vectors that span the same subspace as a matrix. Example, draw the picture for two vectors <span class="math inline">\(\vec{a}\)</span> and <span class="math inline">\(\vec{b}\)</span>.</li>
+<li>Matrix operation: <em>Projection</em>
+<ul>
+<li>Given a matrix M and a vector V, find the closest point in the subspace of M to the vector V. How? Orthogonalize matrix M, then for each vector in orthogonalized M, subtract out the part of <span class="math inline">\(V\)</span> aligned with that vector.</li>
+</ul></li>
+<li>Matrix operation: <em>inversion</em> — the inverse operation to linear combination.
+<ul>
+<li>given an end-point in the space spanned by M, figure out a linear combination that will get you there.</li>
+</ul></li>
+<li>Vector to vector operation: Outer product. col vector <span class="math inline">\(\times\)</span> row vector.
+<ul>
+<li>Can generalize to operations other than <span class="math inline">\(\times\)</span>.</li>
+</ul></li>
+</ul>
+<p>For linear algebra folks: Projection is the Q part of QR decomposition. R is the solve part. - In economics, they write things in an older style: Solve <span class="math inline">\(M b = y\)</span> for <span class="math inline">\(b\)</span>. But <span class="math inline">\(M\)</span> may not be square, so no regular inverse. - Pre-multiply by <span class="math inline">\(M^T\)</span> to get <span class="math inline">\(M^T M b = M^T y\)</span> - Invert to get <span class="math inline">\(b = (M^T M)^{-1} M^T y\)</span>. The matrix <span class="math inline">\((M^T M)^{-1} M^T\)</span> is called the pseudo inverse.</p>
+</div>
+<div id="arithmetic-of-linear-algebra-operations" class="section level2">
+<h2><span class="header-section-number">3.2</span> Arithmetic of linear algebra operations</h2>
+<ol style="list-style-type: decimal">
+<li>Addition comes for free. Confirm this.</li>
+<li>Scalar multiplication comes for free. Confirm this.</li>
+<li>Write a function for the dot product.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vdot &lt;-<span class="st"> </span>function(v, w) {
+  <span class="kw">sum</span>(v *<span class="st"> </span>w)
+}   </code></pre></div>
+<ol>
+<li>Write a function for the vector length.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vlength &lt;-<span class="st"> </span>function(v) {
+  <span class="kw">sqrt</span>(<span class="kw">vdot</span>(v, v))
+}</code></pre></div>
+<ol>
+<li>Write a function for the cosine of the angle between two vectors.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vangle &lt;-<span class="st"> </span>function(v, w, <span class="dt">degrees =</span> <span class="ot">FALSE</span>) {
+   theta &lt;-<span class="st"> </span><span class="kw">acos</span>(<span class="kw">vdot</span>(v, w) /<span class="st"> </span>(<span class="kw">vlength</span>(v) *<span class="st"> </span><span class="kw">vlength</span>(w)))
+  
+   if (degrees) theta *<span class="st"> </span>(<span class="dv">180</span> /<span class="st"> </span>pi )
+   else theta
+}</code></pre></div>
+<ol>
+<li>Write a function to project vector <span class="math inline">\(\vec{a}\)</span> onto <span class="math inline">\(\vec{b}\)</span>. Subtracting the result from <span class="math inline">\(\vec{a}\)</span> will give the component of <span class="math inline">\(\vec{a}\)</span> orthogonal to <span class="math inline">\(\vec{b}\)</span>. So we can decompose <span class="math inline">\(\vec{a}\)</span> into two components relative to <span class="math inline">\(\vec{b}\)</span>. Show that the supposedly ortogonal component is really orthogonal to <span class="math inline">\(b\)</span> — that is, the dot product is 0.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vproject &lt;-<span class="st"> </span>function(v, onto) { <span class="co"># the red thing</span>
+  onto *<span class="st"> </span><span class="kw">vlength</span>(v) *<span class="st"> </span><span class="kw">cos</span>(<span class="kw">vangle</span>(v, onto)) /<span class="st"> </span><span class="kw">vlength</span>(onto)
+}
+vresid &lt;-<span class="st"> </span>function(v, onto) {
+  v -<span class="st"> </span><span class="kw">vproject</span>(v, onto)
+}</code></pre></div>
+<ol>
+<li>Generalization: Write a function to orthogonalize a matrix M.</li>
+<li>Generalization: Write a function to calculate the projection of V onto M.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vdot &lt;-<span class="st"> </span>function(a, b) {
+  <span class="kw">sum</span>(a *<span class="st"> </span>b)
+}
+vlen &lt;-<span class="st"> </span>function(a) <span class="kw">sqrt</span>(<span class="kw">vdot</span>(a, a))
+vcos &lt;-<span class="st"> </span>function(a, b) { 
+  <span class="kw">vdot</span>(a, b) /<span class="st"> </span>(<span class="kw">vlen</span>(a) *<span class="st"> </span><span class="kw">vlen</span>(b))
+}
+vangle &lt;-<span class="st"> </span>function(a, b, <span class="dt">degrees =</span> <span class="ot">FALSE</span>) {
+  res &lt;-<span class="st"> </span><span class="kw">vcos</span>(a, b)
+  if (degrees) res &lt;-<span class="st"> </span>res *<span class="st"> </span><span class="dv">180</span> /<span class="st"> </span>pi
+  
+  res
+}
+vproj &lt;-<span class="st"> </span>function(a, <span class="dt">onto =</span> b) {
+  <span class="kw">vlen</span>(a) *<span class="st"> </span><span class="kw">vcos</span>(a, onto) *<span class="st"> </span>onto
+}</code></pre></div>
+</div>
+<div id="the-geometry-of-fitting" class="section level2">
+<h2><span class="header-section-number">3.3</span> The geometry of fitting</h2>
+<ul>
+<li>Data tables: cases and variables.</li>
+<li>Case space (the rows of the matrix) and variable space (the columns).</li>
+<li>A quantitative variable is a vector.</li>
+<li>A categorical variable can be encoded as a set of “dummy” vectors.</li>
+<li>Response variable and explanatory variable</li>
+<li>The linear projection problem: find the point spanned by the explanatory variables that’s closest to the response. That linear combination is the best-fitting model.
+<ul>
+<li>One explanatory and the response</li>
+<li>Two explanatory on board and the response on the board (perfect, but meaningless fit)</li>
+<li>Two explanatory in three-space and the response (residual likely)</li>
+</ul></li>
+</ul>
+</div>
+<div id="precision-of-the-coefficients" class="section level2">
+<h2><span class="header-section-number">3.4</span> Precision of the coefficients</h2>
+<p><span class="math display">\[ \mbox{standard error of B coef.} = 
+| \mbox{residuals} | \frac{1}{| \mbox{B} |}\ 
+\frac{1}{\sin( \theta )}\ \frac{1}{\sqrt{n}}\ \sqrt{\frac{n}{n-m}}\]</span></p>
+<ul>
+<li><span class="math inline">\(m\)</span> — degrees of freedom in model</li>
+<li><span class="math inline">\(\theta\)</span> — angle between this model vector and the space spanned by the others</li>
+<li>B — this model vector</li>
+<li>residuals — the residual vector</li>
+</ul>
+</div>
+<div id="likelihood-and-bayes" class="section level2">
+<h2><span class="header-section-number">3.5</span> Likelihood and Bayes</h2>
+<p>We accept that our models won’t produce an <span class="math inline">\(\hat{f}(x)\)</span> that always matches <span class="math inline">\(y\)</span>. There is the <em>irreducible error</em> <span class="math inline">\(\epsilon\)</span>, in addition to variance and bias.</p>
+<ul>
+<li>Variance: a measure of how far off our <span class="math inline">\(\hat{f}()\)</span> is from that we would have been able to construct with an infinite amount of data: <span class="math inline">\(\hat{f}_\infty()\)</span>.</li>
+<li>Bias: a measure of how far off <span class="math inline">\(\hat{f}_\infty()\)</span> is from <span class="math inline">\(f()\)</span>.</li>
+</ul>
+<p>We’re using <em>mean square error</em> or <em>sum of square errors</em> as a measure of how far <span class="math inline">\(\hat{f}(x_i)\)</span> is from the actual result <span class="math inline">\(y_i\)</span>.</p>
+<p>Now we’re going to look at the difference in terms of probabilities: what would be the probability of any particular <span class="math inline">\(\hat{y}_i\)</span> given our <span class="math inline">\(\hat{f}(x_i)\)</span>.</p>
+<p>Let’s quantify probability.</p>
+</div>
+<div id="summary-of-day-8" class="section level2">
+<h2><span class="header-section-number">3.6</span> Summary of Day 8</h2>
+<p>We finished up our brief introduction to linear algebra and started discussing probability. I suggested the rather broad definition of a probability as a number between zero and one.</p>
+</div>
+<div id="day-9-announcements" class="section level2">
+<h2><span class="header-section-number">3.7</span> Day 9 Announcements</h2>
+<p>Make sure you’ve accepted the invitation to the discussion group.</p>
+<p>Reading for Thursday: “What is Bayesian statistics and why everything else is wrong”</p>
+<div id="whats-a-probability" class="section level3">
+<h3><span class="header-section-number">3.7.1</span> What’s a probability?</h3>
+<ul>
+<li>Chances of something happening</li>
+<li>Frequentist: Number of “favorable events” / number of events</li>
+<li>Bayesian. Number between 0 and 1.</li>
+</ul>
+<p>$ p(rain | Sept 29, Libra, Thursday )$</p>
+<ul>
+<li>densities</li>
+<li>cumulative — this is really what probability refers to.</li>
+<li>discrete events</li>
+<li>joint events</li>
+<li>conditional events</li>
+<li>relating joint and conditional: p(A &amp; X) = p(A | X) p(X) = p(X | A) p(A)</li>
+<li>Bayes rule p(A | X) = p(X | A) p(A) / p(X)</li>
+</ul>
+</div>
+</div>
+<div id="conditional-probability" class="section level2">
+<h2><span class="header-section-number">3.8</span> Conditional probability</h2>
+<p>The probability of an event in a <em>given</em> state of the world. That state of the world might have been set up by another event having occurred.</p>
+</div>
+<div id="inverting-conditional-probabilities" class="section level2">
+<h2><span class="header-section-number">3.9</span> Inverting conditional probabilities</h2>
+<p>What we want is <span class="math inline">\(p(\mbox{state of world} | \mbox{observations})\)</span>. I’ll write this <span class="math inline">\(p(\theta | {\cal O})\)</span></p>
+<p>Tree with cancer (benign or malignant) and cell shape (round, elongated, ruffled)</p>
+<p>SPACE FOR THE TREE</p>
+<p>SEE PAPER NOTES. (remember to transcribe them here)</p>
+<p>, e.g. observe ruffled, what is the chance that the tumor is malignant.</p>
+<p>Of the 10000 people in the study,<br />
+* 7000 had benign tumors of which 10% or 700 had ruffled cells * 3000 had malignant tumors of whom 60% or 1800 had ruffled cells</p>
+<p>So, of the 2500 people with ruffled cells, 1800 had malignant tumors. <span class="math inline">\(p( \theta | {\cal O} )\)</span></p>
+</div>
+<div id="summary-of-day-9" class="section level2">
+<h2><span class="header-section-number">3.10</span> Summary of Day 9</h2>
+<p>Announcement: Read <a href="../Resources/Likelihood-Lavine.pdf">“What is Bayesian Statistics and why everything else is wrong.”</a></p>
+<p>We derived Bayes’ rule (simple!) from fundamental principles of probability. There are three components of the formula that have individual names:</p>
+<ul>
+<li>The <em>prior</em>. What you know before you examine the data.</li>
+<li>The <em>likelihood</em>. A conditional probability. Given a theory (that is, a way that you think the world works), what is the probability of the data you have observed.
+<ul>
+<li>Typically a likelihood is built around a model that has both a deterministic and a random component. For instance, the output <span class="math inline">\(y_i\)</span> depends on an input <span class="math inline">\(x_i\)</span> according to <span class="math inline">\(y_i = a + b x + \epsilon\)</span>.</li>
+<li>We specify the properties (e.g., the variance) of the random component as part of the theory. For instance, we might specify that <span class="math inline">\(\epsilon\)</span> is drawn from a normal distribution with mean zero and variance <span class="math inline">\(c^2\)</span>.</li>
+<li>The likelihood can be calculated by multiplying together the probabilities of each of values the data indicates. Continuing with the example in the previous points, <span class="math inline">\(\epsilon_i = y_i - (a + b x_i)\)</span>. The calculation would be likelihood <span class="math inline">\(= \prod_i\)</span><code>dnorm(</code><span class="math inline">\(\epsilon_i\)</span><code>, mean = 0, sd = c)</code>.</li>
+<li>In order to have acceptable performance in computer arithmetic, we generally calculate the <em>log likelihood</em>. This allows us to turn the product in the above point into a sum.</li>
+</ul></li>
+<li>The <em>posterior</em>. Our updated beliefs given the data.</li>
+</ul>
+<p>Controversy! Many people believe that performing calculations using a prior is unscientific. This is because the prior reflects the views of the researcher, rather than a solid fact of reality. Nonetheless, everyone agrees that the likelihood is meaningful. Many of the estimation problems of statistics amount to finding parameters that maximize the likelihood. (People who think that using a prior is a reasonable way of doing business, like the author, point out that the model itself is a subjective choice.)</p>
+<p>The in-class programming task involved calculating a likelihood with a model that involved the exponential probability distribution. In that task, we were not doing the full Bayesian calculation. Instead, we took as our point estimate of the parameter the <em>argmax</em>, that is, the parameter value that produces the highest likelihood.</p>
+</div>
+<div id="likelihood-example" class="section level2">
+<h2><span class="header-section-number">3.11</span> Likelihood example</h2>
+<p>Consider a mechanism like that behind Figure 3.1 in ISLR.</p>
+<div class="figure">
+<img src="Images/Chapter-3/3.1.png" alt="Figure 3.1 from ISRL" />
+<p class="caption">Figure 3.1 from ISRL</p>
+</div>
+<p>There seems to be a straight-line relationship between Sales and TV. You can also see that the variance of the residuals is bigger for larger values of TV. The usual least-squares estimator is based on maximizing the likelihood of a model like <span class="math inline">\(\mbox{Sales} = a + b \mbox{TV} + \epsilon\)</span>, where <span class="math inline">\(\epsilon\)</span> is “iid normal”. But we know the <span class="math inline">\(\epsilon\)</span> estimated from the data won’t be iid. Our model is therefore wrong. That’s not necessarily a problem, since all models are wrong (they are models after all!) but some models are useful. So the iid model might be useful.</p>
+<p>Let’s make some similar data on which we can demonstrate a likelihood calculation.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">TV &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">500</span>)
+Sales &lt;-<span class="st"> </span><span class="fl">3.5</span> +<span class="st"> </span><span class="dv">12</span> *<span class="st"> </span>TV +<span class="st"> </span>(<span class="dv">3</span>*<span class="st"> </span>TV +<span class="st"> </span><span class="fl">0.75</span>) *<span class="st"> </span><span class="kw">rnorm</span>(<span class="kw">length</span>(TV))
+<span class="kw">plot</span>(TV, Sales, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">25</span>))</code></pre></div>
+<p><img src="Class_Notes__Statistical_Computing___Machine_Learning_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p>Here’s a simple calculation with a “wrong” model:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lm</span>(Sales ~<span class="st"> </span>TV)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Sales ~ TV)
+## 
+## Coefficients:
+## (Intercept)           TV  
+##       3.391       11.910</code></pre>
+<p>If we like, however, we can do the calculation with a “better” model, say, taking the following as the model behind our likelihood.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Sales_likelihood &lt;-<span class="st"> </span>function(params) {
+  a &lt;-<span class="st"> </span>params[<span class="dv">1</span>]
+  b &lt;-<span class="st"> </span>params[<span class="dv">2</span>]
+  c &lt;-<span class="st"> </span>params[<span class="dv">3</span>]
+  d &lt;-<span class="st"> </span>params[<span class="dv">4</span>]
+
+  <span class="co"># Negate so the the minimization routine will produce the maximum likelihood</span>
+  -<span class="kw">sum</span>(<span class="kw">log</span>(<span class="kw">dnorm</span>(Sales -<span class="st"> </span>(a +<span class="st"> </span>b *<span class="st"> </span>TV), <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> c +<span class="st"> </span>d *<span class="st"> </span>TV )))
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Sales_likelihood</span>(<span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">1</span>, <span class="dv">1</span>))</code></pre></div>
+<pre><code>## [1] 1263.285</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nlm</span>(Sales_likelihood, <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">1</span>, <span class="dv">1</span>))</code></pre></div>
+<pre><code>## $minimum
+## [1] 1040.835
+## 
+## $estimate
+## [1]  3.4181833 11.8437802  0.6808023  2.8594718
+## 
+## $gradient
+## [1]  1.303770e-05  1.746993e-06 -1.318767e-05  8.905789e-06
+## 
+## $code
+## [1] 1
+## 
+## $iterations
+## [1] 23</code></pre>
+</div>
+<div id="exponential-probability-density" class="section level2">
+<h2><span class="header-section-number">3.12</span> Exponential probability density</h2>
+<p>What’s the time between random events, e.g. 500-year storms or earthquakes in a region that has a big one roughly every 100 years?</p>
+<p><a href="http://www.latimes.com/local/lanow/la-me-ln-earthquake-san-andreas-20161003-snap-story.html">Earthquake warning in Southern California, late Sept. 2016</a></p>
+<blockquote>
+<p>But over the last week, anxieties were particularly heightened, and the natural denial that is part of living in earthquake country was harder to pull off.</p>
+</blockquote>
+<blockquote>
+<p>A swarm of seismic activity at the Salton Sea that began a week ago prompted scientists to say there was an elevated risk for a big San Andreas fault earthquake. By Monday [Oct 3, 2016], that risk had lessened.</p>
+</blockquote>
+<blockquote>
+<p>But the impact of that warning was still being felt. For some, it meant checking quake safety lists. Others looked at preparing for the Big One, such as bolting bookshelves to walls, installing safety latches on kitchen cabinets and strapping down televisions.</p>
+</blockquote>
+<p>Why has the risk gotten smaller? How much smaller?</p>
+<div id="meanwhile-further-north" class="section level3">
+<h3><span class="header-section-number">3.12.1</span> Meanwhile, further north …</h3>
+<p>From <a href="http://www.newyorker.com/magazine/2015/07/20/the-really-big-one">*The Really Big One</a>, an article in the New Yorker about discoveries in the last few decades that established a high risk in the Pacific Northwest for an earthquake of magnitude 9.</p>
+<blockquote>
+<p>We now know that the Pacific Northwest has experienced forty-one subduction-zone earthquakes in the past ten thousand years. If you divide ten thousand by forty-one, you get two hundred and forty-three, which is Cascadia’s recurrence interval: the average amount of time that elapses between earthquakes. That timespan is dangerous both because it is too long—long enough for us to unwittingly build an entire civilization on top of our continent’s worst fault line—and because it is not long enough. Counting from the earthquake of 1700, we are now three hundred and fifteen years into a two-hundred-and-forty-three-year cycle.</p>
+</blockquote>
+<blockquote>
+<p>It is possible to quibble with that number. Recurrence intervals are averages, and averages are tricky: ten is the average of nine and eleven, but also of eighteen and two. It is not possible, however, to dispute the scale of the problem.</p>
+</blockquote>
+<p>The last paragraph …</p>
+<blockquote>
+<p>All day long, just out of sight, the ocean rises up and collapses, spilling foamy overlapping ovals onto the shore. Eighty miles farther out, ten thousand feet below the surface of the sea, the hand of a geological clock is somewhere in its slow sweep. All across the region, seismologists are looking at their watches, wondering how long we have, and what we will do, before geological time catches up to our own.</p>
+</blockquote>
+<p>Have students propose distributions and justify them.</p>
+</div>
+</div>
+<div id="california-earthquake-warning-reprise" class="section level2">
+<h2><span class="header-section-number">3.13</span> California earthquake warning, reprise</h2>
+<p>The Salton Sea earthquake happens. Our prior on large <span class="math inline">\(\lambda\)</span> immediately surges, so there is a significant probability of a quake in the next hours. But as more time goes by, that probability goes down.</p>
+<ul>
+<li>We’re interested in <span class="math inline">\(\lambda\)</span> in the exponential distribution <span class="math inline">\(\lambda \exp(-lambda t)\)</span> . This has a cumulative <span class="math inline">\(1 - \exp(-\lambda t)\)</span>.</li>
+<li>Observation: Earthquake hasn’t occurred after D days. Likelihood is 1 minus the cumulative, or <span class="math inline">\(\exp(-\lambda D)\)</span>.</li>
+<li>Prior: a mix of the conventional (very small lambda) and some small probability of very high lambda.</li>
+</ul>
+<p>Plot out the posterior for different values of D:</p>
+<ul>
+<li>D = 0.1 two hours after the quake.</li>
+<li>D = 1 a day after the quake</li>
+<li>D = 3 three days after the quake</li>
+</ul>
+<p>The area to the right of 5 days (in expected time to the next quake) is the conventional model.</p>
+<p>Plot this out as a function of <span class="math inline">\(1/\lambda\)</span>, so we need to adjust the density by <span class="math inline">\(| df/d\lambda | = | d \frac{1}{\lambda} / d\lambda| = \lambda^2\)</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">D &lt;-<span class="st"> </span><span class="dv">30</span>
+lambda &lt;-<span class="st"> </span><span class="dv">100</span>/(<span class="dv">1</span>:<span class="dv">5000</span>) 
+<span class="co"># prior: proportional to lambda: </span>
+<span class="co">#  small lambda unlikely, so short time to next earthquake</span>
+prior &lt;-<span class="st"> </span>function(lambda) (<span class="kw">ifelse</span>(lambda &lt;<span class="st"> </span>.<span class="dv">2</span>, <span class="dv">25</span>, <span class="dv">1</span>/lambda))
+<span class="kw">plot</span>(lambda, ( <span class="kw">prior</span>(lambda)), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">5</span>))</code></pre></div>
+<p><img src="Class_Notes__Statistical_Computing___Machine_Learning_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="dv">1</span>/lambda, <span class="kw">exp</span>( -<span class="st"> </span>lambda *<span class="st"> </span>D) *<span class="st"> </span><span class="kw">prior</span>(lambda) *<span class="st"> </span>(lambda^<span class="dv">2</span>), 
+     <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Expected time to the big one, days.&quot;</span>,
+     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">10</span>))
+<span class="kw">lines</span>(<span class="dv">1</span>/lambda, lambda*.<span class="dv">005</span>/<span class="kw">prior</span>(lambda), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</code></pre></div>
+<p><img src="Class_Notes__Statistical_Computing___Machine_Learning_files/figure-html/unnamed-chunk-35-2.png" width="672" /></p>
+<p>For small D, the “urgency” part of the prior overwhelms the likelihood. As D gets bigger, we revert to the standard model.</p>
+</div>
+<div id="the-price-is-right" class="section level2">
+<h2><span class="header-section-number">3.14</span> The Price is Right!</h2>
+<p><em>The Price is Right</em> is a game show in which contestants compete to guess the price of a prize. The winner is the person whose guess is closest to the actual price considering just those contestants who guesses a price less than or equal to the actual price.</p>
+<p>Strategy:</p>
+<ol style="list-style-type: decimal">
+<li>First person to guess: an honest guess, hedged on the low side.</li>
+<li>Second person: bias guess to be far from the first person’s guess.</li>
+<li>Third person:</li>
+<li>Fourth person: Zero, or just above one of the other guesses.</li>
+</ol>
+<p>Play this game. Call down 4 contestants. What’s the price of this yacht?</p>
+<div class="figure">
+<img src="Images/yacht-04.jpg" />
+
+</div>
+<p>Now, suppose rather than being a strategic game biased toward the last guesser, we wanted to evaluate political prognosticators. The winner should be the person who makes the best prediction rather than the best guess.</p>
+<p>Game: Predict the number of electoral college votes for Donald Trump.</p>
+<p>Game: Predict the results of the Ukrainian Parliament’s <a href="http://www.bbc.com/news/world-europe-35591605">vote of no confidence</a> in Prime Minister Arseniy Yatsenyuk. How many votes for no confidence were there.<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
+<p>Play this game asking people to draw the probability distribution of their prediction.</p>
+<ul>
+<li>Suppose you know something about the contestants.
+<ul>
+<li>David Moore from International Studies</li>
+<li>Gary Krueger from Economics</li>
+<li>Sybill Trelawney from Divination Science</li>
+<li>Jesse Ventura from Political Science</li>
+</ul></li>
+<li>You’ve been asked to assign a probability to each contestant. You’ll use this probability to weight each of their future predictions.</li>
+</ul>
+<p>Have the contestants keep their identity secret at first.</p>
+<p>Draw a density on the board. Give them a vertical scale for density, insisting that each of their densities has area one.</p>
+<ol style="list-style-type: decimal">
+<li><p><em>The Likelihood Game</em>: Who won? How to evaluate the predictions?</p></li>
+<li><em>The Bayesian Game</em>:
+<ul>
+<li>The contestants reveal their identity</li>
+<li>What’s your posterior probability on each of them.</li>
+</ul></li>
+</ol>
+</div>
+<div id="from-likelihood-to-bayes" class="section level2">
+<h2><span class="header-section-number">3.15</span> From likelihood to Bayes</h2>
+<p>Multiply likelihood by prior probability. Normalize so that total probability is 1.</p>
+</div>
+<div id="choosing-models-using-maximum-likelihood" class="section level2">
+<h2><span class="header-section-number">3.16</span> Choosing models using maximum likelihood</h2>
+<ul>
+<li>We model the error as random, with a probability distribution we choose. Often this distribution has parameters.</li>
+<li>To find the error, we need to make an assumption of what the parameters of the deterministic model are.
+<ul>
+<li>Make that assumption.</li>
+<li>Make a similar assumption for the parameters of the probability distribution.</li>
+<li>Find the errors.</li>
+<li>Calculate the probability of those errors given the probability distribution that we choose. That’s the likelihood for the assumed parameters.</li>
+</ul></li>
+<li>Repeat in order to modify the assumptions to increase the likelihood.</li>
+</ul>
+<p>Straight line model:</p>
+<p>Gaussian errors:</p>
+<p><span class="math display">\[f(x \; | \; \mu, \sigma) = \frac{1}{\sigma\sqrt{2\pi} } \; e^{ -\frac{(x-\mu)^2}{2\sigma^2} }\]</span></p>
+<p>What happens when you take the log … why it’s sum of squares.</p>
+<p>Question: What about minimizing the absolute value of the residuals, rather than the square? - Corresponds to a two-sided exponential distribution like <span class="math inline">\(\frac{\lambda}{2} \exp(-\lambda |x|)\)</span></p>
+</div>
+<div id="day-9-review" class="section level2">
+<h2><span class="header-section-number">3.17</span> Day 9 Review</h2>
+<p>Likelihood.</p>
+<ul>
+<li>Choose the “best” of a set of competing models. Often the set is parameterized by quantities such as slope <span class="math inline">\(m\)</span>, intercept <span class="math inline">\(b\)</span>, rate , mean, standard deviation, …</li>
+<li>“Figure of merit” for each model is the probability of the data given the model.</li>
+<li>Often, models have a deterministic part (e.g. <span class="math inline">\(m x + b\)</span>) and a random part <span class="math inline">\(\epsilon\)</span>.</li>
+<li>Part of the model is our choice for the distribution of <span class="math inline">\(\epsilon\)</span>.</li>
+<li>Given that distribution, and treating each error <span class="math inline">\(\epsilon_i\)</span> as random, to calculate the likelihood we find the probability of each <span class="math inline">\(\epsilon_i\)</span> and multiply them together.</li>
+<li>For practical reasons (both algebraic and computational) we work with the log-likelihood.</li>
+</ul>
+<p>Example: Mean and standard deviation</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_vals &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">100</span>, <span class="dt">min =</span> <span class="dv">20</span>, <span class="dt">max =</span> <span class="dv">50</span>)
+<span class="co"># data_vals &lt;- rexp(10000, rate = 1) </span>
+<span class="kw">mean</span>(data_vals)</code></pre></div>
+<pre><code>## [1] 35.6361</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">median</span>(data_vals)</code></pre></div>
+<pre><code>## [1] 35.42998</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sd</span>(data_vals)</code></pre></div>
+<pre><code>## [1] 8.917119</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">IQR</span>(data_vals)</code></pre></div>
+<pre><code>## [1] 15.23678</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">LL_gaussian &lt;-<span class="st"> </span>function(params) {
+  center =<span class="st"> </span>params[<span class="dv">1</span>]
+  spread =<span class="st"> </span>params[<span class="dv">2</span>]
+  <span class="kw">sum</span>(<span class="kw">log</span>(<span class="kw">dnorm</span>(data_vals, <span class="dt">mean =</span> center, <span class="dt">sd =</span> spread)))
+}
+<span class="kw">optim</span>(<span class="dt">par =</span> <span class="kw">c</span>(<span class="dv">25</span>, <span class="dv">10</span>), LL_gaussian, <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">fnscale =</span> -<span class="dv">1</span>))</code></pre></div>
+<pre><code>## $par
+## [1] 35.636783  8.873492
+## 
+## $value
+## [1] -360.1886
+## 
+## $counts
+## function gradient 
+##       57       NA 
+## 
+## $convergence
+## [1] 0
+## 
+## $message
+## NULL</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">LL_exp &lt;-<span class="st"> </span>function(params) {
+  center =<span class="st"> </span>params[<span class="dv">1</span>]
+  spread =<span class="st"> </span>params[<span class="dv">2</span>]
+  <span class="kw">sum</span>(<span class="kw">log</span>(<span class="kw">dexp</span>(<span class="kw">abs</span>(data_vals -<span class="st"> </span>center), <span class="dt">rate =</span> <span class="dv">1</span>/spread)))
+}
+<span class="kw">optim</span>(<span class="dt">par =</span> <span class="kw">c</span>(<span class="dv">25</span>, <span class="dv">10</span>), LL_exp, <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">fnscale =</span> -<span class="dv">1</span>))</code></pre></div>
+<pre><code>## $par
+## [1] 35.478397  7.760706
+## 
+## $value
+## [1] -304.917
+## 
+## $counts
+## function gradient 
+##       53       NA 
+## 
+## $convergence
+## [1] 0
+## 
+## $message
+## NULL</code></pre>
+</div>
+<div id="reading-what-is-bayesian-statistics" class="section level2">
+<h2><span class="header-section-number">3.18</span> Reading: <em>What is Bayesian Statistics</em></h2>
+<p>Link to <a href="../Resources/Likelihood-Lavine.pdf">“What is Bayesian Statistics and why everything else is wrong.”</a></p>
+<p>Go through sections 1, 2, and 4 in class: about the likelihood calculation, the p-value calculation, and the philosophical criticism of p-values.</p>
+<p>Emphasize the choice of what detail of the sampling model to use. Just this school in isolation? This school as the max of 1000 schools?</p>
+</div>
+<div id="programming-basics-conditionals" class="section level2">
+<h2><span class="header-section-number">3.19</span> Programming Basics: Conditionals</h2>
+<ul>
+<li>a function: <code>ifelse(condition, yes_value, no_value)</code> Carries out the test for each element in the vector.</li>
+<li>a special form: <code>if (condition) {statements} else {statements}</code></li>
+</ul>
+<p>Both of these can be nested.</p>
+</div>
+<div id="ifelse-examples" class="section level2">
+<h2><span class="header-section-number">3.20</span> <code>ifelse()</code> examples</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ISLR)</code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;ISLR&#39;</code></pre>
+<pre><code>## The following object is masked _by_ &#39;.GlobalEnv&#39;:
+## 
+##     College</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(Default) <span class="co"># loan balances and defaults.</span></code></pre></div>
+<p>Determine annual payment amount for student loans. E.g.</p>
+<ul>
+<li>If it’s a student, no payment, otherwise $100</li>
+<li>If it’s a student, no payment. Otherwise 10% of the balance.</li>
+<li>If the balance is less than 10 times the income, 10% of the balance, otherwise 5% of income.</li>
+<li>For those in default, nothing. For the others, any of the above three schemes.</li>
+</ul>
+</div>
+<div id="if-else-examples" class="section level2">
+<h2><span class="header-section-number">3.21</span> if … else … examples</h2>
+<ol style="list-style-type: decimal">
+<li>Calculate the median of a set of values.
+<ul>
+<li>if an odd number in the set, then the middle value</li>
+<li>if an even number in the set, the mean of the two values in the middle.</li>
+</ul></li>
+<li><code>pmax()</code> is a function that takes the case-by-case maximum of each of two input vectors. We’re going to add some error checking.</li>
+</ol>
+<ul>
+<li>Unless the vectors are either numeric or character, and of the same type, throw an error.</li>
+<li>Add an argument <code>handle_na</code> which, if <code>TRUE</code> replaces <code>NA</code> with <code>-Inf</code> for the purposes of the comparison.</li>
+<li>Add an argument <code>na_rid=</code>
+<ul>
+<li>if “either”, throw away the cases where either of the values is <code>NA</code></li>
+<li>if “both”, throw away cases where both are <code>NA</code> and otherwise handle <code>NA</code> as <code>-Inf</code></li>
+<li>if “neither”, keep all cases.</li>
+</ul></li>
+</ul>
+</div>
+<div id="simple" class="section level2">
+<h2><span class="header-section-number">3.22</span> Simple</h2>
+<p>Write functions that return, case by case,</p>
+<ul>
+<li>the maximum of two vectors.</li>
+<li>three vectors</li>
+<li>four vectors</li>
+<li><p>five vectors</p></li>
+<li><p>Write a supervisory function that does it for 1 to 5 vectors. Use <code>...</code></p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">max_in_parallel &lt;-<span class="st"> </span>function(...) {
+  Vecs &lt;-<span class="st"> </span><span class="kw">list</span>(...)
+}</code></pre></div>
+<ul>
+<li>Write a supervisory function that will handle more than 5 vectors.</li>
+</ul>
+</div>
+<div id="blood-testing" class="section level2">
+<h2><span class="header-section-number">3.23</span> Blood testing</h2>
+<blockquote>
+<p>It is known that 5% of the members of a population have disease X, which can be discovered by a blood test (that is assumed to perfectly identify both diseased and nondiseased populations). Suppose that N people are to be tested, and the cost of the test is nontrivial. The testing can be done in two ways:</p>
+</blockquote>
+<ol style="list-style-type: lower-alpha">
+<li>Everyone can be tested separately; or</li>
+<li>the blood samples of k people are pooled to be analyzed.</li>
+</ol>
+<blockquote>
+<p>Assume that N = nk with n being an integer. If the test is negative, all the people tested are healthy (that is, just this one test is needed). If the test result is positive, each of the k people must be tested separately (that is, a total of k + 1 tests are needed for that group).</p>
+</blockquote>
+<ol style="list-style-type: lower-roman">
+<li>For fixed k what is the expected number of tests needed in (B)?</li>
+<li>Find the k that will minimize the expected number of tests in (B).</li>
+<li>Using the k that minimizes the number of tests, on average how many tests does (B) save in comparison with (A)? Be sure to check your answer using an empirical simulation.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ntests &lt;-<span class="st"> </span>function(<span class="dt">p =</span> <span class="fl">0.05</span>, <span class="dt">npools =</span> <span class="dv">500</span>, <span class="dt">pool_size =</span> <span class="dv">10</span>, <span class="dt">nsims=</span><span class="dv">1000</span>) {
+  <span class="co"># generate the number of infected people in each pool</span>
+  infected_in_pool &lt;-<span class="st"> </span><span class="kw">rbinom</span>(npools, <span class="dt">p =</span> p, <span class="dt">size =</span> pool_size)
+  <span class="co"># if one or more in a pool is infected, pool_size+1 tests, </span>
+  <span class="co"># otherwise 1 test</span>
+  tests_in_each_pool &lt;-<span class="st"> </span><span class="kw">ifelse</span>(infected_in_pool &gt;<span class="st"> </span><span class="dv">0</span>, pool_size +<span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>)
+  <span class="co"># total across all pools</span>
+  <span class="kw">sum</span>(tests_in_each_pool)
+}</code></pre></div>
+<p>Can we do this recursively to get more savings?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">people &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">100000</span>) &lt;<span class="st"> </span>.<span class="dv">05</span>
+ntests &lt;-<span class="st"> </span>function(population) {
+  if ( (!<span class="st"> </span><span class="kw">any</span>(population)) ||<span class="st"> </span><span class="kw">length</span>(population) ==<span class="st"> </span><span class="dv">1</span>) {
+    <span class="co"># we&#39;re done!</span>
+    total_tests &lt;-<span class="st"> </span><span class="dv">1</span>
+  } else {
+    <span class="co"># Split into two groups and test again</span>
+    split_point &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">length</span>(population)/<span class="dv">2</span>)
+    group1 &lt;-<span class="st"> </span>population[<span class="dv">1</span>:split_point]
+    group2 &lt;-<span class="st"> </span>population[(split_point +<span class="st"> </span><span class="dv">1</span>) :<span class="st"> </span><span class="kw">length</span>(population)]
+    total_tests &lt;-
+<span class="st">      </span><span class="kw">ntests</span>(group1) +<span class="st"> </span>
+<span class="st">      </span><span class="kw">ntests</span>(group2) +<span class="st"> </span><span class="dv">1</span>  
+    <span class="co"># + 1 for the test that said we need to divide the groups</span>
+  } 
+  
+  total_tests
+}</code></pre></div>
+<p>How many tests needed for a population of 10,000 with a prevalence of 1%?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">do</span>(<span class="dv">10</span>) *<span class="st"> </span><span class="kw">ntests</span>(<span class="kw">runif</span>(<span class="dv">10000</span>) &lt;<span class="st"> </span><span class="fl">0.01</span>)</code></pre></div>
+<pre><code>##    ntests
+## 1    1269
+## 2    1379
+## 3    1485
+## 4    1447
+## 5    1277
+## 6    1189
+## 7    1245
+## 8    1511
+## 9    1351
+## 10   1263</code></pre>
+<p>Try other prevalences to find prevalence at which it’s no longer worthwhile to pool the samples.</p>
+</div>
+<div id="the-hyper-volume-of-the-hypersphere." class="section level2">
+<h2><span class="header-section-number">3.24</span> The (hyper)-volume of the hypersphere.</h2>
+<p>A framework for the volumes: <span class="math inline">\(C_n r^n\)</span>.</p>
+<ul>
+<li><span class="math inline">\(n=1\)</span> — the line segment of length <span class="math inline">\(2r\)</span>. Volume is <span class="math inline">\(2r^1\)</span> so <span class="math inline">\(C_n = 2\)</span>.</li>
+<li><span class="math inline">\(n=2\)</span> — the circle of radius <span class="math inline">\(r\)</span>: volume is <span class="math inline">\(\pi r^2\)</span>, so <span class="math inline">\(C_2 = \pi\)</span></li>
+<li><span class="math inline">\(n=3\)</span> — the sphere of radius <span class="math inline">\(r\)</span>: volume is <span class="math inline">\(\frac{4}{3}\pi r^3\)</span>, so <span class="math inline">\(C_3 = \frac{4}{3} \pi\)</span></li>
+</ul>
+<p><strong>TASK</strong>: Find <span class="math inline">\(C_4\)</span>, <span class="math inline">\(C_5\)</span>, … , <span class="math inline">\(C_8\)</span>.</p>
+<p><strong>Programming approach</strong>:</p>
+<ol style="list-style-type: lower-alpha">
+<li>Write the logic. Give explicit names to all quantities that you might want to change later.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dim &lt;-<span class="st"> </span><span class="dv">3</span>  <span class="co"># might vary</span>
+npts &lt;-<span class="st"> </span><span class="dv">1000</span>  <span class="co"># might vary</span>
+pts &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">runif</span>(dim *<span class="st"> </span>npts, <span class="dt">min=</span><span class="dv">0</span>, <span class="dt">max=</span><span class="dv">1</span>), <span class="dt">ncol=</span>dim)
+dists &lt;-<span class="st"> </span><span class="kw">rowSums</span>( pts^<span class="dv">2</span> )
+(<span class="dv">2</span>^dim) *<span class="st"> </span><span class="kw">sum</span>(dists &lt;=<span class="st"> </span><span class="dv">1</span>) /<span class="st"> </span><span class="kw">length</span>(dists)</code></pre></div>
+<pre><code>## [1] 4.016</code></pre>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Make the “might vary” quantities the arguments to a function that encapsulates the rest of the logic.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sphere_volume &lt;-<span class="st"> </span>function(<span class="dt">dim=</span><span class="dv">3</span>, <span class="dt">npts=</span><span class="dv">1000000</span>) {
+  pts &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">runif</span>(dim *<span class="st"> </span>npts, <span class="dt">min=</span><span class="dv">0</span>, <span class="dt">max=</span><span class="dv">1</span>), <span class="dt">ncol=</span>dim)
+  dists &lt;-<span class="st"> </span><span class="kw">rowSums</span>( pts^<span class="dv">2</span> )
+  
+  (<span class="dv">2</span>^dim) *<span class="st"> </span><span class="kw">sum</span>(dists &lt;=<span class="st"> </span><span class="dv">1</span>) /<span class="st"> </span><span class="kw">length</span>(dists)
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sapply</span>(<span class="dv">1</span>:<span class="dv">20</span>, <span class="dt">FUN =</span> sphere_volume)</code></pre></div>
+<pre><code>##  [1] 2.000000 3.143060 4.191616 4.930064 5.285312 5.171200 4.690304
+##  [8] 4.048640 3.213824 2.513920 1.968128 1.257472 0.901120 0.540672
+## [15] 0.360448 0.327680 0.393216 0.000000 0.000000 0.000000</code></pre>
+<p>Volume of the unit hyper-cube:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span> ^<span class="st"> </span>(<span class="dv">1</span>:<span class="dv">20</span>)</code></pre></div>
+<pre><code>##  [1]       2       4       8      16      32      64     128     256
+##  [9]     512    1024    2048    4096    8192   16384   32768   65536
+## [17]  131072  262144  524288 1048576</code></pre>
+<p>So the volume of the encompassed hyper-sphere goes to zero percent of the volume of the encompassing hyper-cube.</p>
+<p><strong>Theoretical formula</strong>: <span class="math inline">\(V_n(R) = \frac{\pi^{n/2}}{\Gamma(\frac{n}{2} + 1)}R^n\)</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sapply</span>(<span class="dv">1</span>:<span class="dv">20</span>, <span class="dt">FUN=</span>function(n) (pi^(n/<span class="dv">2</span>) /<span class="st"> </span><span class="kw">gamma</span>(n/<span class="dv">2</span> +<span class="st"> </span><span class="dv">1</span>)) )</code></pre></div>
+<pre><code>##  [1] 2.00000000 3.14159265 4.18879020 4.93480220 5.26378901 5.16771278
+##  [7] 4.72476597 4.05871213 3.29850890 2.55016404 1.88410388 1.33526277
+## [13] 0.91062875 0.59926453 0.38144328 0.23533063 0.14098111 0.08214589
+## [19] 0.04662160 0.02580689</code></pre>
+</div>
+<div id="find-the-surface-area-d_n-rn-1." class="section level2">
+<h2><span class="header-section-number">3.25</span> Find the surface area, <span class="math inline">\(D_n r^{n-1}\)</span>.</h2>
+<ul>
+<li><span class="math inline">\(D_1 = 0\)</span></li>
+<li><span class="math inline">\(D_2 = 2 \pi\)</span></li>
+<li><span class="math inline">\(D_3 = 4 \pi\)</span></li>
+<li>Find <span class="math inline">\(D_4\)</span>, <span class="math inline">\(D_5\)</span>, …, <span class="math inline">\(D_7\)</span></li>
+<li>Two ways:
+<ol style="list-style-type: decimal">
+<li>Take the derivative wrt <span class="math inline">\(r\)</span> of the volume.</li>
+<li>Find the fraction of points in a narrow shell between distance 0.99 and 1.01 from the origin.</li>
+</ol></li>
+</ul>
+</div>
+<div id="in-class-programming-activity-3" class="section level2">
+<h2><span class="header-section-number">3.26</span> In-class programming activity</h2>
+<p>Explanation of draw poker</p>
+<ul>
+<li>cards: ranks and suits</li>
+<li>hands: royal flush, straight-flush,</li>
+</ul>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Actual result for you to compare your prediction to: one-hundred ninety-four out of three-hundred thirty-nine.<a href="foundations.html#fnref1">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="linear-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="appendices.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/dtkaplan/math253/edit/master/310-Foundations.Rmd",
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

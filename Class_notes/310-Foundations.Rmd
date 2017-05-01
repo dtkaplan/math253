@@ -1,5 +1,14 @@
-# Foundations: linear algebra, likelihood and Bayes' rule
-
+---
+title: "Topic 3: Foundations: linear algebra, likelihood and Bayes' rule"
+author: 'Math 253: Statistical Computing & Machine Learning'
+date: "Daniel Kaplan"
+output:
+  tufte::tufte_html: default
+  tufte::tufte_handout:
+    latex_engine: xelatex
+  tufte::tufte_book:
+    latex_engine: xelatex
+---
 ```{r include = FALSE}
 library(mosaic)
 ```

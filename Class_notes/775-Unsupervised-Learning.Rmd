@@ -1,4 +1,15 @@
-# Unsupervised learning
+---
+title: 'Topic 10: Unsupervised learning'
+author: 'Math 253: Statistical Computing & Machine Learning'
+date: "Daniel Kaplan"
+output:
+  tufte::tufte_html: default
+  tufte::tufte_book:
+    latex_engine: xelatex
+  tufte::tufte_handout:
+    latex_engine: xelatex
+  html_document: default
+---
 
 ```{r include=FALSE}
 require(mosaic)

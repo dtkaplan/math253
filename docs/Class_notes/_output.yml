@@ -1,0 +1,17 @@
+bookdown::gitbook:
+  css: style.css
+  config:
+    toc:
+      before: |
+        <li><a href="./">Math 253 Notes</a></li>
+      after: |
+        <li><a href="https://github.com/dtkaplan/math253" target="blank">Published with bookdown</a></li>
+      collapse: section
+    edit:
+      link: https://github.com/dtkaplan/math253/edit/master/%s
+bookdown::pdf_book:
+  includes:
+    in_header: preamble.tex
+  latex_engine: xelatex
+  citation_package: natbib
+bookdown::epub_book: default

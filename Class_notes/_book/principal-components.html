@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Notes for Statistical Computing &amp; Machine Learning</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Notes and other materials for Math 253 at Macalester College.">
+  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Notes for Statistical Computing &amp; Machine Learning" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Notes and other materials for Math 253 at Macalester College." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Notes for Statistical Computing &amp; Machine Learning" />
+  
+  <meta name="twitter:description" content="Notes and other materials for Math 253 at Macalester College." />
+  
+
+<meta name="author" content="Daniel Kaplan">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="clustering.html">
+<link rel="next" href="programming-basics.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Placeholder</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="part"><span><b>I Topic I: Linear Regression</b></span></li>
+<li class="chapter" data-level="3" data-path="placeholder-1.html"><a href="placeholder-1.html"><i class="fa fa-check"></i><b>3</b> Placeholder</a></li>
+<li class="chapter" data-level="4" data-path="notes.html"><a href="notes.html"><i class="fa fa-check"></i><b>4</b> Notes</a></li>
+<li class="chapter" data-level="5" data-path="foundations-linear-algebra-likelihood-and-bayes-rule.html"><a href="foundations-linear-algebra-likelihood-and-bayes-rule.html"><i class="fa fa-check"></i><b>5</b> Foundations: linear algebra, likelihood and Bayes’ rule</a></li>
+<li class="chapter" data-level="6" data-path="classifiers.html"><a href="classifiers.html"><i class="fa fa-check"></i><b>6</b> Classifiers</a></li>
+<li class="chapter" data-level="7" data-path="placeholder-2.html"><a href="placeholder-2.html"><i class="fa fa-check"></i><b>7</b> Placeholder</a></li>
+<li class="chapter" data-level="8" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html"><i class="fa fa-check"></i><b>8</b> Linear and Quadratic Discriminant Analysis</a></li>
+<li class="chapter" data-level="9" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html"><i class="fa fa-check"></i><b>9</b> Cross-Validation and Bootstrapping</a></li>
+<li class="chapter" data-level="10" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html"><i class="fa fa-check"></i><b>10</b> Regularization, shrinkage and dimension reduction</a></li>
+<li class="chapter" data-level="11" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html"><i class="fa fa-check"></i><b>11</b> Nonlinearity in linear models</a></li>
+<li class="chapter" data-level="12" data-path="trees-for-regression-and-classification.html"><a href="trees-for-regression-and-classification.html"><i class="fa fa-check"></i><b>12</b> Trees for Regression and Classification</a></li>
+<li class="chapter" data-level="13" data-path="support-vector-classifiers.html"><a href="support-vector-classifiers.html"><i class="fa fa-check"></i><b>13</b> Support Vector Classifiers</a></li>
+<li class="chapter" data-level="14" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html"><i class="fa fa-check"></i><b>14</b> Unsupervised learning</a></li>
+<li class="chapter" data-level="15" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>15</b> Clustering</a><ul>
+<li class="chapter" data-level="15.1" data-path="clustering.html"><a href="clustering.html#k-means"><i class="fa fa-check"></i><b>15.1</b> K-means</a></li>
+<li class="chapter" data-level="15.2" data-path="clustering.html"><a href="clustering.html#heirarchical-clustering"><i class="fa fa-check"></i><b>15.2</b> Heirarchical clustering</a></li>
+<li class="chapter" data-level="15.3" data-path="clustering.html"><a href="clustering.html#example-gene-expression-in-cancer"><i class="fa fa-check"></i><b>15.3</b> Example: Gene expression in cancer</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="principal-components.html"><a href="principal-components.html"><i class="fa fa-check"></i><b>16</b> Principal components</a></li>
+<li class="chapter" data-level="17" data-path="programming-basics.html"><a href="programming-basics.html"><i class="fa fa-check"></i><b>17</b> Programming Basics</a></li>
+<li class="chapter" data-level="" data-path="appendices.html"><a href="appendices.html"><i class="fa fa-check"></i>Appendices</a></li>
+<li class="chapter" data-level="" data-path="connecting-rstudio-to-your-github-repository.html"><a href="connecting-rstudio-to-your-github-repository.html"><i class="fa fa-check"></i>Connecting RStudio to your GitHub repository</a></li>
+<li class="chapter" data-level="" data-path="instructions-for-the-publishing-system-bookdown.html"><a href="instructions-for-the-publishing-system-bookdown.html"><i class="fa fa-check"></i>Instructions for the publishing system: Bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notes for Statistical Computing &amp; Machine Learning</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="principal-components" class="section level1">
+<h1><span class="header-section-number">16</span> Principal components</h1>
+<p>Manifolds and planes</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get the party names</span>
+Parties &lt;-<span class="st">  </span><span class="kw">read.csv</span>(<span class="st">&quot;VotesS1-tally.csv&quot;</span>, <span class="dt">as.is=</span><span class="ot">TRUE</span>, 
+                      <span class="dt">header=</span><span class="ot">FALSE</span>, <span class="dt">nrows=</span><span class="dv">1</span>,
+                     <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span> )
+<span class="co"># Get rid of the first column and turn into a vector.</span>
+Parties &lt;-<span class="st"> </span><span class="kw">as.character</span>(Parties[,-<span class="dv">1</span>])
+
+Votes &lt;-<span class="st"> </span><span class="kw">read.csv</span>( <span class="st">&quot;VotesS1-tally.csv&quot;</span>, <span class="dt">skip=</span><span class="dv">1</span> )
+Votes &lt;-<span class="st"> </span><span class="kw">subset</span>(Votes, <span class="kw">complete.cases</span>(Votes) )
+<span class="kw">rownames</span>( Votes ) &lt;-<span class="st"> </span>Votes$VOTE
+Votes &lt;-<span class="st"> </span>Votes[,-<span class="dv">1</span>]
+memberNames &lt;-<span class="st"> </span><span class="kw">names</span>(Votes)
+nBallots &lt;-<span class="st"> </span><span class="kw">nrow</span>( Votes )
+VotesM &lt;-<span class="st"> </span><span class="kw">matrix</span>( <span class="kw">unlist</span>( Votes ), <span class="dt">nrow=</span>nBallots )
+<span class="co"># VotesM &lt;- VotesM[1:nBallots,1:ncol(Votes)] # drop the ballot names</span>
+<span class="co"># Put in alphabetical order</span>
+inds &lt;-<span class="st"> </span><span class="kw">order</span>( memberNames )
+VAlpha &lt;-<span class="st"> </span>VotesM[,inds]
+Parties &lt;-<span class="st"> </span>Parties[inds]
+<span class="co"># remove &lt;- which( apply( VAlpha, 2, function(x) sum(abs(x))) &lt; 100 )</span>
+<span class="co"># memberNames &lt;- memberNames[-remove]</span>
+<span class="co"># Parties &lt;- Parties[-remove]</span>
+<span class="co"># Valpha &lt;- VAlpha[,-remove]</span>
+res &lt;-<span class="st"> </span><span class="kw">svd</span>( VAlpha )
+showVotes &lt;-<span class="st"> </span>Votes[,inds]
+a1 &lt;-<span class="st"> </span>res$u[,<span class="dv">1</span>,drop=<span class="ot">FALSE</span>]
+b1 &lt;-<span class="st"> </span>res$v[,<span class="dv">1</span>,drop=<span class="ot">FALSE</span>] %&gt;%<span class="st"> </span>t
+a2 &lt;-<span class="st"> </span>res$u[,<span class="dv">2</span>,drop=<span class="ot">FALSE</span>]
+b2 &lt;-<span class="st"> </span>res$v[,<span class="dv">2</span>,drop=<span class="ot">FALSE</span>] %&gt;%<span class="st"> </span>t
+<span class="kw">library</span>(reshape2) <span class="co"># for melt</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;reshape2&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:tidyr&#39;:
+## 
+##     smiths</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">melt</span>( VAlpha ) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>( <span class="dt">Vote=</span><span class="kw">factor</span>(value, <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Nay&quot;</span>,<span class="st">&quot;Abstain&quot;</span>,<span class="st">&quot;Aye&quot;</span>))) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>( <span class="kw">aes</span>(<span class="dt">x=</span>Var1, <span class="dt">y=</span>Var2, <span class="dt">fill=</span>Vote)) +
+<span class="st">  </span><span class="kw">geom_tile</span>() +
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Ballot&quot;</span>) +<span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Member of Parliament&quot;</span>) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_fill_manual</span>( <span class="dt">values=</span><span class="kw">c</span>(<span class="kw">rgb</span>(.<span class="dv">2</span>,.<span class="dv">2</span>,.<span class="dv">2</span>,.<span class="dv">6</span>), <span class="kw">rgb</span>(.<span class="dv">95</span>,.<span class="dv">95</span>,.<span class="dv">95</span>), <span class="kw">rgb</span>(<span class="dv">209</span>/<span class="dv">255</span>,<span class="dv">148</span>/<span class="dv">255</span>,<span class="dv">12</span>/<span class="dv">255</span>)))</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-6-1.png" width="5in" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Random2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>( <span class="dt">ballot48=</span>VAlpha[<span class="dv">48</span>,], <span class="dt">ballot118=</span>VAlpha[<span class="dv">118</span>,] )
+<span class="kw">ggplot</span>( Random2, <span class="kw">aes</span>(<span class="dt">x=</span>ballot48, <span class="dt">y=</span>ballot118)) +
+<span class="st">  </span><span class="kw">geom_point</span>( <span class="dt">alpha=</span>.<span class="dv">7</span>, <span class="dt">position=</span><span class="kw">position_jitter</span>(<span class="dt">width =</span> .<span class="dv">1</span>, <span class="dt">height =</span> .<span class="dv">1</span>) )+
+<span class="st">  </span><span class="kw">geom_point</span>( <span class="dt">alpha=</span>.<span class="dv">01</span>, <span class="dt">size=</span><span class="dv">10</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span> )</code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-7"></span>
+<img src="_main_files/figure-html/unnamed-chunk-7-1.png" alt="\label{fig:ballot-values} Positions of members of parliament on two ballots." width="5in" />
+<p class="caption">
+Figure 16.1:  Positions of members of parliament on two ballots.
+</p>
+</div>
+<div class="figure"><span id="fig:unnamed-chunk-8"></span>
+<img src="_main_files/figure-html/unnamed-chunk-8-1.png" alt="\label{fig:many-ballots} Positions of members of parliament on two ballot indices made up by the sum of groups of ballots." width="5in" />
+<p class="caption">
+Figure 16.2:  Positions of members of parliament on two ballot indices made up by the sum of groups of ballots.
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">101</span>)
+Best &lt;-<span class="st"> </span><span class="kw">data.frame</span>( <span class="dt">one=</span><span class="kw">c</span>(b1), <span class="dt">two=</span><span class="kw">c</span>(b2), <span class="dt">three=</span>res$v[,<span class="dv">3</span>], <span class="dt">four=</span>res$v[,<span class="dv">4</span>], <span class="dt">five=</span>res$v[,<span class="dv">5</span>] )
+clusts &lt;-<span class="st"> </span><span class="kw">kmeans</span>( Best, <span class="dt">centers=</span><span class="dv">6</span>)
+Best$cluster &lt;-<span class="st"> </span><span class="kw">as.factor</span>(clusts$cluster)
+<span class="co"># I lost the first member: Canavan.  Figure out later.</span>
+Best$actualParty &lt;-<span class="st"> </span>Parties
+<span class="kw">ggplot</span>( <span class="dt">data=</span>Best, <span class="kw">aes</span>( <span class="dt">x=</span>one, <span class="dt">y=</span>two )) +
+<span class="st">    </span><span class="kw">geom_point</span>( <span class="dt">shape=</span><span class="dv">1</span>, <span class="dt">color=</span><span class="st">&#39;red&#39;</span>, <span class="dt">size=</span><span class="dv">7</span>, <span class="kw">aes</span>(<span class="dt">x=</span><span class="dv">0</span>,<span class="dt">y=</span><span class="dv">0</span>)) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>( <span class="dt">size=</span><span class="dv">5</span>, <span class="dt">alpha=</span>.<span class="dv">6</span>, <span class="kw">aes</span>(<span class="dt">color=</span>cluster,<span class="dt">shape=</span>cluster) ) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Best Vector from SVD&quot;</span>) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Next Best Vector from SVD&quot;</span>) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Political Positions of Members of Parliament&quot;</span>)</code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-9"></span>
+<img src="_main_files/figure-html/unnamed-chunk-9-1.png" alt="\label{fig:ballot-PCA} The position of each member of Parliament using the two 'best' ways of summing the ballots." width="5in" />
+<p class="caption">
+Figure 16.3:  The position of each member of Parliament using the two ‘best’ ways of summing the ballots.
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">inds1 &lt;-<span class="st"> </span><span class="kw">order</span>(<span class="kw">c</span>(res$u[,<span class="dv">1</span>]))
+inds2 &lt;-<span class="st"> </span><span class="kw">order</span>(<span class="kw">c</span>(res$v[,<span class="dv">1</span>]))
+VA &lt;-<span class="st"> </span>VAlpha[ inds1, inds2 ]
+foo &lt;-<span class="st"> </span><span class="kw">data.frame</span>( <span class="dt">vote=</span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="kw">t</span>(VA)), <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Nay&quot;</span>,<span class="st">&quot;Abstain&quot;</span>,<span class="st">&quot;Aye&quot;</span>)), 
+  <span class="dt">y=</span><span class="kw">rep</span>(<span class="dv">1</span>:<span class="dv">134</span>,<span class="dt">times=</span><span class="dv">773</span>),
+  <span class="dt">x=</span><span class="kw">rep</span>(<span class="dv">1</span>:<span class="dv">773</span>, <span class="dt">each=</span><span class="dv">134</span>) )
+<span class="kw">ggplot</span>( foo, <span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>y, <span class="dt">fill=</span>vote)) +
+<span class="st">  </span><span class="kw">geom_tile</span>() +
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Ballot&quot;</span>) +<span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Member of Parliament&quot;</span>) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_fill_manual</span>( <span class="dt">values=</span><span class="kw">c</span>(<span class="kw">rgb</span>(.<span class="dv">2</span>,.<span class="dv">2</span>,.<span class="dv">2</span>,.<span class="dv">6</span>), <span class="kw">rgb</span>(.<span class="dv">95</span>,.<span class="dv">95</span>,.<span class="dv">95</span>), <span class="kw">rgb</span>(<span class="dv">209</span>/<span class="dv">255</span>,<span class="dv">148</span>/<span class="dv">255</span>,<span class="dv">12</span>/<span class="dv">255</span>))) </code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-10-1.png" width="5in" /></p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="clustering.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="programming-basics.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

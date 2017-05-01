@@ -1,0 +1,113 @@
+---
+title: "MATH 253 Topic 4 Exercises"
+author: "Danny Kaplan"
+date: "Statistical Computing and Machine Learning"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+set.seed(103)
+library(ISLR)
+```
+
+## Exercise ISLR 4.7.1
+
+> Using a little bit of algebra, prove that (4.2) is equivalent to (4.3). In other words, the logistic function representation and logit representation for the logistic regression model are equivalent.
+
+> 4.2 $$p(X) = \frac{e^{\beta_0 + \beta_1 X}}{1 + e^{\beta_0 + \beta_1 X}}$$
+
+> 4.3 $$\frac{p(X)}{1-p(X)} = e^{\beta_0 + \beta_1 X}$$
+
+Let $Y(X) = e^{\beta_0 + \beta_1 X}$.  Then $p(X) = Y(X) / 1 + Y(X) .$
+
+So, $p(X) \left(1 + Y(X)\right) = Y(X)$ or
+
+$$p(X) = Y(X) -  p(X) Y(X) = \left(1 - p(X)\right) Y(X)$$.  Divide both sides by $$1 - p(X)$$ to get Eq. 4.3
+
+## Exercise 4.7.8 
+
+> Suppose that we take a data set, divide it into equally-sized training and test sets, and then try out two different classification procedures. First we use logistic regression and get an error rate of 20% on the training data and 30% on the test data. Next we use 1-nearest neighbors (i.e. $K = 1$) and get an average error rate (averaged over both test and training data sets) of 18%. Based on these results, which method should we prefer to use for classification of new observations? Why?
+
+Use the method that has the smaller out-of-sample ("test") error rate.  Unfortunately, the problem doesn't state the out-of-sample rate for the 1-nearest neighbors model.  Perhaps it's lower than 30%, but it might (judging from the information given) be as high as 36%.  
+
+## Exercise 4.7.9
+
+> a. On average, what fraction of people with an odds of 0.37 of defaulting on their credit card payment will in fact default?
+
+The "fraction of people" is a probability, $p$.  The odds $D$ is a different formulation: $D = p / (1-p)$. Inverting this relationship gives $p = D / (1 + D)$.  So $D = 0.37$ implies $p = 0.587$
+
+> b. Suppose that an individual has a 16% chance of defaulting on her credit card payment. What are the odds that she will default?
+
+The odds are $0.16/(1-0.16) = 0.19$.
+
+## Exercise 4.7.11
+
+> (a) Create a binary variable, `mpg01`, that contains a 1 if `mpg` contains a value above its median, and a 0 if `mpg` contains a value below its median. 
+
+```{r}
+Auto$mpg01 <- with(Auto, mpg > median(mpg))
+```
+
+> (b) Explore the data graphically in order to investigate the associ- ation between mpg01 and the other features. Which of the other features seem most likely to be useful in predicting mpg01?
+
+```{r}
+for (nm in c("cylinders", "displacement", "horsepower", "weight", "acceleration", "year"))
+  boxplot(Auto[[nm]] ~ mpg01, data = Auto, ylab = nm)
+```
+
+Displacement, horsepower and weight seem the most tightly associated with `mpg01`.
+
+> (c) Split the data into a training set and a test set.
+
+```{r}
+training_inds <- sample(1:nrow(Auto), size = nrow(Auto) / 2)
+Training <- Auto[training_inds,]
+Testing  <- Auto[ - training_inds, ]
+```
+
+> (d) Perform LDA on the training data in order to predict mpg01 using the variables that seemed most associated with mpg01 in (b). What is the test error of the model obtained?
+
+```{r}
+library(MASS)
+mod_formula <- mpg01 ~ acceleration + displacement + horsepower
+mod1 <- lda(mod_formula, data = Training)
+preds1 <- predict(mod1, newdata = Testing )
+# error rate
+mean(Testing$mpg01 != (preds1$posterior[, 2] >= 0.5))
+```
+
+> (e) Perform QDA on the training data in order to predict mpg01 using the variables that seemed most associated with mpg01 in (b). What is the test error of the model obtained?
+
+
+```{r}
+mod2 <- qda(mod_formula, data = Training)
+preds2 <- predict(mod2, newdata = Testing )
+# error rate
+mean(Testing$mpg01 != (preds2$posterior[, 2] >= 0.5))
+```
+
+> (f) Perform logistic regression on the training data in order to pre- dict mpg01 using the variables that seemed most associated with mpg01 in (b). What is the test error of the model obtained?
+
+```{r}
+mod3 <- glm(mod_formula, 
+            data = Training, family = "binomial")
+preds3 <- predict(mod3, newdata = Testing )
+# error rate
+mean(Testing$mpg01 != (preds3 >= 0.5))
+```
+
+> (g) Perform KNN on the training data, with several values of K, in order to predict mpg01. Use only the variables that seemed most associated with mpg01 in (b). What test errors do you obtain? Which value of K seems to perform the best on this data set?
+
+```{r}
+k_vals <- c(1:50)
+error_rate <- rep(NA, length(k_vals))
+Train_mat <- model.matrix(mod_formula, data = Training)
+Test_mat  <- model.matrix(mod_formula, data = Testing)
+for (i in 1:length(k_vals)) {
+  preds <- class::knn(Train_mat, Test_mat, Training$mpg01, k = k_vals[i])
+  error_rate[i] = mean(Testing$mpg01 != as.logical(preds))
+}
+plot(k_vals, error_rate)
+```
+
+$K$ of 10 to 20 is good.

@@ -1,0 +1,23 @@
+# Thursday Sept. 20, 2016
+
+## Notebook interface
+
+Install the preview edition of Version 1.0 of RStudio to get the new "notebook" interface.
+
+Show how notebooks work. File/Newfile/Notebook.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

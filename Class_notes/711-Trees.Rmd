@@ -1,7 +1,18 @@
-# Trees for Regression and Classification
+---
+title: "Topic 8: Trees for Regression and Classification"
+author: 'Math 253: Statistical Computing & Machine Learning'
+date: "Daniel Kaplan"
+output:
+  tufte::tufte_html: default
+  tufte::tufte_handout:
+    latex_engine: xelatex
+  tufte::tufte_book:
+    latex_engine: xelatex
+---
 
 ```{r include = FALSE}
 library(rpart)
+library(rpart.plot)
 library(randomForest)
 library(tree)
 ```

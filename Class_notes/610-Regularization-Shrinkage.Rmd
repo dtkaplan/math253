@@ -1,4 +1,14 @@
-# Regularization, shrinkage and dimension reduction
+---
+title: "Topic 6: Regularization, shrinkage and dimension reduction"
+author: 'Math 253: Statistical Computing & Machine Learning'
+date: "Daniel Kaplan"
+output:
+  tufte::tufte_html: default
+  tufte::tufte_handout:
+    latex_engine: xelatex
+  tufte::tufte_book:
+    latex_engine: xelatex
+---
 
 ```{r include = FALSE}
 data(CPS85, package = "mosaicData")

@@ -1,13 +1,4 @@
----
-output: 
-  html_document: 
-    theme: readable
----
-
-# Syllabus for Math 253
-# Statistical Computing and Machine Learning
-## Spring 2017 
-
+Syllabus, Spring 2017
 
 * Instructor: **Danny Kaplan**, Olin-Rice 231, `kaplan@macalester.edu`
 * Office Hours: 
@@ -151,4 +142,4 @@ In the few weeks of the course, the class will be working on end-of-term project
 
 ------------------
 
-*Updated Jan 12, 2017*
+*Updated May 1, 2017*

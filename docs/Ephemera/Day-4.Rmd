@@ -1,0 +1,88 @@
+# Thursday Sept. 15, 2016
+
+## Don't use `fix()`
+
+Use `View()` instead.
+```r
+View(College)
+```
+
+## Subsets
+
+The book has you use `fix()`.
+
+```{r}
+library(ISLR)
+data(Auto)
+head(Auto)
+```
+
+### Missing data
+
+```{r}
+table(complete.cases(Auto))
+my_auto <- Auto[ ! complete.cases(Auto), ]
+full_autos <- subset(Auto, complete.cases(Auto))
+```
+
+### Data from packages
+
+```{r}
+data(package = "ISLR") # what data is in the package
+data(Auto, package = "ISLR") # load ("attaching" the data)
+library(ISLR)
+```
+
+### Day Two Programming
+
+Last five rows, and last 3 columns
+```{r}
+Auto[ , ]
+```
+
+### Using variable names
+
+```{r}
+library(ISLR)
+data(College)
+names(College)
+attach(College)
+College$Yield <- 1 / (College$Accept / College$Enroll)
+
+
+```
+
+```{r}
+library(dplyr)
+Auto <-
+  Auto %>% 
+  mutate(Yield = Enroll / Accept)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

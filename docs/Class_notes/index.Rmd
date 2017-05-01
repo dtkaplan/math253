@@ -1,0 +1,14 @@
+--- 
+title: "Notes for Statistical Computing & Machine Learning"
+author: "Daniel Kaplan"
+date: "Math 253 Macalester College"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+description: "Notes and other materials for Math 253 at Macalester College."
+---
+

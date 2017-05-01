@@ -1,0 +1,173 @@
+---
+title: "Topic 5: Cross-Validation and Bootstrapping"
+author: 'Math 253: Statistical Computing & Machine Learning'
+date: "Daniel Kaplan"
+output:
+  tufte::tufte_html: default
+  tufte::tufte_handout:
+    latex_engine: xelatex
+  tufte::tufte_book:
+    latex_engine: xelatex
+---
+
+In making a statistical model (including with machine-learning techniques) we have an overall goal:
+
+**Make model error small** for the ways the model will actually be applied.
+
+Model error has three components:
+
+* irreducible error ($\epsilon$)
+* error due to bias
+* error due to variance
+
+Bias refers to the ways that $\hat{f}({\mathbf X})$ is systematically different from the idealized $f({\mathbf X})$.
+
+Variance refers to the ways that $\hat{f}_i({\mathbf X})$ varies with the particular sample $i$ used for training.
+    
+
+The overall model error is the sum of squares of these three components.
+
+There's nothing to be done about irreducible error.  
+
+
+we want to do two things that can conflict with one another:
+
+1. make *bias* small. 
+    - flexible models
+    - QDA rather than LDA
+    - include lots of explanatory variables
+2. make *variance* small
+    - lots of data
+    - few degrees of freedom (vs. flexibility or QDA)
+    - avoid collinearity and weak/irrelevant explanatory variables
+    
+
+## Philosophical approaches
+
+Often, these are just drawing attention to the problem; they don't actually offer a solution.
+
+### Occam's Razor: A heuristic
+
+*Non sunt multiplicanda entia sine necessitate*.
+
+* Entities must not be multiplied beyond necessity.
+
+But what's "beyond necessity?"
+
+### Einstein's proverb
+
+*Man muß die Dinge so einfach wie möglich machen. Aber nicht einfacher*.
+
+* Make things as simple as possible, but not one bit simpler.
+
+But what's "too simple?"
+
+
+Basic modeling-building question:
+
+- Does adding this [variable, model term, potential flexibility] help?
+    - For reducing bias: yes
+    - For reducing variance: maybe (if it eats up residual variance)
+    - For reducing error: maybe
+
+## Operationalizing model choice
+
+We need to be able to measure two aspects of a model:
+
+1. bias: theory is difficult, since we don't know the "true" system
+2. variance: theory is straightforward
+
+Bias in practice:
+
+* Have a good measure of variance.
+* Add in new model terms, flexibility, etc. See if the variance goes down.
+
+
+Think in terms of comparing two models to select which one is better.
+
+"Better" needs to be transitive: if A is better than B, and B is better than C, then A is better than C.
+
+Then, any number of models can be compared to find the one (or more) that is the best.
+
+## Some definitions of "better"
+
+* Larger likelihood (non-iid Gaussian error models)
+* Smaller mean square prediction error (same as larger likelihood with iid Gaussian error model)
+* Classification error rate is smaller
+* Loss function is smaller
+
+## Training and Testing
+
+Evaluation of performance using training data is biased to give larger likelihood (smaller MSE or classification error or loss error).
+
+Unbiased evaluation is done on separate testing data.
+
+## Trade-off
+
+* Need large testing dataset for good estimate of performance
+
+* Need large training dataset for reducing variance in fit.
+
+How to get both:
+
+1. Collect a huge amount of data.  When this works, go for it!
+2. K-fold cross validation
+    - Pull out 1/K part of the data for performance testing.
+    - Fit to the other (K-1)/K part of the data.
+    - Repeat K times and average the prediction results over the K trials.
+3. Once you've found the best *form* of model, fit it to the whole data set.  That's your model.
+
+## Classical theory interlude
+
+M-estimators and robust estimation.
+
+
+## Bootstrapping
+
+```{r echo = FALSE, fig.cap="ISLR Figure 5.10"}
+knitr::include_graphics("Images/Chapter-5/5.10.png")
+```
+
+In-class demonstration.  
+
+- How many cases don't get used in a typical resample?
+- Hint: It will suffice to work with indices, so the numbers `1:n` for a sample of size `n`.
+
+
+```{r}
+cases <- 1:10000
+ntrials <- 50
+result <- numeric(ntrials)
+for (k in 1:50) {
+  bootstrap_sample <- sample(cases, size=length(cases), replace = TRUE)
+  result[k] <- length(setdiff(cases, unique(bootstrap_sample))) / length(cases)
+}
+result
+
+## Or ...
+(1 - 1/length(cases))^length(cases)
+```
+
+
+```{r}
+library(mosaic)
+do(100) * {
+  n <- 100000
+  s <- sample(1:n, size = n, replace = TRUE)
+  n - length(unique(s))
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+

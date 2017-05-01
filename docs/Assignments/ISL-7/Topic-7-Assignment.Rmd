@@ -1,0 +1,107 @@
+---
+title: "MATH 253 Topic 7 Exercises"
+author: "Danny Kaplan"
+date: "Statistical Computing and Machine Learning"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+set.seed(103)
+library(ISLR)
+```
+
+## ISL 7.9.3
+
+I'll use R to do the sketching ...
+
+```{r}
+x <- seq(-2, 2, length = 101)
+f <- function(x) 1 + 1 * x - 2 * (x - 1)^2 * ((x - 1) > 0)
+plot(x, f(x), type = "l")
+```
+
+## ISL 7.9.4
+
+To start, let's define an indicator function and the basis functions:
+```{r}
+indic <- function(x, low, high) ifelse(low <= x & x <= high, 1, 0)
+b1 <- function(x) indic(x, 0, 2) - (x - 1) * indic(x, 1, 2)
+b2 <- function(x) (x - 3) * indic(x, 3, 4) + indic(x, 4, 5)
+```
+(This could also be written `function(x, low, high) as.numeric((low <= x)*(x <= high))`.)
+
+Then, the function is
+```{r}
+beta_0 <- 1; beta_1 <- 1; beta_2 <- 3;
+f2 <- function(x) beta_0 + beta_1 * b1(x) + beta_2 * b2(x)
+plot(x, f2(x), type = 'l')
+```
+Note that `b2()` is always zero in the interval $x \in (-2, 2)$, so it's not doing any of the work in this plot.
+
+## ISL 7.9.5
+
+As $\lambda \rightarrow \infty$, the second term in $\hat{g}_1$ dominates.  This can be minimized by constructing any $g(x)$ whose third derivative is everywhere zero. Similarly, when $\lambda \rightarrow \infty$, $\hat{g}_2$ will be any function whose fourth derivative is everywhere zero. 
+
+In contrast, when $\lambda = 0$, the two functions are equal.
+
+a. $g_2$ is more flexible (because it can have a non-zero third derivative, in contrast to $g_1$) so it will have the smaller training RSS.
+b. Although $g_2$ is more flexible and therefore has lower bias, it may have higher variance.  Test RSS is a combination of bias and variance.  Without knowing the specifics, we can't know if $g_1$ or $g_2$ has the smaller test RSS.
+c. The two functions are exactly the same, so they have the same training RSS and they have the same testing RSS.
+
+## ISL 7.9.11
+
+a. Generate a response $Y$ and two predictors $X_1$ and $X_2$ with $n = 100$. 
+    ```{r}
+n <- 100
+X1 <- rnorm(n)
+X2 <- rnorm(n)
+Y <- 1 + 2 * X1 + 3 * X2
+```
+    The coefficients are, of course, arbitrary.
+b. Initialize $\hat{\beta}_1$ to take on a value of your choice.  It does not matter which.
+    ```{r}
+beta_1 <- 20
+```
+c. Keeping $\hat{\beta}_1$ fixed, fit the model ...
+    ```{r}
+A <- Y - beta_1 * X1
+beta_2 <- lm(A ~ X2)$coef[2]
+```
+d. Keeping $\hat{\beta}_2$ fixed, fit the model
+```{r}
+A <- Y - beta_2 * X2
+beta_1 <- lm(A ~ X1)$coef[2]
+```
+e. Do this repeatedly ...
+    ```{r}
+beta_1 <- 20 # re-initialize
+n <- 10
+results <- matrix(NA, ncol=3, nrow = n)
+for (k in 1:n) {
+  A <- Y - beta_1 * X1
+  beta_2 <- lm(A ~ X2)$coef[2]
+  A <- Y - beta_2 * X2
+  beta_1 <- lm(A ~ X1)$coef[2]
+  beta_0 <- lm(A ~ X1)$coef[1]
+  results[k, 1] <- beta_0
+  results[k, 2] <- beta_1
+  results[k, 3] <- beta_2
+} 
+results
+```
+f. Do multiple regression
+```{r}
+betas <- lm(Y ~ X1 + X2)$coef
+betas
+```
+    Or, in plot form:
+```{r}
+plot(results[,1], ylim = c(0,5))
+points(results[,2], col = "blue")
+points(results[,3], col = "green")
+abline(h = betas[1])
+abline(h = betas[2], col = "blue")
+abline(h = betas[3], col = "green")
+```
+
+g. Backfitting converged very quickly: by the sixth iteration we're at the correct values.   

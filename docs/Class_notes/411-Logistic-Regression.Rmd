@@ -1,0 +1,134 @@
+---
+title: "Logistic Regression"
+---
+
+
+```{r include = FALSE}
+library(mosaic)
+library(ggplot2)
+library(ISLR)
+library(statisticalModeling)
+library(ggformula)
+```
+
+
+## Probability and odds
+
+Probability $p(event)$ is a number between zero and one.
+
+Simple way to make a probability model for yes/no variable: encode outcome as zero and one, use regression.
+```{r}
+Whickham$alive <- as.numeric(with(Whickham, outcome == "Alive"))
+```
+
+Model of mortality in Whickham
+```{r}
+res <- mean( alive ~ smoker, data=Whickham)
+res
+res / (1-res)
+```
+
+```{r}
+library(splines)
+mod <- lm(alive ~ smoker + age, data = Whickham)
+gmodel(mod, ~ age + smoker) %>% gf_jitter(alive ~ age + color:smoker, alpha = .2, data = Whickham)
+mod2 <- glm(alive ~ smoker * age, data = Whickham, family="binomial")
+summary(mod2)
+gmodel(mod2, ~ age + smoker)
+```
+
+
+```{r}
+mod2 <- glm(alive ~ age, data=Whickham, family = "binomial")
+
+gmodel(mod2) %>%
+  gf_jitter(alive ~ age, data = Whickham, alpha = .2)
+```
+
+If we're going to use likelihood to fit, the estimated probability can't be $\leq 0$.
+
+## Log Odds
+
+Gerolamo Cardano (1501-1576) defined *odds* as the ratio of favorable to unfavorable outcomes.
+
+For an event whose *probability* is $p$, it's *odds* are $w = \frac{p}{1-p}$.
+
+A probability is a number between 0 and one.
+
+An odds is a ratio of two positive numbers. 5:9, 9:5, etc.
+
+"Odds are against it," could be taken to mean that the odds is less than 1.  More unfavorable outcomes than favorable ones.
+
+Given odds $w$, the probability is $p = \frac{w}{1+w}$.  There's a one-to-one correspondence between probability and odds.
+
+The log odds is a number between $-\infty$ and $\infty$.  
+
+## Why use odds?
+
+**Making Book**
+
+Several horses in a race.  People bet on each one amounts $H_i$.
+
+What should be the winnings when horse $j$ wins? Payoff means you get your original stake back plus your winnings.
+
+If it's arranged to pay winnings of     
+$\sum{i \neq j} \frac{H_i}{H_j}$ + the amount $H_j$   
+the net income will be zero for the bookie.
+
+*Shaving the odds* means to pay less than the zero-net-income winnings.  
+
+**Link function**
+
+You can build a linear regression to predict the log odds, $\ln w$.  The output of the linear regression is free to range from $-\infty$ to $\infty$.  Then, to measure likelihood, unlog to get odds $w$, then $p = \frac{w}{1+w}$.
+
+## Use of glm() 
+
+Response should be 0 or 1.  We don't take the log odds of the response.  Instead, the likelihood is    
+- $p$ if the outcome is 1
+- $1-p$ if the outcome is 0
+
+Multiply these together of all the cases to get the total likelihood.
+
+## Interpretation of coefficients
+
+Each adds to the log odds in the normal, linear regression way.  Negative means less likely; positive more likely.  
+
+## Example: Logistic regression of default
+
+```{r}
+names(Default)
+ggplot(Default, 
+       aes(x = income, y = balance, alpha = default, color = default)) + 
+  geom_point() #+ facet_wrap( ~ student)
+```
+
+```{r fig.keep = "all"}
+model_of_default <-
+  glm(default == "Yes" ~ balance + income, data = Default, family = "binomial")
+gmodel(model_of_default)
+gmodel(model_of_default, ~ income + balance)
+
+summary(model_of_default)
+
+logodds <- predict(model_of_default, newdata = list(balance = 1000, income = 40000)) #,
+                   # type = "response")
+logodds
+odds <- exp(logodds)
+odds / (1 + odds)
+logistic <- function(x) {exp(x) / (1 + exp(x))}
+logistic(-3.36)
+table(Default$default)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+

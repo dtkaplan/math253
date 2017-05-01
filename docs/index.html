@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title></title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 66px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+
+.section h2 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h3 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h4 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h5 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h6 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Machine Learning</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Assignment solutions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Assignments/ISL-2/Topic-2-Assignment.html">Assignment 2</a>
+    </li>
+    <li>
+      <a href="Assignments/ISL-4/Topic-4-Assignment.html">Assignment 4</a>
+    </li>
+    <li>
+      <a href="Assignments/ISL-6/Topic-6-Assignment.html">Assignment 6</a>
+    </li>
+    <li>
+      <a href="Assignments/ISL-8/Topic-8-Assignment.html">Assignment 8</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Class notes
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Class_notes/010-Preface.html">Preface</a>
+    </li>
+    <li>
+      <a href="Class_notes/110-Introduction.html">Topic 1: Introduction</a>
+    </li>
+    <li>
+      <a href="Class_notes/210-Linear-Regression.html">Topic 2: Linear Regression</a>
+    </li>
+    <li>
+      <a href="Class_notes/310-Foundations.html">Topic 3: Foundations</a>
+    </li>
+    <li>
+      <a href="Class_notes/410-Classifiers.html">Topic 4: Classifiers</a>
+    </li>
+    <li>
+      <a href="Class_notes/510-Cross-Validation.html">Topic 5: Cross-validation</a>
+    </li>
+    <li>
+      <a href="Class_notes/610-Regularization-Shrinkage.html">Topic 6: Regularization and shrinkage</a>
+    </li>
+    <li>
+      <a href="Class_notes/710-nonlinear-functions.html">Topic 7: Nonlinear functions</a>
+    </li>
+    <li>
+      <a href="Class_notes/711-Trees.html">Topic 8: Trees</a>
+    </li>
+    <li>
+      <a href="Class_notes/715-support-vector-classifiers.html">Topic 9: Support vector classifiers</a>
+    </li>
+    <li>
+      <a href="Class_notes/775-Unsupervised learning">Topic 10: Unsupervised learning</a>
+    </li>
+    <li>
+      <a href="850-Programming.html">Programming basics</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="Class_notes/910-github.html">Github</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<p>Syllabus, Spring 2017</p>
+<ul>
+<li>Instructor: <strong>Danny Kaplan</strong>, Olin-Rice 231, <code>kaplan@macalester.edu</code></li>
+<li>Office Hours:
+<ul>
+<li>Tues and Thurs: 3:00pm-4:30pm and</li>
+<li>Wed: 2:00pm-3:30pm</li>
+<li>Anytime by appointment. And if my office door is open, just drop in.</li>
+</ul></li>
+<li>Preceptor: <strong>Yifan (Eva) Gong</strong> <code>ygong@macalester.edu</code>
+<ul>
+<li>Wed 8:00pm-10:00pm, MSCS reading room.</li>
+<li>Thurs 7:00pm - 9:30pm, OLRI 245</li>
+</ul></li>
+<li>Text: <a href="http://www.springer.com/us/book/9781461471370">An Introduction to Statistical Learning</a>. The authors also provide <a href="http://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf">access via PDF</a>.</li>
+<li><strong>Class notes</strong>. <a href="Class_notes/_book/introduction.html">In-class notes for the entire semester</a>. (An evolving document.)</li>
+<li>An <a href="http://ismayc.github.io/rbasics-book">introduction to R/RStudio/Markdown</a></li>
+<li>A <a href="http://happygitwithr.com/classroom-overview.html">introduction to git and GitHub</a> oriented to the classroom.</li>
+<li>The registrar has scheduled our <strong>final exam</strong> for Friday May 5 at 1:30pm - 3:30pm.</li>
+</ul>
+<div id="starting-the-semester" class="section level3">
+<h3>Starting the semester</h3>
+<ul>
+<li><a href="policies.html">Course policies</a></li>
+<li><a href="github.html">Installing and using GitHub from RStudio</a></li>
+<li>Make an account on &lt;GitHub.com&gt; and enter your account ID and the corresponding email address on <a href="https://docs.google.com/forms/d/e/1FAIpQLSdEMEn_uHkv4Wm3BDYZ4TU_XxrrSVfXlQ5S7NK0vZvTTm5u-Q/viewform">this form</a>.</li>
+</ul>
+</div>
+<div id="due-dates" class="section level3">
+<h3>Due dates</h3>
+<p>You should “push” your daily programming activity to your repository <em>before</em> leaving class. But feel free to revise your work and push again at any time.</p>
+<p>Each topic assignment is due one week <em>after</em> we finish covering that topic in class.</p>
+<ul>
+<li>Topic I: Thurs Feb 9, 2017</li>
+<li>Topic II: Thurs Feb 16, 2017</li>
+<li>Topic III: Thurs March 2, 2017</li>
+<li>Topic IV: Tues March 28, 2017</li>
+<li>Topic V: TBA</li>
+<li>Remaining work: By the end of exam period.</li>
+</ul>
+</div>
+<div id="topic-i-introduction" class="section level2">
+<h2>Topic I — Introduction</h2>
+<ul>
+<li>Topics
+<ul>
+<li>Overview of statistical learning.</li>
+<li>Getting started with R, RStudio, and RMarkdown</li>
+</ul></li>
+<li>Reading: Chapter 2 of ISL</li>
+<li>Programming basics 1: Names, classes, and objects</li>
+<li>Assignment 1 — file <code>Topic-1.Rmd</code>
+<ul>
+<li>Discussion questions: ISL 2.4.1, 2.4.3, 2.4.6</li>
+<li>Computing assignment: ISL 2.4.8, 2.4.9
+<ul>
+<li>As an example: <a href="Assignments/ISL-2/example-week-2-programming.html">a solution to 2.4.10</a>.</li>
+</ul></li>
+<li>Theory assignment: ISL 2.4.2, 2.4.7.</li>
+</ul></li>
+<li>Programming activities: <a href="ProgrammingActivities/Day-01-Programming-Task.html">One (Jan 24)</a>, <a href="ProgrammingActivities/Day-02-Programming-Task.html">Two (Jan 29)</a>, <a href="ProgrammingActivities/Day-03-Programming-Task.html">Three (Jan 31)</a></li>
+</ul>
+</div>
+<div id="topic-2-linear-regression" class="section level2">
+<h2>Topic 2 — Linear regression</h2>
+<ul>
+<li>Readings.
+<ul>
+<li>In Chapter 3 of ISL read §3.1 &amp; §3.2</li>
+<li>Read §3.6 as you work through the commands (see computing assignment)</li>
+</ul></li>
+<li>Programming basics 2:
+<ul>
+<li>Writing functions</li>
+<li>Visualization: Base graphics, statistical plots</li>
+</ul></li>
+<li>Assignment 2 — file <code>Topic-2.Rmd</code>
+<ul>
+<li>Computing
+<ul>
+<li>work through §3.6. (Style catastrophe: Although the book uses attach(), it is bad practice to do so. Ask about alternatives!)</li>
+<li>Problem 13 in ISL 3.7.13.</li>
+</ul></li>
+<li>Theory
+<ul>
+<li>Reading questions.
+<ol style="list-style-type: decimal">
+<li>On p. 66 the authors state, “This is clearly not true in Fig. 3.1” Explain why.</li>
+<li>On p. 77 the authors state, “In this case we cannot even fit the multiple regression models using least squares ….” Explain why.</li>
+</ol></li>
+<li>ISL 3.7.3 and 3.7.4.</li>
+</ul></li>
+</ul></li>
+<li>Programming activities: <a href="ProgrammingActivities/Day-04-Programming-Task.html">Four (Feb 2)</a>, <a href="ProgrammingActivities/Day-05-Programming-Task.html">Five (Feb 7)</a>, <a href="ProgrammingActivities/Day-06-Programming-Task.html">Six (Feb 14)</a></li>
+</ul>
+</div>
+<div id="topic-3-foundations-linear-algebra-bayes-rule-and-likelihood" class="section level2">
+<h2>Topic 3 — Foundations: Linear Algebra, Bayes’ Rule, and Likelihood</h2>
+<ul>
+<li>Readings
+<ul>
+<li>These topics are not covered in ISLR, so no readings from the textbook.</li>
+<li>Michael Lavine: “What is Bayesian statistics and why everything else is wrong” <a href="Resources/Likelihood-Lavine.pdf">PDF</a></li>
+</ul></li>
+<li>Programming basics 3: Conditionals</li>
+<li>Visualization: Base graphics: lines, polygons, …</li>
+<li>Programming Activities: <a href="ProgrammingActivities/Day-07-Programming-Task.html">Seven (Feb 16)</a>, <a href="ProgrammingActivities/Day-08-Programming-Task.html">Eight (Feb 21)</a>, <a href="ProgrammingActivities/Day-09-Programming-Task.html">Nine (Feb 23)</a></li>
+<li>Topic assignment: there are no exercises from the textbook, so … finish the exponential likelihood and taxicab in-class activities.</li>
+</ul>
+</div>
+<div id="topic-4-classification" class="section level2">
+<h2>Topic 4 — Classification</h2>
+<ul>
+<li>Readings: In Chapter 4 of ISL §4.1, §4.2, §4.3.1-3, §4.4.1-2, §4.5</li>
+<li>Visualization: Grammar of graphics: glyphs and aesthetics</li>
+<li>Topic 4 Assignment:
+<ul>
+<li>Programming Assignment: 4.7.11, 4.7.13</li>
+<li>Theory assignment: 4.7.1, 4.7.8, 4.7.9</li>
+</ul></li>
+<li>Programming Activities: <a href="ProgrammingActivities/Day-10-Programming-Task.html">Ten (Feb 28)</a>, <a href="ProgrammingActivities/Day-11-Programming-Task.html">Eleven (March 2)</a>, <a href="ProgrammingActivities/Day-12-Programming-Task.html">Twelve (March 7)</a></li>
+</ul>
+</div>
+<div id="topic-5-cross-validation-and-bootstrapping" class="section level2">
+<h2>Topic 5 — Cross-validation and bootstrapping</h2>
+<ul>
+<li>Readings: In Chapter 5 of ISL §5.1, §5.2</li>
+<li>Programming basics 5: Loops and accumulators</li>
+<li>Assignment: finish the in-class programming activities for the first five topics.</li>
+<li>Programming Activity: <a href="ProgrammingActivities/Day-13-Programming-Task.html">Thirteen - Mar 23</a></li>
+</ul>
+</div>
+<div id="topic-6-selecting-model-terms" class="section level2">
+<h2>Topic 6 — Selecting model terms</h2>
+<ul>
+<li>Readings: in Chapter 6 of ISL §6.1, §6.2</li>
+<li>Programming basics 6: Functionals — solving, integration, optimization</li>
+<li>Assignment:
+<ul>
+<li>Theory 6.8.1, 6.8.2.</li>
+<li>Applied, 6.8.9</li>
+</ul></li>
+<li>Programming Activities: <a href="ProgrammingActivities/Day-14-Programming-Task.html">Fourteen - Mar 28</a>, <a href="ProgrammingActivities/Day-15-Programming-Task.html">Fifteen - Apr 4</a></li>
+</ul>
+</div>
+<div id="topic-7-nonlinear-regression" class="section level2">
+<h2>Topic 7 — Nonlinear regression</h2>
+<ul>
+<li>Readings: Chapter 7 of ISL</li>
+<li>Assignment:
+<ul>
+<li>programming: 7.9.11</li>
+<li>theory: in §7.9 problems 3, 4, and 5</li>
+</ul></li>
+<li>Programming Activity: <a href="ProgrammingActivities/Day-16-Programming-Task.html">Sixteen Apr 6</a></li>
+</ul>
+</div>
+<div id="topic-8-tree-based-methods" class="section level2">
+<h2>Topic 8 — Tree-based methods</h2>
+<ul>
+<li>Readings: Chapter 8 of ISL</li>
+<li>Assignment:
+<ul>
+<li>programming: 8.4.12</li>
+<li>theory: In §8.4 problems 1, 2, 3, 4, and 5</li>
+</ul></li>
+<li>Programming Activity: <a href="ProgrammingActivities/Day-17-Programming-Task.pdf">Seventeen</a></li>
+</ul>
+</div>
+<div id="topic-9-support-vector-machines" class="section level2">
+<h2>Topic 9 — Support vector machines</h2>
+<ul>
+<li>Readings: Chapter 9 of ISL</li>
+<li>Programming Activity: <a href="ProgrammingActivities/Day-18-Programming-Task.pdf">Eighteen</a></li>
+</ul>
+</div>
+<div id="topic-10-unsupervised-learning" class="section level2">
+<h2>Topic 10 — Unsupervised learning</h2>
+<ul>
+<li>Readings: Chapter 10 of ISL</li>
+</ul>
+</div>
+<div id="end-of-term-project" class="section level2">
+<h2>End-of-term Project</h2>
+<p>In the few weeks of the course, the class will be working on end-of-term projects. You do not need to do anything before that time arrives.</p>
+<ul>
+<li>You’ll form groups of two to three students and choose a problem from the Kaggle machine-learning competition site. You don’t need to think about this until we get toward the end of the semester. At that point, the in-class programming activities will be given over to the project.</li>
+<li>If you have your own idea for a project, please get my approval before embarking on it.</li>
+<li><a href="https://docs.google.com/spreadsheets/d/1_9j27pURZTR07kC0n-FcIirJ2PZ2K8NwJGkOrwfL-gY/edit?usp=sharing">Course-project topic selection</a></li>
+<li><a href="Assignments/Kaggle-project-rubric.html">Course project report rubric</a></li>
+</ul>
+<hr />
+<p><em>Updated May 1, 2017</em></p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+name: "Math 253: Machine Learning"
+output_dir: "docs"
+output:
+  html_document:
+    theme: readable
+include: ["Class_notes", "Activities", "Assignments"]
+navbar:
+  title: "Machine Learning"
+  left:
+    - text: "Assignment solutions"
+      menu:
+          - text: "Assignment 2"
+            href: "Assignments/ISL-2/Topic-2-Assignment.html"
+          - text: "Assignment 4"
+            href: "Assignments/ISL-4/Topic-4-Assignment.html"
+          - text: "Assignment 6"
+            href: "Assignments/ISL-6/Topic-6-Assignment.html"
+          - text: "Assignment 8"
+            href: "Assignments/ISL-8/Topic-8-Assignment.html"
+    - text: "Class notes"
+      menu:
+          - text: "Preface"
+            href: "Class_notes/010-Preface.html"
+          - text: "Topic 1: Introduction"
+            href: "Class_notes/110-Introduction.html"
+          - text: "Topic 2: Linear Regression"
+            href: "Class_notes/210-Linear-Regression.html"
+          - text: "Topic 3: Foundations"
+            href: "Class_notes/310-Foundations.html"
+          - text: "Topic 4: Classifiers"
+            href: "Class_notes/410-Classifiers.html"
+          - text: "Topic 5: Cross-validation"
+            href: "Class_notes/510-Cross-Validation.html"
+          - text: "Topic 6: Regularization and shrinkage"
+            href: "Class_notes/610-Regularization-Shrinkage.html"
+          - text: "Topic 7: Nonlinear functions"
+            href: "Class_notes/710-nonlinear-functions.html"
+          - text: "Topic 8: Trees"
+            href: "Class_notes/711-Trees.html"
+          - text: "Topic 9: Support vector classifiers"
+            href: "Class_notes/715-support-vector-classifiers.html"
+          - text: "Topic 10: Unsupervised learning"
+            href: "Class_notes/775-Unsupervised learning"
+          - text: "Programming basics"
+            href: "850-Programming.html"
+    - text: "Github"
+      href: "Class_notes/910-github.html"
+      

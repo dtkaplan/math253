@@ -43,9 +43,6 @@ mod2 <- glm(alive ~ age, data=Whickham, family = "binomial")
 
 gmodel(mod2) %>%
   gf_jitter(alive ~ age, data = Whickham, alpha = .2)
-plotFun(f(age) ~ age, age.lim = c(20,100))
-plotPoints(jitter(alive) ~ age, data=Whickham, add=TRUE,
-           pch=20, alpha=.3) 
 ```
 
 If we're going to use likelihood to fit, the estimated probability can't be $\leq 0$.

@@ -366,7 +366,7 @@ President Garfield's assassination.
 load("/Users/kaplan/Dropbox/Projects/Consulting/Ativamed/Ativamed/AtivamedPackage/data/good_set1.rda")
 library(dplyr)
 Cells <- good_set1 %>%
-  select(X = SALS, Y = FALS, Type = GatingCode) %>%
+  rename(X = SALS, Y = FALS, Type = GatingCode) %>%
   mutate(Type = as.character(Type))
 ```
 

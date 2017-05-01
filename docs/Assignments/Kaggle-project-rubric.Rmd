@@ -1,0 +1,37 @@
+# Rubric for the Kaggle Project report
+
+## Form 
+
+Please push the data and any .Rmd or .R files you created for your project to your github repository.
+
+If you've made slides, you can push them also, or just provide a link in your .Rmd file to the Google-drive (or whatever) file. But it is not necessary to hand in your slides. I'll see them in class.
+
+## Content
+
+a. Description of the problem setting. One way to do this is to imagine that you are undertaking the work for a client. Describe the client's problem (which you will have to make up yourself) and how your machine-learning work will address that problem. 
+    - include in your description a statement of the imagined quantitative goal, e.g. prediction with an uncertainty less than 25%, a loss function for classification, etc.
+b. Brief description of the data you are working with such as 
+    - particularly important predictor variables and the response variable. You do not have to give a comprehensive summary.
+    - missing data and how you dealt with it.
+    - link to the specific site(s) where you acquired the data.
+c. Classification and regression methods applied.
+    - how meta-parameters (e.g. cost in SVM, k in knn, $\lambda$ in ridge or lasso regression) were set by, e.g. cross-validation
+    - short summary of whether those parameters were very important to the result.
+d. Evaluation of your result to the purpose specified in (a). Explain whether your model results meaningfully address the purpose and justify your view. (E.g. practical significance of acting based on the output of the model.) Be professional and honest in assessing your results. It's not important to me that you were successful in achieving the goal in (a). Whether success is even possible depends on things out of your control, such as the data and the limited time available for the project. Instead, I'm looking for an informed attempt to tackle the problem and a realistic, meaningful and quantitative appraisal of the extent to which you reached your goal.
+e. Speculative ideas about how a better result might be found, possible alternative approaches, etc. Think of this as your opportunity to demonstrate how your creative mastery of machine learning would allow you to plan for a better resourced attempt on the problem.
+
+## Style
+
+1. Includes meaningful quantitive reports of the model performance.
+2. Includes computer output as needed, but not superfluous output. Rule of thumb: if there is computer output presented that you would not read almost every line of in an oral presentation, leave it out.
+3. Some meaningful graphical presentation of the data and/or your results.
+4. Items (a) and (b) in "content" should be completely understandable to a generally well educated person with statistics at the 155 level, economics at the intro level, or whatever field features in the project at an introductory level.
+5. Items (c), (d), and (e) should be written so that a typical Math 253 student can understand them.
+6. Every member of the project team should be familiar enough with every step of the project and the report that they would be able to answer a general question about each and every item in the report.
+
+## Mechanics
+
+1. You will be writing an Rmd file and compiling it to HTML. It must successfully compile.
+2. The names of all members of the project team should appear in an easily seen position at the top of the report.
+3. Each member of the project team will upload the project RMD and HTML files to his or her own GitHub Math 253 repository. The file should be called `Course_project.Rmd`. (Note the underscore and capitalization.) This means that I will have access to an duplicate the report file in the repository of each student on the team.
+

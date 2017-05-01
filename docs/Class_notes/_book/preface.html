@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Notes for Statistical Computing &amp; Machine Learning</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Notes and other materials for Math 253 at Macalester College.">
+  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Notes for Statistical Computing &amp; Machine Learning" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Notes and other materials for Math 253 at Macalester College." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Notes for Statistical Computing &amp; Machine Learning" />
+  
+  <meta name="twitter:description" content="Notes and other materials for Math 253 at Macalester College." />
+  
+
+<meta name="author" content="Daniel Kaplan">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="index.html">
+<link rel="next" href="introduction.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Placeholder</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#math-253-and-the-macalester-statistics-curriculum"><i class="fa fa-check"></i>Math 253 and the Macalester statistics curriculum</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#these-notes-are-written-in-bookdown"><i class="fa fa-check"></i>These notes are written in Bookdown</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="part"><span><b>I Topic I: Linear Regression</b></span></li>
+<li class="chapter" data-level="3" data-path="placeholder-1.html"><a href="placeholder-1.html"><i class="fa fa-check"></i><b>3</b> Placeholder</a></li>
+<li class="chapter" data-level="4" data-path="notes.html"><a href="notes.html"><i class="fa fa-check"></i><b>4</b> Notes</a></li>
+<li class="chapter" data-level="5" data-path="foundations-linear-algebra-likelihood-and-bayes-rule.html"><a href="foundations-linear-algebra-likelihood-and-bayes-rule.html"><i class="fa fa-check"></i><b>5</b> Foundations: linear algebra, likelihood and Bayes’ rule</a></li>
+<li class="chapter" data-level="6" data-path="classifiers.html"><a href="classifiers.html"><i class="fa fa-check"></i><b>6</b> Classifiers</a></li>
+<li class="chapter" data-level="7" data-path="placeholder-2.html"><a href="placeholder-2.html"><i class="fa fa-check"></i><b>7</b> Placeholder</a></li>
+<li class="chapter" data-level="8" data-path="linear-and-quadratic-discriminant-analysis.html"><a href="linear-and-quadratic-discriminant-analysis.html"><i class="fa fa-check"></i><b>8</b> Linear and Quadratic Discriminant Analysis</a></li>
+<li class="chapter" data-level="9" data-path="cross-validation-and-bootstrapping.html"><a href="cross-validation-and-bootstrapping.html"><i class="fa fa-check"></i><b>9</b> Cross-Validation and Bootstrapping</a></li>
+<li class="chapter" data-level="10" data-path="regularization-shrinkage-and-dimension-reduction.html"><a href="regularization-shrinkage-and-dimension-reduction.html"><i class="fa fa-check"></i><b>10</b> Regularization, shrinkage and dimension reduction</a></li>
+<li class="chapter" data-level="11" data-path="nonlinearity-in-linear-models.html"><a href="nonlinearity-in-linear-models.html"><i class="fa fa-check"></i><b>11</b> Nonlinearity in linear models</a></li>
+<li class="chapter" data-level="12" data-path="trees-for-regression-and-classification.html"><a href="trees-for-regression-and-classification.html"><i class="fa fa-check"></i><b>12</b> Trees for Regression and Classification</a></li>
+<li class="chapter" data-level="13" data-path="support-vector-classifiers.html"><a href="support-vector-classifiers.html"><i class="fa fa-check"></i><b>13</b> Support Vector Classifiers</a></li>
+<li class="chapter" data-level="14" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html"><i class="fa fa-check"></i><b>14</b> Unsupervised learning</a></li>
+<li class="chapter" data-level="15" data-path="programming-basics.html"><a href="programming-basics.html"><i class="fa fa-check"></i><b>15</b> Programming Basics</a></li>
+<li class="chapter" data-level="" data-path="appendices.html"><a href="appendices.html"><i class="fa fa-check"></i>Appendices</a></li>
+<li class="chapter" data-level="" data-path="connecting-rstudio-to-your-github-repository.html"><a href="connecting-rstudio-to-your-github-repository.html"><i class="fa fa-check"></i>Connecting RStudio to your GitHub repository</a></li>
+<li class="chapter" data-level="" data-path="instructions-for-the-publishing-system-bookdown.html"><a href="instructions-for-the-publishing-system-bookdown.html"><i class="fa fa-check"></i>Instructions for the publishing system: Bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notes for Statistical Computing &amp; Machine Learning</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="preface" class="section level1 unnumbered">
+<h1>Preface</h1>
+<div id="math-253-and-the-macalester-statistics-curriculum" class="section level2 unnumbered">
+<h2>Math 253 and the Macalester statistics curriculum</h2>
+<p>Math 253, Statistical Computing and Machine Learning, is a course at <a href="http://www.macalester.edu">Macalester College</a>. The course comes early in our curriculum for the statistics major. Currently, that curriculum looks like:</p>
+<ol style="list-style-type: decimal">
+<li>Comp 110, <a href="Data-Computing.org">Data Computing</a>, a no-prerequisite course in data wrangling and visualization. The main tools in the course are R, dplyr, and ggplot.</li>
+<li>Math 125, Epidemiology. This course also has no pre-requisites. It’s designed to teach quantitative and statistical literacy in the context of public health and decision making. Unlike the other courses in our curriculum, Math 125 is <em>not</em> computer intensive. This is an <em>elective</em> for the statistics major.</li>
+<li>Math 155, <a href="http://www.mosaic-web.org/StatisticalModeling">Introduction to Statistical Modeling</a>. This is our main entry-level statistics course. It also has no pre-requisites, but we encourage students to take a course in our calculus sequence: Applied Multivariate Calculus I, II, and III. The course covers important concepts in modeling: model architectures and fitting using mainly linear and logistic regression, covariation and adjustment, interpretation of model coefficients, inference techniques such as analysis of variance and co-variance and the ways these techniques can inform the decisions needed to build useful models, causality including techniques for making reasonable conclusions about causation from observational data. The course makes very extensive and intensive use of R and the <a href="https://cran.r-project.org/web/packages/mosaic/vignettes/LessVolume-MoreCreativity.html"><code>mosaic</code></a> package for R.</li>
+<li><p>This course, <strong>Math 253, Statistical Computing and Machine Learning</strong>. Math 253 introduces a broader set of model architectures (e.g. those associated with “machine learning” such as support vector machines) and the trade-offs that make machine learning a human skill rather than a push button mechanism. The main text is <a href="http://www-bcf.usc.edu/~gareth/ISL/">Introduction to Statistical Learning in R</a>. Computing in R is used intensively in the course. Math 155 is a pre-requisite. The computing used in that course is the only pre-requisite. A small part of Math 253 is given to basic programming in R, but the large majority is about the mathematical and statistical concepts involved in learning from data and the exercise of a variety of architectures for classification and regression models.</p>
+Math 253 is placed intentionally in the middle of our statistics curriculum to make it accessible to many students who are interested and may have use for the techniques, but whom are not primarily interested in statistics <em>per se</em>.</li>
+<li>Upper level courses including:
+<ul>
+<li>Math 454: Bayesian statistics</li>
+<li>Math 453: Biostatistics</li>
+<li>Math 454: Mathematical statistics</li>
+</ul></li>
+<li>Supporting courses including:
+<ul>
+<li>Math 354: Probability</li>
+<li>Math 135: Applied Multivariate Calculus I</li>
+<li>Math 236: Linear algebra</li>
+<li>Comp 123: Core conceptsin computer science</li>
+</ul></li>
+<li>Electives such as
+<ul>
+<li>Math 432: Mathematical modeling</li>
+<li>Math/Comp 365: Numerical linear algebra</li>
+<li>Comp 302: Introduction to database management systems</li>
+</ul></li>
+</ol>
+</div>
+<div id="these-notes-are-written-in-bookdown" class="section level2 unnumbered">
+<h2>These notes are written in Bookdown</h2>
+<p>The document uses an elaboration on R/Markdown, called “<a href="http://bookdown.org">Bookdown</a>.” I don’t yet know if this will be a good way to maintain and distribute class notes.</p>
+<p>Some advantages:</p>
+<ul>
+<li>All the notes are in one place.</li>
+<li>Students and other instructors can clone the notes for their own uses.</li>
+<li>People spotting mistakes can contribute corrections via the “pull request” mechanism supported by Bookdown working with GitHub.</li>
+<li>Multiple instructors can contribute to the notes via GitHub. This is the stated purpose behind Bookdown — allowing book-length publications to be authored by many authors.</li>
+</ul>
+<p>Disadvantages:</p>
+<ul>
+<li>The notes are <em>always</em> a work in progress. Don’t be mislead by the polish that RMarkdown and Bookdown give to the notes.</li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="introduction.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,4 +1,14 @@
-# Preface {-} 
+---
+title: "Preface"
+author: 'Math 253: Statistical Computing & Machine Learning'
+date: "Starting out in R"
+output:
+  tufte::tufte_html: default
+  tufte::tufte_handout:
+    latex_engine: xelatex
+  tufte::tufte_book:
+    latex_engine: xelatex
+---
 
 ## Math 253 and the Macalester statistics curriculum {-}
 
@@ -24,18 +34,7 @@ Math 253, Statistical Computing and Machine Learning, is a course at [Macalester
     - Math/Comp 365: Numerical linear algebra
     - Comp 302: Introduction to database management systems
 
-## These notes are written in Bookdown  {-}
+## These notes ~~are~~ were written in Bookdown  {-}
 
+Originally, these notes were produced in an elaboration on R/Markdown, called "[Bookdown](http://bookdown.org)."  That turned out not to be a good decision for this site, so now the notes are organized using a website project in RStudio.
 
-The document uses an elaboration on R/Markdown, called "[Bookdown](http://bookdown.org)." I don't yet know if this will be a good way to maintain and distribute class notes.
-
-Some advantages:
-
-* All the notes are in one place.
-* Students and other instructors can clone the notes for their own uses.
-* People spotting mistakes can contribute corrections via the "pull request" mechanism supported by Bookdown working with GitHub. 
-* Multiple instructors can contribute to the notes via GitHub. This is the stated purpose behind Bookdown --- allowing book-length publications to be authored by many authors.
-
-Disadvantages:
-
-* The notes are *always* a work in progress. Don't be mislead by the polish that RMarkdown and Bookdown give to the notes.

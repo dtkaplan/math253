@@ -1,4 +1,15 @@
-# Introduction {#introduction}
+---
+title: "Topic 1: Introduction"
+author: 'Math 253: Statistical Computing & Machine Learning'
+date: "Daniel Kaplan"
+output:
+  tufte::tufte_html: default
+  tufte::tufte_handout:
+    latex_engine: xelatex
+  tufte::tufte_book:
+    latex_engine: xelatex
+---
+
 
 * Subjects
     * Overview of statistical learning.

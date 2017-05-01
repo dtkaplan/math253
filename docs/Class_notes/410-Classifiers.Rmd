@@ -1,0 +1,44 @@
+---
+title: "Topic 4: Classifiers"
+author: 'Math 253: Statistical Computing & Machine Learning'
+date: "Daniel Kaplan"
+output:
+  tufte::tufte_html: default
+  tufte::tufte_handout:
+    latex_engine: xelatex
+  tufte::tufte_book:
+    latex_engine: xelatex
+---
+
+## Classification overview
+
+* Response variable: categorical.  Typically just a few levels: 2 or 3.
+* Two types of outputs from classification models:     
+    1. The predicted category given the inputs
+    2. Probability of each category given the inputs
+        - Type (2) can be fitted with maximum likelihood.
+* Trade-offs:     
+    * Flexibility vs interpretability
+    * Accuracy vs bias
+* Four model architectures
+    1. Logistic regression.  Especially important for interpretability.
+    2. Linear discriminant analysis
+    3. Quadratic discriminant analysis
+    4. K nearest neighbors
+
+## Day 10 preview
+
+1. Probability and odds    
+    * [Theme Song](https://www.youtube.com/watch?v=RthEYvh6aMM)
+    * [Making book](http://en.wikipedia.org/wiki/Dutch_book)
+2. Multivariate gaussians (Maybe)
+3. Programming activity: Poker hands
+
+# Logistic regression
+
+```{r child = "411-Logistic-Regression.Rmd"}
+```
+
+```{r child = "412-LDA-QDA.Rmd"}
+```
+
